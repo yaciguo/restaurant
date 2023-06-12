@@ -46,7 +46,7 @@
 			<p style="color: blue">.main-content { min-width: 580px; margin:
 				20px 20px 20px calc(60px + 20px); padding: 15px; transition:
 				margin-left 0.3s ease-in-out; background-color: #FFF; border-radius:
-				var(--main-radius); }</p>
+				var(--main-radius); } .main-content.active { margin-left: 180px; }</p>
 			(可以參考activity.css #7~14行) <br>
 
 			<p>step3. 建一個main-content的DIV將程式放進去</p>
