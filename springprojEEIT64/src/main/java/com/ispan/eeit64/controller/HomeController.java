@@ -31,6 +31,10 @@ public class HomeController {
 	public String osLogin() {
 		return "osLogin";
 	}
+	@GetMapping("/basicSettings")
+	public String basicSettings() {
+		return "basicSettings";
+	}
 	@GetMapping("/activity")
 	public String activity() {
 		return "activity";

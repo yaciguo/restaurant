@@ -1,10 +1,16 @@
 package com.ispan.eeit64.entity;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,26 +23,11 @@ public class CategoryBean {
 
     @Column(name = "name", columnDefinition = "varchar(20) NOT NULL COMMENT'分類名稱'")
     private String name;
-
-   
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
     
-     
+    @OneToMany(mappedBy = "categoryBean", fetch=FetchType.EAGER, 
+	        cascade = { CascadeType.PERSIST }, orphanRemoval = false
+	  )
+    private Set<DishBean> dishBean = new LinkedHashSet<>();
+    
 }
 
