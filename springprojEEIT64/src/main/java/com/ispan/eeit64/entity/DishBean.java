@@ -44,7 +44,7 @@ public class DishBean {
 	
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "categoryId",  foreignKey = @ForeignKey(name = "dish_id_fk"))
+	@JoinColumn(name = "FK_categoryId",  foreignKey = @ForeignKey(name = "dish_id_fk"))
 	private CategoryBean categoryBean;
 
 	@OneToMany(mappedBy = "dishBean")
