@@ -32,6 +32,6 @@ public class OrderDetailBean {
 //    private Integer unitPrice;
     
     @ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="FK_orderId", nullable=false , foreignKey=@ForeignKey(name = "orders_id_fk"))  
+	@JoinColumn(name="orderId", nullable=false , foreignKey=@ForeignKey(name = "orders_id_fk"))  
 	private OrderBean orderBean;
 }

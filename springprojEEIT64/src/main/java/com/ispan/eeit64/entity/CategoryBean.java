@@ -28,6 +28,91 @@ public class CategoryBean {
 	        cascade = { CascadeType.PERSIST }, orphanRemoval = false
 	  )
     private Set<DishBean> dishBean = new LinkedHashSet<>();
+
+ 
+	public CategoryBean() {
+		super();
+	}
+
+	public CategoryBean(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
+	public CategoryBean(String name) {
+		super();
+		this.name = name;
+	}
+	
+
+
+	public CategoryBean(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
+
+	public CategoryBean(String name, Set<DishBean> dishBean) {
+		super();
+		this.name = name;
+		this.dishBean = dishBean;
+	}
+	
+	   
+	public CategoryBean(Integer id, String name, Set<DishBean> dishBean) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dishBean = dishBean;
+	}
+
+    
+    
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	public Set<DishBean> getDishBean() {
+		return dishBean;
+	}
+
+
+
+	public void setDishBean(Set<DishBean> dishBean) {
+		this.dishBean = dishBean;
+	}
+
+
+	@Override
+	public String toString() {
+		return "CategoryBean [" + (id != null ? "id=" + id + ", " : "") + (name != null ? "name=" + name + ", " : "")
+				+ (dishBean != null ? "dishBean=" + dishBean : "") + "]";
+	}
+
+
+
     
 }
 

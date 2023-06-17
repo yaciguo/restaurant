@@ -39,6 +39,22 @@ public class HomeController {
 	public String activity() {
 		return "activity";
 	}
+	
+	@GetMapping("/booking")
+	public String booking() {
+		return "booking";
+	}
+	@GetMapping("/searchbooking")
+	public String searchbooking() {
+		return "searchbooking";
+	}
+	
+	@GetMapping("/searchorder")
+	public String searchorder() {
+		return "searchorder";
+	}
+	
+	
 
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {
