@@ -1,45 +1,24 @@
 package com.ispan.eeit64.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.ispan.eeit64.controller.forjson.DishJson;
-import com.ispan.eeit64.controller.forjson.OrderJson;
+import com.ispan.eeit64.jsonBean.DishJson;
+import com.ispan.eeit64.jsonBean.OrderJson;
+import com.ispan.eeit64.other.ReadJson;
 
 @Controller
-public class DataAnalysisController {
-	
-	public String getJsonFileSting(String filePath) {
-		ClassPathResource cpr = new ClassPathResource(filePath);
-		try {
-			InputStream is = cpr.getInputStream();
-			File source = cpr.getFile();
-			
-			byte[] buf = new byte[(int)source.length()];
-			is.read(buf);						
-			is.close();
-			return new String(buf);
-		} catch (IOException e) {
-			System.out.println(e);
-			return null;
-		} 		
-	}
+public class DataAnalysisController {	
 
 	@GetMapping("/dataAnalysis")
 	public String dataAnalysis() {
@@ -50,7 +29,7 @@ public class DataAnalysisController {
 	public @ResponseBody List<Object> getCategoryAndDishName(){
 		List<Object> list = new ArrayList<>();
 		List<DishJson> json = new ArrayList<>();
-		String jsonStr = getJsonFileSting("/static/assets/json/menu.json");
+		String jsonStr = ReadJson.getJsonFileString("/static/assets/json/menu.json");
 		if(jsonStr != null) {
 			json = new Gson().fromJson(jsonStr, new TypeToken<List<DishJson>>() {}.getType());
 		}
@@ -59,8 +38,6 @@ public class DataAnalysisController {
 		List<String> checkList = new ArrayList<>();
 		Map<Integer, String> categoryMap = new HashMap<>();
 		Map<Integer, Map> categoryDishMap = new HashMap<>();
-		
-		
 		
 		Integer categoryId = 0;
 		for(DishJson dish:json) {
@@ -78,7 +55,7 @@ public class DataAnalysisController {
 	
 	@GetMapping("/dataAnalysis.api/order")
 	public @ResponseBody List<OrderJson>  findMemberToUpdate(Model model) {
-		String jsonStr = getJsonFileSting("/static/assets/json/orders.json");
+		String jsonStr = ReadJson.getJsonFileString("/static/assets/json/orders.json");
 		if(jsonStr != null) {
 			List<OrderJson> json = new Gson().fromJson(jsonStr, new TypeToken<List<OrderJson>>() {}.getType());
 			return json;

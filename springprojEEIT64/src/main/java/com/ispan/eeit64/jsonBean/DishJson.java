@@ -1,4 +1,4 @@
-package com.ispan.eeit64.controller.forjson;
+package com.ispan.eeit64.jsonBean;
 
 public class DishJson {
 	public Integer id;
