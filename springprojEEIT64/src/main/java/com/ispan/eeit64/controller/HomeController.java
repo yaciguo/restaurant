@@ -54,6 +54,21 @@ public class HomeController {
 		return "searchorder";
 	}
 	
+	@GetMapping("/menu")
+	public String menu() {
+		return "menu";
+	}
+	
+	@GetMapping("/shoppingcart")
+	public String shoppingcart() {
+		return "shoppingcart";
+	}
+	
+	@GetMapping("/ordercheck")
+	public String ordercheck() {
+		return "ordercheck";
+	}
+	
 	
 
 	@GetMapping("/hello")

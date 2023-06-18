@@ -53,13 +53,13 @@
 
 		<div class="row step-container">
 			<div class="col-6 step-item">
-				<a href="#" class="step-box">
+				<a href="<c:url value='/booking' />" class="step-box">
 					<i class="fa-regular fa-calendar-check"></i>
 				</a>
 				<p>線上訂位</p>
 			</div>
 			<div class="col-6 step-item">
-				<a href="/menu.jsp" class="step-box">
+				<a href="<c:url value='/menu' />" class="step-box">
 					<i class="fa-solid fa-person-walking"></i>
 				</a>
 				<p>自取點餐</p>
