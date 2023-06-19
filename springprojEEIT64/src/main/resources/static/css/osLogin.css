@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+body {
+	background: linear-gradient(350deg, #4091ba 5%, #66b3ff 35%, #99ccff 60%, #cdfcfc
+		90%);
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.login-container {
+	min-width: 450px;
+	border-radius: 10px;
+	background-color: #FAF0E6;
+	box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.input-group {
+	height: 50px;
+	align-items: center;
+	text-align: center;
+	border-bottom: 2px solid #CCC;
+	margin-top: 1.75rem;
+}
+
+.login-body input {
+	background-color: transparent;
+}

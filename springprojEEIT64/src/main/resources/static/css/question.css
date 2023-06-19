@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.content {
+	display: flex;
+	min-height: 100vh;
+	background-image: url("../assets/img/background.jpg");
+}
+
+.qa-set {
+	margin: 1rem 1.2rem;
+	padding: 1rem 0.8rem;
+	border: 2px solid #AAA;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	background-color: #FAF0E6;
+}
+
+.question {
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin-bottom: 5px;
+}
+
+.answer {
+	display: none;
+	margin-bottom: 10px;
+}
