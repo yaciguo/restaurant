@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "category")
 public class CategoryBean {
@@ -27,6 +29,7 @@ public class CategoryBean {
     @OneToMany(mappedBy = "categoryBean", fetch=FetchType.EAGER, 
 	        cascade = { CascadeType.PERSIST }, orphanRemoval = false
 	  )
+    @JsonIgnore//==============================增加的
     private Set<DishBean> dishBean = new LinkedHashSet<>();
 
  

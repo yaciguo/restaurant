@@ -79,3 +79,21 @@ footer {
   opacity: 0.8;
   cursor: pointer;
 }
+
+/* card內div並排 */
+.units div {
+  display: inline-block;
+  width: 15%;
+  color: black;
+  /* 根据需要调整宽度 */
+}
+
+.units button {
+  display: inline-block;
+  width: 40px;
+  color: white;
+  border-radius: 50%;
+  background-color: #E8BC0E;
+
+  /* 根据需要调整宽度 */
+}

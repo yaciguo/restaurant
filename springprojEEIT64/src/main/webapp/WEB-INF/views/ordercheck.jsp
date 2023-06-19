@@ -100,18 +100,14 @@ body {
 </style>
 <body>
 <!-- 導覽列 -->
-	<%@ include file="nav.jsp" %>
-  <header>
-    <h1 style="margin-top: 20px;">訂單確認</h1>
+  <%@ include file="nav.jsp" %>
+    <header>
+    <h1 style="margin-top: 20px;">感謝訂購</h1>
   </header>
   <div class="container">
-    <div class="row">
+    <div class="row"> 
       <table class="col-sm-12">
-        <tr>
-          <th>訂購門市</th>
-          <td>1</td>
-        </tr>
-        <tr>
+          <tr>
           <th>取餐人</th>
           <td>1</td>
         </tr>
@@ -135,40 +131,18 @@ body {
     </div>
 
     <footer>
-      <button onclick="window.location.href ='<c:url value='/shoppingcart' />'">上一步</button>
-      <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal" id="submit">送出訂單</button>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal" id="submit">回首頁</button>
     </footer>
   </div>
 
-  <!--跳出視窗內容-->
-  <div class="modal fade" id="loginModal" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>訂單送出</h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <!--body-->
-        <div class="modal-body">
-          <div id="text" style="text-align: center;">
-            訂單已送出 <br /><br />
-            感謝訂購!
-          </div>
-        </div>
-        <div class="modal-footer"></div>
-        <!-- <div id="btcheck">
-            <button id="bt2" style="display: inline-block">查看訂位</button>
-          </div> -->
-      </div>
-    </div>
-  </div>
+  
 
 </body>
 <script>
   $("#submit").on("click", function () {
     setTimeout(function () {
       window.location.href = '<c:url value='/custIndex' />';
-    }, 3000);
+    }, 1000);
   })
 </script>
 </html>

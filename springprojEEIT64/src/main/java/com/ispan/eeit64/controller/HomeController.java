@@ -69,6 +69,12 @@ public class HomeController {
 		return "ordercheck";
 	}
 	
+	@GetMapping("/showAllDishes2")
+	public String showAllDishes2() {
+		return "showAllDishes2";    
+		         
+	}
+	
 	
 
 	@GetMapping("/hello")
@@ -77,5 +83,7 @@ public class HomeController {
 		model.addAttribute("helloMessage", message);
 		return "greeting";
 	}
+	
+	
 
 }

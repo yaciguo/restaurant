@@ -15,6 +15,7 @@
     <a href="<c:url value='/hello' />"> Hello </a><br>
      
     <a href="<c:url value='/dishes' />" >查詢餐點</a><br>
+    <a href="<c:url value='/dishes' />" >查詢餐點2</a><br>
     <img src="<c:url value='/images/kitty.jpg'/>"/>
 
     

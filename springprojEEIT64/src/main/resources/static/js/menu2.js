@@ -29,7 +29,7 @@ var xhr = new XMLHttpRequest();
 		   products.forEach(function (obj, index) {
         content += `
         <tr class="tableRow">
-            <td id="td1" style="width: 10%;"><img src="${obj.picture}" width="130px"> </td>
+            <td id="td1" style="width: 10%;"><img src="${obj.image}" width="130px"> </td>
             <td id="td2" style="width: 25%;">${obj.name}</td>
             <td id="td3" style="width: 5%;">${obj.status}</td>
             <td id="td5" style="width: 7%;">$ ${obj.price}</td>          

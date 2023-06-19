@@ -21,20 +21,42 @@
 
 <script>
   $(function () {
+    //載入local===============================
+    var data = JSON.parse(localStorage.getItem('CART'));
+    console.log(data)
+    let totalPrice = 0;
+    let content = ''
+    data.forEach(function (obj, index) {
+    	content += '<tr class="tableRow">' +
+        '<td id="td2" style="width: 50%;">' + obj.name + '</td>' +
+        '<td id="td5" style="width: 20%;">$ ' + obj.price + '</td>' +
+        '<td class="units" style="width: 20%;">' +
+        '<div class="number">' + obj.numberOfUnits + '</div>' +
+        '</td>' +
+        '</tr>';
 
-    $(".btedit2>input").click(function () {
-      console.log(this)
-      $(this).parent().parent().remove();
+      let objTotal = obj.price * obj.numberOfUnits
+      totalPrice += objTotal
+      console.log(obj.name)
+
     })
+    $(".store").append(content)
+    console.log(totalPrice)
+    $(".totalPrice").append(totalPrice)
 
   })
 </script>
-<script>//提交驗證
+<!--修改內容==================================-->
+<script>
+
+
+  //提交驗證
   function validateAndRedirect() {
     var form = document.getElementById('myForm');
     if (form.checkValidity()) {
-      // 在这里执行验证通过后的跳转逻辑
-      window.location.href ='<c:url value='/ordercheck' />' ;
+      // 在这里执行验证後訂單內容
+      localStorage.clear();
+      window.location.href ='<c:url value='/ordercheck' />';
       return false; // 阻止表单的默认提交行为
     } else {
       // 在这里执行验证失败时的逻辑
@@ -42,17 +64,18 @@
       return false; // 阻止表单的默认提交行为
     }
   }
+
 </script>
+<!--修改內容==================================-->
+
 
 <body>
-
 <!-- 導覽列 -->
 	<%@ include file="nav.jsp" %>
-	
   <div class="container">
     <div class="row">
       <header class="col-sm-12" style="margin-top: 20px;">
-        <h1 style="font-weight: bolder;">購物車</h1>
+        <h1 style="font-weight: bolder;">訂單結帳</h1>
       </header>
     </div><br>
     <h5 style="text-align: center">xxxx店 <br />(外帶/內用)</h5>
@@ -61,54 +84,22 @@
     <form action="" style="" id="myForm" onsubmit="return validateAndRedirect()">
       <!-- 訂單內容 -->
       <div class="row">
+
         <fieldset class="col-sm-12">
           <legend>訂單內容</legend>
-          <table>
-            <tr>
-              <td class="dish">
-                <ul>
-                  <li>(菜名)</li>
-                  <li>(單價)/(份數)份</li>
-                </ul>
-              </td>
-              <td class="btedit1">
-                <ul class="counter">
-                  <li id="minus" class="counter1">
-                    <input type="button" onclick="minuser()" value="-" style="cursor: pointer" />
-                  </li>
-                  <li id="countnum" class="counter1">0</li>
-                  <li id="plus" class="counter1">
-                    <input type="button" onclick="adder()" value="+" style="cursor: pointer" />
-                  </li>
-                </ul>
-              <td class="btedit2">
-                <input type="image" src="/images/trash.png" width="20px" />
-              </td>
-              </td>
-            </tr>
-            <tr>
-              <td class="dish">
-                <ul>
-                  <li>(菜名)</li>
-                  <li>(單價)/(份數)份</li>
-                </ul>
-              </td>
-              <td class="btedit1">
-                <ul class="counter">
-                  <li id="minus" class="counter1">
-                    <input type="button" onclick="minuser()" value="-" style="cursor: pointer" />
-                  </li>
-                  <li id="countnum" class="counter1">0</li>
-                  <li id="plus" class="counter1">
-                    <input type="button" onclick="adder()" value="+" style="cursor: pointer" />
-                  </li>
-                </ul>
-              </td>
-              <td class="btedit2">
-                <input type="image" src="./pic/trash.png" width="20px" />
-              </td>
-            </tr>
-          </table>
+          <!--新增=============================-->
+          <div>
+            <table class="store" style="width: 100%;">
+              <tr>
+                <th style="width: 50%;">餐點名稱</th>
+                <th style="width: 20%;">單價</th>
+                <th style="width: 20%;">數量</th>
+              </tr>
+
+            </table>
+
+          </div>
+
         </fieldset>
       </div><br>
 
@@ -127,38 +118,52 @@
           <fieldset>
             <legend>付款方式</legend>
 
-            <input type="radio" name="userpay" value="1" required />現金
+            <input type="radio" name="userpay" value="1" checked />現金
             <!-- <input type="radio" name="userpay" value="2" required />Linepay -->
             <br /><br />
             <span>商品小計:</span>
-            <span style="text-align: right;">$(金額)</span><br><br>
+            <span class="totalPrice" style="text-align: right;">$</span><br><br>
             <span>折扣金額:</span>
-            <span>$(金額)</span><br><br>
+            <span>$(0)</span><br><br>
             <span>應付金額:</span>
-            <span>$(金額)</span><br><br>
+            <span class="totalPrice">$</span><br><br>
 
           </fieldset>
         </div>
 
         <div class="col-sm-4">
           <fieldset>
-            <legend>取餐人資料</legend>
+            <legend>取餐資料</legend>
 
-            <label for="">姓名</label><br />
-            <input name="username" type="text" placeholder="請輸入訂購人" style="width: 90%;" required /><br /><br />
-            <label for="">手機</label><br />
-            <input name="userphone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;" pattern="[0]{1}[9]{1}[0-9]{8}"
-              required />
+            <label for="">姓名:</label><br />
+            <input id="name" name="username" type="text" placeholder="請輸入訂購人" style="width: 90%;"
+              required /><br /><br />
+            <label for="">手機:</label><br />
+            <input id="tel" name="userphone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;"
+              pattern="[0]{1}[9]{1}[0-9]{8}" required /><br/><br/>
+            <label>取餐時間:</label>
+            <select name="selectTime" required>
+                        <option value="">請選擇時間</option>
+                        <option value="1200">12:00</option>
+                        <option value="1230">12:30</option>
+                        <option value="1300">13:00</option>
+                        <option value="1330">13:30</option>
+                        <option value="1400">14:00</option>
+                        
+             </select>
 
           </fieldset>
         </div>
       </div>
       <footer>
         <input type="button" value="繼續加點" class="button2" onclick="window.location.href ='<c:url value='/menu' />'" /> <!--上一頁-->
-        <input type="submit" value="確認訂單" class="button2" /><!--訂單確認-->
+        <input type="submit" value="提交訂單" class="button2" /><!--訂單確認-->
       </footer>
     </form>
   </div>
 </body>
 
+
+
 </html>
+

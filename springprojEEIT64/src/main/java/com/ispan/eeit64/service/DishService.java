@@ -6,13 +6,11 @@ import java.util.Optional;
 import com.ispan.eeit64.entity.DishBean;
 
 public interface DishService {
-	Optional<DishBean> findById(Integer id);
-
+	DishBean findById(Integer id);
 	List<DishBean> findAll();
-
-	DishBean save(DishBean bean);
-	
+	void save(DishBean bean);	
 	DishBean update(DishBean bean); 
-
-	void deleteById(Integer key);
+	void deleteById(Integer id);	
+	DishBean findByMemberId(String dishId);	
+	void   detach(DishBean bean);
 }
