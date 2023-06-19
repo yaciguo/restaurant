@@ -477,6 +477,6 @@
     var contextPath = "<%=request.getContextPath()%>";
 </script>
 
-<script type="text/javascript" src="<c:url value='/js/dataAnalysis/dataAnalysis.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/dataAnalysis/dataAnalysis.js'/>"></script>
 
 </html>

@@ -1,4 +1,4 @@
-package com.ispan.eeit64.dao.impl;
+package com.ispan.eeit64.repository.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -6,11 +6,11 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ispan.eeit64.dao.universalCustomDao;
+import com.ispan.eeit64.repository.UniversalCustomRepository;
 
 @Repository
 @Transactional
-public class universalCustomDaoImpl implements universalCustomDao {
+public class universalCustomDaoImpl implements UniversalCustomRepository {
 	@PersistenceContext
 	EntityManager em;
 	

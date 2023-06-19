@@ -27,6 +27,10 @@ public class DishBean {
 	@Column(name = "name", columnDefinition = "varchar(100) NOT NULL COMMENT'餐點名稱'")
 	private String name;
 
+	@ManyToOne
+	@JoinColumn(name = "categoryId", nullable = false, foreignKey = @ForeignKey(name = "dish_ibfk_1"))
+	private CategoryBean categoryBean;
+
 	@Column(name = "price", columnDefinition = "INT(10) NOT NULL COMMENT'餐點價格'")
 	private Integer price;
 
@@ -41,12 +45,140 @@ public class DishBean {
 
 	@Column(name = "status", columnDefinition = "varchar(10) NOT NULL COMMENT'餐點狀態 N無,Y有'")
 	private String status;
-	
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_categoryId",  foreignKey = @ForeignKey(name = "dish_id_fk"))
-	private CategoryBean categoryBean;
 
 	@OneToMany(mappedBy = "dishBean")
 	private Set<ActivityBean> activityBean = new LinkedHashSet<>();
+
+	public DishBean() {
+		super();
+	}	
+	
+	
+	public DishBean(String name, CategoryBean categoryBean, Integer price, Integer cost, String picture, String description, String status) {
+		super();
+		this.name = name;
+		this.categoryBean = categoryBean;
+		this.price = price;
+		this.cost = cost;
+		this.picture = picture;
+		this.description = description;
+		this.status = status;
+	}
+
+
+
+
+	public DishBean(Integer id, String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
+			String description, String status) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.categoryBean = categoryBean;
+		this.price = price;
+		this.cost = cost;
+		this.picture = picture;
+		this.description = description;
+		this.status = status;
+	}
+
+
+	public DishBean(Integer id, String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
+			String description, String status, Set<ActivityBean> activityBean) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.categoryBean = categoryBean;
+		this.price = price;
+		this.cost = cost;
+		this.picture = picture;
+		this.description = description;
+		this.status = status;
+		this.activityBean = activityBean;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public CategoryBean getCategoryBean() {
+		return categoryBean;
+	}
+
+	public void setCategoryBean(CategoryBean categoryBean) {
+		this.categoryBean = categoryBean;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public Integer getCost() {
+		return cost;
+	}
+
+	public void setCost(Integer cost) {
+		this.cost = cost;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Set<ActivityBean> getActivityBean() {
+		return activityBean;
+	}
+
+	public void setActivityBean(Set<ActivityBean> activityBean) {
+		this.activityBean = activityBean;
+	}
+
+	@Override
+	public String toString() {
+		return "DishBean [" + (id != null ? "id=" + id + ", " : "") + (name != null ? "name=" + name + ", " : "")
+				+ (categoryBean != null ? "categoryBean=" + categoryBean + ", " : "")
+				+ (price != null ? "price=" + price + ", " : "") + (cost != null ? "cost=" + cost + ", " : "")
+				+ (picture != null ? "picture=" + picture + ", " : "")
+				+ (description != null ? "description=" + description + ", " : "")
+				+ (status != null ? "status=" + status + ", " : "")
+				+ (activityBean != null ? "activityBean=" + activityBean : "") + "]";
+	}
+
+
 }

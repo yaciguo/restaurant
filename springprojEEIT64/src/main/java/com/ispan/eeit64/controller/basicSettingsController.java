@@ -1,8 +1,12 @@
 package com.ispan.eeit64.controller;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -16,16 +20,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ispan.eeit64.dao.OpeningHourDao;
 import com.ispan.eeit64.entity.OpeningHourBean;
+import com.ispan.eeit64.repository.OpeningHourRepository;
 import com.ispan.eeit64.validator.OpeningHourValidator;
 
 @Controller
 public class basicSettingsController {	
 	@Autowired
-	OpeningHourDao dao;
+	OpeningHourRepository dao;
 	@Autowired
 	Environment env;
+	
+	@GetMapping("/basicSettings")
+	public String basicSettings() {
+	    return "basicSettings";
+	}
 	
 	@GetMapping("/basicSettings.api/getAllOpeningHour")
 	public @ResponseBody List<OpeningHourBean> getAllOpeningHour(){
@@ -33,65 +42,83 @@ public class basicSettingsController {
 	}
 	
 	@PostMapping("/basicSettings.api/addOpeningHour")
-	public @ResponseBody Map<String, String> addOpeningHour(
-			@RequestBody OpeningHourBean bean, 
+	public @ResponseBody Map<String, Object> addOpeningHour(
+			@RequestBody OpeningHourBean bean,
+			HttpServletRequest request,
 			BindingResult result
 	){
-		Map<String, String> map = new HashMap<>();
-		
-		new OpeningHourValidator().validate(bean, result);
+		Map<String, Object> map = new HashMap<>();
+		new OpeningHourValidator().validate(bean, result, request.getMethod(), dao);
 
 		if (result.hasErrors()) {
 			collectErrorMessage(map, result);
-		}
-		if(bean.getId() != null) {
-			map.put("IdExist", "不需要id值");
 			return map;
 		}
+		
 		dao.save(bean);
 		map.put("success", "新增成功");
 		return map;
 	}
 
 	@PutMapping("/basicSettings.api/editOpeningHour")
-	public @ResponseBody Map<String, String> editOpeningHour(
-			@RequestBody OpeningHourBean bean
+	public @ResponseBody Map<String, Object> editOpeningHour(
+			@RequestBody OpeningHourBean bean,
+			HttpServletRequest request,
+			BindingResult result
 	){
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
+
+		new OpeningHourValidator().validate(bean, result, request.getMethod(),dao);
+		
+		if (result.hasErrors()) {
+			collectErrorMessage(map, result);
+			return map;
+		}
+		
 		dao.save(bean);
 		map.put("success", "修改成功");
 		return map;
 	}
 
 	@DeleteMapping("/basicSettings.api/deleteOpeningHour")
-	public @ResponseBody Map<String, String> deleteOpeningHour(
+	public @ResponseBody Map<String, Object> deleteOpeningHour(
 			@RequestBody List<Integer> ids
 	){
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
+		List<Integer> failureId = new LinkedList<>();
+		List<Integer> successId = new LinkedList<>();
+		List<Integer> errorId = new LinkedList<>();
 		for(Integer id : ids) {
 			if(!dao.findById(id).isEmpty()) {
 				dao.deleteById(id);
-				boolean isFound = dao.existsById(id);
-				if(isFound) {
-					map.put("failure", "刪除失敗 : "+id);
+				if(dao.existsById(id)) {
+					failureId.add(id);
 				}else {
-					map.put("success", "刪除成功 : "+id);					
+					successId.add(id);	
 				}
 			}else {
-				map.put("failure", "錯誤id : "+id);
+				errorId.add(id);
 			}
+		}
+		if(failureId.size()>0) {
+			map.put("failureId", failureId);
+		}
+		if(errorId.size()>0) {
+			map.put("errorId", errorId);
+		}
+		if(successId.size()>0) {
+			map.put("success", successId);
 		}
 		return map;
 	}
 	
-	public void collectErrorMessage(Map<String, String> map, BindingResult result) {
-//		Map<String, String> map = new HashMap<>();
+	public void collectErrorMessage(Map<String, Object> map, BindingResult result) {
 		List<FieldError> list = result.getFieldErrors();
-		
+		Map<String, String> errors = new HashMap<>();
+		map.put("errors", errors);
 		for (FieldError error : list) {
-			String errorMessage = env.getProperty(error.getCode());
-			map.put(error.getField(), errorMessage);
+			String defaulMessage = error.getDefaultMessage();
+			errors.put(error.getField(), defaulMessage);
 		}
-		
 	}
 }

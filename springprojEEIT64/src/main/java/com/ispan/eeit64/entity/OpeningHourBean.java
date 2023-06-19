@@ -66,14 +66,11 @@ public class OpeningHourBean {
 	}
 
 	public void setStartTime(String startTime) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");		
 		try {
 			this.startTime = dateFormat.parse(startTime);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			this.startTime = new Date();
-			System.out.println("Wrong time format");
+			this.startTime = new Date(0);
 		}
 	}
 
@@ -81,8 +78,13 @@ public class OpeningHourBean {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
+	public void setEndTime(String endTime) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");		
+		try {
+			this.endTime = dateFormat.parse(endTime);
+		} catch (ParseException e) {
+			this.endTime = new Date(0);
+		}
 	}
 
 	@Override
