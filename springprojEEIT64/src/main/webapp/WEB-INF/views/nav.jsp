@@ -108,7 +108,7 @@ body {
 					<hr></li>
 				<li><a href="/searchbooking">訂位查詢</a>
 					<hr></li>
-				<li><a href="/searchorder.jsp">訂單查詢</a>
+				<li><a href="/searchorder">訂單查詢</a>
 					<hr></li>
 				<li><a href="<c:url value='/question' />">常見問題</a>
 					<hr></li>

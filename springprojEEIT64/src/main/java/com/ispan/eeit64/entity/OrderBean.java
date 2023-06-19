@@ -55,10 +55,10 @@ public class OrderBean {
 	@ManyToOne
 	@JoinColumn(name = "FK_Activity_Id")
 	private ActivityBean activityBean;
-
-    @OneToMany(mappedBy = "orderBean")
+	
+	@OneToMany(mappedBy = "orderBean")
     private Set<OrderRecordBean> orderRecordBean= new LinkedHashSet<>();
-    
+
 	@OneToMany(mappedBy = "orderBean", fetch = FetchType.EAGER, cascade = {
 			CascadeType.PERSIST }, orphanRemoval = false)
 	private Set<OrderDetailBean> orderDetailBean = new LinkedHashSet<>();
