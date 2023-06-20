@@ -28,7 +28,7 @@ public class DishBean {
 	private String name;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryId", nullable = false, foreignKey = @ForeignKey(name = "dish_ibfk_1"))
+	@JoinColumn(name = "categoryId", nullable = false, foreignKey = @ForeignKey(name = "FK_categoryId"))
 	private CategoryBean categoryBean;
 
 	@Column(name = "price", columnDefinition = "INT(10) NOT NULL COMMENT'餐點價格'")
