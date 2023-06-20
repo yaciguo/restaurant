@@ -64,9 +64,6 @@ public class DishBean {
 		this.status = status;
 	}
 
-
-
-
 	public DishBean(Integer id, String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
 			String description, String status) {
 		super();
