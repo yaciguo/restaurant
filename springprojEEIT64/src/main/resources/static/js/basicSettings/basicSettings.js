@@ -1,5 +1,5 @@
 const dayOfWeek = { 0: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" }
-
+let runTrClick = true;
 
 function setDatepicker(element) {
 	var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
@@ -13,16 +13,27 @@ function setDatepicker(element) {
 	element.datepicker(options);
 }
 
-
 function setTimeDropdown(selector, buttonSelector, interval, startHour, endHour) {
-    for (let i = startHour; i < endHour; i++) {
-        for (let j = 0; j < (60 / interval); j++) {
-            let hourStr = i.toString().padStart(2, '0');
-            let minute = (j * interval).toString().padStart(2, '0');
-            $(selector).append(`<li><a class="dropdown-item" href="#">${hourStr}:${minute}</a></li>`)
-        }
+
+    let startHourMilliS = new Date(`1970-01-01T${startHour}:00:00Z`).getTime();
+    let endHourMilliS = new Date(`1970-01-01T${endHour}:00:00Z`).getTime();
+    let intervalMilliS = new Date(`1970-01-01T00:${interval}:00Z`).getTime();
+    $(selector).empty();
+    let curr = startHourMilliS;
+    while(curr<endHourMilliS){
+        let hourStr = new Date(curr).getHours().toString().padStart(2, '0');
+        let minute = new Date(curr).getMinutes().toString().padStart(2, '0');
+        $(selector).append(`<li><a class="dropdown-item">${hourStr}:${minute}</a></li>`)
+        curr += intervalMilliS;
     }
-    $(selector).append(`<li><a class="dropdown-item" href="#">24:00</a></li>`)
+
+    // for (let i = startHour; i < endHour; i++) {
+    //     for (let j = 0; j < (60 / interval); j++) {
+    //         let hourStr = i.toString().padStart(2, '0');
+    //         let minute = (j * interval).toString().padStart(2, '0');
+    //     }
+    // }
+    $(selector).append(`<li><a class="dropdown-item">24:00</a></li>`)
 
     $(`${selector} li a`).click(function () {
         $(buttonSelector).html($(this).text());
@@ -42,7 +53,7 @@ function addOpeningHourDataToTable(data) {
     $("#openhour-tody").append(`
         <tr class="data" id="${prefix}-tr">
             <td class="checkbox-td data ">
-                <input class="form-check-input " type="checkbox" value="option1" id="${prefix}-check">
+                <input class="form-check-input " type="checkbox" id="${prefix}-check">
             </td>
             <td class="data">${dayOfWeek[data.dayOfWeek]}</td>
             <td class="data">${data.startTime}</td>
@@ -59,6 +70,23 @@ function addOpeningHourDataToTable(data) {
             </td>
         </tr>
     `)
+    
+    $(`#${prefix}-tr a[type='button']`).add(`#${prefix}-tr input[type="checkbox"]`).each((idx, el) => {
+        $(el).mouseenter(function () {
+            runTrClick = false;
+        })
+        $(el).mouseleave(function () {
+            runTrClick = true;
+        })
+    })
+
+    $(`#${prefix}-tr`).click(function () {
+        if (runTrClick) {
+            $(`#${prefix}-check`).get(0).click();
+            $("#allCheck").hide();
+            $("#removeAllCheck").show();
+        }
+    })
 }
 
 async function getOpeningHourData() {
@@ -72,11 +100,22 @@ async function getOpeningHourData() {
     });
 }
 
+function toggleModal(displayMode){
+    let toggleGroup;
+    if(displayMode == "add"){
+        toggleGroup = [false, true, true, true, false];
+    }
+    $("#modalDateRowDiv").toggle(toggleGroup[0]);
+    $("#modalDayRowDiv").toggle(toggleGroup[1]);
+    $("#modalStartTimeRowDiv").toggle(toggleGroup[2]);
+    $("#modalEndTimeRowDiv").toggle(toggleGroup[3]);
+    $("#modalDescriptionRowDiv").toggle(toggleGroup[4]);
+}
 
 $(() => {
     setStyleBtnHeight()
-    setTimeDropdown("#start-time-ul", "#dropdownMenuStartTimeBtn", 30, 0, 24);
-    setTimeDropdown("#end-time-ul", "#dropdownMenuEndTimeBtn", 30, 0, 24);
+    setTimeDropdown("#start-time-ul", "#dropdownMenuStartTimeBtn", "30", "00", "24");
+    setTimeDropdown("#end-time-ul", "#dropdownMenuEndTimeBtn", "30", "00", "24");
     setDatepicker($("#setdate"))
 
 
@@ -93,7 +132,23 @@ $(() => {
 
     $("#openhour-addbtn").click(() => {
         console.log("新增營業時間")
+        toggleModal("add")
         $("#modalTitle").html("新增營業時間")
+    })
+
+    $("#allCheck").click(function () {
+        $("#allCheck").hide();
+        $("#removeAllCheck").show();
+        $("#openhour-tody").find("input[type='checkbox']").each((idx, el) => {
+            $(el).prop("checked", true);
+        })
+    })
+    $("#removeAllCheck").click(function () {
+        $("#allCheck").show();
+        $("#removeAllCheck").hide();
+        $("#openhour-tody").find("input[type='checkbox']").each((idx, el) => {
+            $(el).prop("checked", false);
+        })
     })
 
     $("#activity-tabs").click(() => {

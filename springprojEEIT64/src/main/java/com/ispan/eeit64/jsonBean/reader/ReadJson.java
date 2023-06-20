@@ -1,4 +1,4 @@
-package com.ispan.eeit64.other;
+package com.ispan.eeit64.jsonBean.reader;
 
 import java.io.File;
 import java.io.IOException;

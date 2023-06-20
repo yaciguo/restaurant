@@ -68,6 +68,7 @@ public class basicSettingsController {
 	){
 		Map<String, Object> map = new HashMap<>();
 
+		
 		new OpeningHourValidator().validate(bean, result, request.getMethod(),dao);
 		
 		if (result.hasErrors()) {

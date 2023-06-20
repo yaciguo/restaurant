@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ispan.eeit64.entity.OpeningHourBean;
 import com.ispan.eeit64.jsonBean.OpeningHourJson;
-import com.ispan.eeit64.other.ReadJson;
+import com.ispan.eeit64.jsonBean.reader.ReadJson;
 import com.ispan.eeit64.repository.OpeningHourRepository;
 import com.ispan.eeit64.repository.UniversalCustomRepository;
 

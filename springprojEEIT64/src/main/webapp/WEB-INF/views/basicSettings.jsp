@@ -161,6 +161,7 @@
 
         <!-- 分頁內容-->
         <div class="tab-content">
+            <!-- basic setting tab -->
             <div id="basic-setting-div" class="container-fluid tab-pane fade show active">
                 <div class="row col-10 offset-1 pt-3">
                     <div class="col-6 text-nowrap">
@@ -182,8 +183,6 @@
                                 </div>
                                 <div class="col offset-10 col-2 d-flex">
                                     <button type="button" class="btn btn-primary flex-fill">上傳商標</button>
-
-                                    <!-- <a href="#" class="btn btn-primary flex-fill" type="button">選取</a> -->
                                 </div>
                             </div>
                         </div>
@@ -286,6 +285,7 @@
                 </div>
             </div>
 
+            <!-- seat setting tab -->
             <div id="seat-setting-div" class="container-fluid tab-pane fade">
                 <div class="row col-10 offset-1 pt-3">
                     <div class="col-6 text-nowrap">
@@ -418,8 +418,7 @@
                                                 <tbody class="faq-body data" id="openhour-tody">
                                                     <tr class="data">
                                                         <td class="checkbox-td data ">
-                                                            <input class="form-check-input " type="checkbox"
-                                                                value="option1" id="AAA">
+                                                            <input class="form-check-input " type="checkbox">
                                                         </td>
                                                         <td class="data">星期一</td>
                                                         <td class="data">8:00</td>
@@ -500,8 +499,7 @@
                                                             <tr class="data">
                                                                 <td class="checkbox-td data ">
                                                                     <input class="form-check-input "
-                                                                        type="checkbox" value="option1"
-                                                                        id="AAA">
+                                                                        type="checkbox">
                                                                 </td>
                                                                 <td class="rest-day-td">2023-06-05</td>
                                                                 <td class="rest-weekDay-td">星期一</td>
@@ -604,17 +602,19 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-                    <div class="modal-body pt-3 pb-0">
-                        <div class="row">
+                    <div class="modal-body pt-2 pb-2">
+                        <!-- date -->
+                        <div class="row" id="modalDateRowDiv">
                             <div class="col-4 d-flex align-items-center">
                                 <label class=" justify-content-center align-items-center">日期：</label>
                             </div>
                             <div class="col-5">
-                                <input class="form-control" id="setdate" name="setdate" placeholder='yyyy-mm-dd'
-                                    type="text" />
+                                <input class="form-control" id="setdate" name="setdate" placeholder='yyyy-mm-dd' type="text" />
                             </div>
                         </div>
-                        <div class="row">
+
+                        <!-- day of week -->
+                        <div class="row" id="modalDayRowDiv">
                             <div class="col-4 d-flex align-items-center">
                                 <label class=" justify-content-center align-items-center">星期：</label>
                             </div>
@@ -631,7 +631,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row">
+
+                        <!-- start time -->
+                        <div class="row" id="modalStartTimeRowDiv">
                             <div class="col-4 d-flex align-items-center">
                                 <label class=" justify-content-center align-items-center">開始時間：</label>
                             </div>
@@ -646,7 +648,9 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="row">
+                        
+                        <!-- end time -->
+                        <div class="row" id="modalEndTimeRowDiv">
                             <div class="col-4 d-flex align-items-center">
                                 <label class=" justify-content-center align-items-center">結束時間：</label>
                             </div>
@@ -661,7 +665,9 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="row">
+                        
+                        <!-- description -->
+                        <div class="row" id="modalDescriptionRowDiv">
                             <div class="col-4 d-flex align-items-center">
                                 <label class=" justify-content-center align-items-center">說明：</label>
                             </div>

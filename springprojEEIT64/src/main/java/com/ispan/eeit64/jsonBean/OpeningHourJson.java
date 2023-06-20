@@ -7,7 +7,7 @@ public class OpeningHourJson {
 	public String close;
 	
 	public OpeningHourJson(Integer id, Integer day, String open, String close) {
-		this.id = id;
+		this.id = id+1;
 		this.day = day;
 		this.open = open;
 		this.close = close;

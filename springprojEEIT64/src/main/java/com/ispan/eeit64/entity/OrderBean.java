@@ -24,7 +24,7 @@ public class OrderBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", length = 10)
+	@Column(name = "id")
 	private Integer id;
 
 	@Column(name = "type", columnDefinition = "varchar(10) NOT NULL COMMENT'訂單類型 I內用O外帶'")
