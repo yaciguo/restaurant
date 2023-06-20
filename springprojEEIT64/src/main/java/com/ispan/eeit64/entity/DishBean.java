@@ -46,8 +46,7 @@ public class DishBean {
 	@Column(name = "status", columnDefinition = "varchar(10) NOT NULL COMMENT'餐點狀態 N無,Y有'")
 	private String status;
 
-
-	@OneToMany(mappedBy = "dishBean")
+	@OneToMany(mappedBy = "dishBean", cascade = { CascadeType.ALL })
 	private Set<ActivityBean> activityBean = new LinkedHashSet<>();
 
 	public DishBean() {

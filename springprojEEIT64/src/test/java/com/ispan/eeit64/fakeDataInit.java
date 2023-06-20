@@ -17,13 +17,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ispan.eeit64.entity.ActivityBean;
 import com.ispan.eeit64.entity.CategoryBean;
 import com.ispan.eeit64.entity.DishBean;
 import com.ispan.eeit64.entity.OpeningHourBean;
+import com.ispan.eeit64.jsonBean.ActivityJson;
 import com.ispan.eeit64.jsonBean.CategoryJson;
 import com.ispan.eeit64.jsonBean.DishJson;
 import com.ispan.eeit64.jsonBean.OpeningHourJson;
 import com.ispan.eeit64.jsonBean.reader.ReadJson;
+import com.ispan.eeit64.repository.ActivityRepository;
 import com.ispan.eeit64.repository.CategoryRepository;
 import com.ispan.eeit64.repository.DishRepository;
 import com.ispan.eeit64.repository.OpeningHourRepository;
@@ -35,7 +38,10 @@ public class fakeDataInit {
 
 	@Autowired
 	UniversalCustomRepository ucDao;
-
+	
+	@Autowired
+	ActivityRepository activityDao;
+	
 	@Autowired
 	DishRepository dishDao;
 
@@ -56,13 +62,32 @@ public class fakeDataInit {
 		System.out.println("Test method execution end : " + testInfo.getDisplayName());
 		System.out.println("");
 	}
-
+	
+	@Test
+	void test() {
+		try {
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	
 	@Test
 	void addFakeData() {
 		try {
+			// clean table data and reset AUTO_INCREMENT = 1
+			if(isDeleteOldData) {
+				resetTable("openinghour", openHourdao);
+				resetTable("category", categoryDao);
+				resetTable("dish", dishDao);
+				resetTable("activity", activityDao);				
+			}
+			
+			// add fake data
 			addOpeningHourData();
 			addCategoryData();
 			addDishData();
+			addActivityData();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -92,10 +117,6 @@ public class fakeDataInit {
 	void addOpeningHourData() throws Exception {
 		List<OpeningHourJson> json = getJson("/static/assets/json/openingHours.json", OpeningHourJson.class);
 
-		if(isDeleteOldData) {
-			resetTable("openinghour", openHourdao);
-		}		
-		
 		SimpleDateFormat formatDate = new SimpleDateFormat("HH:mm");
 		for (OpeningHourJson jsonBean : json) {
 			Date oepnDate = formatDate.parse(jsonBean.open);
@@ -108,10 +129,6 @@ public class fakeDataInit {
 	public void addCategoryData() throws Exception {
 		List<CategoryJson> json = getJson("/static/assets/json/category.json", CategoryJson.class);
 
-		if(isDeleteOldData) {
-			resetTable("category", categoryDao);
-		}		
-
 		for (CategoryJson jsonBean : json) {
 			CategoryBean bean = new CategoryBean(null, jsonBean.name);
 			categoryDao.save(bean);
@@ -121,10 +138,6 @@ public class fakeDataInit {
 
 	public void addDishData() throws Exception {
 		List<DishJson> json = getJson("/static/assets/json/dish.json", DishJson.class);
-
-		if(isDeleteOldData) {
-			resetTable("dish", dishDao);
-		}
 		
 		for (DishJson jsonBean : json) {
 			Optional<CategoryBean> cbeanOptional = categoryDao.findById(jsonBean.category+1);
@@ -132,6 +145,24 @@ public class fakeDataInit {
 			DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "null", jsonBean.description, "null");
 
 			dishDao.save(bean);
+		}
+	}
+
+	public void addActivityData() throws Exception {
+		List<ActivityJson> json = getJson("/static/assets/json/activity.json", ActivityJson.class);
+		
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");			
+		for(ActivityJson jsonBean : json) {
+			java.sql.Date startDate = new java.sql.Date(formatDate.parse(jsonBean.startDate).getTime());
+			java.sql.Date endDate = new java.sql.Date(formatDate.parse(jsonBean.endDate).getTime());
+			
+			DishBean dBean = null;				
+			if(jsonBean.FK_Dish_Id != null) {
+				Optional<DishBean> dBeanOptional = dishDao.findById(jsonBean.FK_Dish_Id);
+				dBean = dBeanOptional.get();
+			}
+			ActivityBean bean = new ActivityBean(jsonBean.name, jsonBean.type, jsonBean.amount, jsonBean.discount, startDate, endDate, dBean);
+			activityDao.save(bean);
 		}
 	}
 

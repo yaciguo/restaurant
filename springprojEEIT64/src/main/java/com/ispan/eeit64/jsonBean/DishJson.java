@@ -10,7 +10,7 @@ public class DishJson {
 	
 	public DishJson(Integer id, String name, Integer category, Integer price, Integer cost, String description) {
 		super();
-		this.id = id+1;
+		this.id = id;
 		this.name = name;
 		this.category = category;
 		this.price = price;

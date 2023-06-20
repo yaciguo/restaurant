@@ -8,8 +8,7 @@ public class OrderJson {
 	public String time;
 	
 	public OrderJson(Integer id, List<Integer> orderDetails, String time) {
-		super();
-		this.id = id+1;
+		this.id = id;
 		this.orderDetails = orderDetails;
 		this.time = time;
 	}
