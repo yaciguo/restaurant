@@ -106,7 +106,7 @@ body {
 			<ul>
 				<li><a href="<c:url value='/custIndex' />">首頁</a>
 					<hr></li>
-				<li><a href="#">訂位查詢</a>
+				<li><a href="/searchbooking">訂位查詢</a>
 					<hr></li>
 				<li><a href="/searchorder.jsp">訂單查詢</a>
 					<hr></li>
