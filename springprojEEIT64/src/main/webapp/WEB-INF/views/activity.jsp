@@ -93,7 +93,7 @@
 							<th id="id-titleCell">活動編號</th>
 							<th id="name-titleCell">活動名稱</th>
 							<th id="type-titleCell">活動類型</th>
-							<th id="items-titleCell">參與品項</th>
+							<th id="discount-titleCell">活動折扣</th>
 							<th id="amount-titleCell">達標金額</th>
 							<th id="start-titleCell">活動開始</th>
 							<th id="end-titleCell">活動結束</th>
@@ -101,26 +101,38 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="bean" items="${allActivity}">
 						<tr onclick="openModal(this)">
-							<td id="id-cell">1</td>
-							<td id="name-cell">夏日促銷</td>
-							<td id="type-cell">折扣</td>
-							<td id="items-cell">小菜, 飲料</td>
-							<td id="amount-cell">200</td>
-							<td id="start-cell">2023-06-01</td>
-							<td id="end-cell">2023-06-30</td>
+							<td id="id-cell">${bean.id}</td>
+							<td id="name-cell">${bean.name}</td>
+							<td id="type-cell">${bean.type}</td>
+							<td id="discount-cell">${bean.discount}</td>
+							<td id="amount-cell">${bean.amount}</td>
+							<td id="start-cell">${bean.startDate}</td>
+							<td id="end-cell">${bean.endDate}</td>
 							<td><i class="fa-solid fa-trash"></i></td>
 						</tr>
-						<tr onclick="openModal(this)">
-							<td id="id-cell">2</td>
-							<td id="name-cell">周年特惠</td>
-							<td id="type-cell">贈禮</td>
-							<td id="items-cell">甜點</td>
-							<td id="amount-cell">500</td>
-							<td id="start-cell">2023-12-01</td>
-							<td id="end-cell">2023-12-31</td>
-							<td><i class="fa-solid fa-trash"></i></td>
-						</tr>
+	  </c:forEach>
+<!-- 						<tr onclick="openModal(this)"> -->
+<!-- 							<td id="id-cell">1</td> -->
+<!-- 							<td id="name-cell">夏日促銷</td> -->
+<!-- 							<td id="type-cell">折扣</td> -->
+<!-- 							<td id="discount-cell">50</td> -->
+<!-- 							<td id="amount-cell">200</td> -->
+<!-- 							<td id="start-cell">2023-06-01</td> -->
+<!-- 							<td id="end-cell">2023-06-30</td> -->
+<!-- 							<td><i class="fa-solid fa-trash"></i></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr onclick="openModal(this)"> -->
+<!-- 							<td id="id-cell">2</td> -->
+<!-- 							<td id="name-cell">周年特惠</td> -->
+<!-- 							<td id="type-cell">贈禮</td> -->
+<!-- 							<td id="discount-cell">紅茶</td> -->
+<!-- 							<td id="amount-cell">500</td> -->
+<!-- 							<td id="start-cell">2023-12-01</td> -->
+<!-- 							<td id="end-cell">2023-12-31</td> -->
+<!-- 							<td><i class="fa-solid fa-trash"></i></td> -->
+<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>

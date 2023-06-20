@@ -27,10 +27,6 @@ public class DishBean {
 	@Column(name = "name", columnDefinition = "varchar(100) NOT NULL COMMENT'餐點名稱'")
 	private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "categoryId", nullable = false, foreignKey = @ForeignKey(name = "FK_categoryId"))
-	private CategoryBean categoryBean;
-
 	@Column(name = "price", columnDefinition = "INT(10) NOT NULL COMMENT'餐點價格'")
 	private Integer price;
 
@@ -46,13 +42,16 @@ public class DishBean {
 	@Column(name = "status", columnDefinition = "varchar(10) NOT NULL COMMENT'餐點狀態 N無,Y有'")
 	private String status;
 
-	@OneToMany(mappedBy = "dishBean", cascade = { CascadeType.ALL })
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FK_categoryId", foreignKey = @ForeignKey(name = "dish_id_fk"))
+	private CategoryBean categoryBean;
+
+	@OneToMany(mappedBy = "dishBean")
 	private Set<ActivityBean> activityBean = new LinkedHashSet<>();
 
 	public DishBean() {
 		super();
 	}	
-	
 	
 	public DishBean(String name, CategoryBean categoryBean, Integer price, Integer cost, String picture, String description, String status) {
 		super();
@@ -63,37 +62,6 @@ public class DishBean {
 		this.picture = picture;
 		this.description = description;
 		this.status = status;
-	}
-
-
-
-
-	public DishBean(Integer id, String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
-			String description, String status) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.categoryBean = categoryBean;
-		this.price = price;
-		this.cost = cost;
-		this.picture = picture;
-		this.description = description;
-		this.status = status;
-	}
-
-
-	public DishBean(Integer id, String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
-			String description, String status, Set<ActivityBean> activityBean) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.categoryBean = categoryBean;
-		this.price = price;
-		this.cost = cost;
-		this.picture = picture;
-		this.description = description;
-		this.status = status;
-		this.activityBean = activityBean;
 	}
 
 	public Integer getId() {
@@ -178,6 +146,5 @@ public class DishBean {
 				+ (status != null ? "status=" + status + ", " : "")
 				+ (activityBean != null ? "activityBean=" + activityBean : "") + "]";
 	}
-
 
 }

@@ -31,10 +31,45 @@ public class HomeController {
 	public String osLogin() {
 		return "osLogin";
 	}
+	@GetMapping("/basicSettings")
+	public String basicSettings() {
+		return "basicSettings";
+	}
 	@GetMapping("/activity")
 	public String activity() {
 		return "activity";
 	}
+	
+	@GetMapping("/booking")
+	public String booking() {
+		return "booking";
+	}
+	@GetMapping("/searchbooking")
+	public String searchbooking() {
+		return "searchbooking";
+	}
+	
+	@GetMapping("/searchorder")
+	public String searchorder() {
+		return "searchorder";
+	}
+	
+	@GetMapping("/menu")
+	public String menu() {
+		return "menu";
+	}
+	
+	@GetMapping("/shoppingcart")
+	public String shoppingcart() {
+		return "shoppingcart";
+	}
+	
+	@GetMapping("/ordercheck")
+	public String ordercheck() {
+		return "ordercheck";
+	}
+	
+	
 
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {

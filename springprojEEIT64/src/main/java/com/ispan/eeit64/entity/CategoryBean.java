@@ -25,11 +25,17 @@ public class CategoryBean {
 
     @Column(name = "name", columnDefinition = "varchar(20) NOT NULL COMMENT'分類名稱'")
     private String name;
+    
+    @OneToMany(mappedBy = "categoryBean", fetch=FetchType.EAGER, 
+	        cascade = { CascadeType.PERSIST }, orphanRemoval = false
+	  )
+    private Set<DishBean> dishBean = new LinkedHashSet<>();
+
 
     @OneToMany(mappedBy = "categoryBean", fetch=FetchType.EAGER, 
 	        cascade = { CascadeType.ALL }, orphanRemoval = false
 	  )
-    @JsonIgnore//==============================增加的z
+    @JsonIgnore
     private Set<DishBean> dishBean = new LinkedHashSet<>();
 
 	public CategoryBean() {
