@@ -28,7 +28,7 @@ public class DishBean {
 	private String name;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryId", nullable = false, foreignKey = @ForeignKey(name = "FK_categoryId"))
+	@JoinColumn(name = "FK_categoryId", nullable = false, foreignKey = @ForeignKey(name = "dish_id_fk"))
 	private CategoryBean categoryBean;
 
 	@Column(name = "price", columnDefinition = "INT(10) NOT NULL COMMENT'餐點價格'")
@@ -51,8 +51,7 @@ public class DishBean {
 
 	public DishBean() {
 		super();
-	}	
-	
+	}
 	
 	public DishBean(String name, CategoryBean categoryBean, Integer price, Integer cost, String picture, String description, String status) {
 		super();
