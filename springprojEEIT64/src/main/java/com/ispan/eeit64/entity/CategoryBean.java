@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "category")
 public class CategoryBean {
@@ -29,7 +31,13 @@ public class CategoryBean {
 	  )
     private Set<DishBean> dishBean = new LinkedHashSet<>();
 
- 
+
+    @OneToMany(mappedBy = "categoryBean", fetch=FetchType.EAGER, 
+	        cascade = { CascadeType.ALL }, orphanRemoval = false
+	  )
+    @JsonIgnore
+    private Set<DishBean> dishBean = new LinkedHashSet<>();
+
 	public CategoryBean() {
 		super();
 	}

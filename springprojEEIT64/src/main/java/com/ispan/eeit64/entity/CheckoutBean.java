@@ -34,6 +34,6 @@ public class CheckoutBean {
 	private String note;
 	
 	@OneToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="orderId")
+    @JoinColumn(name="FK_orderId")
 	private OrderBean order;
 }

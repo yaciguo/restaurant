@@ -24,7 +24,7 @@ public class OrderBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", length = 10)
+	@Column(name = "id")
 	private Integer id;
 
 	@Column(name = "type", columnDefinition = "varchar(10) NOT NULL COMMENT'訂單類型 I內用O外帶'")
@@ -55,10 +55,10 @@ public class OrderBean {
 	@ManyToOne
 	@JoinColumn(name = "FK_Activity_Id")
 	private ActivityBean activityBean;
-	
-	@OneToMany(mappedBy = "orderBean")
-    private Set<OrderRecordBean> orderRecordBean= new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "orderBean")
+    private Set<OrderRecordBean> orderRecordBean= new LinkedHashSet<>();
+    
 	@OneToMany(mappedBy = "orderBean", fetch = FetchType.EAGER, cascade = {
 			CascadeType.PERSIST }, orphanRemoval = false)
 	private Set<OrderDetailBean> orderDetailBean = new LinkedHashSet<>();
