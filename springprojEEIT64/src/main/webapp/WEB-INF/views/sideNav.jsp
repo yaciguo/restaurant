@@ -82,7 +82,7 @@
                     <span class="nav-title">會員管理</span>
                 </a></li> -->
             <li><a href="/table.jsp" class="nav-link side-nav">
-                    <i class="fa-regular fa-address-card fa-xl"></i>
+                    <i class="fa-solid fa-couch fa-lg"></i>
                     <span class="nav-title">桌位管理</span>
                 </a></li>
             <li><a href="product.jsp" class="nav-link side-nav">
@@ -98,7 +98,7 @@
                     <span class="nav-title">活動管理</span>
                 </a></li>
             <li><a href="checkbox.jsp" class="nav-link side-nav">
-                    <i class="fa-solid fa-gift fa-xl"></i>
+                    <i class="fa-solid fa-sack-dollar fa-xl"></i>
                     <span class="nav-title">結帳管理</span>
                 </a></li>
             <li><a href="/dataAnalysis.jsp" class="nav-link side-nav">

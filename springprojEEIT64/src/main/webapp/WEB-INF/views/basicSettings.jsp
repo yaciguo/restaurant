@@ -20,8 +20,25 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
+	<!-- fontAwesome - icon插件 -->
+	<link href="./assets/src/plugins/fontawesome/css/all.min.css" rel="stylesheet">
 </head>
 <style>
+	body {
+		background-color: #EEE;
+	}
+	.main-content {
+		min-width: 580px;
+		margin: 20px 20px 20px calc(60px + 20px);
+		padding: 15px;
+		transition: margin-left 0.3s ease-in-out;
+		background-color: #FFF;
+		border-radius: var(--main-radius);
+	}
+	.main-content.active {
+		margin-left: 180px;
+	}
+	
     div.scheduler-border {
         border: 1px groove #4070ff !important;
         box-shadow: 0px 0px 0px 0px #000;
@@ -148,7 +165,11 @@
 </style>
 
 <body>
-
+	<!-- 左側導覽列 -->
+    <%@ include file="sideNav.jsp"%>
+	
+	<!-- 主要內容區域 -->
+	   
     <div id="main-content" class="main-content">
         <ul class="nav nav-tabs" id="activity-tabs">
             <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"

@@ -51,6 +51,7 @@ public class ActivityBean {
 	@JoinColumn(name = "FK_Dish_Id")
 	private DishBean dishBean;
 
+
 	@Override
 	public String toString() {
 		return "ActivityBean [id=" + id + ", name=" + name + ", type=" + type + ", amount=" + amount + ", discount="
@@ -61,27 +62,15 @@ public class ActivityBean {
 	public ActivityBean() {
 		super();
 	}
-	
-	public ActivityBean(String name, String type, Integer amount, Integer discount, Date startDate,
-			Date endDate, DishBean dishBean) {
-		super();
-		this.name = name;
-		this.type = type;
-		this.amount = amount;
-		this.discount = discount;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.dishBean = dishBean;
-	}
 
-	public ActivityBean(Integer id, String name, String type, Integer amount, Integer discount, Date startDate,
+	public ActivityBean(Integer id, String name, String type, Integer discount, Integer amount,  Date startDate,
 			Date endDate, DishBean dishBean) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.type = type;
-		this.amount = amount;
 		this.discount = discount;
+		this.amount = amount;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.dishBean = dishBean;
@@ -111,20 +100,20 @@ public class ActivityBean {
 		this.type = type;
 	}
 
-	public Integer getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
-
 	public Integer getDiscount() {
 		return discount;
 	}
 
 	public void setDiscount(Integer discount) {
 		this.discount = discount;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
 	public Date getStartDate() {

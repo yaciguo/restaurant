@@ -32,7 +32,7 @@
 
 <body>
 	<!-- 左側導覽列 -->
-	<%@ include file="sideNav.jsp" %>
+	<%@ include file="sideNav.jsp"%>
 
 	<!-- 主要內容區域 -->
 	<div id="main-content" class="main-content">
@@ -81,8 +81,7 @@
 			<!-- 標籤二 - 活動設定 -->
 			<div class="tab-pane fade" id="tab2">
 				<div class="py-4">
-					<button type="button" class="btn btn-primary add-activity"
-						data-bs-toggle="modal" data-bs-target="#activity-modal">
+					<button type="button" class="btn btn-primary add-activity" onclick="openModal(this)">
 						<i class="fa-solid fa-plus "></i>
 					</button>
 				</div>
@@ -93,34 +92,26 @@
 							<th id="id-titleCell">活動編號</th>
 							<th id="name-titleCell">活動名稱</th>
 							<th id="type-titleCell">活動類型</th>
-							<th id="items-titleCell">參與品項</th>
+							<th id="discount-titleCell">折扣內容</th>
 							<th id="amount-titleCell">達標金額</th>
 							<th id="start-titleCell">活動開始</th>
 							<th id="end-titleCell">活動結束</th>
-							<th>功能</th>
+							<th>刪除</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr onclick="openModal(this)">
-							<td id="id-cell">1</td>
-							<td id="name-cell">夏日促銷</td>
-							<td id="type-cell">折扣</td>
-							<td id="items-cell">小菜, 飲料</td>
-							<td id="amount-cell">200</td>
-							<td id="start-cell">2023-06-01</td>
-							<td id="end-cell">2023-06-30</td>
-							<td><i class="fa-solid fa-trash"></i></td>
-						</tr>
-						<tr onclick="openModal(this)">
-							<td id="id-cell">2</td>
-							<td id="name-cell">周年特惠</td>
-							<td id="type-cell">贈禮</td>
-							<td id="items-cell">甜點</td>
-							<td id="amount-cell">500</td>
-							<td id="start-cell">2023-12-01</td>
-							<td id="end-cell">2023-12-31</td>
-							<td><i class="fa-solid fa-trash"></i></td>
-						</tr>
+					<tbody id="activityBody">
+<%-- 						<c:forEach var="bean" items="${allActivity}"> --%>
+<!-- 							<tr onclick="openModal(this)"> -->
+<%-- 								<td id="id-cell">${bean.id}</td> --%>
+<%-- 								<td id="name-cell">${bean.name}</td> --%>
+<%-- 								<td id="type-cell">${bean.type}</td> --%>
+<%-- 								<td id="discount-cell">${bean.discount}</td> --%>
+<%-- 								<td id="amount-cell">${bean.amount}</td> --%>
+<%-- 								<td id="start-cell">${bean.startDate}</td> --%>
+<%-- 								<td id="end-cell">${bean.endDate}</td> --%>
+<!-- 								<td><i class="fa-solid fa-trash"></i></td> -->
+<!-- 							</tr> -->
+<%-- 						</c:forEach> --%>
 					</tbody>
 				</table>
 			</div>
@@ -130,7 +121,7 @@
 		<div class="modal" id="activity-modal" tabindex="-1"
 			aria-labelledby="activity-modalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
+				<form class="modal-content" id="activity-form">
 					<div class="modal-header">
 						<h4 class="modal-title" id="activity-modalLabel">
 							<B>活動設定</B>
@@ -138,52 +129,78 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-					<div class="modal-body px-4">
+					<div class="modal-body px-2">
 						<div class="activity-detail" id="detail-id">
 							<strong>活動編號：</strong>
-							<input type="text">
+							<input type="text" disabled>
+							
 						</div>
 						<div class="activity-detail" id="detail-name">
 							<strong>活動名稱：</strong>
-							<input type="text">
+							<input type="text" required>
 						</div>
-						<div class="activity-detail" id="detail-type">
-							<strong>活動類型：</strong> <select>
-								<option value="discount">折扣</option>
-								<option value="bonus">贈禮</option>
-							</select>
-						</div>
-						<div class="activity-detail" id="detail-items">
-							<strong>參與品項：</strong> <label><input type="checkbox"
-									value="select-all" id="select-all">全部</label> <label><input
-									type="checkbox" value="麵食">麵食</label> <label><input
-									type="checkbox" value="dumplings">餃子</label> <label><input
-									type="checkbox" value="sides">小菜</label> <label><input
-									type="checkbox" value="drinks">飲料</label> <label><input
-									type="checkbox" value="desserts">甜點</label>
-						</div>
+                        <div class="activity-detail d-flex" id="detail-type">
+                            <strong>活動類型：</strong>
+                            <label class="me-1"><input type="radio" name="typeRadio" class="form-check-input" value="discount"> 折扣</label>
+                            <label class="me-1"><input type="radio" name="typeRadio" class="form-check-input" value="gift"> 贈禮</label>
+                        </div>
+						<div class="activity-detail" id="detail-discount">
+                            <strong>折扣內容：</strong>
+                            <input type="text" class="discount-price">
+
+                            <select class="me-2 p-1 discount-gift" id="discount-category">
+<!--                                 <option value="sides">小菜</option> -->
+<!--                                 <option value="drinks" selected>飲料</option> -->
+<!--                                 <option value="desserts">甜點</option> -->
+                            </select>
+                            <select class="p-1 discount-gift" id="discount-choose">
+<!--                                 <option value="blacktea">紅茶</option> -->
+<!--                                 <option value="greentea">綠茶</option> -->
+<!--                                 <option value="milktea">奶茶</option> -->
+<!--                                 <option value="coffee">咖啡</option> -->
+                            </select>
+                        </div>
 						<div class="activity-detail" id="detail-amount">
 							<strong>達標金額：</strong>
-							<input type="text">
+							<input type="text" required>
 						</div>
 						<div class="activity-detail" id="detail-start">
 							<strong>活動開始：</strong>
-							<input type="date">
+							<input type="date" required>
 						</div>
 						<div class="activity-detail" id="detail-end">
 							<strong>活動結束：</strong>
-							<input type="date">
+							<input type="date" required>
 						</div>
 					</div>
 					<div class="modal-footer justify-content-center">
 						<button type="button" class="btn btn-secondary px-5 py-2 mx-4"
 							data-bs-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary px-5 py-2 mx-4"
-							data-bs-dismiss="modal">確認</button>
+						<button type="submit" class="btn btn-primary px-5 py-2 mx-4">確認</button>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
+		
+        <!-- 互動視窗 - 刪除活動 -->
+        <div class="modal" id="delete-modal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><B>刪除活動</B></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <strong></strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary px-5 py-2 mx-4"
+                            data-bs-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary px-5 py-2 mx-4">確認</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 	</div>
 
@@ -192,58 +209,359 @@
 
 <script>
 	$(function() {
-		// 控制參與品項中checkbox
-		document.getElementById("select-all").addEventListener(
-				"change",
-				function() {
-					// 選取label中的checkbox
-					var checkboxes = document
-							.querySelectorAll("label input[type='checkbox']");
+		
+        // 活動類型 預設折扣 -> 不顯示贈禮
+        $('.discount-gift').hide();
+        $('.discount-price').attr('required', 'required');
+        // 監聽 活動類型 的 change 事件
+        $('input[name="typeRadio"]').change(function () {
+            $('.discount-price').val('');
+            $('#discount-choose').val('');
+            
+            var selectedValue = $(this).val();
+            if (selectedValue === "discount") {
+                $('.discount-price').show();
+                $('.discount-price').attr('required', 'required');
+                $('.discount-gift').hide();
+            } else if (selectedValue === "gift") {
+            	loadCategoryData();
+                $('.discount-gift').show();
+                $('.discount-price').hide();
+                $('.discount-price').removeAttr('required');
+            }
+        });
+        
+     	// 監聽 折扣內容的餐點類別 change 事件
+        $('#discount-category').change(function() {
+            var categoryId = $(this).find('option:selected').data('id');
 
-					for (var i = 1; i < checkboxes.length; i++) {
-						checkboxes[i].checked = this.checked;
-					}
-				});
+            loadDishInCategoryData(categoryId);
+        });
 
-	});
+		// 控制輸入框 活動開始/結束 
+        var startDateInput = $('#detail-start input');
+        var endDateInput = $('#detail-end input');
 
-	// 開啟活動設定互動視窗
-	function openModal(row) {
-		var activityId = row.querySelector('#id-cell').textContent;
-		var activityName = row.querySelector('#name-cell').textContent;
-		var activityType = row.querySelector('#type-cell').textContent;
-		var activityItems = row.querySelector('#items-cell').textContent;
-		var activityAmount = row.querySelector('#amount-cell').textContent;
-		var activityStart = row.querySelector('#start-cell').textContent;
-		var activityEnd = row.querySelector('#end-cell').textContent;
+        startDateInput.on('change', validateOptionForEndDate);
 
-		var modal = document.getElementById('activity-modal');
-		modal.querySelector('#detail-id input').value = activityId;
-		modal.querySelector('#detail-name input').value = activityName;
+        startDateInput.on('click', function () {
+            var startDate = new Date(startDateInput.val());
+            var current = new Date().toISOString().split('T')[0];
+            var minDate;
 
-		var detailOptions = document
-				.querySelectorAll('#detail-type select option');
-		detailOptions.forEach(function(option) {
-			if (activityType == option.textContent) {
-				option.setAttribute('selected', '');
-			}
-		});
+            if (isNaN(startDate)) {
+                minDate = current;
+            } else {
+                minDate = (startDate < current) ? startDate : current;
+                console.log("else"+startDate +" / "+ current)
+            }
 
-		var detailLabels = document.querySelectorAll('#detail-items label');
-		detailLabels.forEach(function(label) {
-			var checkbox = label.querySelector('input[type="checkbox"]');
-			if (activityItems.includes(label.textContent)) {
-				checkbox.checked = true;
-			}
-		});
+            startDateInput.prop('min', minDate);
+        });
 
-		modal.querySelector('#detail-amount input').value = activityAmount;
-		modal.querySelector('#detail-start input').value = activityStart;
-		modal.querySelector('#detail-end input').value = activityEnd;
+        endDateInput.on('click', function () {
+            var startDate = new Date(startDateInput.val());
+            var current = new Date().toISOString().split('T')[0];
+            var minDate;
 
-		var modalInstance = new bootstrap.Modal(modal);
-		modalInstance.show();
+            if (isNaN(startDate)) {
+                minDate = current;
+            } else {
+                minDate = startDate.toISOString().split('T')[0];
+            }
+
+            startDate.setDate(startDate.getDate() + 1);
+            endDateInput.prop('min', minDate);
+        });
+
+        // 活動結束日期必須在活動開始日期之後
+        function validateOptionForEndDate() {
+            var startDate = new Date(startDateInput.val());
+            var endDate = new Date(endDateInput.val());
+            if (endDate < startDate) {
+                endDateInput.val(startDateInput.val());
+            }
+        }
+		
+	    // 監聽 Bootstrap Tabs 切換事件
+	    $('#activity-tabs').on('shown.bs.tab', function (e) {
+	        var targetTab = $(e.target).attr('href');
+	        if (targetTab === '#tab2') {
+	            loadActivityData();
+	        }
+	    });
+	    
+	 	// 監聽 確認新增活動 事件
+	    $('#activity-form').on('submit', function (e) {
+	    	e.preventDefault();
+	    	sendActivityData();
+	    });
+	    
+	 
+    });
+	
+	// 讀取產品類別資料
+	function loadCategoryData(selectedId){
+		$.ajax({
+            url: '${pageContext.request.contextPath}/queryCategory',
+            type: 'GET',
+            success: function (response) {
+	            console.log("--------------ajax-Category");
+	            $('#discount-category').empty();
+	            
+	            for (var i = response.length-1; i >= 0 ; i--) {
+	                var category = response[i];
+	                var option = $('<option></option>')
+					                .text(category.name)
+					                .attr('data-id', category.id);
+	                $('#discount-category').append(option);
+	            }
+
+                console.log($('#discount-category option:selected').attr('data-id'));
+                
+                if(selectedId==null){
+    	            loadDishInCategoryData($('#discount-category option:selected').attr('data-id'));
+           
+                }else{
+
+    	            loadDishInCategoryData(selectedId);
+                }
+				
+            },
+            error: function (error) {
+                console.log('活動讀取失敗:', error);
+            }
+        });
+    }
+	
+	// 讀取類別中品項資料
+	function loadDishInCategoryData(cid){
+		$.ajax({
+            url: '${pageContext.request.contextPath}/queryDish?categoryId='+cid,
+            type: 'GET',
+            success: function (response) {
+	            console.log("--------------ajax-Dish "+cid);
+	            $('#discount-choose').empty();
+	            for (var i = 0; i <response.length ; i++) {
+	                var dish = response[i];
+	                var option = $('<option></option>')
+					                .text(dish.name)
+					                .attr('data-id', dish.id);
+	                
+	                
+	                $('#discount-choose').append(option);
+	            }
+				
+            },
+            error: function (error) {
+                console.log('品項讀取失敗:', error);
+            }
+        });
+    }
+	
+	
+	// 讀取所有活動資料
+	function loadActivityData() {
+        $.ajax({
+            url: '${pageContext.request.contextPath}/queryActivity',
+            type: 'GET',
+            success: function (response) {
+	            console.log("--------------ajax-Activity");
+                $('#activityBody').empty();
+
+                // 動態生成表格內容
+                var htmlContent = '';
+                for (var i = 0; i < response.length; i++) {
+                    var bean = response[i];
+                    htmlContent += '<tr onclick="openModal(this)">';
+                    htmlContent += '<td id="id-cell">' + bean.id + '</td>';
+                    htmlContent += '<td id="name-cell">' + bean.name + '</td>';
+                    
+                    var activityType = bean.type;
+                    if (activityType == "discount") {
+                    	htmlContent += '<td id="type-cell" value="' + bean.type + '">折扣</td>';
+                        htmlContent += '<td id="discount-cell">' + bean.discount + '</td>';
+                    } else {
+                    	htmlContent += '<td id="type-cell" value="' + bean.type + '">贈禮</td>';
+//                         htmlContent += '<td id="discount-cell">' + bean.dishBean.name + '</td>';
+                        htmlContent += '<td id="discount-cell" data-category="' + bean.dishBean.categoryBean.name + '" data-cId="' + bean.dishBean.categoryBean.id + '">' + bean.dishBean.name + '</td>';
+
+                    }
+                    
+                    htmlContent += '<td id="amount-cell">' + bean.amount + '</td>';
+                    htmlContent += '<td id="start-cell">' + bean.startDate + '</td>';
+                    htmlContent += '<td id="end-cell">' + bean.endDate + '</td>';
+                    htmlContent += '<td><i class="fa-solid fa-trash" onclick="deleteActivity(event); event.stopPropagation();"></i></td>';
+                    htmlContent += '</tr>';
+                };
+
+                // 更新 activityBody 的內容
+                $('#activityBody').html(htmlContent);
+
+            },
+            error: function (error) {
+                console.log('活動讀取失敗:', error);
+            }
+        });
+    }
+
+
+    // 開啟互動視窗 - 刪除活動 
+    function deleteActivity(event) {
+        var modal =  $('#delete-modal');
+        
+        var nameCell = $(event.target).closest('tr').find('#name-cell').text();
+        var strongElement = modal.find('.modal-body strong');
+        strongElement.html('確定刪除 <span style="color: red">' + nameCell + '</span> 活動?');
+
+        var modalInstance = new bootstrap.Modal(modal);
+        modalInstance.show();
+    }
+
+    // 開啟互動視窗 - 活動設定
+function openModal(row) {
+        var modal = $('#activity-modal');
+
+        if (row.tagName === "BUTTON") {
+            modal.find('#detail-id').hide();
+            modal.find('input[type="text"]').val('');
+            modal.find('input[type="radio"]').prop('checked', false).first().prop('checked', true);
+            modal.find('.discount-price').show();
+            modal.find('.discount-gift').hide();
+            modal.find('input[type="date"]').val('');
+        } else {
+            modal.find('#detail-id').show();
+            var activityId = $(row).find('#id-cell').text();
+            var activityName = $(row).find('#name-cell').text();
+            var activityType = $(row).find('#type-cell').attr('value');
+            var activityDiscount = $(row).find('#discount-cell').text();
+            var activityAmount = $(row).find('#amount-cell').text();
+            var activityStart = $(row).find('#start-cell').text();
+            var activityEnd = $(row).find('#end-cell').text();
+
+            modal.find('#detail-id input').val(activityId);
+            modal.find('#detail-name input').val(activityName);
+
+            var typeOptions = modal.find('#detail-type label');
+            typeOptions.each(function () {
+                var optionRadio = $(this).find('input[type="radio"]');
+                optionRadio.prop('checked', false);
+                if (activityType === optionRadio.val()) {
+                    optionRadio.prop('checked', true);
+                }
+            });
+            console.log($(row))
+            if (activityType === "discount") {
+                $('.discount-price').show();
+                $('.discount-price').attr('required', 'required');
+                $('.discount-gift').hide();
+                modal.find('#detail-discount input').val(activityDiscount);
+            } else {
+                var categoryValue = $(row).find("#discount-cell").attr("data-category");
+                var cIdValue = $(row).find("#discount-cell").attr("data-cId");
+                loadCategoryData(cIdValue);
+                $(document).ajaxComplete(function(event, xhr, settings) {
+                	  if (settings.url === '${pageContext.request.contextPath}/queryCategory' && xhr.status === 200) {
+                	    // 在指定的 AJAX 請求回傳成功後執行的程式碼
+                	    $('.discount-gift').show();
+                	    $('.discount-price').hide();
+                	    $('.discount-price').removeAttr('required');
+
+                	    
+                
+                console.log("categoryValue: "+categoryValue+"DatacId: "+cIdValue);
+                console.log("--------");
+                $("#discount-category option").each(function () {
+                    
+//                     console.log("$(this): "+$(this)+" val: "+$(this).val())
+                    if ($(this).val() === categoryValue) {
+                        $(this).prop("selected", true);
+                    }
+                });
+
+                	  }
+                if (settings.url === ('${pageContext.request.contextPath}/queryDish?categoryId='+cIdValue) && xhr.status === 200) {
+                console.log(activityDiscount);
+                console.log($("#discount-choose option"));
+                // 比對 activityDiscount 和 discount-choose 選項
+                $("#discount-choose option").each(function () {
+                    if ($(this).val() === activityDiscount) {
+                        $(this).prop("selected", true);
+                    }
+                });
+                	  }
+            	});
+            }
+
+
+            // modal.find('#detail-discount input').val(activityDiscount);
+            modal.find('#detail-amount input').val(activityAmount);
+            modal.find('#detail-start input').val(activityStart);
+            modal.find('#detail-end input').val(activityEnd);
+        }
+	
+	    var modalInstance = new bootstrap.Modal(modal);
+	    modalInstance.show();
 	}
+
+    // 新增活動
+    function sendActivityData() {
+        var activityId = ($('#detail-id input').val() !== '') ? $('#detail-id input').val() : '0';
+
+        var activityName = $('#detail-name input').val();
+        var activityType = $('input[name="typeRadio"]:checked').val();
+
+        var activityDiscount;
+        var activityDishId;
+        if (activityType == "discount") {
+            activityDiscount = $('#detail-discount input').val();
+            activityDishId = "NULL";
+        } else {
+            activityDiscount = "0";
+            activityDishId = $("#discount-choose option:selected").attr("data-id");
+        }
+    	
+    	var activityAmount = $('#detail-amount input').val();
+    	var activityStart = new Date($('#detail-start input').val());
+    	var activityEnd = new Date($('#detail-end input').val());
+
+
+        console.log('活動編號:', activityId);
+        console.log('活動名稱:', activityName);
+        console.log('活動類型:', activityType);
+        console.log('折扣內容:', activityDiscount);
+        console.log('達標金額:', activityAmount);
+        console.log('活動開始:', activityStart);
+        console.log('活動結束:', activityEnd);
+        console.log('贈禮品項ID:', activityDishId);
+        
+        var activityData = {
+            id: activityId,
+            name: activityName,
+            type: activityType,
+            discount: activityDiscount,
+            amount: activityAmount,
+            start: activityStart,
+            end: activityEnd,
+            dishId: activityDishId,
+        };
+
+        // 發送 POST 請求
+        $.ajax({
+            url: '${pageContext.request.contextPath}/saveActivity',
+            type: 'POST',
+            data: JSON.stringify(activityData),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log('活動保存成功');
+                $('#activity-modal').modal('hide');
+                loadActivityData();
+            },
+            error: function (error) {
+                console.log('活動保存失敗:', error);
+            }
+        });
+    }
 </script>
 
 </html>
