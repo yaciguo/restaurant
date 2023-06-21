@@ -3,6 +3,7 @@ package com.ispan.eeit64.entity;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -13,9 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "dish")
@@ -31,7 +29,6 @@ public class DishBean {
 
 	@ManyToOne
 	@JoinColumn(name = "FK_categoryId", nullable = false, foreignKey = @ForeignKey(name = "dish_id_fk"))
-	@JsonManagedReference
 	private CategoryBean categoryBean;
 
 	@Column(name = "price", columnDefinition = "INT(10) NOT NULL COMMENT'餐點價格'")
@@ -50,7 +47,6 @@ public class DishBean {
 	private String status;
 
 	@OneToMany(mappedBy = "dishBean", cascade = { CascadeType.ALL })
-	@JsonBackReference
 	private Set<ActivityBean> activityBean = new LinkedHashSet<>();
 
 	public DishBean() {

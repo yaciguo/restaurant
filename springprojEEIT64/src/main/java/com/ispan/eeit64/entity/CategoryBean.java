@@ -26,19 +26,19 @@ public class CategoryBean {
 	@Column(name = "name", columnDefinition = "varchar(20) NOT NULL COMMENT'分類名稱'")
 	private String name;
 
-<<<<<<< HEAD
-    @OneToMany(mappedBy = "categoryBean", fetch=FetchType.EAGER, 
-	        cascade = { CascadeType.ALL }, orphanRemoval = false
+    @OneToMany(
+    		mappedBy = "categoryBean", 
+    		fetch=FetchType.EAGER, 
+    		cascade = { CascadeType.ALL }, 
+    		orphanRemoval = false
 	  )
 	@JsonBackReference
     private Set<DishBean> dishBean = new LinkedHashSet<>();
-=======
 
 	@Override
 	public String toString() {
 		return "CategoryBean [id=" + id + ", name=" + name + ", dishBean=" + dishBean + "]";
 	}
->>>>>>> 035d95aef56754375c87d5f0a642a177ec658c18
 
 	public CategoryBean() {
 		super();
@@ -97,14 +97,5 @@ public class CategoryBean {
 		this.dishBean = dishBean;
 	}
 
-<<<<<<< HEAD
 
-	@Override
-	public String toString() {
-		return "CategoryBean [" + (id != null ? "id=" + id + ", " : "") + (name != null ? "name=" + name + ", " : "")
-				+ (dishBean != null ? "dishBean=" + dishBean : "") + "]";
-	}
-    
-=======
->>>>>>> 035d95aef56754375c87d5f0a642a177ec658c18
 }
