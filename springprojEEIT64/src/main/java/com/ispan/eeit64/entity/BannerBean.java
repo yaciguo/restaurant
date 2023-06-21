@@ -20,4 +20,44 @@ public class BannerBean {
 
     @Column(name = "url", columnDefinition = "VARCHAR(255) NOT NULL COMMENT '活動連結'")
     private String url;
+
+	@Override
+	public String toString() {
+		return "BannerBean [id=" + id + ", pic=" + pic + ", url=" + url + "]";
+	}
+
+	public BannerBean() {
+		super();
+	}
+
+	public BannerBean(Integer id, String pic, String url) {
+		super();
+		this.id = id;
+		this.pic = pic;
+		this.url = url;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

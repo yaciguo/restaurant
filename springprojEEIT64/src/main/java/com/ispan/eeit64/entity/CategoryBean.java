@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "category")
@@ -29,7 +29,7 @@ public class CategoryBean {
     @OneToMany(mappedBy = "categoryBean", fetch=FetchType.EAGER, 
 	        cascade = { CascadeType.ALL }, orphanRemoval = false
 	  )
-    @JsonIgnore//==============================增加的z
+	@JsonBackReference
     private Set<DishBean> dishBean = new LinkedHashSet<>();
 
 	public CategoryBean() {
@@ -112,9 +112,6 @@ public class CategoryBean {
 		return "CategoryBean [" + (id != null ? "id=" + id + ", " : "") + (name != null ? "name=" + name + ", " : "")
 				+ (dishBean != null ? "dishBean=" + dishBean : "") + "]";
 	}
-
-
-
     
 }
 
