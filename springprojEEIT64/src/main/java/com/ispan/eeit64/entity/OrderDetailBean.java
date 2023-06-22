@@ -20,14 +20,14 @@ public class OrderDetailBean {
     @Column(name = "id", length = 10)
     private Integer id;
     
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name="dishId", nullable=false , foreignKey=@ForeignKey(name = "od_fk_dish"))
     private DishBean dish;
 
     @Column(name = "quantity", columnDefinition = "int(11) NOT NULL COMMENT '單品數量'")
     private Integer quantity;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
 	@JoinColumn(name="FK_orderId", nullable=false , foreignKey=@ForeignKey(name = "orders_id_fk"))  
 	private OrderBean orderBean;
 
@@ -39,6 +39,19 @@ public class OrderDetailBean {
 
 	public OrderDetailBean() {
 		super();
+	}
+	
+	public OrderDetailBean(DishBean dish, Integer quantity) {
+		super();
+		this.dish = dish;
+		this.quantity = quantity;
+	}
+	
+	public OrderDetailBean(OrderBean orderBean, DishBean dish, Integer quantity) {
+		super();
+		this.orderBean = orderBean;
+		this.dish = dish;
+		this.quantity = quantity;
 	}
 
 	public OrderDetailBean(Integer id, DishBean dish, Integer quantity, OrderBean orderBean) {

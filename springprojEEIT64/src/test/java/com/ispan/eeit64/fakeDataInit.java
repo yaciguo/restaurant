@@ -3,9 +3,13 @@ package com.ispan.eeit64;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,16 +24,25 @@ import com.google.gson.reflect.TypeToken;
 import com.ispan.eeit64.entity.ActivityBean;
 import com.ispan.eeit64.entity.CategoryBean;
 import com.ispan.eeit64.entity.DishBean;
+import com.ispan.eeit64.entity.FdTableBean;
 import com.ispan.eeit64.entity.OpeningHourBean;
+import com.ispan.eeit64.entity.OrderBean;
+import com.ispan.eeit64.entity.OrderDetailBean;
+import com.ispan.eeit64.entity.OrderRecordBean;
 import com.ispan.eeit64.jsonBean.ActivityJson;
 import com.ispan.eeit64.jsonBean.CategoryJson;
 import com.ispan.eeit64.jsonBean.DishJson;
+import com.ispan.eeit64.jsonBean.FdTableJson;
 import com.ispan.eeit64.jsonBean.OpeningHourJson;
+import com.ispan.eeit64.jsonBean.OrderJson;
+import com.ispan.eeit64.jsonBean.OrderRecordJson;
 import com.ispan.eeit64.jsonBean.reader.ReadJson;
 import com.ispan.eeit64.repository.ActivityRepository;
 import com.ispan.eeit64.repository.CategoryRepository;
 import com.ispan.eeit64.repository.DishRepository;
+import com.ispan.eeit64.repository.FdTableRepository;
 import com.ispan.eeit64.repository.OpeningHourRepository;
+import com.ispan.eeit64.repository.OrderRepository;
 import com.ispan.eeit64.repository.UniversalCustomRepository;
 
 @SpringBootTest
@@ -51,6 +64,11 @@ public class fakeDataInit {
 	@Autowired
 	OpeningHourRepository openHourdao;
 	
+	@Autowired
+	OrderRepository orderDao;
+
+	@Autowired
+	FdTableRepository fdTableDao;
 	@BeforeEach
 	public void before(TestInfo testInfo) {
 		System.out.println("");
@@ -70,24 +88,28 @@ public class fakeDataInit {
 			System.out.println(e);
 		}
 	}
-	
-	
+		
 	@Test
 	void addFakeData() {
 		try {
 			// clean table data and reset AUTO_INCREMENT = 1
 			if(isDeleteOldData) {
+				resetTable("fdtable", fdTableDao);
+				resetTable("orders", orderDao);
+				ucDao.resetAutoId("orderdetail");
 				resetTable("openinghour", openHourdao);
 				resetTable("category", categoryDao);
 				resetTable("dish", dishDao);
-				resetTable("activity", activityDao);				
+				resetTable("activity", activityDao);
 			}
 			
 			// add fake data
+			addFdTableData();
 			addOpeningHourData();
 			addCategoryData();
 			addDishData();
 			addActivityData();
+			addOrderData();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -166,4 +188,64 @@ public class fakeDataInit {
 		}
 	}
 
+	public void addOrderData() throws Exception {
+		List<OrderJson> orderJson = getJson("/static/assets/json/orders.json", OrderJson.class);
+		List<OrderRecordJson> recordJson = getJson("/static/assets/json/orderrecords.json", OrderRecordJson.class);
+		
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+		for(int i=0; i<orderJson.size(); i++) {
+			OrderRecordJson recordData = recordJson.get(i);
+			java.sql.Timestamp orderEstablish = java.sql.Timestamp.valueOf(recordData.order_establish);
+			java.sql.Timestamp orderDeal = recordData.order_deal != null?java.sql.Timestamp.valueOf(recordData.order_deal):null;
+			java.sql.Timestamp orderFinish = recordData.order_finish != null?java.sql.Timestamp.valueOf(recordData.order_finish):null;
+			java.sql.Timestamp orderCancel = recordData.order_cancel != null?java.sql.Timestamp.valueOf(recordData.order_cancel):null;
+			OrderRecordBean rBean = new OrderRecordBean(orderEstablish, orderDeal, orderFinish, orderCancel);
+			
+			OrderJson orderData = orderJson.get(i);
+			Set<OrderDetailBean> dBeans = new HashSet<>();
+	        Map<Integer, Integer> elementCountMap = new HashMap<>();
+	        for (Integer element : orderData.orderDetails) {
+	            if (elementCountMap.containsKey(element)) {
+	                int count = elementCountMap.get(element);
+	                elementCountMap.put(element, count + 1);
+	            } else {
+	                elementCountMap.put(element, 1);
+	            }
+	        }
+			for(Integer id : elementCountMap.keySet()) {
+				Optional<DishBean> dishBeanOptional = dishDao.findById(id);
+				DishBean dishBean = dishBeanOptional.get();
+				
+				OrderDetailBean odBean = new OrderDetailBean(dishBean, elementCountMap.get(id));
+				dBeans.add(odBean);
+			}
+			ActivityBean aBean = null;
+			if(orderData.FK_Activity_Id != null) {
+				Optional<ActivityBean> dishBeanOptional = activityDao.findById(orderData.FK_Activity_Id);
+				aBean = dishBeanOptional.get();					
+			}
+			OrderBean oBean = new OrderBean(
+					orderData.type, 
+					formatDate.parse(orderData.pickTime), 
+					java.sql.Timestamp.valueOf(orderData.orderTime), 
+					orderData.amount, 
+					orderData.orderStatus, 
+					null, 
+					orderData.customer, 
+					orderData.phone, 
+					rBean,
+					dBeans,
+					aBean);		
+			orderDao.save(oBean);
+		}
+	}
+	public void addFdTableData() throws Exception {
+		List<FdTableJson> json = getJson("/static/assets/json/fdtable.json", FdTableJson.class);
+			
+		for(FdTableJson jsonBean : json) {
+			FdTableBean bean = new FdTableBean(jsonBean.capacity);
+			fdTableDao.save(bean);
+		}
+	}
 }

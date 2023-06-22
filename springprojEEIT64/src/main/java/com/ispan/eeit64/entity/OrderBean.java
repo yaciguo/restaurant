@@ -42,7 +42,8 @@ public class OrderBean {
 	@Column(name = "amount", columnDefinition = "int(100) NOT NULL COMMENT '金額'")
 	private Integer amount;
 
-	@Column(name = "orderStatus", columnDefinition = "varchar(10) NOT NULL COMMENT '訂單狀態4種'")
+	// edit varchar(20)
+	@Column(name = "orderStatus", columnDefinition = "varchar(20) NOT NULL COMMENT '訂單狀態4種'")
 	private String orderStatus;
 
 	@Column(name = "note", columnDefinition = "varchar(100) DEFAULT NULL COMMENT '備註'")
@@ -50,19 +51,22 @@ public class OrderBean {
 
 	@Column(name = "customer", columnDefinition = "varchar(100) NOT NULL COMMENT '顧客名稱 內用代桌號'")
 	private String customer;
-
-	@Column(name = "phone", columnDefinition = "varchar(100) NOT NULL COMMENT '電話'")
+	
+	//delete NOT NULL
+	@Column(name = "phone", columnDefinition = "varchar(100) COMMENT '電話'")
 	private String phone;
 
 	@ManyToOne
 	@JoinColumn(name = "FK_Activity_Id")
 	private ActivityBean activityBean;
 
-    @OneToMany(mappedBy = "orderBean")
-    private Set<OrderRecordBean> orderRecordBean= new LinkedHashSet<>();
+	//edit @OneToOne ? add cascade = {CascadeType.ALL}
+    @OneToOne(mappedBy = "orderBean", cascade = {CascadeType.ALL})
+    private OrderRecordBean orderRecordBean;
+//    private Set<OrderRecordBean> orderRecordBean= new LinkedHashSet<>();
     
 	@OneToMany(mappedBy = "orderBean", fetch = FetchType.EAGER, cascade = {
-			CascadeType.PERSIST }, orphanRemoval = false)
+			CascadeType.ALL}, orphanRemoval = false)
 	private Set<OrderDetailBean> orderDetailBean = new LinkedHashSet<>();
 
 	@OneToOne(mappedBy = "order", cascade = CascadeType.PERSIST)
@@ -80,11 +84,11 @@ public class OrderBean {
 		super();
 	}
 
-	public OrderBean(Integer id, String type, Date pickTime, Timestamp orderTime, Integer amount, String orderStatus,
-			String note, String customer, String phone, ActivityBean activityBean, Set<OrderRecordBean> orderRecordBean,
-			Set<OrderDetailBean> orderDetailBean, CheckoutBean checkoutBean) {
+	// add ActivityBean activityBean   OrderRecordBean orderRecordBean
+	public OrderBean(String type, Date pickTime, Timestamp orderTime, Integer amount, String orderStatus,
+			String note, String customer, String phone, OrderRecordBean orderRecordBean
+			,Set<OrderDetailBean> orderDetailBean, ActivityBean activityBean) {
 		super();
-		this.id = id;
 		this.type = type;
 		this.pickTime = pickTime;
 		this.orderTime = orderTime;
@@ -93,11 +97,33 @@ public class OrderBean {
 		this.note = note;
 		this.customer = customer;
 		this.phone = phone;
-		this.activityBean = activityBean;
 		this.orderRecordBean = orderRecordBean;
 		this.orderDetailBean = orderDetailBean;
-		this.checkoutBean = checkoutBean;
+		this.activityBean = activityBean;
+		for(OrderDetailBean odBean : orderDetailBean) {
+			odBean.setOrderBean(this);
+		}
 	}
+
+
+//	public OrderBean(Integer id, String type, Date pickTime, Timestamp orderTime, Integer amount, String orderStatus,
+//			String note, String customer, String phone, ActivityBean activityBean, Set<OrderRecordBean> orderRecordBean,
+//			Set<OrderDetailBean> orderDetailBean, CheckoutBean checkoutBean) {
+//		super();
+//		this.id = id;
+//		this.type = type;
+//		this.pickTime = pickTime;
+//		this.orderTime = orderTime;
+//		this.amount = amount;
+//		this.orderStatus = orderStatus;
+//		this.note = note;
+//		this.customer = customer;
+//		this.phone = phone;
+//		this.activityBean = activityBean;
+//		this.orderRecordBean = orderRecordBean;
+//		this.orderDetailBean = orderDetailBean;
+//		this.checkoutBean = checkoutBean;
+//	}
 
 	public Integer getId() {
 		return id;
@@ -179,11 +205,19 @@ public class OrderBean {
 		this.activityBean = activityBean;
 	}
 
-	public Set<OrderRecordBean> getOrderRecordBean() {
+//	public Set<OrderRecordBean> getOrderRecordBean() {
+//		return orderRecordBean;
+//	}
+//
+//	public void setOrderRecordBean(Set<OrderRecordBean> orderRecordBean) {
+//		this.orderRecordBean = orderRecordBean;
+//	}
+
+	public OrderRecordBean getOrderRecordBean() {
 		return orderRecordBean;
 	}
 
-	public void setOrderRecordBean(Set<OrderRecordBean> orderRecordBean) {
+	public void setOrderRecordBean(OrderRecordBean orderRecordBean) {
 		this.orderRecordBean = orderRecordBean;
 	}
 

@@ -27,11 +27,22 @@ public class FdTableBean {
 	@Column(name = "capacity", nullable = false, columnDefinition = "INT(200) COMMENT '容納人數'")
 	private Integer capacity;
 	
-	
+	// edit cascade = { CascadeType.ALL }
 	@OneToMany(mappedBy = "fdTableBean", fetch=FetchType.EAGER, 
-	        cascade = { CascadeType.PERSIST }, orphanRemoval = false)
+	        cascade = { CascadeType.ALL }, orphanRemoval = false)
     //@JoinColumn(name = "reserveId", nullable = false, foreignKey = @ForeignKey(name = "tb_fk_res"))
     private Set<ReservationBean> reservationBean = new LinkedHashSet<>();
+
+	// add
+	public FdTableBean() {
+		super();
+	}
+
+	// add
+	public FdTableBean(Integer capacity) {
+		super();
+		this.capacity = capacity;
+	}
 
 
 }

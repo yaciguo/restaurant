@@ -53,7 +53,8 @@ public class ReservationBean {
     @Column(name = "submitTime", columnDefinition = "datetime NOT NULL COMMENT ' 送出時間'")
     private java.sql.Timestamp submitTime;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    //delete (cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "FK_FdTableBean_Id", nullable = false, foreignKey = @ForeignKey(name = "res_fk_tb"))
     private FdTableBean fdTableBean;
 }
