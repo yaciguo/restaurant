@@ -2,7 +2,6 @@ package com.ispan.eeit64.entity;
 
 import java.sql.Date;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Access;
@@ -66,7 +65,6 @@ public class ActivityBean {
 	public ActivityBean(String name, String type, Integer discount, Integer amount,  Date startDate,
 			Date endDate, DishBean dishBean) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.discount = discount;
