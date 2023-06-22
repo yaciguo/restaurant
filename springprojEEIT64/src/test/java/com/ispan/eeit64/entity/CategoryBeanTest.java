@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.ispan.eeit64.dao.CategoryRepository;
+import com.ispan.eeit64.repository.CategoryRepository;
 @SpringBootTest
 public class CategoryBeanTest {
 	@Autowired

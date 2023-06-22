@@ -141,7 +141,7 @@
             <label for="">手機:</label><br />
             <input id="tel" name="userphone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;"
               pattern="[0]{1}[9]{1}[0-9]{8}" required /><br/><br/>
-            <label>取餐時間:</label>
+            <label>取餐時間:</label><br/>
             <select name="selectTime" required>
                         <option value="">請選擇時間</option>
                         <option value="1200">12:00</option>

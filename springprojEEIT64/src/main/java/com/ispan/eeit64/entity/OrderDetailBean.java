@@ -20,18 +20,79 @@ public class OrderDetailBean {
     @Column(name = "id", length = 10)
     private Integer id;
     
-    //fk
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name="dishId", nullable=false , foreignKey=@ForeignKey(name = "od_fk_dish"))
     private DishBean dish;
 
     @Column(name = "quantity", columnDefinition = "int(11) NOT NULL COMMENT '單品數量'")
     private Integer quantity;
-
-//    @Column(name = "unitPrice", columnDefinition = "int(11) NOT NULL COMMENT '單價'")
-//    private Integer unitPrice;
     
-    @ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="orderId", nullable=false , foreignKey=@ForeignKey(name = "orders_id_fk"))  
+    @ManyToOne
+	@JoinColumn(name="FK_orderId", nullable=false , foreignKey=@ForeignKey(name = "orders_id_fk"))  
 	private OrderBean orderBean;
+
+	@Override
+	public String toString() {
+		return "OrderDetailBean [id=" + id + ", dish=" + dish + ", quantity=" + quantity + ", orderBean=" + orderBean
+				+ "]";
+	}
+
+	public OrderDetailBean() {
+		super();
+	}
+	
+	public OrderDetailBean(DishBean dish, Integer quantity) {
+		super();
+		this.dish = dish;
+		this.quantity = quantity;
+	}
+	
+	public OrderDetailBean(OrderBean orderBean, DishBean dish, Integer quantity) {
+		super();
+		this.orderBean = orderBean;
+		this.dish = dish;
+		this.quantity = quantity;
+	}
+
+	public OrderDetailBean(Integer id, DishBean dish, Integer quantity, OrderBean orderBean) {
+		super();
+		this.id = id;
+		this.dish = dish;
+		this.quantity = quantity;
+		this.orderBean = orderBean;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public DishBean getDish() {
+		return dish;
+	}
+
+	public void setDish(DishBean dish) {
+		this.dish = dish;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public OrderBean getOrderBean() {
+		return orderBean;
+	}
+
+	public void setOrderBean(OrderBean orderBean) {
+		this.orderBean = orderBean;
+	}
+    
+    
 }

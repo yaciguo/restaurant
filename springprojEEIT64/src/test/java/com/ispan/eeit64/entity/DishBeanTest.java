@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.ispan.eeit64.dao.DishRepository;
+import com.ispan.eeit64.repository.DishRepository;
 
 @SpringBootTest
 public class DishBeanTest {

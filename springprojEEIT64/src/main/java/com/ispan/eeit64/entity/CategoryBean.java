@@ -27,7 +27,7 @@ public class CategoryBean {
     private String name;
     
     @OneToMany(mappedBy = "categoryBean", fetch=FetchType.EAGER, 
-	        cascade = { CascadeType.PERSIST }, orphanRemoval = false
+	        cascade = { CascadeType.ALL}, orphanRemoval = false
 	  )
     @JsonIgnore//==============================增加的
     private Set<DishBean> dishBean = new LinkedHashSet<>();

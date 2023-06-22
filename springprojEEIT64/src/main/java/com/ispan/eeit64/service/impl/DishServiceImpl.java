@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ispan.eeit64.dao.DishRepository;
 import com.ispan.eeit64.entity.DishBean;
+import com.ispan.eeit64.repository.DishRepository;
 import com.ispan.eeit64.service.DishService;
 @Service
 @Transactional

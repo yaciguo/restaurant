@@ -61,6 +61,12 @@ public class ActivityBean {
 	public ActivityBean() {
 		super();
 	}
+	
+
+	public ActivityBean(Integer id) {
+		super();
+		this.id = id;
+	}
 
 	public ActivityBean(Integer id, String name, String type, Integer amount, Integer discount, Date startDate,
 			Date endDate, DishBean dishBean) {
