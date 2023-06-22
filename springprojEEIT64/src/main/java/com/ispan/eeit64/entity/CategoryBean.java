@@ -26,9 +26,14 @@ public class CategoryBean {
 	@Column(name = "name", columnDefinition = "varchar(20) NOT NULL COMMENT'分類名稱'")
 	private String name;
 
-	@OneToMany(mappedBy = "categoryBean", fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, orphanRemoval = false)
+    @OneToMany(
+    		mappedBy = "categoryBean", 
+    		fetch=FetchType.EAGER, 
+    		cascade = { CascadeType.ALL }, 
+    		orphanRemoval = false
+	  )
 	@JsonBackReference
-	private Set<DishBean> dishBean = new LinkedHashSet<>();
+    private Set<DishBean> dishBean = new LinkedHashSet<>();
 
 	@Override
 	public String toString() {
@@ -91,5 +96,6 @@ public class CategoryBean {
 	public void setDishBean(Set<DishBean> dishBean) {
 		this.dishBean = dishBean;
 	}
+
 
 }

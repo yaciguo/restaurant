@@ -62,6 +62,20 @@ public class ActivityBean {
 	public ActivityBean() {
 		super();
 	}
+	
+	public ActivityBean(String name, String type, Integer discount, Integer amount,  Date startDate,
+			Date endDate, DishBean dishBean) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.discount = discount;
+		this.amount = amount;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.dishBean = dishBean;
+	}
+
 
 	public ActivityBean(Integer id, String name, String type, Integer discount, Integer amount,  Date startDate,
 			Date endDate, DishBean dishBean) {
