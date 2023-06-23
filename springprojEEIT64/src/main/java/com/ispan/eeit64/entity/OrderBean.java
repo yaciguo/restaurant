@@ -69,7 +69,8 @@ public class OrderBean {
 			CascadeType.ALL}, orphanRemoval = false)
 	private Set<OrderDetailBean> orderDetailBean = new LinkedHashSet<>();
 
-	@OneToOne(mappedBy = "order", cascade = CascadeType.PERSIST)
+	// edit cascade = CascadeType.ALL
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private CheckoutBean checkoutBean;
 
 	@Override

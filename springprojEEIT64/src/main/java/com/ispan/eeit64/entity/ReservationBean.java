@@ -63,6 +63,22 @@ public class ReservationBean {
 		super();
 	}
 
+	// add
+	public ReservationBean(String name, String gender, String phone, Integer pNumber, Date date,
+			Time startTime, Time endTime, String email, String note, Timestamp submitTime, FdTableBean fdTableBean) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.phone = phone;
+		this.pNumber = pNumber;
+		this.date = date;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.email = email;
+		this.note = note;
+		this.submitTime = submitTime;
+		this.fdTableBean = fdTableBean;
+	}
 
 
 	public ReservationBean(Integer id, String name, String gender, String phone, Integer pNumber, Date date,

@@ -1,6 +1,8 @@
 package com.ispan.eeit64;
 
 import java.lang.reflect.Type;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,26 +25,32 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ispan.eeit64.entity.ActivityBean;
 import com.ispan.eeit64.entity.CategoryBean;
+import com.ispan.eeit64.entity.CheckoutBean;
 import com.ispan.eeit64.entity.DishBean;
 import com.ispan.eeit64.entity.FdTableBean;
 import com.ispan.eeit64.entity.OpeningHourBean;
 import com.ispan.eeit64.entity.OrderBean;
 import com.ispan.eeit64.entity.OrderDetailBean;
 import com.ispan.eeit64.entity.OrderRecordBean;
+import com.ispan.eeit64.entity.ReservationBean;
 import com.ispan.eeit64.jsonBean.ActivityJson;
 import com.ispan.eeit64.jsonBean.CategoryJson;
+import com.ispan.eeit64.jsonBean.CheckoutJson;
 import com.ispan.eeit64.jsonBean.DishJson;
 import com.ispan.eeit64.jsonBean.FdTableJson;
 import com.ispan.eeit64.jsonBean.OpeningHourJson;
 import com.ispan.eeit64.jsonBean.OrderJson;
 import com.ispan.eeit64.jsonBean.OrderRecordJson;
+import com.ispan.eeit64.jsonBean.ReservationsJson;
 import com.ispan.eeit64.jsonBean.reader.ReadJson;
 import com.ispan.eeit64.repository.ActivityRepository;
 import com.ispan.eeit64.repository.CategoryRepository;
+import com.ispan.eeit64.repository.CheckoutRepository;
 import com.ispan.eeit64.repository.DishRepository;
 import com.ispan.eeit64.repository.FdTableRepository;
 import com.ispan.eeit64.repository.OpeningHourRepository;
 import com.ispan.eeit64.repository.OrderRepository;
+import com.ispan.eeit64.repository.ReservationRepository;
 import com.ispan.eeit64.repository.UniversalCustomRepository;
 
 @SpringBootTest
@@ -69,6 +77,12 @@ public class fakeDataInit {
 
 	@Autowired
 	FdTableRepository fdTableDao;
+
+	@Autowired
+	ReservationRepository reservationDao;
+
+	@Autowired
+	CheckoutRepository checkoutDao;
 	@BeforeEach
 	public void before(TestInfo testInfo) {
 		System.out.println("");
@@ -92,11 +106,12 @@ public class fakeDataInit {
 	@Test
 	void addFakeData() {
 		try {
-			// clean table data and reset AUTO_INCREMENT = 1
 			if(isDeleteOldData) {
 				resetTable("fdtable", fdTableDao);
+				resetTable("reservation", reservationDao);
 				resetTable("orders", orderDao);
 				ucDao.resetAutoId("orderdetail");
+				resetTable("checkout", checkoutDao);
 				resetTable("openinghour", openHourdao);
 				resetTable("category", categoryDao);
 				resetTable("dish", dishDao);
@@ -105,11 +120,13 @@ public class fakeDataInit {
 			
 			// add fake data
 			addFdTableData();
+			addReservationData();
 			addOpeningHourData();
 			addCategoryData();
 			addDishData();
 			addActivityData();
 			addOrderData();
+			addCheckoutData();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -129,8 +146,11 @@ public class fakeDataInit {
 	}
 
 	public <T, ID> void resetTable(String tableName, JpaRepository<T, ID> dao) throws Exception {
+		System.out.println(dao.findAll().size());
 		if (dao.findAll().size() != 0) {
+			System.out.println(1);
 			dao.deleteAll();
+			System.out.println(2);
 		}
 		ucDao.resetAutoId(tableName);
 	}
@@ -246,6 +266,50 @@ public class fakeDataInit {
 		for(FdTableJson jsonBean : json) {
 			FdTableBean bean = new FdTableBean(jsonBean.capacity);
 			fdTableDao.save(bean);
+		}
+	}
+	
+
+	public void addReservationData() throws Exception {
+		List<ReservationsJson> json = getJson("/static/assets/json/reservations.json", ReservationsJson.class);
+
+		SimpleDateFormat formatYMDDate = new SimpleDateFormat("yyyy-MM-dd");
+		for(ReservationsJson jsonBean : json) {
+			Optional<FdTableBean> fdTableBeanOptional = fdTableDao.findById(jsonBean.FK_FdTableBean_Id);
+			FdTableBean fBean = fdTableBeanOptional.get();
+			
+			ReservationBean rBean = new ReservationBean(
+					jsonBean.name, 
+					jsonBean.gender, 
+					jsonBean.phone, 
+					jsonBean.pNumber,
+					new java.sql.Date(formatYMDDate.parse(jsonBean.date).getTime()),
+					Time.valueOf(jsonBean.startTime),
+					Time.valueOf(jsonBean.endTime),
+					jsonBean.email,
+					jsonBean.note,
+					Timestamp.valueOf(jsonBean.submitTime),
+					fBean);
+			
+			reservationDao.save(rBean);
+		}
+	}
+	
+
+	public void addCheckoutData() throws Exception {
+		List<CheckoutJson> json = getJson("/static/assets/json/checkout.json", CheckoutJson.class);
+		
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");			
+		for(CheckoutJson jsonBean : json) {
+			Optional<OrderBean> oBeanOptional = orderDao.findById(jsonBean.FK_orderId);
+			OrderBean oBean = oBeanOptional.get();
+			CheckoutBean cBean = new CheckoutBean(
+				formatDate.parse(jsonBean.payTime),
+				jsonBean.payStatus,
+				oBean
+			);
+			checkoutDao.save(cBean);
+			
 		}
 	}
 }

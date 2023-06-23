@@ -37,6 +37,7 @@ public class OpeningHourValidator implements Validator {
 				}
 			}			
 		}
+		
 		if (!errors.hasFieldErrors("dayOfWeek")) {
 	        if (bean.getDayOfWeek()<0 || bean.getDayOfWeek()>6) {
 	            errors.rejectValue("dayOfWeek", "invalidTimeFormat", "錯誤星期格式");
