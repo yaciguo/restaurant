@@ -99,11 +99,12 @@ public class OrderBean {
 		this.customer = customer;
 		this.phone = phone;
 		this.orderRecordBean = orderRecordBean;
+		this.orderRecordBean.setOrderBean(this);
 		this.orderDetailBean = orderDetailBean;
-		this.activityBean = activityBean;
-		for(OrderDetailBean odBean : orderDetailBean) {
+		for(OrderDetailBean odBean : this.orderDetailBean) {
 			odBean.setOrderBean(this);
 		}
+		this.activityBean = activityBean;
 	}
 
 

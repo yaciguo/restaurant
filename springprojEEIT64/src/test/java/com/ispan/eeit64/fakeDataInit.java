@@ -111,6 +111,7 @@ public class fakeDataInit {
 				resetTable("reservation", reservationDao);
 				resetTable("orders", orderDao);
 				ucDao.resetAutoId("orderdetail");
+				ucDao.resetAutoId("orderrecord");
 				resetTable("checkout", checkoutDao);
 				resetTable("openinghour", openHourdao);
 				resetTable("category", categoryDao);
