@@ -108,24 +108,24 @@ public class OrderBean {
 	}
 
 
-//	public OrderBean(Integer id, String type, Date pickTime, Timestamp orderTime, Integer amount, String orderStatus,
-//			String note, String customer, String phone, ActivityBean activityBean, Set<OrderRecordBean> orderRecordBean,
-//			Set<OrderDetailBean> orderDetailBean, CheckoutBean checkoutBean) {
-//		super();
-//		this.id = id;
-//		this.type = type;
-//		this.pickTime = pickTime;
-//		this.orderTime = orderTime;
-//		this.amount = amount;
-//		this.orderStatus = orderStatus;
-//		this.note = note;
-//		this.customer = customer;
-//		this.phone = phone;
-//		this.activityBean = activityBean;
-//		this.orderRecordBean = orderRecordBean;
-//		this.orderDetailBean = orderDetailBean;
-//		this.checkoutBean = checkoutBean;
-//	}
+	public OrderBean(Integer id, String type, Date pickTime, Timestamp orderTime, Integer amount, String orderStatus,
+			String note, String customer, String phone, ActivityBean activityBean, OrderRecordBean orderRecordBean,
+			Set<OrderDetailBean> orderDetailBean, CheckoutBean checkoutBean) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.pickTime = pickTime;
+		this.orderTime = orderTime;
+		this.amount = amount;
+		this.orderStatus = orderStatus;
+		this.note = note;
+		this.customer = customer;
+		this.phone = phone;
+		this.activityBean = activityBean;
+		this.orderRecordBean = orderRecordBean;
+		this.orderDetailBean = orderDetailBean;
+		this.checkoutBean = checkoutBean;
+	}
 
 	public Integer getId() {
 		return id;
@@ -206,14 +206,6 @@ public class OrderBean {
 	public void setActivityBean(ActivityBean activityBean) {
 		this.activityBean = activityBean;
 	}
-
-//	public Set<OrderRecordBean> getOrderRecordBean() {
-//		return orderRecordBean;
-//	}
-//
-//	public void setOrderRecordBean(Set<OrderRecordBean> orderRecordBean) {
-//		this.orderRecordBean = orderRecordBean;
-//	}
 
 	public OrderRecordBean getOrderRecordBean() {
 		return orderRecordBean;
