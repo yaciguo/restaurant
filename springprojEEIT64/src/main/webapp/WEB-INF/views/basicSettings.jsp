@@ -436,7 +436,7 @@
                                                         <th class="data">修改</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="faq-body data" id="openhour-tody">
+                                                <tbody class="faq-body data" id="openhourTody">
                                                     <tr class="data">
                                                         <td class="checkbox-td data ">
                                                             <input class="form-check-input " type="checkbox">
@@ -472,7 +472,7 @@
                                             type="button" style="display: none;">清空</a>
                                     </div>
                                     <div class="offset-5 col-3 d-flex px-1">
-                                        <a class="btn btn-primary btn-sm flex-fill" type="button">刪除選取</a>
+                                        <a class="btn btn-primary btn-sm flex-fill" type="button" data-bs-toggle="modal" data-bs-target="#tdItemModalDiv" id="openhour-deleteAllbtn">刪除選取</a>
                                     </div>
                                     <div class="col-2 d-flex px-1">
                                         <a class="btn btn-primary btn-sm flex-fill" type="button"
@@ -640,8 +640,8 @@
                                 <label class=" justify-content-center align-items-center">星期：</label>
                             </div>
                             <div class="col-5">
-                                <select class="form-select" aria-label="select day of week">
-                                    <option selected hidden>選取星期</option>
+                                <select class="form-select" aria-label="select day of week" id="dayOfWeekSelect">
+                                    <option selected hidden class="default">選取星期</option>
                                     <option value="1">星期一</option>
                                     <option value="2">星期二</option>
                                     <option value="3">星期三</option>
@@ -665,7 +665,7 @@
                                     選取時間
                                 </button>
                                 <ul class="dropdown-menu timepicker" aria-labelledby="dropdownMenuStartTimeBtn"
-                                    id="start-time-ul">
+                                    id="startTimeUl">
                                 </ul>
                             </div>
                         </div>
@@ -682,7 +682,7 @@
                                     選取時間
                                 </button>
                                 <ul class="dropdown-menu timepicker" aria-labelledby="dropdownMenuEndTimeBtn"
-                                    id="end-time-ul">
+                                    id="endTimeUl">
                                 </ul>
                             </div>
                         </div>
@@ -699,8 +699,8 @@
                     </div>
                     <div class="modal-footer px-0">
                         <div class="row flex-fill">
-                            <button type="button" class="col col-md-3 btn btn-primary">清空</button>
-                            <button type="button" class="col col-md-3 btn btn-primary offset-sm-6">確定</button>
+                            <!-- <button type="button" class="col col-md-3 btn btn-primary">清空</button> -->
+                            <button type="button" class="col col-md-3 btn btn-primary offset-sm-9" id="sureBtn">確定</button>
                         </div>
                     </div>
                 </div>

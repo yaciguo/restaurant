@@ -1,11 +1,9 @@
 package com.ispan.eeit64.controller;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.eeit64.entity.OpeningHourBean;
-import com.ispan.eeit64.repository.OpeningHourRepository;
+import com.ispan.eeit64.service.impl.OpeningHourServiceImpl;
 import com.ispan.eeit64.validator.OpeningHourValidator;
 
 @Controller
 public class basicSettingsController {	
 	@Autowired
-	OpeningHourRepository dao;
+	OpeningHourServiceImpl service;
 	@Autowired
 	Environment env;
 	
@@ -38,7 +36,7 @@ public class basicSettingsController {
 	
 	@GetMapping("/basicSettings.api/getAllOpeningHour")
 	public @ResponseBody List<OpeningHourBean> getAllOpeningHour(){
-		return dao.findAll();
+		return service.findAll();
 	}
 	
 	@PostMapping("/basicSettings.api/addOpeningHour")
@@ -48,16 +46,15 @@ public class basicSettingsController {
 			BindingResult result
 	){
 		Map<String, Object> map = new HashMap<>();
-		new OpeningHourValidator().validate(bean, result, request.getMethod(), dao);
+		new OpeningHourValidator().validate(bean, result, request.getMethod(), service);
 
 		if (result.hasErrors()) {
 			collectErrorMessage(map, result);
 			return map;
+		}else{
+			map = service.save(bean);
+			return map;
 		}
-		
-		dao.save(bean);
-		map.put("success", "新增成功");
-		return map;
 	}
 
 	@PutMapping("/basicSettings.api/editOpeningHour")
@@ -67,49 +64,23 @@ public class basicSettingsController {
 			BindingResult result
 	){
 		Map<String, Object> map = new HashMap<>();
-
 		
-		new OpeningHourValidator().validate(bean, result, request.getMethod(),dao);
+		new OpeningHourValidator().validate(bean, result, request.getMethod(), service);
 		
 		if (result.hasErrors()) {
 			collectErrorMessage(map, result);
 			return map;
+		}else{
+			map = service.update(bean);
+			return map;
 		}
-		
-		dao.save(bean);
-		map.put("success", "修改成功");
-		return map;
 	}
 
 	@DeleteMapping("/basicSettings.api/deleteOpeningHour")
 	public @ResponseBody Map<String, Object> deleteOpeningHour(
 			@RequestBody List<Integer> ids
 	){
-		Map<String, Object> map = new HashMap<>();
-		List<Integer> failureId = new LinkedList<>();
-		List<Integer> successId = new LinkedList<>();
-		List<Integer> errorId = new LinkedList<>();
-		for(Integer id : ids) {
-			if(!dao.findById(id).isEmpty()) {
-				dao.deleteById(id);
-				if(dao.existsById(id)) {
-					failureId.add(id);
-				}else {
-					successId.add(id);	
-				}
-			}else {
-				errorId.add(id);
-			}
-		}
-		if(failureId.size()>0) {
-			map.put("failureId", failureId);
-		}
-		if(errorId.size()>0) {
-			map.put("errorId", errorId);
-		}
-		if(successId.size()>0) {
-			map.put("success", successId);
-		}
+		Map<String, Object> map = service.deleteByIdList(ids);
 		return map;
 	}
 	
