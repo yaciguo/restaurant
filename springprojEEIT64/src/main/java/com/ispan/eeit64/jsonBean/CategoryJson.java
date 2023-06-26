@@ -5,7 +5,7 @@ public class CategoryJson {
 	public String name;
 	
 	public CategoryJson(Integer id, String name) {
-		this.id = id+1;
+		this.id = id;
 		this.name = name;
 	}
 

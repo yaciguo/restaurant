@@ -45,35 +45,48 @@
             <div class="col-sm-5">
                 <div> (帶入當日營業時間)</div>
                 <!--選單-->
-                <div>
-                    <label>取餐時間：</label>
-                    <select name="selectTime" required>
-                        <option value="">請選擇時間</option>
-                        <option value="00:00">12:00</option>
-                        <option value="00:30">12:30</option>
-                        <option value="01:00">13:00</option>
-                        <option value="01:30">13:30</option>
-                        <option value="01:30">14:00</option>
-                        <option value="01:30">14:30</option>
-                        <option value="01:30">15:00</option>
-                    </select>
-                </div>
+<!--                 <div> -->
+<!--                     <label>取餐時間：</label> -->
+<!--                     <select name="selectTime" required> -->
+<!--                         <option value="">請選擇時間</option> -->
+<!--                         <option value="00:00">12:00</option> -->
+<!--                         <option value="00:30">12:30</option> -->
+<!--                         <option value="01:00">13:00</option> -->
+<!--                         <option value="01:30">13:30</option> -->
+<!--                         <option value="01:30">14:00</option> -->
+<!--                         <option value="01:30">14:30</option> -->
+<!--                         <option value="01:30">15:00</option> -->
+<!--                     </select> -->
+<!--                 </div> -->
             </div>
             <div class="col-sm-3">
                 <button style="font-size: 30px; color: white; ">餐廳資訊</button>
             </div>
         </div><br>
-        <!--分類區-->
-        <div class="row">
-            <div class="box"><a href="#row1"><button class="btsort">全部</button></a></div>
-            <div class="box"><a href="#row2"><button class="btsort">麵類</button></a></div>
-            <div class="box"><a href="#row3"><button class="btsort">湯品</button></a></div>
-            <div class="box"><a href="#row4"><button class="btsort">飲料</button></a></div>
+        
+        
+        <!--分類區=======================-->
+        <script type="text/javascript">	
+        $(document).ready(function() {
+        	  
+			    
+        });
+  
+        </script>
+        
+        
+        <div class="row" id="categoryButtons">
+        	<div class="col-sm-12">
+
+	        </div>
         </div>
         <hr>
+        
+        
+        
         <!--菜單區-->
         <div class="row">
-            <div>
+            <div class="col-sm-12">
                 <table id="tableContainer">
 
                 </table>

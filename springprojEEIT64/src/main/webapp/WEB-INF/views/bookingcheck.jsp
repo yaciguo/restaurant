@@ -76,19 +76,19 @@ body {
     cursor: pointer;
   }
 
-  .modal-header h3 {
-    font-size: 30px;
+/*   .modal-header h3 { */
+/*     font-size: 30px; */
 
-    /* 置中 */
-    position: absolute;
-    top: 12%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+/*     /* 置中 */ */
+/*     position: absolute; */
+/*     top: 12%; */
+/*     left: 50%; */
+/*     transform: translate(-50%, -50%); */
+/*   } */
 
-  #loginModal {
-    backdrop: static
-  }
+/*   #loginModal { */
+/*     backdrop: static */
+/*   } */
 
   /* #btcheck {
       padding-left: 30%;
@@ -106,39 +106,41 @@ body {
   </header>
   <div class="container">
     <div class="row"> 
-      <table class="col-sm-12">
-        <tr>
-          <th>訂位姓名</th>
-          <td>xxx</td>
-        </tr>
-        <tr>
-          <th>訂位人數</th>
-          <td>1</td>
-        </tr>
-        <tr>
-          <th>聯絡電話</th>
-          <td>0919208005</td>
-        </tr>
-        <tr>
-          <th>訂位日期</th>
-          <td>1</td>
-        </tr>
-        <tr>
-          <th>訂位時間</th>
-          <td>12:00</td>
-        </tr>
-        <tr>
-          <th>備註</th>
-          <td></td>
-        </tr>
-      </table>
+      <h1>感謝您的訂位！</h1>
     </div>
 
     <footer>
-      <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal" id="submit">回首頁</button>
+      <button type="button" id="submit">回首頁</button>
     </footer>
   </div>
-
+<%-- 	<c:forEach var="booking" items="${booking}"> --%>
+<%-- 	<c:out value="${booking} " /> --%>
+<!--                     <tr> -->
+<!--                         <th>成立時間</th> -->
+<%--                         <td>${booking.submitTime}</td> --%>
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                         <th>訂位人數</th> -->
+<%--                         <td>${booking.pNumber} 位</td> --%>
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                         <th>訂位日期</th> -->
+<%--                         <td>${booking.date}</td> --%>
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                         <th>用餐時間</th> -->
+<%--                         <td>${booking.startTime}</td> --%>
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                         <th>E-mail</th> -->
+<%--                         <td>${booking.email}</td> --%>
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                         <th>備註</th> -->
+<%--                         <td>${booking.note}</td> --%>
+<!--                     </tr> -->
+                    
+<%--                 </c:forEach> --%>
   
 
 </body>

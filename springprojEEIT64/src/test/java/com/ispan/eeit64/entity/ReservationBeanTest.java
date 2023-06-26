@@ -20,22 +20,20 @@ public class ReservationBeanTest {
         // 建立一個新的 ReservationBean 物件
         ReservationBean reservation = new ReservationBean();
 
-        reservation.setName("John Doe");
+        reservation.setName("sara");
         reservation.setGender("M");
-        reservation.setPhone(123456789);
+        reservation.setPhone("0919208005");
         reservation.setpNumber(2);
-        reservation.setDate(Date.valueOf("2023-06-23"));
-        reservation.setStartTime(Time.valueOf("12:00:00"));
+        reservation.setDate(Date.valueOf("2023-06-25"));
+        reservation.setStartTime(Time.valueOf("13:00:00"));
      // 設定結束時間為開始時間 + 1小時
         long startTimeMillis = reservation.getStartTime().getTime();
         long endTimeMillis = startTimeMillis + (60 * 60 * 1000);
         reservation.setEndTime(new Time(endTimeMillis));
-//        reservation.setEmail("john.doe@example.com");
-//        reservation.setNote("");
+        reservation.setEmail("john.doe@example.com");
+       reservation.setNote("");
         reservation.setSubmitTime(new Timestamp(System.currentTimeMillis()));
         reservation.setFdTableBean(null);
-
-
         reservationRepository.save(reservation);
 
         // 印出插入後的 ID

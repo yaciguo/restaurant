@@ -23,6 +23,12 @@ public class DishServiceImpl implements DishService{
 	public List<DishBean> findAll() {
 		return dishRepository.findAll();
 	}
+	
+	//找全部並利用類別排序
+	@Override
+	public List<DishBean> findAllbyCategory() {
+		return dishRepository.findAllOrderByCategoryId();
+	}
 
 //	@Override
 //	public List<DishBean> findAll() {
@@ -68,5 +74,7 @@ public class DishServiceImpl implements DishService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

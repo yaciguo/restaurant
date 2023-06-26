@@ -14,7 +14,7 @@ import com.ispan.eeit64.service.OrderService;
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService{
-	final static Logger log = LoggerFactory.getLogger(DishServiceImpl.class);
+	final static Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 	@Autowired
 	OrderRepository orderRepository;
 	
@@ -26,6 +26,11 @@ public class OrderServiceImpl implements OrderService{
 				orderRepository.save(bean);
 			
 		}
+	}
+	
+	@Override//找訂單
+	public List<OrderBean> findByCustomerAndPhone(String customer, String phone) {
+		return orderRepository.findByCustomerAndPhoneOrderByOrderTimeDesc(customer, phone);
 	}
 	
 	@Override
@@ -54,16 +59,14 @@ public class OrderServiceImpl implements OrderService{
 		
 	}
 
-	@Override
-	public OrderBean findByMemberId(String orderId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public void detach(OrderBean bean) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

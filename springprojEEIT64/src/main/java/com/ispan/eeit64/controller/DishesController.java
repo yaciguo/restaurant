@@ -14,15 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ispan.eeit64.entity.DishBean;
 import com.ispan.eeit64.service.DishService;
+import com.ispan.eeit64.service.impl.DishServiceImpl;
 
 @RestController
 public class DishesController {
 	final static Logger log = LoggerFactory.getLogger(DishesController.class);
-	DishService dishService;
+	DishServiceImpl service;
 
 	@Autowired
-	public DishesController(DishService dishService) {
-		this.dishService = dishService;
+	public DishesController(DishServiceImpl service) {
+		this.service = service;
 	}
 	
 //	@RequestMapping(value="/dishes2")
@@ -30,11 +31,11 @@ public class DishesController {
 //		System.out.println("--------------findAll()--------------------");
 //		return dishService.findAll();
 //	}
-	
+	//找全部並利用類別排序
 	@GetMapping("/dishes2")
-    public @ResponseBody List<DishBean> findAll() {
+    public @ResponseBody List<DishBean> findAllbyCategory() {
         System.out.println("--------------findAll()--------------------");
-        return dishService.findAll();
+        return service.findAllbyCategory();
     }
 	
 	

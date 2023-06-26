@@ -3,8 +3,9 @@ package com.ispan.eeit64.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ispan.eeit64.entity.ReservationBean;
 
 @Controller
 public class HomeController {
@@ -41,10 +42,12 @@ public class HomeController {
 		return "activity";
 	}
 	
-	@GetMapping("/booking")
-	public String booking() {
-		return "booking";
-	}
+//	@GetMapping("/booking")
+//	public String booking() {
+//		return "booking";
+//	}
+	
+	
 	@GetMapping("/searchbooking")
 	public String searchbooking() {
 		return "searchbooking";
@@ -60,10 +63,6 @@ public class HomeController {
 		return "menu";
 	}
 	
-	@GetMapping("/shoppingcart")
-	public String shoppingcart() {
-		return "shoppingcart";
-	}
 	
 	@GetMapping("/ordercheck")
 	public String ordercheck() {

@@ -17,8 +17,8 @@
 	</head>
 		<style>
   body {
-    margin-right: 20%;
-    margin-left: 20%;
+    margin-right: 10%;
+    margin-left: 10%;
     /* display: flex; */
     /* justify-content: center; */
 /*     width: 60%; */
@@ -85,14 +85,15 @@
   <br />
   <div class="row">
 	  <div class="col-sm-4">
-	    <form:form action="" >
+	    <form:form action="/reservation" method="POST">
 	      <fieldset>
 	        <legend>訂位資料</legend>
-	        <label for="">姓名</label><br />
-	         <input name="username" type="text" placeholder="請輸入訂位人" style="width: 90%;" required /><br /><br />
-            <label for="">手機</label><br />
-            <input name="userphone" type="tel" placeholder="請輸入手機(格式0912345678)" style="width: 90%;" 
-            pattern="[0]{1}[9]{1}[0-9]{8}" required />
+	        <label for="name">姓名</label><br />
+	         <input name="name" type="text" placeholder="請輸入訂位人" style="width: 90%;" required 
+	         value="${param.name}"/><br /><br />
+            <label for="phone">手機</label><br />
+            <input name="phone" type="tel" placeholder="請輸入手機(格式0912345678)" style="width: 90%;" 
+            pattern="[0]{1}[9]{1}[0-9]{8}" value="${param.phone}" required />
 	        <br /><br />
 	        <input type="submit" value="查詢" />
 	      </fieldset>
@@ -103,25 +104,39 @@
 		      <fieldset>
 		        <legend>訂位記錄</legend>
 		        <table>
-		          <div>
-		            <tr>
-		              <th>成立時間</th>
-		              <td>(yyyy/mm/dd hh:mm)</td>
-		            </tr>
-		            <tr>
-		              <th>訂位人數</th>
-		              <td>() 位</td>
-		            </tr>
-		            <tr>
-		              <th>訂位日期</th>
-		              <td>xxx</td>
-		            </tr>
-		            <tr>
-		              <th>訂位時間</th>
-		              <td>12:00</td>
-		            </tr>
-		          </div>
-		        </table>
+                <c:forEach var="reservation" items="${reservationList}">
+                    <tr>
+                        <th>成立時間</th>
+                        <td>${reservation.submitTime}</td>
+                    </tr>
+                    <tr>
+                        <th>訂位人數</th>
+                        <td>${reservation.pNumber} 位</td>
+                    </tr>
+                    <tr>
+                        <th>訂位日期</th>
+                        <td>${reservation.date}</td>
+                    </tr>
+                    <tr>
+                        <th>用餐時間</th>
+                        <td>${reservation.startTime}</td>
+                    </tr>
+                    <tr>
+                        <th>E-mail</th>
+                        <td>${reservation.email}</td>
+                    </tr>
+                    <tr>
+                        <th>備註</th>
+                        <td>${reservation.note}</td>
+                    </tr>
+                    <!-- 添加分隔线 -->
+				    <c:if test="${not status.last}">
+				        <tr>
+				            <td colspan="2"><hr /></td>
+				        </tr>
+				    </c:if>
+                </c:forEach>
+            </table>
 		      </fieldset>
 		    </form:form>
   	</div>

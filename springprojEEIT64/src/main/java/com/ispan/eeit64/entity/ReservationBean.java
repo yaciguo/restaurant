@@ -30,11 +30,11 @@ public class ReservationBean {
     @Column(name = "gender", columnDefinition = "varchar(11) NOT NULL COMMENT '性別F, M'")
     private String gender;
 
-    @Column(name = "phone", columnDefinition = "int(20) NOT NULL COMMENT '電話'")
-    private int phone;
+    @Column(name = "phone", columnDefinition = "varchar(20) NOT NULL COMMENT '電話'")
+    private String  phone;
 
     @Column(name = "pNumber", columnDefinition = "int(11) NOT NULL COMMENT '人數'")
-    private int pNumber;
+    private Integer pNumber;
 
     @Column(name = "date", columnDefinition = "date NOT NULL COMMENT '日期'")
     private Date date;
@@ -54,8 +54,8 @@ public class ReservationBean {
     @Column(name = "submitTime", columnDefinition = "datetime NOT NULL COMMENT ' 送出時間'")
     private java.sql.Timestamp submitTime;
     
-    //是不是要可以null?有更改成nullable = true
-    @ManyToOne(cascade=CascadeType.ALL)
+    //是不是要可以null?有更改成nullable = true 
+    @ManyToOne//delete (cascade=CascadeType.ALL)
     @JoinColumn(name = "FK_FdTableBean_Id", nullable = true, foreignKey = @ForeignKey(name = "res_fk_tb"))
     private FdTableBean fdTableBean;
     
@@ -64,12 +64,13 @@ public class ReservationBean {
 	public ReservationBean() {
 		super();
 	}
-	
-	
 
-	public ReservationBean(String name, String gender, int phone, int pNumber, Date date, Time startTime, Time endTime,
-			String email, String note, Timestamp submitTime) {
+
+
+	public ReservationBean(Integer id, String name, String gender, String phone, Integer pNumber, Date date,
+			Time startTime, Time endTime, String email, String note, Timestamp submitTime, FdTableBean fdTableBean) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.phone = phone;
@@ -80,14 +81,14 @@ public class ReservationBean {
 		this.email = email;
 		this.note = note;
 		this.submitTime = submitTime;
+		this.fdTableBean = fdTableBean;
 	}
 
 
 
-	public ReservationBean(int id, String name, String gender, int phone, int pNumber, Date date, Time startTime,
+	public ReservationBean(String name, String gender, String phone, Integer pNumber, Date date, Time startTime,
 			Time endTime, String email, String note, Timestamp submitTime, FdTableBean fdTableBean) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.phone = phone;
@@ -139,25 +140,25 @@ public class ReservationBean {
 
 
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
 
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
 
 
-	public int getpNumber() {
+	public Integer getpNumber() {
 		return pNumber;
 	}
 
 
 
-	public void setpNumber(int pNumber) {
+	public void setpNumber(Integer pNumber) {
 		this.pNumber = pNumber;
 	}
 
@@ -244,6 +245,8 @@ public class ReservationBean {
 	public void setFdTableBean(FdTableBean fdTableBean) {
 		this.fdTableBean = fdTableBean;
 	}
+
+
 	
 	
     

@@ -7,6 +7,7 @@
 	<head>
 		<meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
    <!-- Boostrap 導入程式 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -50,12 +51,15 @@
 /*     display: flex; */
 /*     justify-content: space-between; */
 /*   } */
-
-
-  th {
+  
+    th {
     text-align: left;
     width: 50%;
   }
+/*    td { */
+/*     text-align: left; */
+/*     width: 80%; */
+/*   } */
 </style>
 
 <body>
@@ -71,14 +75,15 @@
    </div><br />
     <div class="row">
       <div class="col-sm-4">
-        <form:form action="">
+        <form:form action="/searchorders" method="POST">
           <fieldset>
             <legend>取餐資料</legend>
             <label for="">姓名</label><br />
-            <input name="username" type="text" placeholder="請輸入訂購人" style="width: 90%;" required /><br /><br />
+            <input name="customer" type="text" placeholder="請輸入訂購人" style="width: 90%;"
+             value="${param.customer}" required /><br /><br />
             <label for="">手機</label><br />
-            <input name="userphone" type="tel" placeholder="請輸入手機(格式0912345678)" style="width: 90%;" 
-            pattern="[0]{1}[9]{1}[0-9]{8}" required />
+            <input name="phone" type="tel" placeholder="請輸入手機(格式0912345678)" style="width: 90%;" 
+            pattern="[0]{1}[9]{1}[0-9]{8}" value="${param.phone}" required />
             <br /><br />
             <input type="submit" value="查詢" />
           </fieldset>
@@ -89,32 +94,57 @@
           <fieldset>
             <legend>訂單記錄</legend>
             <table>
-              <div>
-                <tr>
-                  <th>成立時間</th>
-                  <td>(yyyy/mm/dd hh:mm)</td>
-                </tr>
-                <tr>
-                  <th>付款方式</th>
-                  <td>(現金)</td>
-                </tr>
-                <tr>
-                  <th>金額</th>
-                  <td>$(999)</td>
-                </tr>
-                <tr>
-                  <th>明細</th>
-                  <td>(商品名)</td>
-                </tr>
-              </div>
-
-              <!-- <div>
-                <tr>
-                  <td>(商品名)</td>
-                  <td>(數量)</td>
-                  <td>(金額)</td>
-                </tr>
-              </div> -->
+            <c:forEach var="order" items="${orderList}">
+                    <tr>
+                        <th>成立時間</th>
+                        <td>${order.orderTime}</td>
+                    </tr>
+                      <tr>
+                        <th>應付金額</th>
+                        <td>${order.amount}</td>
+                    </tr>
+                  
+                    <tr>
+                        <th>預約取餐時間</th>
+                        <td>${order.pickTime}</td>
+                    </tr>
+                    
+                    <tr>
+                        <th>訂單狀態</th>
+                        <td>${order.orderStatus}</td>
+                    </tr>
+                    
+                    <tr>
+                    <th>訂單明細</th>
+                    <td>
+                        <table>
+                            <c:forEach var="detail" items="${order.orderDetailBean}">
+                                <tr>
+                                    <td>${detail.dish.name}</td>
+                                    <td>${detail.quantity}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </td>
+                	</tr>
+                    
+                    <tr>
+                        <th>備註</th>
+                        <td>${order.note}</td>
+                    </tr>
+                    <!-- 添加订单明细 -->
+                
+                    
+                    
+                    <!-- 添加分隔线 -->
+				    <c:if test="${not status.last}">
+				        <tr>
+				            <td colspan="2"><hr /></td>
+				        </tr>
+				    </c:if>
+                </c:forEach>
+            
+            
             </table>
           </fieldset>
         </form:form>

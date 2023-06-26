@@ -1,13 +1,12 @@
 package com.ispan.eeit64.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +32,75 @@ public class CheckoutBean {
 	@Column(name = "note", columnDefinition = "VARCHAR(200) DEFAULT NULL COMMENT '備註'")
 	private String note;
 	
-	@OneToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="orderId")
+//	delete (cascade=CascadeType.PERSIST)
+	@OneToOne
+    @JoinColumn(name="FK_orderId")
 	private OrderBean order;
+
+	@Override
+	public String toString() {
+		return "CheckoutBean [id=" + id + ", payTime=" + payTime + ", payStatus=" + payStatus + ", note=" + note
+				+ ", order=" + order + "]";
+	}
+
+	public CheckoutBean() {
+		super();
+	}
+
+	public CheckoutBean(Date payTime, String payStatus, OrderBean order) {
+		super();
+		this.payTime = payTime;
+		this.payStatus = payStatus;
+		this.order = order;
+	}
+
+	public CheckoutBean(Integer id, Date payTime, String payStatus, String note, OrderBean order) {
+		super();
+		this.id = id;
+		this.payTime = payTime;
+		this.payStatus = payStatus;
+		this.note = note;
+		this.order = order;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Date getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
+	}
+
+	public String getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public OrderBean getOrder() {
+		return order;
+	}
+
+	public void setOrder(OrderBean order) {
+		this.order = order;
+	}
+	
 }

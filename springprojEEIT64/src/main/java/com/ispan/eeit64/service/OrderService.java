@@ -10,6 +10,6 @@ public interface OrderService {
 	void save(OrderBean bean);	
 	OrderBean update(OrderBean bean); 
 	void deleteById(Integer id);	
-	OrderBean findByMemberId(String orderId);	
 	void detach(OrderBean bean);
+	public List<OrderBean> findByCustomerAndPhone(String customer, String phone);
 }

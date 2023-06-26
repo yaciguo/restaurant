@@ -2,7 +2,6 @@ package com.ispan.eeit64.entity;
 
 import java.sql.Date;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Access;
@@ -16,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "activity")
@@ -47,9 +48,11 @@ public class ActivityBean {
 	@OneToMany(mappedBy = "activityBean")
 	private Set<OrderBean> orderBean = new LinkedHashSet<>();
 
+	@JsonIgnoreProperties("activityBean") // 忽略属性的序列化sara===========
 	@ManyToOne
 	@JoinColumn(name = "FK_Dish_Id")
 	private DishBean dishBean;
+
 
 	@Override
 	public String toString() {
@@ -62,20 +65,27 @@ public class ActivityBean {
 		super();
 	}
 	
-
-	public ActivityBean(Integer id) {
+	public ActivityBean(String name, String type, Integer discount, Integer amount,  Date startDate,
+			Date endDate, DishBean dishBean) {
 		super();
-		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.discount = discount;
+		this.amount = amount;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.dishBean = dishBean;
 	}
 
-	public ActivityBean(Integer id, String name, String type, Integer amount, Integer discount, Date startDate,
+
+	public ActivityBean(Integer id, String name, String type, Integer discount, Integer amount,  Date startDate,
 			Date endDate, DishBean dishBean) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.type = type;
-		this.amount = amount;
 		this.discount = discount;
+		this.amount = amount;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.dishBean = dishBean;
@@ -105,20 +115,20 @@ public class ActivityBean {
 		this.type = type;
 	}
 
-	public Integer getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
-
 	public Integer getDiscount() {
 		return discount;
 	}
 
 	public void setDiscount(Integer discount) {
 		this.discount = discount;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
 	public Date getStartDate() {

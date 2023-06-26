@@ -30,10 +30,28 @@ button:hover {
     font-size: 20px;
 }
 
-.box {
-    display: inline-block;
-    width: calc(100% / 4);
+#categoryButtons {
+/*   display: grid; */
+/*   grid-auto-flow: column; 水平排列 */
+/*   grid-gap: 5px; 设置元素之间的间距 */
+display: flex;
+  flex-wrap: wrap; /* 自动换行 */
+  justify-content: flex-start; /* 左对齐 */
+  align-items: flex-start; /* 顶部对齐 */
 }
+
+.box {
+/*     display: inline-block; */
+flex-basis: calc(100% /7); 
+/*   margin-right: 5px; 元素之间的间距 */
+	
+}
+@media (max-width: 767px) {
+  .box {
+    flex-basis: calc(100% / 6); /* 在较小的视窗下，每行显示6个元素 */
+  }
+}
+
 
 .btsort {
     font-size: 20px;

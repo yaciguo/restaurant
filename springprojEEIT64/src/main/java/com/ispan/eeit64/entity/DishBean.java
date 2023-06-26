@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "dish")
 public class DishBean {
@@ -26,7 +28,8 @@ public class DishBean {
 
 	@Column(name = "name", columnDefinition = "varchar(100) NOT NULL COMMENT'餐點名稱'")
 	private String name;
-
+	
+	@JsonIgnoreProperties("dishBean") // 忽略属性的序列化sara================
 	@ManyToOne
 	@JoinColumn(name = "FK_categoryId", nullable = false, foreignKey = @ForeignKey(name = "dish_ibfk_1"))
 	private CategoryBean categoryBean;
@@ -46,8 +49,8 @@ public class DishBean {
 	@Column(name = "status", columnDefinition = "varchar(10) NOT NULL COMMENT'餐點狀態 N無,Y有'")
 	private String status;
 
-
-	@OneToMany(mappedBy = "dishBean")
+	@JsonIgnoreProperties("dishBean") // 忽略属性的序列化sara==============
+	@OneToMany(mappedBy = "dishBean", cascade = { CascadeType.ALL })
 	private Set<ActivityBean> activityBean = new LinkedHashSet<>();
 
 	public DishBean() {
