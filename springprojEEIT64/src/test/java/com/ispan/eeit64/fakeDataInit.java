@@ -215,7 +215,7 @@ public class fakeDataInit {
                 Optional<DishBean> dBeanOptional = dishDao.findById(jsonBean.FK_Dish_Id);
                 dBean = dBeanOptional.get();
             }
-            ActivityBean bean = new ActivityBean(jsonBean.name, jsonBean.type, jsonBean.amount, jsonBean.discount, startDate, endDate, dBean);
+            ActivityBean bean = new ActivityBean(jsonBean.name, jsonBean.type, jsonBean.discount, jsonBean.amount, startDate, endDate, dBean);
             activityDao.save(bean);
         }
     }
