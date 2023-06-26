@@ -88,11 +88,23 @@ public class basicSettingsController {
         Map<String, Object> map = openingHourService.deleteByIdList(ids);
         return map;
     }
-    @GetMapping("/basicSettings.api/getClosingTime")
-    public @ResponseBody List<ClosingTimeBean> getClosingTime(){
-        return closingTimeService.findAll();
-    }
+
+    // @GetMapping("/basicSettings.api/getClosingTime")
+    // public @ResponseBody List<ClosingTimeBean> getClosingTime(){
+    //     return closingTimeService.findAll();
+    // }
     
+    @GetMapping("/basicSettings.api/getAllClosingTime")
+    public @ResponseBody Map<String, Object> getAllClosingTime(){
+        try {
+            return closingTimeService.getAllDate();
+        } catch (Exception e) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("error", "無法獲取資料");
+            return map;
+        }
+    }
+
     @PostMapping("/basicSettings.api/addClosingTime")
     public @ResponseBody Map<String, Object> addClosingTime(
             @RequestBody ClosingTimeBean bean,

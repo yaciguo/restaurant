@@ -179,7 +179,7 @@
     <div id="main-content" class="main-content">
         <ul class="nav nav-tabs" id="activity-tabs">
             <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
-                    href="#basic-setting-div">廣告看板</a></li>
+                    href="#basic-setting-div">基本設定</a></li>
             <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
                     href="#seat-setting-div">座位設定</a></li>
             <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
@@ -563,24 +563,24 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
+                                                </div>                                                
+                                                <div class="row m-2">
+                                                    <div class="col-2 d-flex ps-2 pe-1">
+                                                        <a class="btn btn-primary btn-sm flex-fill" id="closetime-allCheck"
+                                                            type="button">全選</a>
+                                                        <a class="btn btn-primary btn-sm flex-fill" id="closetime-removeAllCheck"
+                                                            type="button" style="display: none;">清空</a>
+                                                    </div>
+                                                    <div class="offset-5 col-3 d-flex px-1">
+                                                        <a id="closetime-deleteAllbtn" class="btn btn-primary btn-sm flex-fill" type="button">刪除選取</a>
+                                                    </div>
+                                                    <div class="col-2 d-flex px-1">
+                                                        <a id="closetime-addbtn" class="btn btn-primary btn-sm flex-fill"
+                                                            type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#tdItemModalDiv">新增</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row me-1">
-                                        <div class="col-2 d-flex ps-2 pe-1">
-                                            <a class="btn btn-primary btn-sm flex-fill" id="allCheck"
-                                                type="button">全選</a>
-                                            <a class="btn btn-primary btn-sm flex-fill" id="removeAllCheck"
-                                                type="button" style="display: none;">清空</a>
-                                        </div>
-                                        <div class="offset-5 col-3 d-flex px-1">
-                                            <a class="btn btn-primary btn-sm flex-fill" type="button">刪除選取</a>
-                                        </div>
-                                        <div class="col-2 d-flex px-1">
-                                            <a id="addRestBtn" class="btn btn-primary btn-sm flex-fill"
-                                                type="button" data-bs-toggle="modal"
-                                                data-bs-target="#tdItemModalDiv">新增</a>
                                         </div>
                                     </div>
                                     <div class="accordion-item">
@@ -606,7 +606,7 @@
                                                                 <th class="data">說明</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody class="faq-body data" id="closeTimeNewTbody">
+                                                        <tbody class="faq-body data" id="closeTimeOldTbody">
                                                             <tr class="data">
                                                                 <td class="rest-day-td">
                                                                     <div>2023-06-05</div>
@@ -635,8 +635,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -652,16 +650,6 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body pt-2 pb-2">
-                        <!-- date -->
-                        <div class="row" id="modalDateRowDiv">
-                            <div class="col-4 d-flex align-items-center">
-                                <label class=" justify-content-center align-items-center">日期：</label>
-                            </div>
-                            <div class="col-5">
-                                <input class="form-control" id="setdate" name="setdate" placeholder='yyyy-mm-dd' type="text" />
-                            </div>
-                        </div>
-
                         <!-- day of week -->
                         <div class="row" id="modalDayRowDiv">
                             <div class="col-4 d-flex align-items-center">
@@ -670,14 +658,24 @@
                             <div class="col-5">
                                 <select class="form-select" aria-label="select day of week" id="dayOfWeekSelect">
                                     <option selected hidden class="default">選取星期</option>
+                                    <option value="0">星期日</option>
                                     <option value="1">星期一</option>
                                     <option value="2">星期二</option>
                                     <option value="3">星期三</option>
                                     <option value="4">星期四</option>
                                     <option value="5">星期五</option>
                                     <option value="6">星期六</option>
-                                    <option value="7">星期日</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <!-- start date -->
+                        <div class="row" id="modalStartDateRowDiv">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">開始日期：</label>
+                            </div>
+                            <div class="col-5">
+                                <input class="form-control" id="setStartDate" name="setStartDate" placeholder='yyyy-mm-dd' type="text" />
                             </div>
                         </div>
 
@@ -698,6 +696,16 @@
                             </div>
                         </div>
                         
+                        <!-- end date -->
+                        <div class="row" id="modalEndDateRowDiv">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">結束日期：</label>
+                            </div>
+                            <div class="col-5">
+                                <input class="form-control" id="setEndDate" name="setEndDate" placeholder='yyyy-mm-dd' type="text" />
+                            </div>
+                        </div>
+
                         <!-- end time -->
                         <div class="row" id="modalEndTimeRowDiv">
                             <div class="col-4 d-flex align-items-center">
@@ -720,8 +728,8 @@
                             <div class="col-4 d-flex align-items-center">
                                 <label class=" justify-content-center align-items-center">說明：</label>
                             </div>
-                            <div class="col-5">
-                                <input class="form-control" type="text" />
+                            <div class="col-8">
+                                <textarea class="form-control text-wrap" type="text" style="height: 100px;" id="description-textarea"></textarea>
                             </div>
                         </div>
                     </div>
