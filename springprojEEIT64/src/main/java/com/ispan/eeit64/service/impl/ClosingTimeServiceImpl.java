@@ -10,18 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ispan.eeit64.entity.OpeningHourBean;
-import com.ispan.eeit64.repository.OpeningHourRepository;
-import com.ispan.eeit64.service.OpeningHourService;
+import com.ispan.eeit64.entity.ClosingTimeBean;
+import com.ispan.eeit64.repository.ClosingTimeRepository;
+import com.ispan.eeit64.service.ClosingTimeService;
 
 @Service
 @Transactional
-public class OpeningHourServiceImpl implements OpeningHourService {
+public class ClosingTimeServiceImpl implements ClosingTimeService {
     @Autowired
-    OpeningHourRepository dao;
+    ClosingTimeRepository dao;
 
     @Override
-    public OpeningHourBean findById(Integer id) {
+    public ClosingTimeBean findById(Integer id) {
         if(dao.existsById(id)){
             return dao.findById(id).get();
         }else{
@@ -30,12 +30,12 @@ public class OpeningHourServiceImpl implements OpeningHourService {
     }
 
     @Override
-    public List<OpeningHourBean> findAll() {
+    public List<ClosingTimeBean> findAll() {
         return dao.findAll();
     }
 
     @Override
-    public Map<String, Object> save(OpeningHourBean bean) {
+    public Map<String, Object> save(ClosingTimeBean bean) {
         Map<String, Object> map = new HashMap<>();
         dao.save(bean);
         map.put("success", "新增成功");
@@ -43,7 +43,7 @@ public class OpeningHourServiceImpl implements OpeningHourService {
     }
 
     @Override
-    public Map<String, Object> update(OpeningHourBean bean) {
+    public Map<String, Object> update(ClosingTimeBean bean) {
         Map<String, Object> map = new HashMap<>();
         dao.save(bean);
         map.put("success", "修改成功");
@@ -85,6 +85,5 @@ public class OpeningHourServiceImpl implements OpeningHourService {
         }
         return map;
     }
-
     
 }

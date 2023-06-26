@@ -1,9 +1,16 @@
 const dayOfWeek = { 7: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" }
 let runTrClick = true;
 let updateId;
-let OpeningHourData;
+let openingHourData;
+let closingTimeData;
 let sureBtnType;
 let deleteIds = [];
+
+function setStyleBtnHeight() {
+    $("button.style-set").each((idx, el) => {
+        $(el).height($(el).width())
+    })
+}
 
 function setDatepicker(element) {
 	var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
@@ -35,9 +42,18 @@ function setTimeDropdown(selector, buttonSelector, interval, startHour, endHour)
     });
 }
 
-function setStyleBtnHeight() {
-    $("button.style-set").each((idx, el) => {
-        $(el).height($(el).width())
+async function getOpeningHourData() {
+    openingHourData = await $.ajax({
+        type: "get",
+        url: contextPath + "/basicSettings.api/getAllOpeningHour"
+    })
+    resetOpenhourTody();
+}
+
+function resetOpenhourTody(){
+    $("#openhourTody").empty();
+    openingHourData.forEach((data) => {
+        addOpeningHourDataToTable(data);
     })
 }
 
@@ -97,20 +113,57 @@ function addOpeningHourDataToTable(data) {
     })
 }
 
-async function getOpeningHourData() {
-    OpeningHourData = await $.ajax({
+
+async function getClosingTimeData() {
+    closingTimeData = await $.ajax({
         type: "get",
-        url: contextPath + "/basicSettings.api/getAllOpeningHour"
+        url: contextPath + "/basicSettings.api/getClosingTime"
     })
-    resetOpenhourTody();
+    closingTimeData.forEach(function(data){
+        console.log()
+        data.startDate = new Date(data.startDate.replace(" ","T")+"+0800");
+        data.endDate = new Date(data.endDate.replace(" ","T")+"+0800");
+    })
+    resetClosingTimeTody();
 }
 
-function resetOpenhourTody(){
-    $("#openhourTody").empty();
-    OpeningHourData.forEach((data) => {
-        addOpeningHourDataToTable(data);
+function resetClosingTimeTody(){
+    let nowTime = new Date().getTime();
+    let oldData = []
+    closingTimeData.forEach(function(data){
+        if(nowTime >= data.startDate.getTime()){
+            oldData.push(data);
+        }
     })
 }
+
+
+function getClosingTimeTdStr(data){
+    let start = ""
+    let str = ``
+
+/* <td class="rest-day-td">
+    <div>2023-06-05</div>
+    <div class="intervalTime"></div>
+    <div>2023-06-05</div>
+</td>
+<td class="rest-weekDay-td">
+    <div>星期一</div>
+    <div class="intervalTime">></div>
+    <div>星期一</div>
+</td>
+<td class="rest-time-td">
+    <div>8:00</div>
+    <div class="intervalTime"> </div>
+    <div>8:00</div>
+</td>
+<!-- <td class="rest-time-td">13:00</td> -->
+<td class="data text-wrap">
+    說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明
+</td> */
+}
+
+
 
 function toggleModal(displayMode){
     let toggleGroup;
@@ -189,8 +242,6 @@ $(() => {
     setTimeDropdown("#endTimeUl", "#dropdownMenuEndTimeBtn", "30", "00", "24");
     setDatepicker($("#setdate"))
 
-
-
     $("a[href='#basic-setting-div']").click(() => {
     })
 
@@ -199,9 +250,11 @@ $(() => {
 
     $("a[href='#opening-setting-div']").click(() => {
         getOpeningHourData();
+        getClosingTimeData();
     })
+
     $("#sureBtn").click(() => {
-        sureBtnClick();
+        sureBtnClick();        
     })
 
 

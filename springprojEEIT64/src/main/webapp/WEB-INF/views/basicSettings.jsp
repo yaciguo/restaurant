@@ -160,7 +160,13 @@
 
     button[data-bs-toggle="dropdown"]{
         text-align: left;
+    }
 
+    .intervalTime{
+        text-align: center;
+        transform: rotate(90deg);
+        font-size:25px;
+        height:20px;
     }
 </style>
 
@@ -510,22 +516,32 @@
                                                                 <th class="rest-day-td">日期</th>
                                                                 <th class="rest-weekDay-td">星期幾</th>
                                                                 <th class="rest-time-td">休假時間</th>
-                                                                <th class="rest-time-td"></th>
                                                                 <th class="data">說明</th>
                                                                 <th class="rest-btn-td">刪除</th>
                                                                 <th class="rest-btn-td">修改</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody class="faq-body data">
+                                                        <tbody class="faq-body data" id="closeTimeNewTbody">
                                                             <tr class="data">
                                                                 <td class="checkbox-td data ">
                                                                     <input class="form-check-input "
                                                                         type="checkbox">
                                                                 </td>
-                                                                <td class="rest-day-td">2023-06-05</td>
-                                                                <td class="rest-weekDay-td">星期一</td>
-                                                                <td class="rest-time-td">8:00</td>
-                                                                <td class="rest-time-td">13:00</td>
+                                                                <td class="rest-day-td">
+                                                                    <div>2023-06-05</div>
+                                                                    <div class="intervalTime"></div>
+                                                                    <div>2023-06-05</div>
+                                                                </td>
+                                                                <td class="rest-weekDay-td">
+                                                                    <div>星期一</div>
+                                                                    <div class="intervalTime">></div>
+                                                                    <div>星期一</div>
+                                                                </td>
+                                                                <td class="rest-time-td">
+                                                                    <div>8:00</div>
+                                                                    <div class="intervalTime"> </div>
+                                                                    <div>8:00</div>
+                                                                </td>
                                                                 <td class="data">
                                                                     <p class="text-wrap">
                                                                         說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明
@@ -586,16 +602,28 @@
                                                                 <th class="rest-day-td">日期</th>
                                                                 <th class="rest-weekDay-td">星期幾</th>
                                                                 <th class="rest-time-td">休假時間</th>
-                                                                <th class="rest-time-td"></th>
+                                                                <!-- <th class="rest-time-td"></th> -->
                                                                 <th class="data">說明</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody class="faq-body data">
+                                                        <tbody class="faq-body data" id="closeTimeNewTbody">
                                                             <tr class="data">
-                                                                <td class="rest-day-td">2023-06-05</td>
-                                                                <td class="rest-weekDay-td">星期一</td>
-                                                                <td class="rest-time-td">8:00</td>
-                                                                <td class="rest-time-td">13:00</td>
+                                                                <td class="rest-day-td">
+                                                                    <div>2023-06-05</div>
+                                                                    <div class="intervalTime"></div>
+                                                                    <div>2023-06-05</div>
+                                                                </td>
+                                                                <td class="rest-weekDay-td">
+                                                                    <div>星期一</div>
+                                                                    <div class="intervalTime">></div>
+                                                                    <div>星期一</div>
+                                                                </td>
+                                                                <td class="rest-time-td">
+                                                                    <div>8:00</div>
+                                                                    <div class="intervalTime"> </div>
+                                                                    <div>8:00</div>
+                                                                </td>
+                                                                <!-- <td class="rest-time-td">13:00</td> -->
                                                                 <td class="data text-wrap">
                                                                     說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明
                                                                 </td>
