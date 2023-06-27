@@ -84,16 +84,21 @@ $(document).ready(function(){
   //提交驗證
   function validateAndRedirect() {
 	//將物件裝進json中
+	var orderDetails = jsonofDetails.orderDetails;
+	var orderDetailsArray = [];
+	for (var i = 0; i < orderDetails.length; i++) {
+		  orderDetailsArray.push(parseInt(orderDetails[i], 10));
+		}
 	
 	var jsonData = {
 		  	  "orderStatus": "order_establish",
-		  	  "orderDetails": jsonofDetails.orderDetails,
+		  	  "orderDetails": orderDetailsArray,
 			  "amount":document.getElementById("totalAmount").value,
-			  "FK_Activity_Id": "",
+			  "FK_Activity_Id": null,
 			  "type": "O",
 			  "customer": document.getElementById("customer").value,
 			  "phone": document.getElementById("phone").value,
-			  "leaveTime": null,
+// 			  "leaveTime": null,
 			  "pickTime": document.getElementById("pickTime").value,
 			  "note":document.getElementById("note").value,
 			  	  

@@ -237,8 +237,8 @@ public class fakeDataInit {
 			for(Integer id : elementCountMap.keySet()) {
 				Optional<DishBean> dishBeanOptional = dishDao.findById(id);
 				DishBean dishBean = dishBeanOptional.get();
-				
-				OrderDetailBean odBean = new OrderDetailBean(dishBean, elementCountMap.get(id));
+				int quantity = elementCountMap.get(id);
+				OrderDetailBean odBean = new OrderDetailBean(dishBean, quantity);
 				dBeans.add(odBean);
 			}
 			ActivityBean aBean = null;
@@ -246,6 +246,7 @@ public class fakeDataInit {
 				Optional<ActivityBean> dishBeanOptional = activityDao.findById(orderData.FK_Activity_Id);
 				aBean = dishBeanOptional.get();					
 			}
+			
 			OrderBean oBean = new OrderBean(
 					orderData.type, 
 					formatDate.parse(orderData.pickTime), 

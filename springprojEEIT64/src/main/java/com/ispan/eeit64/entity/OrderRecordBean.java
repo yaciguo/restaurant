@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "orderRecord")
 public class OrderRecordBean {
@@ -34,6 +36,7 @@ public class OrderRecordBean {
 	
 	// edit @OneToOne
 	@OneToOne
+	@JsonBackReference
 	@JoinColumn(name = "FK_OrderBean_Id")
 	private OrderBean orderBean;
 
@@ -61,6 +64,18 @@ public class OrderRecordBean {
 			Timestamp orderCancel, OrderBean orderBean) {
 		super();
 		this.id = id;
+		this.orderEstablish = orderEstablish;
+		this.orderDeal = orderDeal;
+		this.orderFinish = orderFinish;
+		this.orderCancel = orderCancel;
+		this.orderBean = orderBean;
+	}
+	
+	
+
+	public OrderRecordBean(Timestamp orderEstablish, Timestamp orderDeal, Timestamp orderFinish, Timestamp orderCancel,
+			OrderBean orderBean) {
+		super();
 		this.orderEstablish = orderEstablish;
 		this.orderDeal = orderDeal;
 		this.orderFinish = orderFinish;
