@@ -8,10 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "orderRecord")
@@ -33,8 +31,9 @@ public class OrderRecordBean {
 
 	@Column(name = "order_cancel", columnDefinition = "time  COMMENT '訂單取消'")
 	private java.sql.Timestamp orderCancel;
-
-	@ManyToOne
+	
+	// edit @OneToOne
+	@OneToOne
 	@JoinColumn(name = "FK_OrderBean_Id")
 	private OrderBean orderBean;
 
@@ -46,6 +45,16 @@ public class OrderRecordBean {
 
 	public OrderRecordBean() {
 		super();
+	}
+	
+	// add
+	public OrderRecordBean(Timestamp orderEstablish, Timestamp orderDeal, Timestamp orderFinish,
+			Timestamp orderCancel) {
+		super();
+		this.orderEstablish = orderEstablish;
+		this.orderDeal = orderDeal;
+		this.orderFinish = orderFinish;
+		this.orderCancel = orderCancel;
 	}
 
 	public OrderRecordBean(Integer id, Timestamp orderEstablish, Timestamp orderDeal, Timestamp orderFinish,

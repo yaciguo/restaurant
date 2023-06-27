@@ -8,11 +8,11 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.ispan.eeit64.entity.OpeningHourBean;
-import com.ispan.eeit64.repository.OpeningHourRepository;
+import com.ispan.eeit64.service.impl.OpeningHourServiceImpl;
 
 public class OpeningHourValidator implements Validator {
 	private String method;
-	OpeningHourRepository dao;
+	OpeningHourServiceImpl service;
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -23,23 +23,24 @@ public class OpeningHourValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		OpeningHourBean bean = (OpeningHourBean) target;
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id", "bean.id.empty", "id欄不能為空白");
-		if(this.method.equals("PUT")) {
+		if(this.method.equals("POST")) {
 			if (!errors.hasFieldErrors("id")) {
-				if(dao.findById(bean.getId()).isEmpty()) {
+				if(bean.getId() != null) {
+					errors.rejectValue("id", "postIdIsNotNull", "POST id需要是null");
+				}
+			}			
+		}else if(this.method.equals("PUT")) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id", "bean.id.empty", "id欄不能為空白");
+			if (!errors.hasFieldErrors("id")) {
+				if(service.findById(bean.getId()) == null) {
 					errors.rejectValue("id", "notFoundData", "id資料不存在");
 				}
 			}
-		}else if(this.method.equals("POST")) {
-			if (!errors.hasFieldErrors("id")) {
-				if(bean.getId() != 0) {
-					errors.rejectValue("id", "postIdIsNotZero", "POST id需要是零");
-				}
-			}			
-		}
+		} 
+		
 		if (!errors.hasFieldErrors("dayOfWeek")) {
 	        if (bean.getDayOfWeek()<0 || bean.getDayOfWeek()>6) {
-	            errors.rejectValue("dayOfWeek", "invalidTimeFormat", "錯誤星期格式");
+	            errors.rejectValue("dayOfWeek", "invalidTimeFormat", "錯誤星期數字");
 	        }
 		}
 		if (!errors.hasFieldErrors("startTime")) {
@@ -59,9 +60,9 @@ public class OpeningHourValidator implements Validator {
 	        }
 		}
 	}
-	public void validate(Object target, Errors errors, String method, OpeningHourRepository dao) {
+	public void validate(Object target, Errors errors, String method, OpeningHourServiceImpl service) {
 		this.method = method;
-		this.dao = dao;
+		this.service = service;
 		validate(target, errors);
 	}
 	

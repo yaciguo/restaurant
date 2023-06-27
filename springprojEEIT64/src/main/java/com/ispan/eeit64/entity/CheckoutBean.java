@@ -1,13 +1,12 @@
 package com.ispan.eeit64.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +32,8 @@ public class CheckoutBean {
 	@Column(name = "note", columnDefinition = "VARCHAR(200) DEFAULT NULL COMMENT '備註'")
 	private String note;
 	
-	@OneToOne(cascade=CascadeType.PERSIST)
+//	delete (cascade=CascadeType.PERSIST)
+	@OneToOne
     @JoinColumn(name="FK_orderId")
 	private OrderBean order;
 
@@ -45,6 +45,13 @@ public class CheckoutBean {
 
 	public CheckoutBean() {
 		super();
+	}
+
+	public CheckoutBean(Date payTime, String payStatus, OrderBean order) {
+		super();
+		this.payTime = payTime;
+		this.payStatus = payStatus;
+		this.order = order;
 	}
 
 	public CheckoutBean(Integer id, Date payTime, String payStatus, String note, OrderBean order) {
