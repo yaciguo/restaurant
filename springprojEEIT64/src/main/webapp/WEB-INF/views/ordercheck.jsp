@@ -76,62 +76,46 @@ body {
     cursor: pointer;
   }
 
-  .modal-header h3 {
-    font-size: 30px;
-
-    /* 置中 */
-    position: absolute;
-    top: 12%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  #loginModal {
-    backdrop: static
-  }
-
-  /* #btcheck {
-      padding-left: 30%;
-      padding-right: 30%;
-      text-align: center;
-      width: 90%;
-      margin-top: -5%;
-    } */
+ 
 </style>
 <body>
 <!-- 導覽列 -->
   <%@ include file="nav.jsp" %>
     <header>
-    <h1 style="margin-top: 20px;">感謝訂購</h1>
+    <h1 style="margin-top: 20px;">訂購完成</h1>
   </header>
+ 
   <div class="container">
-    <div class="row"> 
-      <table class="col-sm-12">
-          <tr>
-          <th>取餐人</th>
-          <td>1</td>
-        </tr>
-        <tr>
-          <th>聯絡電話</th>
-          <td>1</td>
-        </tr>
-        <tr>
-          <th>預計取餐時間</th>
-          <td>1</td>
-        </tr>
-        <tr>
-          <th>付款方式</th>
-          <td>10000000000000</td>
-        </tr>
-        <tr>
-          <th>應付金額</th>
-          <td>$</td>
-        </tr>
-      </table>
+   <div class="row"> 
+      <h1>感謝您的訂購！</h1>
+    </div>
+<!--     <div class="row">  -->
+<!--       <table class="col-sm-12"> -->
+<!--           <tr> -->
+<!--           <th>取餐人</th> -->
+<!--           <td>1</td> -->
+<!--         </tr> -->
+<!--         <tr> -->
+<!--           <th>聯絡電話</th> -->
+<!--           <td>1</td> -->
+<!--         </tr> -->
+<!--         <tr> -->
+<!--           <th>預計取餐時間</th> -->
+<!--           <td>1</td> -->
+<!--         </tr> -->
+<!--         <tr> -->
+<!--           <th>付款方式</th> -->
+<!--           <td>10000000000000</td> -->
+<!--         </tr> -->
+<!--         <tr> -->
+<!--           <th>應付金額</th> -->
+<!--           <td>$</td> -->
+<!--         </tr> -->
+<!--       </table> -->
     </div>
 
     <footer>
-      <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal" id="submit">回首頁</button>
+      <button type="button" id="submit">回首頁</button>
     </footer>
   </div>
 
@@ -142,7 +126,7 @@ body {
   $("#submit").on("click", function () {
     setTimeout(function () {
       window.location.href = '<c:url value='/custIndex' />';
-    }, 1000);
+    }, 5000);
   })
 </script>
 </html>

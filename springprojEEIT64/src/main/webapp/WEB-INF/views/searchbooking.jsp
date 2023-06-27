@@ -7,6 +7,8 @@
 	<head>
 		<meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- jquery 框架 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <!-- Boostrap 導入程式 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -88,10 +90,10 @@
 	    <form:form action="/reservation" method="POST">
 	      <fieldset>
 	        <legend>訂位資料</legend>
-	        <label for="name">姓名</label><br />
+	        <label>姓名</label><br />
 	         <input name="name" type="text" placeholder="請輸入訂位人" style="width: 90%;" required 
 	         value="${param.name}"/><br /><br />
-            <label for="phone">手機</label><br />
+            <label>手機</label><br />
             <input name="phone" type="tel" placeholder="請輸入手機(格式0912345678)" style="width: 90%;" 
             pattern="[0]{1}[9]{1}[0-9]{8}" value="${param.phone}" required />
 	        <br /><br />

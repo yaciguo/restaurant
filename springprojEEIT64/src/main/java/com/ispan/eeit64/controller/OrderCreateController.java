@@ -41,11 +41,11 @@ public class OrderCreateController {
 
 	@GetMapping("/shoppingcart")
 	public String shoppingcart(Model model) {
-	    model.addAttribute("orderForm", new OrderBean());
+//	    model.addAttribute("newOrder", new OrderBean());
 	    return "shoppingcart";
 	}
 	
-	@PostMapping(value ="/newOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping("/newOrder")
 	@ResponseBody
 //    public Map<String, String> newOrder(@RequestBody OrderBean bean, @RequestParam("orderDetails") List<Integer> dishIds) {
 	public Map<String, String> newOrder(@RequestBody Map<String, Object> requestData) throws Exception {	
@@ -120,8 +120,7 @@ public class OrderCreateController {
         orderBean.setOrderDetailBean(odBeans);
         orderBean.setOrderRecordBean(rBean);
         orderBean.setActivityBean(aBean);
-                 
-        // 返回相應的視圖名稱或重定向URL
+
 		service.save(orderBean);
 		
 		System.out.println(orderBean.getId()); 

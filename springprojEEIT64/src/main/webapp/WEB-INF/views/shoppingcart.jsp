@@ -58,31 +58,14 @@ $(document).ready(function(){
     console.log($("#totalAmount").val())
     //test==================================================
     var jsonData = {};
-// 	var jsonData = {
-//   	  "orderStatus": "order_establish",
-//   	  "orderDetails": jsonofDetails.orderDetails,
-// 	  "amount":document.getElementById("totalAmount").value,
-// 	  "FK_Activity_Id": "",
-// 	  "type": "O",
-// 	  "customer": document.getElementById("customer").value,
-// 	  "phone": document.getElementById("phone").value,
-// 	  "leaveTime": null,
-// 	  "pickTime": document.getElementById("pickTime").value,
-// 	  "note":document.getElementById("note").value,
-	  
-  	  
-//   	};
-    
-//   	console.log(jsonData);
-//========================================================================    
-
   })
-</script>
+
 <!--修改內容==================================-->
-<script>
+
 
   //提交驗證
   function validateAndRedirect() {
+	  event.preventDefault();
 	//將物件裝進json中
 	var orderDetails = jsonofDetails.orderDetails;
 	var orderDetailsArray = [];
@@ -98,7 +81,6 @@ $(document).ready(function(){
 			  "type": "O",
 			  "customer": document.getElementById("customer").value,
 			  "phone": document.getElementById("phone").value,
-// 			  "leaveTime": null,
 			  "pickTime": document.getElementById("pickTime").value,
 			  "note":document.getElementById("note").value,
 			  	  
@@ -110,48 +92,32 @@ $(document).ready(function(){
 	  xhr.open("POST", "<c:url value='/newOrder' />", true);
 	  xhr.setRequestHeader("Content-Type", "application/json");
 	  xhr.send(JSON.stringify(jsonData));
+	  console.log(33)
 	  xhr.onreadystatechange = function() {
+		  console.log()
 		// 伺服器請求完成
-		    if (xhr.readyState === XMLHttpRequest.DONE) {
-		      if (xhr.status === 200) {
-		        // 处理响应
-//	 	        console.log(xhr.responseText);
-		        var responseJson = JSON.parse(xhr.responseText);
-	            console.log(responseJson); // 将 JSON 数据打印到控制台
-	            if (responseJson.success === "新增成功") {
-	                // 重定向到 bookingcheck.jsp	                
-	         		setTimeout(function() {
-    	    		localStorage.clear();
-    	    		window.location.href = '<c:url value='/ordercheck' />';
-    	  			}, 800); // 延遲 1000 毫秒（1 秒）後跳轉
-	            }
-		      } else {
+		if (xhr.readyState === XMLHttpRequest.DONE) {
+			
+			      if (xhr.status === 200) {
+			        // 处理响应
+		// 	        console.log(xhr.responseText);
+			        var responseJson = JSON.parse(xhr.responseText);
+		            console.log(responseJson); // 将 JSON 数据打印到控制台		            
+		            if (responseJson.success === "新增成功") {
+		            	// 重定向到订单确认页面
+                        setTimeout(function() {
+                            localStorage.clear();
+                            window.location.href = "/ordercheck";
+                        }, 800); // 延时800毫秒后跳转
+		            }		            
+			      } else {
 			        // 处理错误
-			        console.error("发生错误：" + xhr.status);
-//		 	        alert("no")
-			        
-			      }	  
-	  		}
-	  };
-  	 
-  	 
-	  
-//     var form = document.getElementById('myForm');
-//     if (form.checkValidity()) {
-//       // 在这里执行验证後訂單內容
-//       localStorage.clear();
-//       setTimeout(function() {
-//     	    localStorage.clear();
-//     	    window.location.href = '<c:url value='/ordercheck' />';
-//     	  }, 800); // 延遲 1000 毫秒（1 秒）後跳轉
-     
-//       return false; // 阻止表单的默认提交行为
-//     } else {
-//       // 在这里执行验证失败时的逻辑
-//       form.reportValidity();
-//       return false; // 阻止表单的默认提交行为
-//     }
+			        console.error("发生错误：" + xhr.status);			        
+			      }
+			    }
+	  }
   }
+
 
 </script>
 <!--修改內容==================================-->
@@ -170,8 +136,8 @@ $(document).ready(function(){
 
     <br>
 
-    <form:form action="/newOrder"  modelAttribute="orderForm" id="myForm" 
-    onsubmit="return validateAndRedirect()" method="POST" >
+    <form id="myForm">
+<%--     onsubmit="return validateAndRedirect()" method="POST" action="/newOrder" --%>  
       <!-- 訂單內容 -->
       <div class="row">
 
@@ -198,9 +164,9 @@ $(document).ready(function(){
           <fieldset>
                      
             <legend>餐點備註</legend>
-                <form:textarea path="note" id="note" rows="8" cols="20" style="width: 98%" 
-                placeholder="請輸入餐點備註"></form:textarea>
-                <form:errors path="note" cssClass="error" />
+                <textarea id="note" rows="8" cols="20" style="width: 98%" 
+                placeholder="請輸入餐點備註"></textarea>
+<%--                 <form:errors path="note" cssClass="error" /> --%>
 			
           </fieldset>
         </div>
@@ -219,8 +185,9 @@ $(document).ready(function(){
             <span class="totalPrice"></span><br><br>
             
             <!-- 添加隱藏字段 -->
-		    <form:hidden path="activityBean" id="discountAmount" value="0" />
-		    <form:hidden path="amount" id="totalAmount" value="" />
+            <input type="hidden" id="discountAmount" value="0" />
+			<input type="hidden" id="totalAmount" value="" />
+		   
 
           </fieldset>
         </div>
@@ -230,39 +197,43 @@ $(document).ready(function(){
             <legend>取餐資料</legend>
 
             <label for="">姓名:</label><br />
-            <form:input path="customer" id="customer" type="text" placeholder="請輸入訂購人" 
-            	style="width: 90%;" required="true" /><br /><br />
+            <input id="customer" type="text" placeholder="請輸入訂購人" 
+            style="width: 90%;" required="required" /><br /><br />
+<%--             <form:input id="customer" type="text" placeholder="請輸入訂購人"  --%>
+<%--             	style="width: 90%;" required="true" /><br /><br /> --%>
             
             <label for="">手機:</label><br />
-            <form:input path="phone" id="phone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;" 
-            	pattern="[0]{1}[9]{1}[0-9]{8}" required="true" /><br /><br />
+            <input id="phone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;" 
+       			pattern="[0]{1}[9]{1}[0-9]{8}" required="required" /><br /><br />
+<%--             <form:input id="phone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;"  --%>
+<%--             	pattern="[0]{1}[9]{1}[0-9]{8}" required="true" /><br /><br /> --%>
   
             <label>取餐時間:</label><br/>
-	            <form:select path="pickTime" id="pickTime" required="true">
-				  <form:option value="">請選擇時間</form:option>
-				  <form:option value="12:00:00" label="12:00" />
-				  <form:option value="12:30:00" label="12:30" />
-				  <form:option value="13:00:00" label="13:00" />
-				  <form:option value="13:30:00" label="13:30" />
-				  <form:option value="14:00:00" label="14:00" />
-				  <form:option value="14:30:00" label="14:30" />
-				  <form:option value="15:00:00" label="15:00" />
-				  <form:option value="15:30:00" label="15:30" />
-				  <form:option value="16:00:00" label="16:00" />
-				  <form:option value="16:30:00" label="16:30" />
-				  <form:option value="17:00:00" label="17:00" />
-				  <form:option value="17:30:00" label="17:30" />
-				  <form:option value="18:00:00" label="18:00" />
-				</form:select>
+	            <select id="pickTime" required="required">
+				    <option value="">請選擇時間</option>
+				    <option value="12:00:00">12:00</option>
+				    <option value="12:30:00">12:30</option>
+				    <option value="13:00:00">13:00</option>
+				    <option value="13:30:00">13:30</option>
+				    <option value="14:00:00">14:00</option>
+				    <option value="14:30:00">14:30</option>
+				    <option value="15:00:00">15:00</option>
+				    <option value="15:30:00">15:30</option>
+				    <option value="16:00:00">16:00</option>
+				    <option value="16:30:00">16:30</option>
+				    <option value="17:00:00">17:00</option>
+				    <option value="17:30:00">17:30</option>
+				    <option value="18:00:00">18:00</option>
+				</select>
 	       
           </fieldset>
         </div>
       </div>
       <footer>
         <input type="button" value="繼續加點" class="button2" onclick="window.location.href ='<c:url value='/menu' />'" /> <!--上一頁-->
-        <input type="submit" value="提交訂單" class="button2" /><!--訂單確認-->
+        <input type="button" value="提交訂單" class="button2" onclick="validateAndRedirect()"/><!--訂單確認-->
       </footer>
-    </form:form>
+    </form>
   </div>
 </body>
 

@@ -82,11 +82,12 @@ function validateAndRedirect() {
 	        // 处理响应
 // 	        console.log(xhr.responseText);
 	        var responseJson = JSON.parse(xhr.responseText);
-            console.log(responseJson); // 将 JSON 数据打印到控制台
-            
+            console.log(responseJson); // 将 JSON 数据打印到控制台           
             if (responseJson.success === "新增成功") {
-                // 重定向到 bookingcheck.jsp
-            	window.location.href = "/bookingcheck";
+            	setTimeout(function() {
+                    localStorage.clear();
+                    window.location.href = "/bookingcheck";
+                }, 800); 
             }
             
 	      } else {
@@ -129,9 +130,7 @@ function validateAndRedirect() {
   </div>
   <br />
   <div>
-    <form:form action="/newbooking" id="myForm" method="POST" 
-    	onsubmit="return validateAndRedirect()" modelAttribute="newbooking">
-<%--     	<input type="text" name="someField" value="${newbooking.someField}" /> --%>
+    <form:form id="myForm" modelAttribute="newbooking">
       <div class="fieldset-container">
         <fieldset class="fieldsetdata">
           <legend>訂位資料</legend>
@@ -238,7 +237,7 @@ function validateAndRedirect() {
       </div>
 
       <footer>
-        <input type="submit" value="送出訂位" class="button2" />
+        <input type="button" value="送出訂位" class="button2" onclick="validateAndRedirect()"/>
       </footer>
     </form:form>
   </div>
