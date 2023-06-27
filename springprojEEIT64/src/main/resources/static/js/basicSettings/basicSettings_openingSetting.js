@@ -5,6 +5,9 @@ let openingHourData;
 let closingTimeData;
 let sureBtnType;
 let deleteIds = [];
+// var token = $("meta[name='_csrf']").attr("content");
+// var header = $("meta[name='_csrf_header']").attr("content");
+
 
 async function getOpeningHourData() {
     openingHourData = await $.ajax({
@@ -268,7 +271,10 @@ async function sureBtnClick(){
                 type: "post",
                 url: contextPath + "/basicSettings.api/addOpeningHour",
                 contentType: "application/json",
-                data: JSON.stringify(data)
+                data: JSON.stringify(data),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                }
             })
             break;
         case "update":
@@ -277,7 +283,10 @@ async function sureBtnClick(){
                 type: "put",
                 url: contextPath + "/basicSettings.api/editOpeningHour",
                 contentType: "application/json",
-                data: JSON.stringify(data)
+                data: JSON.stringify(data),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                }
             })
             break;
         case "delete":
@@ -285,7 +294,16 @@ async function sureBtnClick(){
                 type: "delete",
                 url: contextPath + "/basicSettings.api/deleteOpeningHour",
                 contentType: "application/json",
-                data: JSON.stringify(deleteIds)
+                data: JSON.stringify(deleteIds),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success : function(response) {
+                    console.log("-response");
+                },
+                error : function(error) {
+                    console.log(error);
+                }
             })
             break;
         case "addCloseTime":
@@ -293,7 +311,10 @@ async function sureBtnClick(){
                 type: "post",
                 url: contextPath + "/basicSettings.api/addClosingTime",
                 contentType: "application/json",
-                data: JSON.stringify(closeTimeData)
+                data: JSON.stringify(closeTimeData),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                }
             })
             break;
         case "deleteclosetime":
@@ -301,7 +322,10 @@ async function sureBtnClick(){
                 type: "delete",
                 url: contextPath + "/basicSettings.api/deleteClosingTime",
                 contentType: "application/json",
-                data: JSON.stringify(deleteIds)
+                data: JSON.stringify(deleteIds),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                }
             })
             break;
         case "updateclosetime":
@@ -310,7 +334,10 @@ async function sureBtnClick(){
                 type: "put",
                 url: contextPath + "/basicSettings.api/editClosingTime",
                 contentType: "application/json",
-                data: JSON.stringify(closeTimeData)
+                data: JSON.stringify(closeTimeData),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                }
             })
             break;
         case "deleteAllclosetime":
@@ -318,7 +345,10 @@ async function sureBtnClick(){
                 type: "delete",
                 url: contextPath + "/basicSettings.api/deleteClosingTime",
                 contentType: "application/json",
-                data: JSON.stringify(deleteIds)
+                data: JSON.stringify(deleteIds),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                }
             })
             break;
     }
