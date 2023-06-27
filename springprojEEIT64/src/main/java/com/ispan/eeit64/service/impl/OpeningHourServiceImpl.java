@@ -85,6 +85,4 @@ public class OpeningHourServiceImpl implements OpeningHourService {
         }
         return map;
     }
-
-    
 }

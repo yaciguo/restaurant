@@ -472,9 +472,9 @@
                                 </div>
                                 <div class="row me-1">
                                     <div class="col-2 d-flex ps-2 pe-1">
-                                        <a class="btn btn-primary btn-sm flex-fill" id="allCheck"
+                                        <a class="btn btn-primary btn-sm flex-fill" id="openhour-allCheck"
                                             type="button">全選</a>
-                                        <a class="btn btn-primary btn-sm flex-fill" id="removeAllCheck"
+                                        <a class="btn btn-primary btn-sm flex-fill" id="openhour-removeAllCheck"
                                             type="button" style="display: none;">清空</a>
                                     </div>
                                     <div class="offset-5 col-3 d-flex px-1">
@@ -544,7 +544,7 @@
                                                                 </td>
                                                                 <td class="data">
                                                                     <p class="text-wrap">
-                                                                        說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明
+                                                                        說明
                                                                     </p>
                                                                 </td>
                                                                 <td class="rest-btn-td p-1">
@@ -572,7 +572,8 @@
                                                             type="button" style="display: none;">清空</a>
                                                     </div>
                                                     <div class="offset-5 col-3 d-flex px-1">
-                                                        <a id="closetime-deleteAllbtn" class="btn btn-primary btn-sm flex-fill" type="button">刪除選取</a>
+                                                        <a id="closetime-deleteAllbtn" class="btn btn-primary btn-sm flex-fill" data-bs-toggle="modal"
+                                                        data-bs-target="#tdItemModalDiv" type="button">刪除選取</a>
                                                     </div>
                                                     <div class="col-2 d-flex px-1">
                                                         <a id="closetime-addbtn" class="btn btn-primary btn-sm flex-fill"
@@ -625,7 +626,7 @@
                                                                 </td>
                                                                 <!-- <td class="rest-time-td">13:00</td> -->
                                                                 <td class="data text-wrap">
-                                                                    說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明
+                                                                    說明
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -702,7 +703,7 @@
                                 <label class=" justify-content-center align-items-center">結束日期：</label>
                             </div>
                             <div class="col-5">
-                                <input class="form-control" id="setEndDate" name="setEndDate" placeholder='yyyy-mm-dd' type="text" />
+                                <input class="form-control" id="setEndDate" name="setEndDate" placeholder='選取日期' type="text" readonly />
                             </div>
                         </div>
 
@@ -749,5 +750,6 @@
 </script>
 
 <script type="text/javascript" src="<c:url value='/js/basicSettings/basicSettings.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/basicSettings/basicSettings_openingSetting.js'/>"></script>
 
 </html>

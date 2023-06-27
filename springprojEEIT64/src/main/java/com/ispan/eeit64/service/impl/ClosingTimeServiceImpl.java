@@ -1,6 +1,5 @@
 package com.ispan.eeit64.service.impl;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,6 +45,7 @@ public class ClosingTimeServiceImpl implements ClosingTimeService {
             return null;
         }
     }
+    
     private Map<String, String> getDateMap(Date date){
         SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
         ymd.setTimeZone(TimeZone.getTimeZone("Asia/Taipei"));

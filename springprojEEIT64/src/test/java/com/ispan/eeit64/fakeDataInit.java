@@ -105,8 +105,6 @@ public class fakeDataInit {
     @Test
     void test() {
         try {
-            resetTable("closingtime", ClosingTimeDao);
-            addClosingTimeData();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -276,7 +274,7 @@ public class fakeDataInit {
         List<FdTableJson> json = getJson("/static/assets/json/fdtable.json", FdTableJson.class);
             
         for(FdTableJson jsonBean : json) {
-            FdTableBean bean = new FdTableBean(jsonBean.capacity);
+            FdTableBean bean = new FdTableBean(jsonBean.id,jsonBean.capacity);
             fdTableDao.save(bean);
         }
     }
