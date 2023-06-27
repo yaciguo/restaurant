@@ -3,7 +3,6 @@ package com.ispan.eeit64.entity;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -14,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "dish")
@@ -29,6 +31,7 @@ public class DishBean {
 
 	@ManyToOne
 	@JoinColumn(name = "FK_categoryId", nullable = false, foreignKey = @ForeignKey(name = "dish_id_fk"))
+	@JsonManagedReference
 	private CategoryBean categoryBean;
 
 	@Column(name = "price", columnDefinition = "INT(10) NOT NULL COMMENT'餐點價格'")
@@ -46,14 +49,16 @@ public class DishBean {
 	@Column(name = "status", columnDefinition = "varchar(10) NOT NULL COMMENT'餐點狀態 N無,Y有'")
 	private String status;
 
-	@OneToMany(mappedBy = "dishBean", cascade = { CascadeType.ALL })
+	@OneToMany(mappedBy = "dishBean")
+	@JsonBackReference
 	private Set<ActivityBean> activityBean = new LinkedHashSet<>();
 
 	public DishBean() {
 		super();
 	}
-	
-	public DishBean(String name, CategoryBean categoryBean, Integer price, Integer cost, String picture, String description, String status) {
+
+	public DishBean(String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
+			String description, String status) {
 		super();
 		this.name = name;
 		this.categoryBean = categoryBean;
@@ -76,7 +81,6 @@ public class DishBean {
 		this.description = description;
 		this.status = status;
 	}
-
 
 	public DishBean(Integer id, String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
 			String description, String status, Set<ActivityBean> activityBean) {
@@ -174,6 +178,5 @@ public class DishBean {
 				+ (status != null ? "status=" + status + ", " : "")
 				+ (activityBean != null ? "activityBean=" + activityBean : "") + "]";
 	}
-
 
 }
