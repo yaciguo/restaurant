@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.ispan.eeit64.entity.DishBean;
 @Repository
 public interface DishRepository extends JpaRepository<DishBean, Integer>{
-	 @Query("SELECT d FROM DishBean d ORDER BY d.categoryBean.id")
-	    List<DishBean> findAllOrderByCategoryId();
+	@Query("SELECT d FROM DishBean d ORDER BY d.categoryBean.id")
+	List<DishBean> findAllOrderByCategoryId();
 
 }

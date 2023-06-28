@@ -41,49 +41,50 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests(requests -> requests
-                    .antMatchers("/resources/**").permitAll()
-                    .antMatchers("/assets/img/**").permitAll()
-                    .antMatchers("/**/*.css").permitAll()
-                    .antMatchers("/osLogin").permitAll()
-                    .antMatchers("/custIndex/**").permitAll()
-//                    .antMatchers("/custIndex/queryBanner").permitAll()
-                    .antMatchers("/searchorder").permitAll()
-                    .antMatchers("/searchbooking").permitAll()
-                    .antMatchers("/question").permitAll()
-                    .antMatchers("/booking").permitAll()
-                    .antMatchers("/menu").permitAll()
-                    .anyRequest().authenticated())
-            .cors(cors -> cors.disable())
-            .csrf(csrf -> csrf
-            		.ignoringAntMatchers("/custIndex")
-                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+        http.formLogin().disable();
+//             .authorizeRequests(requests -> requests
+//                     .antMatchers("/resources/**").permitAll()
+//                     .antMatchers("/assets/img/**").permitAll()
+//                     .antMatchers("/**/*.css").permitAll()
+//                     .antMatchers("/osLogin").permitAll()
+//                     .antMatchers("/custIndex/**").permitAll()
+// //                    .antMatchers("/custIndex/queryBanner").permitAll()
+//                     .antMatchers("/searchorder").permitAll()
+//                     .antMatchers("/searchbooking").permitAll()
+//                     .antMatchers("/question").permitAll()
+//                     .antMatchers("/booking").permitAll()
+//                     .antMatchers("/menu").permitAll()
+//                     .anyRequest().authenticated())
+//             .cors(cors -> cors.disable())
+//             .csrf(csrf -> csrf
+//             		.ignoringAntMatchers("/custIndex")
+//                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
 //                	.csrf(csrf -> csrf.disable())
-            .formLogin(login -> login
-                    .loginPage("/osLogin")
-//                  .usernameParameter("username")
-//                  .passwordParameter("password")
-//	                .failureUrl("/restaurant/osLogin")
-//	                .defaultSuccessUrl("/activity")
-                    .successHandler((request, response, authentication) -> {
-                        System.out.println("Login Successful!");
-                        response.sendRedirect(request.getContextPath() + "/activity");
-                    })
-                    .failureHandler((request, response, exception) -> {
-                        System.out.println("Login Failed!");
-                        response.sendRedirect(request.getContextPath() + "/osLogin");
-                    })
-            	)
-            .logout(logout -> logout
-            	    .logoutUrl("/logout")
-//                	    .logoutSuccessUrl("/osLogin")
-            	    .logoutSuccessHandler((request, response, authentication) -> {
-            	        System.out.println("Logout Successful!");
-                        response.sendRedirect(request.getContextPath() + "/osLogin");
-            	    })
-            	    .invalidateHttpSession(true)
-            	    .deleteCookies("JSESSIONID")
-            	);
+            
+//             .formLogin(login -> login
+//                     .loginPage("/osLogin")
+// //                  .usernameParameter("username")
+// //                  .passwordParameter("password")
+// //	                .failureUrl("/restaurant/osLogin")
+// //	                .defaultSuccessUrl("/activity")
+//                     .successHandler((request, response, authentication) -> {
+//                         System.out.println("Login Successful!");
+//                         response.sendRedirect(request.getContextPath() + "/activity");
+//                     })
+//                     .failureHandler((request, response, exception) -> {
+//                         System.out.println("Login Failed!");
+//                         response.sendRedirect(request.getContextPath() + "/osLogin");
+//                     })
+//             	)            
+//             .logout(logout -> logout
+//             	    .logoutUrl("/logout")
+// //                	    .logoutSuccessUrl("/osLogin")
+//             	    .logoutSuccessHandler((request, response, authentication) -> {
+//             	        System.out.println("Logout Successful!");
+//                         response.sendRedirect(request.getContextPath() + "/osLogin");
+//             	    })
+//             	    .invalidateHttpSession(true)
+//             	    .deleteCookies("JSESSIONID")
+//             	);
 	}
 }

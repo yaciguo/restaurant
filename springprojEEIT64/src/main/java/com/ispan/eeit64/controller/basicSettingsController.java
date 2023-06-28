@@ -33,12 +33,7 @@ public class basicSettingsController {
     ClosingTimeServiceImpl closingTimeService;
     @Autowired
     Environment env;
-    
-    @GetMapping("/basicSettings")
-    public String basicSettings() {
-        return "basicSettings";
-    }
-    
+        
     @GetMapping("/basicSettings.api/getAllOpeningHour")
     public @ResponseBody List<OpeningHourBean> getAllOpeningHour(){
         return openingHourService.findAll();

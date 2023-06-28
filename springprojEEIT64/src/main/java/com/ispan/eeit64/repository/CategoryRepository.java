@@ -11,6 +11,4 @@ import com.ispan.eeit64.entity.CategoryBean;
 public interface CategoryRepository extends JpaRepository<CategoryBean, Integer>{
 	@Query("SELECT c.name FROM CategoryBean c ORDER BY c.id")
     List<String> findAllNamesOrderById();
-
-
 }

@@ -73,11 +73,7 @@
         <img src="./assets/img/logo.png">
 
         <ul class="nav flex-column" style="list-style: none;padding: 30px 0;">
-<<<<<<< HEAD
             <li><a href="<c:url value='/basicSettings' />" class="nav-link side-nav active">
-=======
-            <li><a href="/basicSettings.jsp" class="nav-link side-nav active">
->>>>>>> origin/sara
                     <i class="fa-solid fa-house fa-xl"></i>
                     <span class="nav-title">餐廳管理</span>
                 </a></li>
@@ -85,7 +81,6 @@
                     <i class="fa-regular fa-address-card fa-xl"></i>
                     <span class="nav-title">會員管理</span>
                 </a></li> -->
-<<<<<<< HEAD
             <li><a href="<c:url value='/table' />" class="nav-link side-nav">
                     <i class="fa-solid fa-couch fa-lg"></i>
                     <span class="nav-title">桌位管理</span>
@@ -107,29 +102,6 @@
                     <span class="nav-title">結帳管理</span>
                 </a></li>
             <li><a href="<c:url value='/dataAnalysis' />" class="nav-link side-nav">
-=======
-            <li><a href="/table.jsp" class="nav-link side-nav">
-                    <i class="fa-solid fa-couch fa-lg"></i>
-                    <span class="nav-title">桌位管理</span>
-                </a></li>
-            <li><a href="product.jsp" class="nav-link side-nav">
-                    <i class="fa-solid fa-book-open-reader fa-xl"></i>
-                    <span class="nav-title">商品管理</span>
-                </a></li>
-            <li><a href="orders.jsp" class="nav-link side-nav">
-                    <i class="fa-solid fa-list-ul fa-xl"></i>
-                    <span class="nav-title">訂單管理</span>
-                </a></li>
-            <li><a href="activity.jsp" class="nav-link side-nav">
-                    <i class="fa-solid fa-gift fa-xl"></i>
-                    <span class="nav-title">活動管理</span>
-                </a></li>
-            <li><a href="checkbox.jsp" class="nav-link side-nav">
-                    <i class="fa-solid fa-sack-dollar fa-xl"></i>
-                    <span class="nav-title">結帳管理</span>
-                </a></li>
-            <li><a href="/dataAnalysis.jsp" class="nav-link side-nav">
->>>>>>> origin/sara
                     <i class="fa-solid fa-chart-column fa-xl"></i>
                     <span class="nav-title">數據管理</span>
                 </a></li>
@@ -150,16 +122,9 @@
 
         <span class="page-title fa-solid fa-xl" style="display: contents;"></span>
 
-<<<<<<< HEAD
         <i class="fa-solid fa-right-to-bracket fa-xl" onclick="logout()">
             <span>登出</span></i>
        
-=======
-        <a href="#logout">
-            <i class="fa-solid fa-right-to-bracket fa-xl">
-                <span>登出</span></i>
-        </a>
->>>>>>> origin/sara
     </nav>
 </body>
 
@@ -187,7 +152,6 @@
             });
         }
     });
-<<<<<<< HEAD
     
     function logout(){
     	$.ajax({
@@ -206,7 +170,5 @@
 			}
 		});
     }
-=======
->>>>>>> origin/sara
 
 </script>

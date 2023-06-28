@@ -62,6 +62,9 @@ $(document).ready(function(){
 
 <!--修改內容==================================-->
 
+function backToMenu(){
+  window.location.href = "<c:url value='/menu' />";
+}
 
   //提交驗證
   function validateAndRedirect() {
@@ -230,14 +233,12 @@ $(document).ready(function(){
         </div>
       </div>
       <footer>
-        <input type="button" value="繼續加點" class="button2" onclick="window.location.href ='<c:url value='/menu' />'" /> <!--上一頁-->
+        <input type="button" value="繼續加點" class="button2" onclick="backToMenu()" /> <!--上一頁-->
         <input type="button" value="提交訂單" class="button2" onclick="validateAndRedirect()"/><!--訂單確認-->
       </footer>
     </form>
   </div>
 </body>
-
-
 
 </html>
 
