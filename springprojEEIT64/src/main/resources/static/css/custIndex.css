@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+.bannerSlider {
+	overflow: hidden;
+	width: 100%;
+	height: calc(((( 100vw/ 2)* 1))* 0.95);
+}
+
+.content {
+	display: flex;
+	width: 100%;
+	height: 550px;
+	background-image: url("../assets/img/background.jpg");
+}
+
+.step-container {
+	margin: auto;
+	width: 80%;
+}
+
+.step-item {
+	text-align: center;
+}
+
+.step-item a {
+	padding: 20px;
+	border-radius: 50%;
+	display: inline-block;
+	background-color: var(--main-color);
+}
+
+.step-item i {
+	color: #333;
+	font-size: 1.75rem;
+	width: 28px;
+	height: 28px;
+	text-align: center;
+}
+
+.step-item p {
+	height: 3rem;
+	font-size: 1.2rem;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hot-sell {
+	background-image: url("../assets/img/background.jpg");
+	padding-bottom: 50px;
+}
+
+.product-slider {
+	overflow: hidden;
+	width: 90%;
+	margin: auto;
+}
+
+.slick-slide {
+	padding: 5px 10px
+}
+
+@media ( max-width : 576px) {
+	.content {
+		/* 計算 content 的高度為視口高度減去兩個輪播圖的高度 */
+		height: calc(100vh - (100vw * 0.475) - (100vw * 0.45) - 50px);
+	}
+	.product-slider {
+		height: calc((( 100vw/ 2)* 1))* 0.9;
+	}
+	.hot-sell {
+		padding-bottom: 0px;
+	}
+}
+
+@media ( min-width : 768px) {
+	.step-item a {
+		padding: 40px;
+	}
+	.step-item i {
+		font-size: 3rem;
+		width: 48px;
+		height: 48px;
+	}
+}
