@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -65,12 +64,10 @@ public class ReservationBean {
 		super();
 	}
 
-
-
-	public ReservationBean(Integer id, String name, String gender, String phone, Integer pNumber, Date date,
+	// add
+	public ReservationBean(String name, String gender, String phone, Integer pNumber, Date date,
 			Time startTime, Time endTime, String email, String note, Timestamp submitTime, FdTableBean fdTableBean) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.phone = phone;
@@ -85,10 +82,10 @@ public class ReservationBean {
 	}
 
 
-
-	public ReservationBean(String name, String gender, String phone, Integer pNumber, Date date, Time startTime,
-			Time endTime, String email, String note, Timestamp submitTime, FdTableBean fdTableBean) {
+	public ReservationBean(Integer id, String name, String gender, String phone, Integer pNumber, Date date,
+			Time startTime, Time endTime, String email, String note, Timestamp submitTime, FdTableBean fdTableBean) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.phone = phone;

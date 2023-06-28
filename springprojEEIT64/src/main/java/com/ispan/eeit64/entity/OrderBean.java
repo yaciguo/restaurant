@@ -36,9 +36,8 @@ public class OrderBean {
 	@Column(name = "pickTime", columnDefinition = "time NOT NULL COMMENT '取餐時間'")
 	private java.util.Date pickTime;
 
-	
 	@Column(name = "orderTime", columnDefinition = "date NOT NULL COMMENT '下單時間'")
-	 private java.sql.Timestamp orderTime;
+	private java.sql.Timestamp orderTime;
 
 	@Column(name = "amount", columnDefinition = "int(100) NOT NULL COMMENT '金額'")
 	private Integer amount;

@@ -1,7 +1,5 @@
 package com.ispan.eeit64;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ispan.eeit64.entity.DishBean;
-import com.ispan.eeit64.entity.OrderBean;
 import com.ispan.eeit64.entity.OrderDetailBean;
 import com.ispan.eeit64.repository.DishRepository;
 import com.ispan.eeit64.repository.OrderRepository;

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -32,6 +33,7 @@ public class CategoryBean {
     		cascade = { CascadeType.ALL }, 
     		orphanRemoval = false
 	  )
+	@JsonBackReference
     @JsonIgnore//=============sara==============
     private Set<DishBean> dishBean = new LinkedHashSet<>();
 
