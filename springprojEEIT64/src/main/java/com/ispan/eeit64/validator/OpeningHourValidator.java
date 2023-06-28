@@ -47,7 +47,8 @@ public class OpeningHourValidator implements Validator {
 	        Date startTime = bean.getStartTime();
 	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	        String startTimeStr = formatter.format(startTime);
-	        if (startTimeStr.equals("1970-01-01 08:00:00")) {
+			System.out.println(startTimeStr);
+	        if (startTimeStr.equals("1970-01-01 00:00:00")) {
 	            errors.rejectValue("startTime", "invalidTimeFormat", "錯誤時間格式");
 	        }
 		}
@@ -55,7 +56,8 @@ public class OpeningHourValidator implements Validator {
 	        Date endTime = bean.getEndTime();
 	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	        String endTimeStr = formatter.format(endTime);
-	        if (endTimeStr.equals("1970-01-01 08:00:00")) {
+			System.out.println(endTimeStr);
+	        if (endTimeStr.equals("1970-01-01 00:00:00")) {
 	            errors.rejectValue("endTime", "invalidTimeFormat", "錯誤時間格式");
 	        }
 		}

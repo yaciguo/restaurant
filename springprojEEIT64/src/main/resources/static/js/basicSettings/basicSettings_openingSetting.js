@@ -273,23 +273,26 @@ async function sureBtnClick() {
                 contentType: "application/json",
                 data: JSON.stringify(data),
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;
         case "update":
             data.id = updateId;
+            console.log(data)
             result = await $.ajax({
                 type: "put",
                 url: contextPath + "/basicSettings.api/editOpeningHour",
                 contentType: "application/json",
                 data: JSON.stringify(data),
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                    xhr.setRequestHeader(header, token);
                 }
             })
+            console.log(result)
             break;
         case "delete":
+            console.log(header, token)
             result = await $.ajax({
                 type: "delete",
                 url: contextPath + "/basicSettings.api/deleteOpeningHour",
@@ -297,12 +300,6 @@ async function sureBtnClick() {
                 data: JSON.stringify(deleteIds),
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader(header, token);
-                },
-                success: function (response) {
-                    console.log("-response");
-                },
-                error: function (error) {
-                    console.log(error);
                 }
             })
             break;
@@ -324,7 +321,7 @@ async function sureBtnClick() {
                 contentType: "application/json",
                 data: JSON.stringify(deleteIds),
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;
@@ -336,7 +333,7 @@ async function sureBtnClick() {
                 contentType: "application/json",
                 data: JSON.stringify(closeTimeData),
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;
@@ -347,7 +344,7 @@ async function sureBtnClick() {
                 contentType: "application/json",
                 data: JSON.stringify(deleteIds),
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;
