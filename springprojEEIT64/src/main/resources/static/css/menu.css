@@ -52,6 +52,14 @@ flex-basis: calc(100% /7);
   }
 }
 
+#restInfo{
+	border-radius: 10px;
+    border: none;
+    background-color: rgb(239, 164, 84);
+    font-size: 30px; 
+    color: white;
+}
+
 
 .btsort {
     font-size: 20px;

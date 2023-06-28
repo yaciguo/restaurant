@@ -2,16 +2,15 @@ let products = [];
 let categories = []; 
 //jquery
 $(document).ready(function () {
-	//======================================抓分類
-	
+	//======================================資料庫抓分類============================	
 	  $.ajax({
         url: "/showCategories",
         type: "GET",
         dataType: "json",
         success: function(response) {
-            categories = response; // 将返回的分类列表数据存储到数组中
-            renderCategoryList(); // 调用渲染函数
-            bindCategoryClickEvent(); // 绑定点击事件处理程序
+            categories = response; // 得到返回的分類
+            renderCategoryList(); 
+            bindCategoryClickEvent(); // click分類按鈕
             
         },
         error: function(xhr, status, error) {
@@ -24,7 +23,7 @@ $(document).ready(function () {
 	function renderCategoryList() {		  
 	  var categoryButtonsContainer = document.getElementById("categoryButtons");
 
-	  // 遍历类别名称数组，为每个类别创建一个按钮
+	  // ===================將每個分類創一個按鈕=========================
 	  categories.forEach(function(category) {
 	    var box = document.createElement("div");
 	    box.classList.add("box");
@@ -53,30 +52,23 @@ $(document).ready(function () {
 	            // 执行滚动到目标元素的操作
 	            $("html, body").animate({
 	                scrollTop: targetRow.offset().top
-	            }, 500);
+	            }, 200);
 	        }
 	    });
 	   }
 
 
 	
-	
-	
 	//================================================
     $("#cart").click(function () {
-        // alert('按下了按鈕');
         $("body").addClass('active');
     })
     $(".closeShopping").click(function () {
-        // alert('按下了按鈕');
         $("body").removeClass('active');
     })
     
     
 //======================================================================================
-    
-    
-
 //引入json=== 抓到/dishes2====================================================
 var xhr = new XMLHttpRequest();
 	xhr.open("GET", "/dishes2", true);	
@@ -120,8 +112,6 @@ var xhr = new XMLHttpRequest();
 	
 });
 //===================================================
-    //for each
-
 //add cart
 // cart array
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
