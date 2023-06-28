@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "activity")
 @Access(AccessType.FIELD)
@@ -46,6 +48,7 @@ public class ActivityBean {
 	@OneToMany(mappedBy = "activityBean")
 	private Set<OrderBean> orderBean = new LinkedHashSet<>();
 
+	@JsonIgnoreProperties("activityBean") // 忽略属性的序列化sara===========
 	@ManyToOne
 	@JoinColumn(name = "FK_Dish_Id")
 	private DishBean dishBean;

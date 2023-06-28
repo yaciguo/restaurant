@@ -14,6 +14,7 @@
 <link href="assets/img/s-logo.png" rel="icon">
 
 <!-- bootstrap5 - 前端框架 -->
+<<<<<<< HEAD
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -26,6 +27,26 @@
 
 <!-- fontAwesome - icon插件 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"  />
+=======
+<link href="./assets/src/plugins/bootstrap5.2/bootstrap.min.css"
+	rel="stylesheet">
+<script src="./assets/src/plugins/bootstrap5.2/bootstrap.bundle.min.js"></script>
+
+<!-- jquery 框架 -->
+<script type="text/javascript"
+	src="./assets/src/plugins/jquery/jquery-1.11.0.min.js"></script>
+
+<!-- slick - css輪播圖插件 -->
+<link rel="stylesheet"
+	href="./assets/src/plugins/slick-slider/slick.css" />
+<link rel="stylesheet"
+	href="./assets/src/plugins/slick-slider/slick-theme.css" />
+<script src="./assets/src/plugins/slick-slider/slick.js"></script>
+
+<!-- fontAwesome - icon插件 -->
+<link href="./assets/src/plugins/fontawesome/css/all.min.css"
+	rel="stylesheet">
+>>>>>>> origin/sara
 
 
 <link rel='stylesheet' href="<c:url value='/css/custIndex.css' />" />
@@ -37,7 +58,15 @@
 	<%@ include file="nav.jsp" %>
 
 	<!-- 輪播圖 - 廣告看板 -->
+<<<<<<< HEAD
 	<div class="slider bannerSlider text-center" id="bannerSlider"></div>
+=======
+	<div class="slider bannerSlider text-center" id="bannerSlider">
+		<img src="./assets/img/3-banner1.jpg">
+		<img src="./assets/img/3-banner2.jpg">
+		<img src="./assets/img/3-banner3.jpg">
+	</div>
+>>>>>>> origin/sara
 
 	<div class="content">
 
@@ -74,6 +103,7 @@
 
 <script>
 	$(function() {
+<<<<<<< HEAD
 		// 讀取 輪播圖
 		$.ajax({
 		    url: '${pageContext.request.contextPath}/custIndex/queryBanner',
@@ -119,6 +149,31 @@
 				} ]
 			});
 		}
+=======
+		// 輪播圖設定
+		$('.bannerSlider').slick({
+			infinite : true,
+			autoplay : true,
+			autoplaySpeed : 2500,
+			arrows : false,
+		});
+		$('.product-slider').slick({
+			infinite : true,
+			slidesToShow : 3,
+			slidesToScroll : 1,
+			autoplay : true,
+			autoplaySpeed : 3000,
+			arrows : false,
+			responsive : [ {
+				breakpoint : 576,
+				settings : {
+					slidesToShow : 2,
+					slidesToScroll : 1,
+				}
+			} ]
+		});
+
+>>>>>>> origin/sara
 	});
 </script>
 

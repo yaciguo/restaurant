@@ -41,12 +41,22 @@ body {
 
 .activity-detail {
 	margin: 0.5rem;
+<<<<<<< HEAD
 	padding: 0.5rem;
 }
 
 .activity-detail input {
     border: 1px solid #ccc;
     line-height: 1.8rem;
+=======
+	padding: 1rem;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.activity-detail input {
+	border: none;
+	border-bottom: 1px solid black;
+>>>>>>> origin/sara
 }
 
 .activity-table {

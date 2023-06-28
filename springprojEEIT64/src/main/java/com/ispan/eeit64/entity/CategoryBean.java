@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "category")
@@ -33,6 +34,7 @@ public class CategoryBean {
     		orphanRemoval = false
 	  )
 	@JsonBackReference
+    @JsonIgnore//=============sara==============
     private Set<DishBean> dishBean = new LinkedHashSet<>();
 
 	@Override

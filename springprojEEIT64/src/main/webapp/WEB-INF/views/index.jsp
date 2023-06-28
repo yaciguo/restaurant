@@ -25,7 +25,11 @@
 		<br>
 		<a href="<c:url value='/basicSettings' />"> 後台-基本設定 </a>
 		<br>
+<<<<<<< HEAD
 		<a href="<c:url value='/activity' />"> 後台-活動頁 </a>
+=======
+		<a href="<c:url value='/queryActivity' />"> 後台-活動頁 </a>
+>>>>>>> origin/sara
 		<br> <br>
 	</div>
 
