@@ -31,20 +31,18 @@ public class HomeController {
 	public String osLogin() {
 		return "osLogin";
 	}
-	@GetMapping("/basicSettings")
-	public String basicSettings() {
-		return "basicSettings";
-	}
+
 	@GetMapping("/activity")
 	public String activity() {
 		return "activity";
 	}
+	  
+    @GetMapping("/basicSettings")
+    public String basicSettings() {
+        return "basicSettings";
+    }
 	
-//	@GetMapping("/booking")
-//	public String booking() {
-//		return "booking";
-//	}
-	
+
 	
 	@GetMapping("/searchbooking")
 	public String searchbooking() {
@@ -67,16 +65,15 @@ public class HomeController {
 		return "ordercheck";
 	}
 	
-	@GetMapping("/showAllDishes2")
-	public String showAllDishes2() {
-		return "showAllDishes2";    
-		         
-	}
 	
 	@GetMapping("/bookingcheck")
-    public String bookingcheck() {
-       
+    public String bookingcheck() {      
         return "bookingcheck";
+    }
+	
+	@GetMapping("/restInfo")
+    public String restInfo() {      
+        return "restInfo";
     }
 	
 	

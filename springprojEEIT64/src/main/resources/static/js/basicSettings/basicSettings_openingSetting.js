@@ -17,7 +17,7 @@ async function getOpeningHourData() {
     resetOpenhourTody();
 }
 
-function resetOpenhourTody(){
+function resetOpenhourTody() {
     $("#openhourTody").empty();
     openingHourData.forEach((data) => {
         addOpeningHourDataToTody(data);
@@ -46,7 +46,7 @@ function addOpeningHourDataToTody(data) {
             </td>
         </tr>
     `)
-    
+
     $(`#${prefix}-tr a[type='button']`).add(`#${prefix}-tr input[type="checkbox"]`).each((idx, el) => {
         $(el).mouseenter(function () {
             runTrClick = false;
@@ -58,19 +58,19 @@ function addOpeningHourDataToTody(data) {
 
     $(`#${prefix}-tr`).click(function () {
         if (runTrClick) {
-            $(`#${prefix}-check`).prop("checked",$(`#${prefix}-check`).prop("checked")?false:true)
+            $(`#${prefix}-check`).prop("checked", $(`#${prefix}-check`).prop("checked") ? false : true)
         }
         $("#openhour-allCheck").toggle($("#openhourTody").find("input:checked").length == 0);
         $("#openhour-removeAllCheck").toggle($("#openhourTody").find("input:checked").length > 0);
     })
 
-    $(`#${prefix}-delbtn`).click(function() {
+    $(`#${prefix}-delbtn`).click(function () {
         deleteIds = [data.id];
         toggleModal("delete");
     })
 
-    $(`#${prefix}-editbtn`).click(function() {
-        console.log("修改營業時間"); 
+    $(`#${prefix}-editbtn`).click(function () {
+        console.log("修改營業時間");
         updateId = data.id;
         toggleModal("update");
         $("#dayOfWeekSelect option[hidden]").removeAttr('selected');
@@ -89,24 +89,24 @@ async function getAllClosingTimeData() {
     resetClosingTimeTody();
 }
 
-function resetClosingTimeTody(){
+function resetClosingTimeTody() {
     let keys = Object.keys(closingTimeData);
-    if(keys.includes("error")){
+    if (keys.includes("error")) {
         console.log(closingTimeData["error"]);
-    }else{
+    } else {
         $("#closeTimeNewTbody").empty();
         $("#closeTimeOldTbody").empty();
-        closingTimeData["now"].forEach(function(data){
+        closingTimeData["now"].forEach(function (data) {
             setNowClosingTimeTody(data);
         })
-        closingTimeData["old"].forEach(function(data){
+        closingTimeData["old"].forEach(function (data) {
             setOldClosingTimeTody(data);
         })
     }
 }
 
-function setNowClosingTimeTody(data){
-    let prefix = `closingTime-${data.id}`    
+function setNowClosingTimeTody(data) {
+    let prefix = `closingTime-${data.id}`
     $("#closeTimeNewTbody").append(`
     <tr class="data" id= "${prefix}-tr" data-id='${data.id}'>
         <td class="checkbox-td data ">
@@ -141,19 +141,19 @@ function setNowClosingTimeTody(data){
 
     $(`#${prefix}-tr`).click(function () {
         if (runTrClick) {
-            $(`#${prefix}-check`).prop("checked",$(`#${prefix}-check`).prop("checked")?false:true)
+            $(`#${prefix}-check`).prop("checked", $(`#${prefix}-check`).prop("checked") ? false : true)
         }
         $("#closetime-allCheck").toggle($("#closeTimeNewTbody").find("input:checked").length == 0);
         $("#closetime-removeAllCheck").toggle($("#closeTimeNewTbody").find("input:checked").length > 0);
     })
 
-    $(`#${prefix}-delbtn`).click(function() {
+    $(`#${prefix}-delbtn`).click(function () {
         deleteIds = [data.id];
         toggleModal("deleteclosetime");
     })
 
-    $(`#${prefix}-editbtn`).click(function() {
-        console.log("修改營業時間"); 
+    $(`#${prefix}-editbtn`).click(function () {
+        console.log("修改營業時間");
         updateId = data.id;
         toggleModal("updateclosetime");
         $("#setStartDate").val(data.start.date);
@@ -164,14 +164,14 @@ function setNowClosingTimeTody(data){
     })
 }
 
-function setOldClosingTimeTody(data){    
+function setOldClosingTimeTody(data) {
     $("#closeTimeOldTbody").append(`
     <tr class="data">
         ${getClosingTimeTdStr(data)}
     </tr>`);
 }
 
-function getClosingTimeTdStr(data){
+function getClosingTimeTdStr(data) {
     let start = data.start;
     let end = data.end;
     let dateStr = `
@@ -194,9 +194,9 @@ function getClosingTimeTdStr(data){
     return str;
 }
 
-function toggleModal(displayMode){
+function toggleModal(displayMode) {
     let toggleGroup;
-    switch(displayMode){
+    switch (displayMode) {
         case "add":
             $("#modalTitle").html("新增營業時間")
             toggleGroup = [true, false, true, false, true, false];
@@ -210,12 +210,12 @@ function toggleModal(displayMode){
         case "delete":
             $("#modalTitle").html("是否要刪除營業時間?")
             toggleGroup = [false, false, false, false, false, false];
-            sureBtnType = "delete";     
+            sureBtnType = "delete";
             break;
         case "deleteAll":
             $("#modalTitle").html("是否要刪除選取營業時間?")
             toggleGroup = [false, false, false, false, false, false];
-            sureBtnType = "delete";     
+            sureBtnType = "delete";
             break;
         case "addCloseTime":
             $("#modalTitle").html("新增休假時間")
@@ -230,14 +230,14 @@ function toggleModal(displayMode){
         case "deleteclosetime":
             $("#modalTitle").html("是否要刪除休假時間?")
             toggleGroup = [false, false, false, false, false, false];
-            sureBtnType = "deleteclosetime";     
+            sureBtnType = "deleteclosetime";
             break;
         case "deleteAllclosetime":
             $("#modalTitle").html("是否要刪除選取休假時間?")
             toggleGroup = [false, false, false, false, false, false];
-            sureBtnType = "deleteAllclosetime";     
+            sureBtnType = "deleteAllclosetime";
             break;
-            
+
     }
     $("#modalDayRowDiv").toggle(toggleGroup[0]);
     $("#modalStartDateRowDiv").toggle(toggleGroup[1]);
@@ -247,62 +247,59 @@ function toggleModal(displayMode){
     $("#modalDescriptionRowDiv").toggle(toggleGroup[5]);
 }
 
-async function sureBtnClick(){
+async function sureBtnClick() {
     let startDate = $("#setStartDate").val();
     let endDate = $("#setEndDate").val();
     let startTime = $("#dropdownMenuStartTimeBtn").html();
     let endTime = $("#dropdownMenuEndTimeBtn").html();
     let data = {
-        "id":null,
-        "dayOfWeek":parseInt($("#dayOfWeekSelect").val()),
-        "startTime":startTime,
-        "endTime":endTime
+        "id": null,
+        "dayOfWeek": parseInt($("#dayOfWeekSelect").val()),
+        "startTime": startTime,
+        "endTime": endTime
     };
     let closeTimeData = {
-        "id":null,
-        "startDate":`${startDate} ${startTime}:00`,
-        "endDate":`${endDate} ${endTime}:00`,
-        "description":$("#description-textarea").val()?$("#description-textarea").val():null
+        "id": null,
+        "startDate": `${startDate} ${startTime}:00`,
+        "endDate": `${endDate} ${endTime}:00`,
+        "description": $("#description-textarea").val() ? $("#description-textarea").val() : null
     }
     let result;
-    switch(sureBtnType){
+    switch (sureBtnType) {
         case "add":
             result = await $.ajax({
                 type: "post",
                 url: contextPath + "/basicSettings.api/addOpeningHour",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;
         case "update":
             data.id = updateId;
+            console.log(data)
             result = await $.ajax({
                 type: "put",
                 url: contextPath + "/basicSettings.api/editOpeningHour",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
                 }
             })
+            console.log(result)
             break;
         case "delete":
+            console.log(header, token)
             result = await $.ajax({
                 type: "delete",
                 url: contextPath + "/basicSettings.api/deleteOpeningHour",
                 contentType: "application/json",
                 data: JSON.stringify(deleteIds),
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader(header, token);
-                },
-                success : function(response) {
-                    console.log("-response");
-                },
-                error : function(error) {
-                    console.log(error);
                 }
             })
             break;
@@ -312,7 +309,7 @@ async function sureBtnClick(){
                 url: contextPath + "/basicSettings.api/addClosingTime",
                 contentType: "application/json",
                 data: JSON.stringify(closeTimeData),
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
                 }
             })
@@ -323,8 +320,8 @@ async function sureBtnClick(){
                 url: contextPath + "/basicSettings.api/deleteClosingTime",
                 contentType: "application/json",
                 data: JSON.stringify(deleteIds),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;
@@ -335,8 +332,8 @@ async function sureBtnClick(){
                 url: contextPath + "/basicSettings.api/editClosingTime",
                 contentType: "application/json",
                 data: JSON.stringify(closeTimeData),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;
@@ -346,13 +343,13 @@ async function sureBtnClick(){
                 url: contextPath + "/basicSettings.api/deleteClosingTime",
                 contentType: "application/json",
                 data: JSON.stringify(deleteIds),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;
     }
-    
+
     getAllClosingTimeData()
     getOpeningHourData();
     $('#tdItemModalDiv').modal('hide');
@@ -365,17 +362,17 @@ $(() => {
     })
 
     $("#sureBtn").click(() => {
-        sureBtnClick();        
+        sureBtnClick();
     })
 
     $("#openhour-addbtn").click(() => {
         console.log("新增營業時間")
         toggleModal("add")
 
-        $("#dayOfWeekSelect option").each(function(el){
+        $("#dayOfWeekSelect option").each(function (el) {
             $(el).removeAttr('selected')
         })
-        $("#dayOfWeekSelect option[hidden]").prop('selected','selected');
+        $("#dayOfWeekSelect option[hidden]").prop('selected', 'selected');
         $("#dropdownMenuStartTimeBtn").html("選取時間");
         $("#dropdownMenuEndTimeBtn").html("選取時間");
     })
@@ -383,9 +380,9 @@ $(() => {
     $("#openhour-deleteAllbtn").click(() => {
         toggleModal("deleteAll");
         deleteIds = []
-        $("#openhourTody tr").each(function(){
+        $("#openhourTody tr").each(function () {
             let id = $(this).attr("data-id");
-            if($(this).find("input").prop("checked")){
+            if ($(this).find("input").prop("checked")) {
                 deleteIds.push(id);
             }
         })
@@ -420,19 +417,19 @@ $(() => {
             $(el).prop("checked", false);
         })
     })
-    
+
     $("#closetime-deleteAllbtn").click(() => {
         toggleModal("deleteAllclosetime");
         deleteIds = []
-        $("#closeTimeNewTbody tr").each(function(){
+        $("#closeTimeNewTbody tr").each(function () {
             let id = $(this).attr("data-id");
-            if($(this).find("input").prop("checked")){
+            if ($(this).find("input").prop("checked")) {
                 deleteIds.push(id);
             }
         })
     })
 
-    $("#closetime-addbtn").click(function(){
+    $("#closetime-addbtn").click(function () {
         toggleModal("addCloseTime");
         $("#dropdownMenuStartTimeBtn").html("選取時間");
         $("#dropdownMenuEndTimeBtn").html("選取時間");

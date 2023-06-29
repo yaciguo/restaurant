@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="en">
 
 <head>
 <meta charset="UTF-8">
@@ -44,46 +44,24 @@
 
             <div class="col-sm-5">
                 <div> (帶入當日營業時間)</div>
-                <!--選單-->
-<!--                 <div> -->
-<!--                     <label>取餐時間：</label> -->
-<!--                     <select name="selectTime" required> -->
-<!--                         <option value="">請選擇時間</option> -->
-<!--                         <option value="00:00">12:00</option> -->
-<!--                         <option value="00:30">12:30</option> -->
-<!--                         <option value="01:00">13:00</option> -->
-<!--                         <option value="01:30">13:30</option> -->
-<!--                         <option value="01:30">14:00</option> -->
-<!--                         <option value="01:30">14:30</option> -->
-<!--                         <option value="01:30">15:00</option> -->
-<!--                     </select> -->
-<!--                 </div> -->
+
             </div>
             <div class="col-sm-3">
-                <button style="font-size: 30px; color: white; ">餐廳資訊</button>
+            	<input id="restInfo" type="button" value="餐廳資訊"
+            	onclick="window.location.href ='<c:url value='/restInfo' />'"/>
+<!--                 <button style="font-size: 30px; color: white">餐廳資訊</button> -->
             </div>
         </div><br>
-        
-        
+         
         <!--分類區=======================-->
-        <script type="text/javascript">	
-        $(document).ready(function() {
-        	  
-			    
-        });
-  
-        </script>
-        
-        
+ 
         <div class="row" id="categoryButtons">
         	<div class="col-sm-12">
 
 	        </div>
         </div>
         <hr>
-        
-        
-        
+         
         <!--菜單區-->
         <div class="row">
             <div class="col-sm-12">
@@ -128,7 +106,6 @@
             alert("購物車為空");
             event.preventDefault(); // 取消事件的默认行为
         } else {
-            // 在这里执行跳转逻辑
             window.location.href = "<c:url value='/shoppingcart' />";
         }
     }

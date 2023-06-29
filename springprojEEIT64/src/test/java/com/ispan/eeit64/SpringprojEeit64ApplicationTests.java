@@ -1,5 +1,8 @@
 package com.ispan.eeit64;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -8,7 +11,6 @@ class SpringprojEeit64ApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println(111);
 	}
 
 }
