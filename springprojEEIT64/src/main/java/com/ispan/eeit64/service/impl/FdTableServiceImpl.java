@@ -20,8 +20,7 @@ public class FdTableServiceImpl implements FdTableService {
 
     @Override
     public List<FdTableBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return dao.findAll();
     }
 
     @Override
