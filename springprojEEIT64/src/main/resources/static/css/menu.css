@@ -30,6 +30,14 @@ button:hover {
     font-size: 20px;
 }
 
+/* 今日營業時間*/
+#openingHoursDiv p {
+    display: inline;
+    padding-right: 1px;
+
+}
+
+
 #categoryButtons {
 /*   display: grid; */
 /*   grid-auto-flow: column; 水平排列 */

@@ -75,7 +75,7 @@
    </div><br />
     <div class="row">
       <div class="col-sm-4">
-        <form:form action="/searchorders" method="POST">
+        <form:form action="/restaurant/searchorders" method="POST">
           <fieldset>
             <legend>取餐資料</legend>
             <label for="">姓名</label><br />

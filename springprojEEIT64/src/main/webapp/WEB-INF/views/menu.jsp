@@ -37,18 +37,25 @@
         </div>
         <!--  -->
         <div class="row" id="container-intro">
-            <div class="col-sm-4">
-                <div>xxx店</div>
-                <div>(外帶/內用桌號)</div>
-            </div>
-
-            <div class="col-sm-5">
-                <div> (帶入當日營業時間)</div>
-
-            </div>
             <div class="col-sm-3">
+               <div>xxx店</div><br>
+               <div>(外帶)</div>
+            </div>
+
+             <div class="col-sm-5">
+               <div>
+                   <span id="dayOfWeek"></span>
+                   <span id="time"></span><br>
+                   <span>今日營業時段:</span>
+                   <div id="openingHoursDiv">                    
+        		   </div>
+               </div>
+             </div>
+             
+            <div class="col-sm-4">
+            	<br>&nbsp;
             	<input id="restInfo" type="button" value="餐廳資訊"
-            	onclick="window.location.href ='<c:url value='/restInfo' />'"/>
+            	onclick="restInfo()"/>
 <!--                 <button style="font-size: 30px; color: white">餐廳資訊</button> -->
             </div>
         </div><br>
@@ -75,8 +82,8 @@
 
     <!--購物車按鈕-->
     <div class="container2">
-        <div class="shopping">
-            <img id="cart" src="/images/cart.png" style="width: 70px;">
+        <div class="shopping"> 
+            <img id="cart" src="<c:url value='/images/cart.png' />" style="width: 70px;">
             <span class="quantity">0</span>
         </div>
         <div class="list"></div>
@@ -96,7 +103,8 @@
             <div class="" onclick="validateAndRedirect(event)">結帳</div>
         </div>
     </div>
-    <script type="text/javascript" src="/js/menu.js"></script>
+    <script type="text/javascript" src="<c:url value='/js/menu.js' />"></script>
+    
 </body>
 <script>
 
@@ -109,5 +117,30 @@
             window.location.href = "<c:url value='/shoppingcart' />";
         }
     }
+    
+    function restInfo() {
+        window.location.href = "<c:url value='/restInfo' />";
+    }
+    
+    function updateDateTime() {
+        var now = new Date();
+
+        // 获取星期
+        var daysOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        var dayOfWeek = daysOfWeek[now.getDay()];
+
+        // 获取时间
+        var time = now.toLocaleTimeString();
+
+        // 将日期、星期和时间显示在网页上
+        document.getElementById('dayOfWeek').textContent = dayOfWeek;
+        document.getElementById('time').textContent = time;
+    }
+
+    // 页面加载完成后调用 displayDateTime() 函数
+    window.onload = function () {
+        updateDateTime(); // 立即更新时间
+        setInterval(updateDateTime, 1000); // 每秒钟更新一次时间
+    };
 </script>
 </html>

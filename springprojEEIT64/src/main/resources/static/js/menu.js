@@ -2,9 +2,38 @@ let products = [];
 let categories = []; 
 //jquery
 $(document).ready(function () {
+	//==================================營業時間=====================
+    $.ajax({
+        url: "/restaurant/custIndex/getOpeningHoursForToday",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+                        var openingHours = data;
+                        var openingHoursDiv = $("#openingHoursDiv");
+
+                        if (openingHours.length > 0) {
+							
+                            for (var i = 0; i < openingHours.length; i++) {
+                                var openingHour = openingHours[i];
+                                var startTime = openingHour.startTime;
+                                var endTime = openingHour.endTime;
+                                var openingHourStr = startTime + ' - ' + endTime+" "+" "+" ";
+                                var openingHourElement = $("<p>").text(openingHourStr);
+                                openingHoursDiv.append(openingHourElement);
+                            }
+                        } else {
+                            var noOpeningHourElement = $("<p>").text("今日無營業");
+                            openingHoursDiv.append(noOpeningHourElement);
+                        }
+                    },
+        error: function () {
+            console.log("error");
+        }
+    });
+	
 	//======================================資料庫抓分類============================	
 	  $.ajax({
-        url: "/showCategories",
+        url: '/restaurant/custIndex/showCategories',
         type: "GET",
         dataType: "json",
         success: function(response) {
@@ -71,17 +100,15 @@ $(document).ready(function () {
 //======================================================================================
 //引入json=== 抓到/dishes2====================================================
 var xhr = new XMLHttpRequest();
-	xhr.open("GET", "/dishes2", true);	
+	xhr.open("GET",  "/restaurant/custIndex/dishes2", true);	
 	xhr.send()
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {	
-			products = JSON.parse(xhr.responseText);
-//			console.log(xhr.responseText);
-//			console.log(products);
-			
+			products = JSON.parse(xhr.responseText);		
 		 let content = ''
 		 let currentCategory = '' //追蹤該類別
 		   products.forEach(function (obj, index) {
+//			   console.log(obj.picture)
 			let categoryName = obj.categoryBean.name;
 			if (categoryName !== currentCategory) {
 		        content += `
@@ -94,14 +121,14 @@ var xhr = new XMLHttpRequest();
 			
 			
 	        content += `
-	        <tr class="tableRow ${categoryName}">
-	            <td id="td1" style="width: 10%;"><img src="${obj.picture}" width="130px"> </td>
-	            <td id="td2" style="width: 25%;">${obj.name}</td>
-	            <td id="td3" style="width: 5%;">${obj.status}</td>
-	            <td id="td5" style="width: 7%;">$ ${obj.price}</td>          
+	        <tr class="tableRow ${categoryName}">  
+	            <td id="td1" style="width: 15%;"><img src="<c:url value='${obj.picture}' />" width="130px"> </td>
+	            <td id="td2" style="width: 50%;">${obj.name}</td>	            
+	            <td id="td2" style="width: 20%;">$ ${obj.price}</td>	            
 	            <td id="td4" style="width: 15%;">
 	                <button class="add" onclick="addToCard(${index})">+</button>
 	            </td>
+	            <td id="td5" style="width: 5%;"></td>          
 	        <tr>      
 	        `
     })

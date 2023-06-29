@@ -28,7 +28,7 @@ public class DishesController {
 //		return dishService.findAll();
 //	}
 	//找全部並利用類別排序
-	@GetMapping("/dishes2")
+	@GetMapping("/custIndex/dishes2")
     public @ResponseBody List<DishBean> findAllbyCategory() {
         System.out.println("--------------findAll()--------------------");
         return service.findAllbyCategory();

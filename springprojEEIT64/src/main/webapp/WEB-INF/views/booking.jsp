@@ -10,8 +10,8 @@
 	<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>booking</title>
-  <script type="text/javascript" src="/js/booking.js"></script>
+  <title>booking</title> 
+  <script type="text/javascript" src="<c:url value='/js/booking.js' />"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -72,7 +72,7 @@ function validateAndRedirect() {
 	console.log(jsonData)
 	  // 创建 XMLHttpRequest 对象并发送 JSON 数据到后端
 	  var xhr = new XMLHttpRequest();
-	  xhr.open("POST", "<c:url value='/newbooking' />", true);
+	  xhr.open("POST", "/restaurant/newbooking", true);
 	  xhr.setRequestHeader("Content-Type", "application/json");
 	  xhr.send(JSON.stringify(jsonData));
 	  xhr.onreadystatechange = function() {
@@ -85,9 +85,9 @@ function validateAndRedirect() {
             console.log(responseJson); // 将 JSON 数据打印到控制台           
             if (responseJson.success === "新增成功") {
             	setTimeout(function() {
-                    localStorage.clear();
-                    window.location.href = "/bookingcheck";
-                }, 800); 
+                    // 重定向到 bookingcheck.jsp
+                    window.location.href = "<c:url value='/bookingcheck' />";
+                }, 500); 
             }
             
 	      } else {
@@ -113,8 +113,8 @@ function validateAndRedirect() {
     <h1>xxxx店</h1>
     <div class="row">
       <div>
-        餐廳地址: 台中市南屯區公益路二段42號
-        <a href="<c:url value='https://goo.gl/maps/tYQZqHMS9LfWwVoE9' />" target="_blank"><img src="/images/mapicon.png" alt=""
+        餐廳地址: 台中市南屯區公益路二段42號			
+        <a href="<c:url value='https://goo.gl/maps/tYQZqHMS9LfWwVoE9' />" target="_blank"><img src="<c:url value='/images/mapicon.png' />" alt=""
             style="width: 30px" /></a>
       </div>
       <div>餐廳電話: (04)23891234</div>
@@ -130,7 +130,8 @@ function validateAndRedirect() {
   </div>
   <br />
   <div>
-    <form:form id="myForm" modelAttribute="newbooking">
+    <form:form id="myForm" 
+    	onsubmit="return validateAndRedirect()" modelAttribute="newbooking">
       <div class="fieldset-container">
         <fieldset class="fieldsetdata">
           <legend>訂位資料</legend>
@@ -237,7 +238,7 @@ function validateAndRedirect() {
       </div>
 
       <footer>
-        <input type="button" value="送出訂位" class="button2" onclick="validateAndRedirect()"/>
+        <input type="submit" value="送出訂位" class="button2" />
       </footer>
     </form:form>
   </div>

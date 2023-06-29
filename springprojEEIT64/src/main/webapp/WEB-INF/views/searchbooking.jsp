@@ -87,7 +87,7 @@
   <br />
   <div class="row">
 	  <div class="col-sm-4">
-	    <form:form action="/reservation" method="POST">
+	    <form:form action="/restaurant/reservation" method="POST">
 	      <fieldset>
 	        <legend>訂位資料</legend>
 	        <label>姓名</label><br />

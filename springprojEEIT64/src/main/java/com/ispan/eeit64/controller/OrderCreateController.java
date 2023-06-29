@@ -2,7 +2,9 @@ package com.ispan.eeit64.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -44,16 +46,16 @@ public class OrderCreateController {
 	    return "shoppingcart";
 	}
 	
-	@PostMapping("/newOrder")
+	@PostMapping("/custIndex/newOrder")
 	@ResponseBody
-//    public Map<String, String> newOrder(@RequestBody OrderBean bean, @RequestParam("orderDetails") List<Integer> dishIds) {
+//  public Map<String, String> newOrder(@RequestBody OrderBean bean, @RequestParam("orderDetails") List<Integer> dishIds) {
 	public Map<String, String> newOrder(@RequestBody Map<String, Object> requestData) throws Exception {	
 		Map<String, String> response = new HashMap<>();		
 		SimpleDateFormat formatDate = new SimpleDateFormat("hh:mm:ss");
-		Date pickTime = null;
+//		Date pickTime = null;
 		
 		OrderBean orderBean = new OrderBean();
-       //處裡前端data=========================
+     //處裡前端data=========================
 		//od部分====================
 		
 			Set<OrderDetailBean> odBeans = new LinkedHashSet<>();			  
@@ -89,42 +91,53 @@ public class OrderCreateController {
 		        
 		        
 //			}			
-        
-        //================================record============
-        java.sql.Timestamp orderEstablish = new Timestamp(System.currentTimeMillis());
-        java.sql.Timestamp orderDeal=null;
-        java.sql.Timestamp orderFinish=null;
-        java.sql.Timestamp orderCancel=null;       
-        OrderRecordBean rBean = new OrderRecordBean(orderEstablish, orderDeal, orderFinish, orderCancel, orderBean);
-        //========================活動====================
-        ActivityBean aBean = null;
-        if(requestData.get("FK_Activity_Id")!= null) {
+      
+      //================================record============
+      java.sql.Timestamp orderEstablish = new Timestamp(System.currentTimeMillis());
+      java.sql.Timestamp orderDeal=null;
+      java.sql.Timestamp orderFinish=null;
+      java.sql.Timestamp orderCancel=null;       
+      OrderRecordBean rBean = new OrderRecordBean(orderEstablish, orderDeal, orderFinish, orderCancel, orderBean);
+      //========================活動====================
+      ActivityBean aBean = null;
+      if(requestData.get("FK_Activity_Id")!= null) {
 			Optional<ActivityBean> dishBeanOptional = activityDao.findById((Integer) requestData.get("FK_Activity_Id"));
 			aBean = dishBeanOptional.get();					
 		}
-        
-      //===處裡時間===========================       
-		pickTime = formatDate.parse((String) requestData.get("pickTime"));
+      
+    //===處裡時間===========================       
+      LocalTime localTime = LocalTime.parse((String) requestData.get("pickTime"));
+      int hour = localTime.getHour();
+      int minute = localTime.getMinute();
+      
+      if (hour == 12) {
+          hour = 12; 
+      }
+      LocalDateTime localDateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(hour, minute));
+      Timestamp pickTime = Timestamp.valueOf(localDateTime);
+
+      
+      
 		Timestamp orderTime = new Timestamp(System.currentTimeMillis());
-        //========================
+      //========================
 		//將值裝進orderBean
-        orderBean.setType((String) requestData.get("type"));
-        orderBean.setPickTime(pickTime);
-        orderBean.setOrderTime(orderTime);
-        orderBean.setAmount(Integer.parseInt((String) requestData.get("amount")));
-        orderBean.setOrderStatus((String) requestData.get("orderStatus"));
-        orderBean.setNote((String) requestData.get("note"));
-        orderBean.setCustomer((String) requestData.get("customer"));
-        orderBean.setPhone((String) requestData.get("phone"));      
-        orderBean.setOrderDetailBean(odBeans);
-        orderBean.setOrderRecordBean(rBean);
-        orderBean.setActivityBean(aBean);
+      orderBean.setType((String) requestData.get("type"));
+      orderBean.setPickTime(pickTime);
+      orderBean.setOrderTime(orderTime);
+      orderBean.setAmount(Integer.parseInt((String) requestData.get("amount")));
+      orderBean.setOrderStatus((String) requestData.get("orderStatus"));
+      orderBean.setNote((String) requestData.get("note"));
+      orderBean.setCustomer((String) requestData.get("customer"));
+      orderBean.setPhone((String) requestData.get("phone"));      
+      orderBean.setOrderDetailBean(odBeans);
+      orderBean.setOrderRecordBean(rBean);
+      orderBean.setActivityBean(aBean);
 
 		service.save(orderBean);
 		
 		System.out.println(orderBean.getId()); 
 		response.put("success", "新增成功");
-        return response;
-    }
+      return response;
+  }
 
 }

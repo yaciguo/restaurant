@@ -21,7 +21,7 @@
             $(document).ready(function () {
                 //======================================資料庫抓============================	
                 $.ajax({
-                    url: "/getAllOpeningHour",
+                    url: "/restaurant/custIndex/getAllOpeningHour",
                     type: "GET",
                     dataType: "json",
                     success: function (response) {
@@ -90,7 +90,7 @@
                 });
 
                 $("#pp").click(function () {
-                    window.location.href = "/menu";
+                    window.location.href = "<c:url value='/menu' />";
                 })
             })
 

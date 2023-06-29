@@ -43,30 +43,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private boolean isCloseSecurity = true;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-        if(isCloseSecurity){
-            http
-                .authorizeRequests(requests -> requests
-                        .anyRequest().permitAll()
-                        )
-                .cors(cors -> cors.disable())
-                .csrf(csrf -> csrf.ignoringAntMatchers("/**"))
-                ;
-            return;
-        }
+//        if(isCloseSecurity){
+//            http
+//                .authorizeRequests(requests -> requests
+//                        .anyRequest().permitAll()
+//                        )
+//                .cors(cors -> cors.disable())
+//                .csrf(csrf -> csrf.ignoringAntMatchers("/**"))
+//                ;
+//            return;
+//        }
         http
             .authorizeRequests(requests -> requests
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/assets/img/**").permitAll()
+                    .antMatchers("/js/**").permitAll()
+                    .antMatchers("/images/**").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("/**/*.css").permitAll()
                     .antMatchers("/osLogin").permitAll()
                     .antMatchers("/custIndex/**").permitAll()
+//                    .antMatchers("/custIndex/newOrder").permitAll()
 //                    .antMatchers("/custIndex/queryBanner").permitAll()
                     .antMatchers("/searchorder").permitAll()
+                    .antMatchers("/searchorders").permitAll()
                     .antMatchers("/searchbooking").permitAll()
+                    .antMatchers("/reservation").permitAll()
+                    .antMatchers("/shoppingcart").permitAll()
                     .antMatchers("/question").permitAll()
                     .antMatchers("/booking").permitAll()
+                    .antMatchers("/restaurant/newbooking").permitAll()
+                    .antMatchers("/newbooking").permitAll()
+                    .antMatchers("/bookingcheck").permitAll()
                     .antMatchers("/menu").permitAll()
+                    .antMatchers("/restInfo").permitAll()
+                    .antMatchers("/ordercheck").permitAll()
                     .anyRequest().authenticated()
                     )
             .cors(cors -> cors.disable())

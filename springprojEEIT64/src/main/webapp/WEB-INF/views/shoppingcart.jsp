@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
@@ -62,9 +61,6 @@ $(document).ready(function(){
 
 <!--修改內容==================================-->
 
-function backToMenu(){
-  window.location.href = "<c:url value='/menu' />";
-}
 
   //提交驗證
   function validateAndRedirect() {
@@ -92,30 +88,25 @@ function backToMenu(){
 		  	console.log(jsonData);
   	 // 创建 XMLHttpRequest 对象并发送 JSON 数据到后端
 	  var xhr = new XMLHttpRequest();
-	  xhr.open("POST", "<c:url value='/newOrder' />", true);
+	  xhr.open("POST", "/restaurant/custIndex/newOrder", true);
 	  xhr.setRequestHeader("Content-Type", "application/json");
 	  xhr.send(JSON.stringify(jsonData));
-	  console.log(33)
 	  xhr.onreadystatechange = function() {
-		  console.log()
 		// 伺服器請求完成
-		if (xhr.readyState === XMLHttpRequest.DONE) {
-			
-			      if (xhr.status === 200) {
-			        // 处理响应
-		// 	        console.log(xhr.responseText);
+		if (xhr.readyState === XMLHttpRequest.DONE) {			
+			      if (xhr.status === 200) {                  
 			        var responseJson = JSON.parse(xhr.responseText);
 		            console.log(responseJson); // 将 JSON 数据打印到控制台		            
 		            if (responseJson.success === "新增成功") {
 		            	// 重定向到订单确认页面
                         setTimeout(function() {
-                            localStorage.clear();
-                            window.location.href = "/ordercheck";
+                            localStorage.clear(); 
+                            window.location.href = "<c:url value='/ordercheck' />";
                         }, 800); // 延时800毫秒后跳转
 		            }		            
 			      } else {
 			        // 处理错误
-			        console.error("发生错误：" + xhr.status);			        
+			        console.error("錯誤：" + xhr.status);			        
 			      }
 			    }
 	  }
@@ -139,10 +130,9 @@ function backToMenu(){
 
     <br>
 
-    <form id="myForm">
-<%--     onsubmit="return validateAndRedirect()" method="POST" action="/newOrder" --%>  
+    <form id="myForm" onsubmit="return validateAndRedirect()">
       <!-- 訂單內容 -->
-      <div class="row">
+        <div class="row">
 
         <fieldset class="col-sm-12">
           <legend>訂單內容</legend>
@@ -164,52 +154,36 @@ function backToMenu(){
 
       <div class="row">
         <div class="col-sm-4">
-          <fieldset>
-                     
+          <fieldset>                     
             <legend>餐點備註</legend>
-                <textarea id="note" rows="8" cols="20" style="width: 98%" 
-                placeholder="請輸入餐點備註"></textarea>
-<%--                 <form:errors path="note" cssClass="error" /> --%>
-			
+                <textarea id="note" rows="8" cols="20" style="width: 98%" placeholder="請輸入餐點備註"></textarea>			
           </fieldset>
         </div>
 
         <div class="col-sm-4">
           <fieldset>
-<!--             <legend>付款方式</legend> -->
-<%--             <form:radiobutton path="userpay" value="現金" label="現金" checked="true" /> --%>
-            <!-- <input type="radio" name="userpay" value="2" required />Linepay -->
-            <br /><br />
+            <legend>訂單金額</legend>
             <span>商品小計:</span>
             <span class="totalPrice" style="text-align: right;">$</span><br><br>
             <span>折扣金額:</span>
             <span>$(0)</span><br><br>
             <span>應付金額:</span>
-            <span class="totalPrice"></span><br><br>
-            
+            <span class="totalPrice"></span><br><br>          
             <!-- 添加隱藏字段 -->
             <input type="hidden" id="discountAmount" value="0" />
 			<input type="hidden" id="totalAmount" value="" />
-		   
-
           </fieldset>
         </div>
 
         <div class="col-sm-4">
           <fieldset>
             <legend>取餐資料</legend>
-
             <label for="">姓名:</label><br />
-            <input id="customer" type="text" placeholder="請輸入訂購人" 
-            style="width: 90%;" required="required" /><br /><br />
-<%--             <form:input id="customer" type="text" placeholder="請輸入訂購人"  --%>
-<%--             	style="width: 90%;" required="true" /><br /><br /> --%>
+            <input id="customer" type="text" placeholder="請輸入訂購人" style="width: 90%;" required="required" /><br /><br />
             
             <label for="">手機:</label><br />
             <input id="phone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;" 
        			pattern="[0]{1}[9]{1}[0-9]{8}" required="required" /><br /><br />
-<%--             <form:input id="phone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;"  --%>
-<%--             	pattern="[0]{1}[9]{1}[0-9]{8}" required="true" /><br /><br /> --%>
   
             <label>取餐時間:</label><br/>
 	            <select id="pickTime" required="required">
@@ -233,12 +207,18 @@ function backToMenu(){
         </div>
       </div>
       <footer>
-        <input type="button" value="繼續加點" class="button2" onclick="backToMenu()" /> <!--上一頁-->
-        <input type="button" value="提交訂單" class="button2" onclick="validateAndRedirect()"/><!--訂單確認-->
+        <input type="button" value="繼續加點" class="button2" onclick="menuPage()" /> <!--上一頁-->
+        <input type="submit" value="提交訂單" class="button2" /><!--訂單確認-->
       </footer>
     </form>
   </div>
 </body>
+  <script>
+        function menuPage() {
+          window.location.href = "<c:url value='/menu' />";
+        }
+  </script>
+
 
 </html>
 
