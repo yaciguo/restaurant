@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ispan.eeit64.controller.APIResult.APIResult;
+import com.ispan.eeit64.controller.APIResult.StatusCode;
 import com.ispan.eeit64.entity.ClosingTimeBean;
 import com.ispan.eeit64.entity.OpeningHourBean;
 import com.ispan.eeit64.service.impl.ClosingTimeServiceImpl;
@@ -26,6 +29,7 @@ import com.ispan.eeit64.validator.ClosingTimeValidator;
 import com.ispan.eeit64.validator.OpeningHourValidator;
 
 @Controller
+@RequestMapping("/basicSettings.api")
 public class BasicSettingsController {    
     @Autowired
     OpeningHourServiceImpl openingHourService;
@@ -33,13 +37,14 @@ public class BasicSettingsController {
     ClosingTimeServiceImpl closingTimeService;
     @Autowired
     Environment env;
-        
-    @GetMapping("/basicSettings.api/getAllOpeningHour")
+    
+    // OpeningHour
+    @GetMapping("/getAllOpeningHour")
     public @ResponseBody List<OpeningHourBean> getAllOpeningHour(){
         return openingHourService.findAll();
     }
     
-    @PostMapping("/basicSettings.api/addOpeningHour")
+    @PostMapping("/addOpeningHour")
     public @ResponseBody Map<String, Object> addOpeningHour(
             @RequestBody OpeningHourBean bean,
             HttpServletRequest request,
@@ -57,7 +62,7 @@ public class BasicSettingsController {
         }
     }
 
-    @PutMapping("/basicSettings.api/editOpeningHour")
+    @PutMapping("/editOpeningHour")
     public @ResponseBody Map<String, Object> editOpeningHour(
             @RequestBody OpeningHourBean bean,
             HttpServletRequest request,
@@ -76,7 +81,7 @@ public class BasicSettingsController {
         }
     }
 
-    @DeleteMapping("/basicSettings.api/deleteOpeningHour")
+    @DeleteMapping("/deleteOpeningHour")
     public @ResponseBody Map<String, Object> deleteOpeningHour(
             @RequestBody List<Integer> ids
     ){
@@ -84,12 +89,15 @@ public class BasicSettingsController {
         return map;
     }
 
-    // @GetMapping("/basicSettings.api/getClosingTime")
+    
+    // ClosingTime
+
+    // @GetMapping("/getClosingTime")
     // public @ResponseBody List<ClosingTimeBean> getClosingTime(){
     //     return closingTimeService.findAll();
     // }
     
-    @GetMapping("/basicSettings.api/getAllClosingTime")
+    @GetMapping("/getAllClosingTime")
     public @ResponseBody Map<String, Object> getAllClosingTime(){
         try {
             return closingTimeService.getAllDate();
@@ -100,7 +108,7 @@ public class BasicSettingsController {
         }
     }
 
-    @PostMapping("/basicSettings.api/addClosingTime")
+    @PostMapping("/addClosingTime")
     public @ResponseBody Map<String, Object> addClosingTime(
             @RequestBody ClosingTimeBean bean,
             HttpServletRequest request,
@@ -118,7 +126,7 @@ public class BasicSettingsController {
         }
     }
     
-    @PutMapping("/basicSettings.api/editClosingTime")
+    @PutMapping("/editClosingTime")
     public @ResponseBody Map<String, Object> editClosingTime(
             @RequestBody ClosingTimeBean bean,
             HttpServletRequest request,
@@ -137,13 +145,27 @@ public class BasicSettingsController {
         }
     }
     
-    @DeleteMapping("/basicSettings.api/deleteClosingTime")
+    @DeleteMapping("/deleteClosingTime")
     public @ResponseBody Map<String, Object> deleteClosingTime(
             @RequestBody List<Integer> ids
     ){
         Map<String, Object> map = closingTimeService.deleteByIdList(ids);
         return map;
     }
+        
+    // FdTable
+    @GetMapping("/getAllFdTable")
+    public @ResponseBody APIResult getAllFdTable(){
+        try {
+            APIResult result = new APIResult(StatusCode.SUCCESS, closingTimeService.getAllDate(), "成功獲取資料");
+            return result;
+        } catch (Exception e) {
+            APIResult result = new APIResult(StatusCode.ERROR, null, "無法獲取資料");
+            return result;
+        }
+    }
+
+
     
     public void collectErrorMessage(Map<String, Object> map, BindingResult result) {
         List<FieldError> list = result.getFieldErrors();
@@ -154,4 +176,5 @@ public class BasicSettingsController {
             errors.put(error.getField(), defaulMessage);
         }
     }
+    
 }

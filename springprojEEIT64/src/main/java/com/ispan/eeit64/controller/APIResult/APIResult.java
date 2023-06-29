@@ -3,20 +3,20 @@ package com.ispan.eeit64.controller;
 import lombok.Data;
 
 @Data
-public class Result {
+public class APIResult {
     private Object data;
     private Integer code;
     private String msg;
-    public Result(Integer code, Object data, String msg) {
+    public APIResult(Integer code, Object data, String msg) {
         this.data = data;
         this.code = code;
         this.msg = msg;
     }
-    public Result(Integer code, Object data) {
+    public APIResult(Integer code, Object data) {
         this.data = data;
         this.code = code;
     }
-    public Result() {
+    public APIResult() {
 
     }
 }
