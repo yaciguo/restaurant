@@ -154,5 +154,4 @@ public class BasicSettingsController {
             errors.put(error.getField(), defaulMessage);
         }
     }
-
 }
