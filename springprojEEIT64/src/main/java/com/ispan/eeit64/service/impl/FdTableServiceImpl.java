@@ -3,11 +3,15 @@ package com.ispan.eeit64.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.ispan.eeit64.entity.FdTableBean;
+import com.ispan.eeit64.repository.FdTableRepository;
 import com.ispan.eeit64.service.FdTableService;
 
 public class FdTableServiceImpl implements FdTableService {
-
+    @Autowired
+    FdTableRepository dao;
     
     @Override
     public FdTableBean findById(Integer id) {

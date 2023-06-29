@@ -1,4 +1,4 @@
-package com.ispan.eeit64.controller;
+package com.ispan.eeit64.controller.APIResult;
 
 import lombok.Data;
 
