@@ -15,8 +15,7 @@ public class FdTableServiceImpl implements FdTableService {
     
     @Override
     public FdTableBean findById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return dao.findById(id).get();
     }
 
     @Override
