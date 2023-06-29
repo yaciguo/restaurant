@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ispan.eeit64.controller.APIResult.APIResult;
 import com.ispan.eeit64.controller.APIResult.StatusCode;
 import com.ispan.eeit64.entity.ClosingTimeBean;
+import com.ispan.eeit64.entity.FdTableBean;
 import com.ispan.eeit64.entity.OpeningHourBean;
 import com.ispan.eeit64.service.impl.ClosingTimeServiceImpl;
+import com.ispan.eeit64.service.impl.FdTableServiceImpl;
 import com.ispan.eeit64.service.impl.OpeningHourServiceImpl;
 import com.ispan.eeit64.validator.ClosingTimeValidator;
 import com.ispan.eeit64.validator.OpeningHourValidator;
@@ -35,6 +37,8 @@ public class BasicSettingsController {
     OpeningHourServiceImpl openingHourService;
     @Autowired
     ClosingTimeServiceImpl closingTimeService;
+    @Autowired
+    FdTableServiceImpl FdTableService;
     @Autowired
     Environment env;
     
@@ -157,7 +161,7 @@ public class BasicSettingsController {
     @GetMapping("/getAllFdTable")
     public @ResponseBody APIResult getAllFdTable(){
         try {
-            APIResult result = new APIResult(StatusCode.SUCCESS, closingTimeService.getAllDate(), "成功獲取資料");
+            APIResult result = new APIResult(StatusCode.SUCCESS, FdTableService.findAll(), "成功獲取資料");
             return result;
         } catch (Exception e) {
             APIResult result = new APIResult(StatusCode.ERROR, null, "無法獲取資料");
@@ -165,7 +169,48 @@ public class BasicSettingsController {
         }
     }
 
+    @PostMapping("/addFdTable")
+    public @ResponseBody APIResult addFdTable(
+            @RequestBody FdTableBean bean,
+            HttpServletRequest request,
+            BindingResult result){
+        try {
+            APIResult apiResult = new APIResult(StatusCode.SUCCESS, FdTableService.saveAndUpdate(bean), "成功儲存資料");
+            return apiResult;
+        } catch (Exception e) {
+            APIResult apiResult = new APIResult(StatusCode.ERROR, null, "無法儲存資料");
+            return apiResult;
+        }
+    }
 
+    @PutMapping("/editFdTable")
+    public @ResponseBody APIResult editFdTable(
+            @RequestBody FdTableBean bean,
+            HttpServletRequest request,
+            BindingResult result
+    ){
+        try {
+            APIResult apiResult = new APIResult(StatusCode.SUCCESS, FdTableService.saveAndUpdate(bean), "成功修改資料");
+            return apiResult;
+        } catch (Exception e) {
+            APIResult apiResult = new APIResult(StatusCode.ERROR, null, "無法修改資料");
+            return apiResult;
+        }
+    }
+
+    @DeleteMapping("/deleteFdTable")
+    public @ResponseBody APIResult deleteFdTable(
+            @RequestBody List<Integer> ids
+    ){
+        try {
+            FdTableService.deleteByIdList(ids);
+            APIResult apiResult = new APIResult(StatusCode.SUCCESS, null, "成功刪除資料");
+            return apiResult;
+        } catch (Exception e) {
+            APIResult apiResult = new APIResult(StatusCode.ERROR, null, "無法修改資料");
+            return apiResult;
+        }
+    }
     
     public void collectErrorMessage(Map<String, Object> map, BindingResult result) {
         List<FieldError> list = result.getFieldErrors();
