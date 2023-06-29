@@ -26,7 +26,7 @@ import com.ispan.eeit64.validator.ClosingTimeValidator;
 import com.ispan.eeit64.validator.OpeningHourValidator;
 
 @Controller
-public class basicSettingsController {    
+public class BasicSettingsController {    
     @Autowired
     OpeningHourServiceImpl openingHourService;
     @Autowired
