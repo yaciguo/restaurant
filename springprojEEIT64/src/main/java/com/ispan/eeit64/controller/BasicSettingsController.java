@@ -161,6 +161,7 @@ public class BasicSettingsController {
     @GetMapping("/getAllFdTable")
     public @ResponseBody APIResult getAllFdTable(){
         try {
+            System.out.println(FdTableService.findAll());
             APIResult result = new APIResult(StatusCode.SUCCESS, FdTableService.findAll(), "成功獲取資料");
             return result;
         } catch (Exception e) {
