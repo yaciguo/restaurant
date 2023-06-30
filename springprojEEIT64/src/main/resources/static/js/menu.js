@@ -1,10 +1,11 @@
 let products = [];
 let categories = []; 
 //jquery
+function initializeMenu(contextPath){
 $(document).ready(function () {
 	//==================================營業時間=====================
     $.ajax({
-        url: "/restaurant/custIndex/getOpeningHoursForToday",
+        url: contextPath+"/custIndex/getOpeningHoursForToday",
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -32,8 +33,8 @@ $(document).ready(function () {
     });
 	
 	//======================================資料庫抓分類============================	
-	  $.ajax({
-        url: '/restaurant/custIndex/showCategories',
+	  $.ajax({  
+        url: contextPath+'/custIndex/showCategories',
         type: "GET",
         dataType: "json",
         success: function(response) {
@@ -100,7 +101,7 @@ $(document).ready(function () {
 //======================================================================================
 //引入json=== 抓到/dishes2====================================================
 var xhr = new XMLHttpRequest();
-	xhr.open("GET",  "/restaurant/custIndex/dishes2", true);	
+	xhr.open("GET",  contextPath+"/custIndex/dishes2", true);	
 	xhr.send()
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {	
@@ -108,7 +109,7 @@ var xhr = new XMLHttpRequest();
 		 let content = ''
 		 let currentCategory = '' //追蹤該類別
 		   products.forEach(function (obj, index) {
-//			   console.log(obj.picture)
+
 			let categoryName = obj.categoryBean.name;
 			if (categoryName !== currentCategory) {
 		        content += `
@@ -119,16 +120,17 @@ var xhr = new XMLHttpRequest();
 		        currentCategory = categoryName; // 更新当前类别
 		    }
 			
-			
+			 console.log(obj.picture)
 	        content += `
 	        <tr class="tableRow ${categoryName}">  
 	            <td id="td1" style="width: 15%;"><img src="<c:url value='${obj.picture}' />" width="130px"> </td>
-	            <td id="td2" style="width: 50%;">${obj.name}</td>	            
-	            <td id="td2" style="width: 20%;">$ ${obj.price}</td>	            
-	            <td id="td4" style="width: 15%;">
+	            <td id="td2" style="width: 15%;">${obj.name}</td>
+	            <td id="td5" style="width: 30%;">${obj.description}</td>	            
+	            <td id="td3" style="width: 5%;">$ ${obj.price}</td>	            
+	            <td id="td4" style="width: 10%;">
 	                <button class="add" onclick="addToCard(${index})">+</button>
 	            </td>
-	            <td id="td5" style="width: 5%;"></td>          
+	                      
 	        <tr>      
 	        `
     })
@@ -138,6 +140,7 @@ var xhr = new XMLHttpRequest();
 	
 	
 });
+}
 //===================================================
 //add cart
 // cart array

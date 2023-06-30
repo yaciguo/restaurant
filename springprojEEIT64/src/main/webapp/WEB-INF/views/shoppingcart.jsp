@@ -16,6 +16,7 @@
         crossorigin="anonymous"></script>
     <title>shoppingcart</title>
     <link rel="stylesheet" href="<c:url value='/css/shoppingcart.css' />">
+<%--     <script type="text/javascript" src="<c:url value='/js/shoppingcart.js' />"></script> --%>
 
 </head>
 
@@ -57,6 +58,27 @@ $(document).ready(function(){
     console.log($("#totalAmount").val())
     //test==================================================
     var jsonData = {};
+    
+    
+	//===================================撈活動資料進來========================
+		$.ajax({  
+	        url: '${pageContext.request.contextPath}/custIndex/getActivity',
+	        type: "GET",
+	        dataType: "json",
+	        success: function(response) {
+	            activities = response; // 得到返回的分類
+	          var activityJsonString = JSON.stringify(activities);
+
+	        // 將 JSON 字串插入到指定的 <div> 元素中
+	        $('#activityDiv').text(activityJsonString);
+	        
+	            
+	        },
+	        error: function(xhr, status, error) {
+	            console.log("Error: " + error);
+	        }
+	    }); 
+    
   })
 
 <!--修改內容==================================-->
@@ -86,32 +108,55 @@ $(document).ready(function(){
 		  	};
 		    
 		  	console.log(jsonData);
-  	 // 创建 XMLHttpRequest 对象并发送 JSON 数据到后端
-	  var xhr = new XMLHttpRequest();
-	  xhr.open("POST", "/restaurant/custIndex/newOrder", true);
-	  xhr.setRequestHeader("Content-Type", "application/json");
-	  xhr.send(JSON.stringify(jsonData));
-	  xhr.onreadystatechange = function() {
-		// 伺服器請求完成
-		if (xhr.readyState === XMLHttpRequest.DONE) {			
-			      if (xhr.status === 200) {                  
-			        var responseJson = JSON.parse(xhr.responseText);
-		            console.log(responseJson); // 将 JSON 数据打印到控制台		            
-		            if (responseJson.success === "新增成功") {
-		            	// 重定向到订单确认页面
-                        setTimeout(function() {
-                            localStorage.clear(); 
-                            window.location.href = "<c:url value='/ordercheck' />";
-                        }, 800); // 延时800毫秒后跳转
-		            }		            
-			      } else {
-			        // 处理错误
-			        console.error("錯誤：" + xhr.status);			        
-			      }
-			    }
-	  }
-  }
+  	 // 创建 XMLHttpRequest 对象并发送 JSON 数据到后端===================
+  		 $.ajax({
+         url: '${pageContext.request.contextPath}/custIndex/newOrder',
+         type: "POST",
+         contentType: "application/json",
+         data: JSON.stringify(jsonData),
+         success: function(responseJson) {
+          console.log("success")
+//              console.log(responseJson); // 将 JSON 数据打印到控制台
+//              if (responseJson.success === "新增成功") {
+                 // 重定向到订单确认页面
+                 setTimeout(function() {
+                     localStorage.clear();
+                     window.location.href = "<c:url value='/ordercheck' />";
+                 }, 800); // 延时800毫秒后跳转
+//              }
+         },
+         error: function(xhr, status, error) {
+             console.error("錯誤：" + xhr.status);
+         }
+     });
+  		 
+// 	  var xhr = new XMLHttpRequest();=========================
+// 	  xhr.open("POST", window.location.pathname + "/custIndex/newOrder", true);
+// 	  xhr.setRequestHeader("Content-Type", "application/json");
+// 	  xhr.send(JSON.stringify(jsonData));
+// 	  xhr.onreadystatechange = function() {
+// 		// 伺服器請求完成
+// 		if (xhr.readyState === XMLHttpRequest.DONE) {			
+// 			      if (xhr.status === 200) {                  
+// 			        var responseJson = JSON.parse(xhr.responseText);
+// 		            console.log(responseJson); // 将 JSON 数据打印到控制台		            
+// 		            if (responseJson.success === "新增成功") {
+// 		            	// 重定向到订单确认页面
+//                         setTimeout(function() {
+//                             localStorage.clear(); 
+//                             window.location.href = "<c:url value='/ordercheck' />";
+//                         }, 800); // 延时800毫秒后跳转
+// 		            }		            
+// 			      } else {
+// 			        // 处理错误
+// 			        console.error("錯誤：" + xhr.status);			        
+// 			      }
+// 			    }
+// 	  }=======================================================================
 
+  	
+	
+  }
 
 </script>
 <!--修改內容==================================-->
@@ -211,6 +256,8 @@ $(document).ready(function(){
         <input type="submit" value="提交訂單" class="button2" /><!--訂單確認-->
       </footer>
     </form>
+    
+    <div id="activityDiv"></div>
   </div>
 </body>
   <script>

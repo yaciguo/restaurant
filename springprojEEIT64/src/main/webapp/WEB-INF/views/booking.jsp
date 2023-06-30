@@ -72,7 +72,7 @@ function validateAndRedirect() {
 	console.log(jsonData)
 	  // 创建 XMLHttpRequest 对象并发送 JSON 数据到后端
 	  var xhr = new XMLHttpRequest();
-	  xhr.open("POST", "/restaurant/newbooking", true);
+	  xhr.open("POST", "${pageContext.request.contextPath}/custIndex/newbooking", true);
 	  xhr.setRequestHeader("Content-Type", "application/json");
 	  xhr.send(JSON.stringify(jsonData));
 	  xhr.onreadystatechange = function() {

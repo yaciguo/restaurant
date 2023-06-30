@@ -18,15 +18,7 @@
     <link rel="stylesheet" href="<c:url value='/css/menu.css' />">
 
 </head>
-<script>
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
 
-</script>
 <body class="">
 <!-- 導覽列 -->
 	<%@ include file="nav.jsp" %>
@@ -106,7 +98,20 @@
     <script type="text/javascript" src="<c:url value='/js/menu.js' />"></script>
     
 </body>
+
 <script>
+$(document).ready(function () {
+	let contextPath='${pageContext.request.contextPath}';
+	initializeMenu(contextPath);
+})
+
+ function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
 
     function validateAndRedirect(event) {
         // 检查 cart[] 是否为空

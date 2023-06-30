@@ -87,7 +87,7 @@
   <br />
   <div class="row">
 	  <div class="col-sm-4">
-	    <form:form action="/restaurant/reservation" method="POST">
+	    <form:form action="${pageContext.request.contextPath}/reservation" method="POST">
 	      <fieldset>
 	        <legend>訂位資料</legend>
 	        <label>姓名</label><br />
@@ -106,6 +106,9 @@
 		      <fieldset>
 		        <legend>訂位記錄</legend>
 		        <table>
+<%-- 		        <c:if test="${empty reservationList}"> --%>
+<!-- 			    	<p style=" font-size: 30px; text-align: center">查無訂位記錄!</p> -->
+<%-- 				</c:if> --%>
                 <c:forEach var="reservation" items="${reservationList}">
                     <tr>
                         <th>成立時間</th>

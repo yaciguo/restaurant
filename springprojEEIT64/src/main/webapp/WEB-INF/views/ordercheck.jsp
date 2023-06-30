@@ -126,7 +126,7 @@ body {
   $("#submit").on("click", function () {
     setTimeout(function () {
       window.location.href = "<c:url value='/custIndex' />";
-    }, 5000);
+    }, 500);
   })
 </script>
 </html>

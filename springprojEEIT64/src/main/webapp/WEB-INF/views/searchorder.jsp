@@ -62,6 +62,7 @@
 /*   } */
 </style>
 
+
 <body>
 <!-- 導覽列 -->
 	<div class="container">
@@ -75,7 +76,7 @@
    </div><br />
     <div class="row">
       <div class="col-sm-4">
-        <form:form action="/restaurant/searchorders" method="POST">
+        <form:form action="${pageContext.request.contextPath}/searchorders" method="POST">
           <fieldset>
             <legend>取餐資料</legend>
             <label for="">姓名</label><br />
@@ -94,6 +95,9 @@
           <fieldset>
             <legend>訂單記錄</legend>
             <table>
+<%--             <c:if test="${empty orderList}"> --%>
+<!-- 			    <p style=" font-size: 30px; text-align: center">查無訂單記錄!</p> -->
+<%-- 			</c:if> --%>
             <c:forEach var="order" items="${orderList}">
                     <tr>
                         <th>成立時間</th>
@@ -110,8 +114,22 @@
                     </tr>
                     
                     <tr>
-                        <th>訂單狀態</th>
-                        <td>${order.orderStatus}</td>
+                        <th>訂單狀態</th>                       
+       					<td class="status">
+					        <script>
+					        //置換成中文名稱js寫在body外，EL抓不到
+					            var statusMap = {
+					                "order_establish": "訂單成立",
+					                "order_deal": "訂單處理中",
+					                "order_finish": "訂單完成",
+					                "order_cancel": "訂單取消"
+					            };
+					            var statusString = statusMap["${order.orderStatus}"] || "${order.orderStatus}";
+					            document.write(statusString);
+					        </script>
+					    </td>
+ 
+<%--                         <td class="status">${order.orderStatus}</td> --%>
                     </tr>
                     
                     <tr>
@@ -154,5 +172,22 @@
     </div>
   
 </body>
+
+<script>
+// $(document).ready(function() {
+//     var statusMap = {
+//         "order_establish": "訂單成立",
+//         "order_deal": "訂單處理中",
+//         "order_finish": "訂單完成",
+//         "order_cancel": "訂單取消"
+//     };
+
+//     var statusString = statusMap["${order.orderStatus}"] || "${order.orderStatus}";
+//     $("#status").html(statusString);
+// });
+
+
+
+</script>
 
 </html>

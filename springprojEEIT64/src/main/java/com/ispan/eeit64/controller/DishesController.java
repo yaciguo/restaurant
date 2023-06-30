@@ -9,17 +9,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ispan.eeit64.entity.ActivityBean;
 import com.ispan.eeit64.entity.DishBean;
+import com.ispan.eeit64.repository.ActivityRepository;
+import com.ispan.eeit64.service.ActivityService;
 import com.ispan.eeit64.service.impl.DishServiceImpl;
 
 @RestController
 public class DishesController {
 	final static Logger log = LoggerFactory.getLogger(DishesController.class);
-	DishServiceImpl service;
-
 	@Autowired
+	DishServiceImpl service;
+	@Autowired
+	private final ActivityRepository activityRepository;
+	@Autowired
+	private final ActivityService activityService;
+
+	
 	public DishesController(DishServiceImpl service) {
 		this.service = service;
+		this.activityRepository = null;
+		this.activityService = null;
 	}
 	
 //	@RequestMapping(value="/dishes2")
@@ -34,6 +44,12 @@ public class DishesController {
         return service.findAllbyCategory();
     }
 	
+	//找所有活動
+	@GetMapping("/custIndex/getActivity")
+	public List<ActivityBean> findAllActivitys() {
+		List<ActivityBean> allActivity = activityRepository.findAll();
+		return allActivity;
+	}
 	
 
 

@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.roles("USER");
     }
   
-    private boolean isCloseSecurity = true;
+//    private boolean isCloseSecurity = true;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 //        if(isCloseSecurity){
@@ -83,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .cors(cors -> cors.disable())
             .csrf(csrf -> csrf
             		.ignoringAntMatchers("/custIndex")
+            		.ignoringAntMatchers("/custIndex/**")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                	// .csrf(csrf -> csrf.disable())
             

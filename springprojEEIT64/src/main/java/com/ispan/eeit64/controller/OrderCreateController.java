@@ -60,10 +60,7 @@ public class OrderCreateController {
 		
 			Set<OrderDetailBean> odBeans = new LinkedHashSet<>();			  
 			Map<Integer, Integer> elementCountMap = new HashMap<>();
-			
-//			Object orderDetailsObj = requestData.get("orderDetails");
-//			if (orderDetailsObj instanceof List) {
-//			    List<Integer> dishIds = (List<Integer>) orderDetailsObj;
+
 			
 			List<Integer> orderDetails = (List<Integer>)requestData.get("orderDetails");
 			    for(Integer dishId :orderDetails) {
