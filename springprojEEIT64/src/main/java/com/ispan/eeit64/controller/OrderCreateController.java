@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,9 +98,13 @@ public class OrderCreateController {
       OrderRecordBean rBean = new OrderRecordBean(orderEstablish, orderDeal, orderFinish, orderCancel, orderBean);
       //========================活動====================
       ActivityBean aBean = null;
-      if(requestData.get("FK_Activity_Id")!= null) {
-			Optional<ActivityBean> dishBeanOptional = activityDao.findById((Integer) requestData.get("FK_Activity_Id"));
+      String activityId = (String) requestData.get("FK_Activity_Id");
+      if(activityId != null && !activityId.isEmpty()) {
+			Optional<ActivityBean> dishBeanOptional = 
+					activityDao.findById(Integer.parseInt(activityId));
 			aBean = dishBeanOptional.get();					
+		}else {
+			aBean = null;
 		}
       
     //===處裡時間===========================       
@@ -113,9 +118,14 @@ public class OrderCreateController {
       LocalDateTime localDateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(hour, minute));
       Timestamp pickTime = Timestamp.valueOf(localDateTime);
 
-      
-      
 		Timestamp orderTime = new Timestamp(System.currentTimeMillis());
+		// 檢查orderTime是否小於pickTime並且差距大於等於10分鐘
+		long timeDifferenceInMillis = pickTime.getTime() - orderTime.getTime();
+		long timeDifferenceInMinutes = TimeUnit.MILLISECONDS.toMinutes(timeDifferenceInMillis);
+		if (orderTime.after(pickTime) || timeDifferenceInMinutes < 10) {
+		    response.put("error", "訂單提交時間已超過能取餐的時間或差距不足10分鐘！");
+		    return response;
+		}
       //========================
 		//將值裝進orderBean
       orderBean.setType((String) requestData.get("type"));

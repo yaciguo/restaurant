@@ -40,7 +40,7 @@ public class DishesController {
 	//找全部並利用類別排序
 	@GetMapping("/custIndex/dishes2")
     public @ResponseBody List<DishBean> findAllbyCategory() {
-        System.out.println("--------------findAll()--------------------");
+        System.out.println("--------------findAll()--------------------");    
         return service.findAllbyCategory();
     }
 	

@@ -1,129 +1,133 @@
 let products = [];
-let categories = []; 
+let categories = [];
 //jquery
-function initializeMenu(contextPath){
-$(document).ready(function () {
-	//==================================營業時間=====================
-    $.ajax({
-        url: contextPath+"/custIndex/getOpeningHoursForToday",
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-                        var openingHours = data;
-                        var openingHoursDiv = $("#openingHoursDiv");
+function initializeMenu(contextPath) {
+    $(document).ready(function () {
+        //==================================營業時間=====================
+        $.ajax({
+            url: contextPath + "/custIndex/getOpeningHoursForToday",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                var openingHours = data;
+                var openingHoursDiv = $("#openingHoursDiv");
 
-                        if (openingHours.length > 0) {
-							
-                            for (var i = 0; i < openingHours.length; i++) {
-                                var openingHour = openingHours[i];
-                                var startTime = openingHour.startTime;
-                                var endTime = openingHour.endTime;
-                                var openingHourStr = startTime + ' - ' + endTime+" "+" "+" ";
-                                var openingHourElement = $("<p>").text(openingHourStr);
-                                openingHoursDiv.append(openingHourElement);
-                            }
-                        } else {
-                            var noOpeningHourElement = $("<p>").text("今日無營業");
-                            openingHoursDiv.append(noOpeningHourElement);
-                        }
-                    },
-        error: function () {
-            console.log("error");
+                if (openingHours.length > 0) {
+
+                    for (var i = 0; i < openingHours.length; i++) {
+                        var openingHour = openingHours[i];
+                        var startTime = openingHour.startTime;
+                        var endTime = openingHour.endTime;
+                        var openingHourStr = startTime + ' - ' + endTime + " " + " " + " ";
+                        var openingHourElement = $("<p>").text(openingHourStr);
+                        openingHoursDiv.append(openingHourElement);
+                    }
+                } else {
+                    var noOpeningHourElement = $("<p>").text("今日無營業");
+                    openingHoursDiv.append(noOpeningHourElement);
+                }
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
+
+        //======================================資料庫抓分類============================	
+        $.ajax({
+            url: contextPath + '/custIndex/showCategories',
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                categories = response; // 得到返回的分類
+                renderCategoryList();
+                bindCategoryClickEvent(); // click分類按鈕
+
+            },
+            error: function (xhr, status, error) {
+                console.log("Error: " + error);
+            }
+        });
+
+
+
+        function renderCategoryList() {
+            var categoryButtonsContainer = document.getElementById("categoryButtons");
+
+            // ===================將每個分類創一個按鈕=========================
+            categories.forEach(function (category) {
+                var box = document.createElement("div");
+                box.classList.add("box");
+
+                var button = document.createElement("button");
+                button.classList.add("btsort");
+                button.innerText = category;
+
+                box.appendChild(button);
+                categoryButtonsContainer.appendChild(box);
+            });
         }
-    });
-	
-	//======================================資料庫抓分類============================	
-	  $.ajax({  
-        url: contextPath+'/custIndex/showCategories',
-        type: "GET",
-        dataType: "json",
-        success: function(response) {
-            categories = response; // 得到返回的分類
-            renderCategoryList(); 
-            bindCategoryClickEvent(); // click分類按鈕
-            
-        },
-        error: function(xhr, status, error) {
-            console.log("Error: " + error);
+
+        function bindCategoryClickEvent() {
+            $(".btsort").on("click", function () {
+                // 获取按钮的文本内容作为类别
+                var category = $(this).text();
+
+                // 根据标识符查找对应的 <tr> 元素
+                var targetRow = $("tr.categoryRow").filter(function () {
+                    return $(this).find("td").text() === category;
+                });
+
+                // 检查目标元素是否存在
+                if (targetRow.length > 0) {
+                    // 执行滚动到目标元素的操作
+                    $("html, body").animate({
+                        scrollTop: targetRow.offset().top
+                    }, 200);
+                }
+            });
         }
-    }); 
-
-			    
-			  
-	function renderCategoryList() {		  
-	  var categoryButtonsContainer = document.getElementById("categoryButtons");
-
-	  // ===================將每個分類創一個按鈕=========================
-	  categories.forEach(function(category) {
-	    var box = document.createElement("div");
-	    box.classList.add("box");
-			    
-	    var button = document.createElement("button");
-	    button.classList.add("btsort");
-	    button.innerText = category;
-	    
-	    box.appendChild(button);
-        categoryButtonsContainer.appendChild(box);
-    	});
-    }
-	    
-	  function bindCategoryClickEvent() {  
-	    $(".btsort").on("click", function() {
-	        // 获取按钮的文本内容作为类别
-	        var category = $(this).text();
-
-	        // 根据标识符查找对应的 <tr> 元素
-	         var targetRow = $("tr.categoryRow").filter(function() {
-	        return $(this).find("td").text() === category;
-	    	});
-
-	        // 检查目标元素是否存在
-	        if (targetRow.length > 0) {
-	            // 执行滚动到目标元素的操作
-	            $("html, body").animate({
-	                scrollTop: targetRow.offset().top
-	            }, 200);
-	        }
-	    });
-	   }
 
 
-	
-	//================================================
-    $("#cart").click(function () {
-        $("body").addClass('active');
-    })
-    $(".closeShopping").click(function () {
-        $("body").removeClass('active');
-    })
-    
-    
-//======================================================================================
-//引入json=== 抓到/dishes2====================================================
-var xhr = new XMLHttpRequest();
-	xhr.open("GET",  contextPath+"/custIndex/dishes2", true);	
-	xhr.send()
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {	
-			products = JSON.parse(xhr.responseText);		
-		 let content = ''
-		 let currentCategory = '' //追蹤該類別
-		   products.forEach(function (obj, index) {
 
-			let categoryName = obj.categoryBean.name;
-			if (categoryName !== currentCategory) {
-		        content += `
+        //================================================
+        $("#cart").click(function () {
+            $("body").addClass('active');
+        })
+        $(".closeShopping").click(function () {
+            $("body").removeClass('active');
+        })
+
+
+        //======================================================================================
+        //引入json=== 抓到/dishes2====================================================
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", contextPath + "/custIndex/dishes2", true);
+        xhr.send()
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                products = JSON.parse(xhr.responseText);
+                let content = ''
+                let currentCategory = '' //追蹤該類別
+                products.forEach(function (obj, index) {
+
+                    let categoryName = obj.categoryBean.name;
+                    if (categoryName !== currentCategory) {
+                        content += `
 		        <tr class="categoryRow">
 		            <td colspan="5">${categoryName}</td>
 		        </tr>
 		        `;
-		        currentCategory = categoryName; // 更新当前类别
-		    }
-			
-			 console.log(obj.picture)
-	        content += `
+                        currentCategory = categoryName; // 更新当前类别
+                    }
+                    //"<c:url value='/images/cart.png' />"
+//                    console.log(obj.picture)
+                    let picurl ="/restaurant"+obj.picture
+//                    let picurl =obj.picture
+                    console.log(picurl)
+                    
+                    content += `
 	        <tr class="tableRow ${categoryName}">  
-	            <td id="td1" style="width: 15%;"><img src="<c:url value='${obj.picture}' />" width="130px"> </td>
+	            <td id="td1" style="width: 15%;"><img src="<c:url value='${picurl}'/>" style="width: 120px;"> </td>
 	            <td id="td2" style="width: 15%;">${obj.name}</td>
 	            <td id="td5" style="width: 30%;">${obj.description}</td>	            
 	            <td id="td3" style="width: 5%;">$ ${obj.price}</td>	            
@@ -133,13 +137,13 @@ var xhr = new XMLHttpRequest();
 	                      
 	        <tr>      
 	        `
-    })
-    $("#tableContainer").append(content)			
-	}
-	}
-	
-	
-});
+                })
+                $("#tableContainer").append(content)
+            }
+        }
+
+
+    });
 }
 //===================================================
 //add cart
@@ -234,7 +238,7 @@ function changeNumberOfUnits(action, id) {
                 numberOfUnits++
             }
         }
- 
+
         return {
             ...item,
             numberOfUnits: numberOfUnits

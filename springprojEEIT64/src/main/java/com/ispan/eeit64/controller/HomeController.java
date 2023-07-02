@@ -1,5 +1,9 @@
 package com.ispan.eeit64.controller;
 
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +59,14 @@ public class HomeController {
 	}
 	
 	@GetMapping("/menu")
-	public String menu() {
+	public String menu(Model model) {
+		LocalDate currentDate = LocalDate.now();
+	    DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
+	    
+	    if (currentDayOfWeek == DayOfWeek.SUNDAY) {
+	        model.addAttribute("closedMessage", "今日無營業"); // 添加關閉通知訊息
+	    }
+		
 		return "menu";
 	}
 	
