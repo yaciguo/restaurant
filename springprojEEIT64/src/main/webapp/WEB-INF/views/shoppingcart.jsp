@@ -25,8 +25,16 @@
         $(document).ready(function () {
           //載入local===============================
           var data = JSON.parse(localStorage.getItem('CART'));
-
           console.log(data)
+
+          // 檢查 localStorage 是否為空若為空就重新載入消費者首頁
+          if (data === null || data.length === 0) {
+            setTimeout(function () {
+              window.location.href = "<c:url value='/custIndex' />";
+            }, 500);
+          }
+
+
           let totalPrice = 0;
           let content = ''
           data.forEach(function (obj, index) {
@@ -191,15 +199,17 @@
                   localStorage.clear();
                   window.location.href = "<c:url value='/ordercheck' />";
                 }, 800); // 延时800毫秒后跳转
-              } else {
-                alert("無法提交訂單：已超過能取餐時間，請重新選擇取餐時間");
-                location.reload(); // 自動重新載入頁面
               }
+              // else {
+              //   alert("無法提交訂單：已超過能取餐時間，請重新選擇取餐時間");
+              //   location.reload(); // 自動重新載入頁面
+              // }
             },
             error: function (xhr, status, error) {
               console.error("錯誤：" + xhr.status);
               if (xhr.responseJSON && xhr.responseJSON.error) {
                 alert(xhr.responseJSON.error); // 使用警告框顯示錯誤訊息
+                location.reload(); // 自動重新載入頁面
               } else {
                 alert("發生未知錯誤，無法提交訂單"); // 使用警告框顯示未知錯誤訊息
               }
@@ -314,7 +324,7 @@
                     <label>取餐時間:</label><br />
                     <select id="pickTime" required="required">
                       <option value="">請選擇時間</option>
-                      <option value="09:22:00">09:22</option>
+                      <option value="10:39:00">10:39</option>
                       <option value="11:00:00">11:00</option>
                       <option value="11:30:00">11:30</option>
                       <option value="12:00:00">12:00</option>
@@ -359,6 +369,18 @@
         var currentHour = currentTime.getHours();
         var currentMinute = currentTime.getMinutes();
 
+        //檢查是否為星期日不讓user選擇取餐時間=====
+        var daysOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        var currentDayOfWeek = daysOfWeek[currentTime.getDay()];
+        if (currentDayOfWeek === '星期日') {
+          alert('今日星期日無營業');
+          for (var i = 0; i < pickTimeSelect.options.length; i++) {
+            pickTimeSelect.options[i].disabled = true;
+          }
+
+        }
+
+
         // 禁止選擇過去的時間和相差不到10分鐘的時間
         for (var i = 0; i < pickTimeSelect.options.length; i++) {
           var optionValue = pickTimeSelect.options[i].value;
@@ -375,6 +397,8 @@
             }
           }
         }
+
+
       </script>
 
 

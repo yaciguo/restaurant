@@ -77,7 +77,7 @@
             </div><br />
             <div class="row">
               <div class="col-sm-4">
-                <form:form action="${pageContext.request.contextPath}/searchorders" method="POST">
+                <form:form action="${pageContext.request.contextPath}/custIndex/searchorders" method="POST">
                   <fieldset>
                     <legend>取餐資料</legend>
                     <label for="">姓名</label><br />
@@ -87,6 +87,7 @@
                     <input name="phone" type="tel" placeholder="請輸入手機(格式0912345678)" style="width: 90%;"
                       pattern="[0]{1}[9]{1}[0-9]{8}" value="${param.phone}" required />
                     <br /><br />
+                    <input type="hidden" name="viewName" value="searchorder" />
                     <input type="submit" value="查詢" />
                   </fieldset>
                 </form:form>
@@ -96,86 +97,86 @@
                   <fieldset>
                     <legend>訂單記錄</legend>
                     <table>
-                      <%-- <c:if test="${empty orderList}"> --%>
-                        <!-- 			    <p style=" font-size: 30px; text-align: center">查無訂單記錄!</p> -->
-                        <%-- </c:if> --%>
-                          <c:forEach var="order" items="${orderList}">
-                            <tr>
-                              <th>成立時間</th>
-                              <td>${order.orderTime}</td>
-                            </tr>
-                            <tr>
-                              <th>應付金額</th>
-                              <td>${order.amount}</td>
-                            </tr>
-                            <tr>
-                              <th>折扣金額</th>
-                              <td>${empty order.activityBean ? 0 : order.activityBean.discount}</td>
-                            </tr>
+                      <c:if test="${not empty orderList}">
+                        <c:forEach var="order" items="${orderList}">
+                          <tr>
+                            <th>成立時間</th>
+                            <td>${order.orderTime}</td>
+                          </tr>
+                          <tr>
+                            <th>應付金額</th>
+                            <td>${order.amount}</td>
+                          </tr>
+                          <tr>
+                            <th>折扣金額</th>
+                            <td>${empty order.activityBean ? 0 : order.activityBean.discount}</td>
+                          </tr>
 
-                            <tr>
-                              <th>活動名稱</th>
-                              <td>${order.activityBean.name}</td>
-                            </tr>
+                          <tr>
+                            <th>活動名稱</th>
+                            <td>${order.activityBean.name}</td>
+                          </tr>
 
-                            <tr>
-                              <th>預約取餐時間</th>
-                              <td>${order.pickTime}</td>
-                            </tr>
+                          <tr>
+                            <th>預約取餐時間</th>
+                            <td>${order.pickTime}</td>
+                          </tr>
 
+                          <tr>
+                            <th>訂單狀態</th>
+                            <td class="status">
+                              <script>
+                                //置換成中文名稱js寫在body外，EL抓不到
+                                var statusMap = {
+                                  "order_establish": "訂單成立",
+                                  "order_deal": "訂單處理中",
+                                  "order_finish": "訂單完成",
+                                  "order_cancel": "訂單取消"
+                                };
+                                var statusString = statusMap["${order.orderStatus}"] || "${order.orderStatus}";
+                                document.write(statusString);
+                              </script>
+                            </td>
+
+                            <%-- <td class="status">${order.orderStatus}</td> --%>
+                          </tr>
+
+                          <tr>
+                            <th>訂單明細</th>
+                            <td>
+                              <table>
+                                <c:forEach var="detail" items="${order.orderDetailBean}">
+                                  <tr>
+                                    <td>${detail.dish.name}</td>
+                                    <td>${detail.quantity}</td>
+                                  </tr>
+                                </c:forEach>
+                              </table>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <th>備註</th>
+                            <td>${order.note}</td>
+                          </tr>
+                          <!-- 添加订单明细 -->
+
+
+
+                          <!-- 添加分隔线 -->
+                          <c:if test="${not status.last}">
                             <tr>
-                              <th>訂單狀態</th>
-                              <td class="status">
-                                <script>
-                                  //置換成中文名稱js寫在body外，EL抓不到
-                                  var statusMap = {
-                                    "order_establish": "訂單成立",
-                                    "order_deal": "訂單處理中",
-                                    "order_finish": "訂單完成",
-                                    "order_cancel": "訂單取消"
-                                  };
-                                  var statusString = statusMap["${order.orderStatus}"] || "${order.orderStatus}";
-                                  document.write(statusString);
-                                </script>
+                              <td colspan="2">
+                                <hr />
                               </td>
-
-                              <%-- <td class="status">${order.orderStatus}</td> --%>
                             </tr>
-
-                            <tr>
-                              <th>訂單明細</th>
-                              <td>
-                                <table>
-                                  <c:forEach var="detail" items="${order.orderDetailBean}">
-                                    <tr>
-                                      <td>${detail.dish.name}</td>
-                                      <td>${detail.quantity}</td>
-                                    </tr>
-                                  </c:forEach>
-                                </table>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <th>備註</th>
-                              <td>${order.note}</td>
-                            </tr>
-                            <!-- 添加订单明细 -->
-
-
-
-                            <!-- 添加分隔线 -->
-                            <c:if test="${not status.last}">
-                              <tr>
-                                <td colspan="2">
-                                  <hr />
-                                </td>
-                              </tr>
-                            </c:if>
-                          </c:forEach>
-
-
+                          </c:if>
+                        </c:forEach>
+                      </c:if>
                     </table>
+                    <c:if test="${empty orderList}">
+                      <p style="font-size: 30px; text-align: center">${noDataMessage}</p>
+                    </c:if>
                   </fieldset>
                 </form:form>
               </div>
@@ -184,19 +185,41 @@
         </div>
 
       </body>
+      <script type="text/javascript">
+        //若查無資料清空input欄位
+        window.onload = function () {
+          var noDataMessage = '${noDataMessage}';
+          if (noDataMessage) {
+            setTimeout(function () {
+              document.querySelector('input[name="customer"]').value = '';
+              document.querySelector('input[name="phone"]').value = '';
+            }, 300);
+          }
+        };
+
+        // 當使用者離開頁面時清空 input 欄位的值
+        window.onbeforeunload = function () {
+          document.querySelector('input[name="customer"]').value = '';
+          document.querySelector('input[name="phone"]').value = '';
+        };
+
+
+      </script>
 
       <script>
-// $(document).ready(function() {
-//     var statusMap = {
-//         "order_establish": "訂單成立",
-//         "order_deal": "訂單處理中",
-//         "order_finish": "訂單完成",
-//         "order_cancel": "訂單取消"
-//     };
+        // $(document).ready(function() {
+        //     var statusMap = {
+        //         "order_establish": "訂單成立",
+        //         "order_deal": "訂單處理中",
+        //         "order_finish": "訂單完成",
+        //         "order_cancel": "訂單取消"
+        //     };
 
-//     var statusString = statusMap["${order.orderStatus}"] || "${order.orderStatus}";
-//     $("#status").html(statusString);
-// });
+        //     var statusString = statusMap["${order.orderStatus}"] || "${order.orderStatus}";
+        //     $("#status").html(statusString);
+        // });
+
+
 
 
 

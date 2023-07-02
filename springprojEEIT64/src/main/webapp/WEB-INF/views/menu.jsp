@@ -126,6 +126,9 @@
                 window.location.href = "<c:url value='/restInfo' />";
             }
 
+
+
+            var isAlertDisplayed = false; // 跟蹤警告視窗是否已經彈出
             function updateDateTime() {
                 var now = new Date();
 
@@ -139,7 +142,17 @@
                 // 將日期、星期和時間顯示在網頁上
                 document.getElementById('dayOfWeek').textContent = dayOfWeek;
                 document.getElementById('time').textContent = time;
+
+                // 檢查是否為星期日並顯示警告訊息
+                if (dayOfWeek === '星期日' && !isAlertDisplayed) {
+                    // 星期日，且警告視窗未彈出，顯示警告訊息
+                    alert('今日星期日無營業');
+                    isAlertDisplayed = true; // 將警告視窗已彈出的標記設置為true
+                } else {
+                    // TODO: 在這裡添加其他操作的程式碼
+                }
             }
+
 
             // 頁面加載完成後調用 displayDateTime() 函數
             window.onload = function () {
