@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.ispan.eeit64.controller.APIResult.APIResult;
 import com.ispan.eeit64.controller.APIResult.StatusCode;
 import com.ispan.eeit64.entity.ClosingTimeBean;
@@ -28,6 +30,7 @@ import com.ispan.eeit64.service.impl.ClosingTimeServiceImpl;
 import com.ispan.eeit64.service.impl.FdTableServiceImpl;
 import com.ispan.eeit64.service.impl.OpeningHourServiceImpl;
 import com.ispan.eeit64.validator.ClosingTimeValidator;
+import com.ispan.eeit64.validator.FdTableValidator;
 import com.ispan.eeit64.validator.OpeningHourValidator;
 
 @Controller
@@ -42,6 +45,14 @@ public class BasicSettingsController {
     @Autowired
     Environment env;
     
+    @ExceptionHandler(value = InvalidFormatException.class)
+    public @ResponseBody APIResult handleException(InvalidFormatException e) {
+        String fieldName = e.getPath().get(0).getFieldName();
+        APIResult apiResult = new APIResult(StatusCode.INVALIDFORMATERROR, fieldName, "無效的格式輸入");
+        // handle exception here
+        return apiResult;
+    }
+
     // OpeningHour
     @GetMapping("/getAllOpeningHour")
     public @ResponseBody List<OpeningHourBean> getAllOpeningHour(){
@@ -161,7 +172,6 @@ public class BasicSettingsController {
     @GetMapping("/getAllFdTable")
     public @ResponseBody APIResult getAllFdTable(){
         try {
-            System.out.println(FdTableService.findAll());
             APIResult result = new APIResult(StatusCode.SUCCESS, FdTableService.findAll(), "成功獲取資料");
             return result;
         } catch (Exception e) {
@@ -175,11 +185,17 @@ public class BasicSettingsController {
             @RequestBody FdTableBean bean,
             HttpServletRequest request,
             BindingResult result){
+        APIResult apiResult = new APIResult();
+        new FdTableValidator().validate(bean, result, request.getMethod(), FdTableService);
+        if (result.hasErrors()) {
+            collectErrorMessageToAPIResult(apiResult, result);
+            return apiResult;
+        }
         try {
-            APIResult apiResult = new APIResult(StatusCode.SUCCESS, FdTableService.saveAndUpdate(bean), "成功儲存資料");
+            apiResult = new APIResult(StatusCode.SUCCESS, FdTableService.saveAndUpdate(bean), "成功儲存資料");
             return apiResult;
         } catch (Exception e) {
-            APIResult apiResult = new APIResult(StatusCode.ERROR, null, "無法儲存資料");
+            apiResult = new APIResult(StatusCode.ERROR, bean, "無法儲存資料");
             return apiResult;
         }
     }
@@ -190,11 +206,17 @@ public class BasicSettingsController {
             HttpServletRequest request,
             BindingResult result
     ){
+        APIResult apiResult = new APIResult();
+        new FdTableValidator().validate(bean, result, request.getMethod(), FdTableService);
+        if (result.hasErrors()) {
+            collectErrorMessageToAPIResult(apiResult, result);
+            return apiResult;
+        }
         try {
-            APIResult apiResult = new APIResult(StatusCode.SUCCESS, FdTableService.saveAndUpdate(bean), "成功修改資料");
+            apiResult = new APIResult(StatusCode.SUCCESS, FdTableService.saveAndUpdate(bean), "成功修改資料");
             return apiResult;
         } catch (Exception e) {
-            APIResult apiResult = new APIResult(StatusCode.ERROR, null, "無法修改資料");
+            apiResult = new APIResult(StatusCode.ERROR, bean, "無法修改資料");
             return apiResult;
         }
     }
@@ -205,10 +227,10 @@ public class BasicSettingsController {
     ){
         try {
             FdTableService.deleteByIdList(ids);
-            APIResult apiResult = new APIResult(StatusCode.SUCCESS, null, "成功刪除資料");
+            APIResult apiResult = new APIResult(StatusCode.SUCCESS, ids, "成功刪除資料");
             return apiResult;
         } catch (Exception e) {
-            APIResult apiResult = new APIResult(StatusCode.ERROR, null, "無法修改資料");
+            APIResult apiResult = new APIResult(StatusCode.ERROR, ids, "無法修改資料");
             return apiResult;
         }
     }
@@ -222,5 +244,16 @@ public class BasicSettingsController {
             errors.put(error.getField(), defaulMessage);
         }
     }
-    
+
+    public void collectErrorMessageToAPIResult(APIResult apiResult, BindingResult result){
+        Map<String, String> errors = new HashMap<>();
+        apiResult.setData(errors);
+        apiResult.setCode(StatusCode.FIELDERROR);
+        apiResult.setMsg("欄位資料錯誤");
+        List<FieldError> list = result.getFieldErrors();
+        for (FieldError error : list) {
+            String defaulMessage = error.getDefaultMessage();
+            errors.put(error.getField(), defaulMessage);
+        }
+    }    
 }

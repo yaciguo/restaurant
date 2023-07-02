@@ -304,8 +304,6 @@ async function sureBtnClick() {
             })
             break;
         case "addCloseTime":
-            console.log(JSON.stringify(closeTimeData));
-            console.log(header, token);
             result = await $.ajax({
                 type: "post",
                 url: contextPath + "/basicSettings.api/addClosingTime",
@@ -315,7 +313,6 @@ async function sureBtnClick() {
                     xhr.setRequestHeader(header, token);
                 }
             })
-            console.log(result);
             break;
         case "deleteclosetime":
             result = await $.ajax({

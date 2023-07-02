@@ -9,7 +9,7 @@ import com.ispan.eeit64.service.impl.FdTableServiceImpl;
 
 public class FdTableValidator implements Validator{
     private String method;
-    FdTableServiceImpl service;
+    private FdTableServiceImpl service;
     
     @Override
     public boolean supports(Class<?> clazz) {
@@ -22,15 +22,15 @@ public class FdTableValidator implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tableId", "FdTable.tableId.empty", "桌位不能為空白");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "capacity", "FdTable.capacity.empty", "人數不能為空白");
 
-        if(this.method =="POST"){
+        if(this.method.equals( "POST")){
             if (!errors.hasFieldErrors("tableId")) {
-                if(!service.existsById(bean.getTableId())) {
+                if(service.existsById(bean.getTableId())) {
                     errors.rejectValue("tableId", "FdTable.tableId.exist", "桌號是重複的");
                 }
             }   
-        }else if(this.method =="PUT"){
+        }else if(this.method.equals("PUT")){
             if (!errors.hasFieldErrors("tableId")) {
-                if(service.existsById(bean.getTableId())) {
+                if(!service.existsById(bean.getTableId())) {
                     errors.rejectValue("tableId", "FdTable.tableId.notExist", "桌號是不存在的");
                 }
             }   

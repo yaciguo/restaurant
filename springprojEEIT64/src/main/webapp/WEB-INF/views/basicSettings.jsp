@@ -83,7 +83,7 @@
     }
 
     .seat-people {
-        font-size: medium;
+        font-size: smaller;
         position: absolute;
         bottom: 5%;
         left: 0;
@@ -91,7 +91,7 @@
     }
 
     .seat-num {
-        font-size: x-large;
+        font-size: large;
         position: absolute;
         bottom: 35%;
         left: 0;
@@ -166,6 +166,11 @@
         font-size: 25px;
         height: 20px;
     }
+
+    #seatButtonDiv{
+        max-height: 600px;
+        overflow: auto;
+    }
 </style>
 
 <body>
@@ -187,36 +192,38 @@
             <!-- basic setting tab -->
             <div id="basic-setting-div" class="container-fluid tab-pane fade show active">
                 <div class="row col-10 offset-1 pt-3">
-                    <div class="col-6 text-nowrap">
-                        <div class="row mb-4 px-2 pb-2 pt-4 scheduler-border">
-                            <h5 class="text-on-pannel text-primary w-auto">
-                                <strong class="text-uppercase">店名設定</strong>
-                            </h5>
-                            <input class="form-control  mb-2" type="text" />
-                            <div class="col offset-10 col-2 d-flex">
-                                <button type="button" class="btn btn-primary flex-fill">存檔</button>
+                    <div class="col-4 text-nowrap ">
+                        <div class="m-2">
+                            <div class="row mb-4 px-2 pb-2 pt-4 scheduler-border">
+                                <h5 class="text-on-pannel text-primary w-auto">
+                                    <strong class="text-uppercase">店名設定</strong>
+                                </h5>
+                                <input class="form-control  mb-2" type="text" />
+                                <div class="col offset-10 col-2 d-flex">
+                                    <button type="button" class="btn btn-primary flex-fill">存檔</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row px-2 panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary w-auto">
-                                <strong class="text-uppercase">商標</strong>
-                            </h5>
-                            <div class="col mb-2" style="height: 200px;background-color: aqua;">
-
-                            </div>
-                            <div class="col offset-10 col-2 d-flex">
-                                <button type="button" class="btn btn-primary flex-fill">上傳</button>
+                            <div class="row px-2 panel-body panel scheduler-border pb-2">
+                                <h5 class="text-on-pannel text-primary w-auto">
+                                    <strong class="text-uppercase">商標</strong>
+                                </h5>
+                                <div class="col mb-2" style="height: 200px;background-color: aqua;">
+    
+                                </div>
+                                <div class="col offset-10 col-2 d-flex">
+                                    <button type="button" class="btn btn-primary flex-fill">上傳</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 text-nowrap">
-                        <div class="row px-2">
-                            <div class="panel-body panel scheduler-border pb-2">
-                                <h5 class="text-on-pannel text-primary">
+                    <div class="col-8 text-nowrap">
+                        <div class="m-2">
+                            <div class="row px-2 panel-body panel scheduler-border pb-2">
+                                <h5 class="text-on-pannel text-primary w-auto">
                                     <strong class="text-uppercase">座位</strong>
                                 </h5>
-                                <div class="row mb-4 g-4 p-4 ">
-                                    <div class="col col-3 d-flex">
+                                <div class="row mb-4 g-2 faq-body" id="seatButtonDiv">
+                                    <div class="col col-2 d-flex">
                                         <button type="button"
                                             class="style-set btn btn-primary flex-fill p-0" data-bs-toggle="modal"
                                             data-bs-target="#seatSettingModalDiv">
@@ -226,58 +233,14 @@
                                             </div>
                                         </button>
                                     </div>
-                                    <div class="col col-3 d-flex">
-                                        <button type="button"
-                                            class="style-set btn btn-primary flex-fill p-0">
-                                            <div class="flex-fill h-100 seat-btn">
-                                                <span class="seat-num">桌號：<span>1</span></span>
-                                                <span class="seat-people ">座位人數：<span>4</span></span>
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col col-3 d-flex">
-                                        <button type="button"
-                                            class="style-set btn btn-primary flex-fill p-0">
-                                            <div class="flex-fill h-100 seat-btn">
-                                                <span class="seat-num">桌號：<span>1</span></span>
-                                                <span class="seat-people ">座位人數：<span>4</span></span>
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col col-3 d-flex">
-                                        <button type="button"
-                                            class="style-set btn btn-primary flex-fill p-0">
-                                            <div class="flex-fill h-100 seat-btn">
-                                                <span class="seat-num">桌號：<span>1</span></span>
-                                                <span class="seat-people ">座位人數：<span>4</span></span>
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col col-3 d-flex">
-                                        <button type="button"
-                                            class="style-set btn btn-primary flex-fill p-0">
-                                            <div class="flex-fill h-100 seat-btn">
-                                                <span class="seat-num">桌號：<span>1</span></span>
-                                                <span class="seat-people ">座位人數：<span>4</span></span>
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col col-3 d-flex">
-                                        <button type="button"
-                                            class="style-set btn btn-primary flex-fill p-0">
-                                            <div class="flex-fill h-100 seat-btn">
-                                                <span class="seat-num">桌號：<span>1</span></span>
-                                                <span class="seat-people ">座位人數：<span>4</span></span>
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col col-3 d-flex">
-                                        <button type="button"
-                                            class="style-set btn btn-primary flex-fill p-0">
-                                            <div class="flex-fill "
-                                                style="font-size: 80px; vertical-align: middle;">+
-                                            </div>
-                                        </button>
+                                </div>
+                                
+                                <div class="row ">
+                                    <div class="offset-10 col-2 d-flex ">
+                                        <a id="seat-addbtn"
+                                            class="btn btn-primary btn-sm flex-fill"
+                                            type="button" data-bs-toggle="modal"
+                                            data-bs-target="#seatSettingModalDiv">新增</a>
                                     </div>
                                 </div>
                             </div>
@@ -373,47 +336,6 @@
                             </div>
                         </div>
                     </div> -->
-                </div>
-            </div>
-
-            <!-- seat setting tab -->
-            <div id="seat-setting-div" class="container-fluid tab-pane fade">
-                <div class="row col-10 offset-1 pt-3">
-                    <div class="col-6 text-nowrap">
-                        <div class="row ps-2 pe-3 ">
-                            <div class="panel-body panel scheduler-border pb-2 ">
-                                <h5 class="text-on-pannel text-primary">
-                                    <strong class="text-uppercase">座位設定</strong>
-                                </h5>
-                                <div class="row col-8 offset-2 mb-4 px-2 mt-3">
-                                    <div class="panel-body panel scheduler-border pb-2">
-                                        <h5 class="text-on-pannel text-primary">
-                                            <strong class="text-uppercase">桌號</strong>
-                                        </h5>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                </div>
-                                <div class="row col-8 offset-2 mb-4 px-2 mt-3">
-                                    <div class="panel-body panel scheduler-border pb-2">
-                                        <h5 class="text-on-pannel text-primary">
-                                            <strong class="text-uppercase">座位人數</strong>
-                                        </h5>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="offset-6 col-2 d-flex px-2">
-                                        <button type="button" class="btn btn-primary flex-fill">移除</button>
-                                    </div>
-                                    <div class=" col-2 d-flex px-2 ">
-                                        <button type="button" class="btn btn-primary flex-fill">確定</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -658,7 +580,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content px-3">
                     <div class="modal-header pb-1">
-                        <h5 class="modal-title" id="seatSettingModalTitle">新增特定休假</h5>
+                        <h5 class="modal-title" id="seatModalTitle">新增桌位</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -668,7 +590,7 @@
                                 <label class=" justify-content-center align-items-center">桌號：</label>
                             </div>
                             <div class="col-5">
-                                <input class="form-control" type="text" />
+                                <input class="form-control" type="text" id="tableId-input" />
                             </div>
                         </div>
                         <div class="row">
@@ -676,17 +598,19 @@
                                 <label class=" justify-content-center align-items-center">座位人數：</label>
                             </div>
                             <div class="col-5">
-                                <input class="form-control" type="text" />
+                                <input class="form-control" type="text" id="capacity-input"/>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer px-0">
-                        <div class="row flex-fill">
-                            <button type="button" class="col col-md-3 btn btn-primary offset-sm-5"
-                                id="seatSettingRemoveBtn">移除</button>
-                            <div class="col col-3 offset-6" hidden></div>
-                            <button type="button" class="col col-md-3 btn btn-primary offset-1"
-                                id="seatSettingSureBtn">確定</button>
+                        <div class="row  flex-fill">                            
+                            <div class="col col-3 offset-6 " id="seatPlaceholder">
+                                <button type="button" class="btn btn-primary flex-fill" id="seatRemoveBtn">移除</button>
+                            </div>
+                            <div class="col-3 " id="seatPlaceholder">
+                                <button type="button" class="btn btn-primary"
+                                    id="seatSureBtn">確定</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -807,7 +731,7 @@
 </script>
 
 <script type="text/javascript" src="<c:url value='/js/basicSettings/basicSettings.js'/>"></script>
-<script type="text/javascript"
-    src="<c:url value='/js/basicSettings/basicSettings_openingSetting.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/basicSettings/basicSettings_setting.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/basicSettings/basicSettings_openingSetting.js'/>"></script>
 
 </html>

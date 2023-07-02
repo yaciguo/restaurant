@@ -1,7 +1,11 @@
 package com.ispan.eeit64.controller.APIResult;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Data
 public class APIResult {
     private Object data;
