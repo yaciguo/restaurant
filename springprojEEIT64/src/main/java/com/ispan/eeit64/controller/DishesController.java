@@ -1,5 +1,8 @@
 package com.ispan.eeit64.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -47,8 +50,23 @@ public class DishesController {
 	//找所有活動
 	@GetMapping("/custIndex/getActivity")
 	public List<ActivityBean> findAllActivitys() {
-		List<ActivityBean> allActivity = activityRepository.findAll();
-		return allActivity;
+		LocalDate currentDate = LocalDate.now(); 
+		 List<ActivityBean> allActivity = activityRepository.findAll();
+
+		    List<ActivityBean> filteredActivity = new ArrayList<>();
+		// 過濾出當下日期在活動日期內的活動有包括當天
+		    for (ActivityBean activity : allActivity) {
+		        LocalDate startDate = activity.getStartDate().toLocalDate();
+		        LocalDate endDate = activity.getEndDate().toLocalDate();
+
+		        if ((currentDate.isAfter(startDate) || currentDate.isEqual(startDate)) &&
+		                (currentDate.isBefore(endDate) || currentDate.isEqual(endDate))) {
+		            // 當前日期在活動日期範圍內，將該活動添加到過濾後的活動列表中
+		            filteredActivity.add(activity);
+		        }
+		    }
+
+		    return filteredActivity;
 	}
 	
 

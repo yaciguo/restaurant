@@ -21,10 +21,12 @@
       </head>
 
       <script>
-        var jsonofDetails = { orderDetails: [] };//一個有od的json
+        var orderDetails = [];
+        var jsonofDetails = { orderDetails };//一個有od的json
+        var data = [];
         $(document).ready(function () {
           //載入local===============================
-          var data = JSON.parse(localStorage.getItem('CART'));
+          data = JSON.parse(localStorage.getItem('CART')) || [];
           console.log(data)
 
           // 檢查 localStorage 是否為空若為空就重新載入消費者首頁
@@ -59,17 +61,6 @@
 
 
           $(".store").append(content)
-          console.log(totalPrice)
-          $(".totalPrice").text("$" + totalPrice);
-
-          // let discount = 0
-          // let totalAmount = (totalPrice - discount).toString();
-          // console.log(totalAmount)
-          // $(".totalAmount").text("$" + totalAmount)
-          // $("#totalAmount").val(totalAmount)
-
-
-
 
 
           //test==================================================
@@ -83,14 +74,13 @@
             dataType: "json",
             success: function (response) {
               activities = response; // 得到返回的分類
-              var totalAmount = totalPrice;
+              // var totalAmount = totalPrice;
               var activityJsonString = JSON.stringify(activities);
               //=========================增加0701===================================
               var maxDiscountAmount = 0;
-              var selectedActivityIndex = 0;
-              var i = 0;
+              var selectedActivityIndex = -1;
               // 遍歷活動資料進行折扣計算
-              for (i = 0; i < activities.length; i++) {
+              for (var i = 0; i < activities.length; i++) {
                 var activity = activities[i];
 
                 // 判斷活動是否在有效期內
@@ -103,7 +93,7 @@
                   // 滿足活動有效期限
                   var discountAmount = 0;
 
-                  if (totalAmount >= activity.amount) {
+                  if (totalPrice >= activity.amount) {
                     // 滿足滿額條件，計算折扣金額
                     discountAmount = activity.discount;
                     if (discountAmount > maxDiscountAmount) {
@@ -116,14 +106,16 @@
                 }
               }
               // 將折扣金額應用於總金額
-              if (selectedActivityIndex === 0 && maxDiscountAmount == 0) {
-                selectedActivityIndex = -1
-                $("#selectedActivityId").val();
+              if (selectedActivityIndex === -1) {
+                // 若未找到符合條件的活動，清空選擇的活動相關資訊
+                $("#activityName").text("");
+                $("#selectedActivityId").val("");
               } else {
-                // 將折扣金額和活動名稱顯示在備註欄位中
+                // 將折扣金額和活動名稱顯示出來中
                 // 取得選擇的活動名稱及id
+                var selectedActivity = activities[selectedActivityIndex];
                 var selectedActivityName = activities[selectedActivityIndex].name;
-                var selectedActivityId = (activities[selectedActivityIndex].id).toString();
+                var selectedActivityId = activities[selectedActivityIndex].id.toString();
                 // 將折扣金額和活動名稱顯示在不可編輯的<span>元素中
                 $("#activityName").text(selectedActivityName);
                 $("#selectedActivityId").val(selectedActivityId);
@@ -131,29 +123,98 @@
 
 
               }
-              console.log(totalAmount)
 
-              console.log(maxDiscountAmount)
-              $("#discount").text("$" + maxDiscountAmount);
-
-
-              //總金額==============================================
-              totalAmount -= maxDiscountAmount
-              console.log(totalAmount)
-              let totalAmountstr = totalAmount.toString();
-              $(".totalAmount").text("$" + totalAmountstr)
-              $("#totalAmount").val(totalAmountstr)
 
               //=========================增加0701=====================================
               // 將 JSON 字串插入到指定的 <div> 元素中
               // $('#activityDiv').text(activityJsonString);
+
+              // 進行購物車相關操作====================================
+              if (selectedActivityIndex !== -1) {
+                var selectedActivity = activities[selectedActivityIndex];
+                // 檢查活動類型是否為 "gift"
+                if (selectedActivity.type === "gift") {
+                  // 獲取活動送的 dish
+                  var giftDish = selectedActivity.dishBean;
+                  console.log(giftDish);
+
+                  var modifiedGiftDish = {
+                    id: giftDish.id,
+                    name: giftDish.name,
+                    categoryBean: giftDish.categoryBean,
+                    price: giftDish.price,
+                    cost: giftDish.cost,
+                    picture: giftDish.picture,
+                    description: giftDish.description,
+                    status: giftDish.status,
+                    numberOfUnits: 1  // 設置預設數量為 1
+                  };
+                  // // 檢查購物車中是否已存在相同的 dishId
+                  var existingItemIndex = -1;
+                  for (var i = 0; i < data.length; i++) {
+                    if (data[i].id === modifiedGiftDish.id) {
+                      existingItemIndex = i;
+                      break;
+                    }
+                  }
+
+                  // 將 贈送的dish 添加到頁面顯現
+                  var giftRow =
+                    '<tr class="giftRow">' +
+                    '<td colspan="3">' + '<hr>' +
+                    '<span>贈品</span>' +
+                    '</td>' +
+                    '</tr>' +
+                    '<tr class="giftRow">' +
+                    '<td style="width: 50%;">' + modifiedGiftDish.name + '</td>' +
+                    '<td style="width: 20%">$' + modifiedGiftDish.price + '</td>' +
+                    '<td class="units" style="width: 20%">' +
+                    '<div class="number">' + modifiedGiftDish.numberOfUnits + '</div>' +
+                    '</td>' +
+                    '</tr>'
+                    ;
+
+                  $(".store").append(giftRow);
+
+                  // 將 dish 添加到購物車資料中
+
+                  if (existingItemIndex !== -1) {
+                    // 已存在相同的 dishId，合併物件並更新 numberOfUnits
+                    var existingItem = data[existingItemIndex];
+                    existingItem.numberOfUnits += modifiedGiftDish.numberOfUnits;
+                  } else {
+                    // 購物車中不存在相同的 dishId，將新的 modifiedGiftDish 加入購物車
+                    data.push(modifiedGiftDish);
+                  }
+                  // localStorage.setItem('CART', JSON.stringify(data));
+                  console.log(data)
+                  orderDetails.push(modifiedGiftDish.id);
+                  totalPrice += modifiedGiftDish.price
+
+                }
+              }
+
+
+              console.log(maxDiscountAmount)
+              // 計算總金額並更新顯示
+              console.log(totalPrice)
+
+              $(".totalPrice").text("$" + totalPrice);
+              var discountedTotalAmount = totalPrice - maxDiscountAmount;
+              $(".totalAmount").text("$" + discountedTotalAmount);
+              $("#totalAmount").val(discountedTotalAmount);
+              $("#discount").text("$" + maxDiscountAmount);
+              console.log(discountedTotalAmount)
 
 
             },
             error: function (xhr, status, error) {
               console.log("Error: " + error);
             }
+
           });
+
+          console.log(data)
 
         })
 
@@ -163,7 +224,9 @@
         //提交驗證
         function validateAndRedirect() {
           event.preventDefault();
-          //將物件裝進json中
+          //按下才把locoal更新
+          localStorage.setItem('CART', JSON.stringify(data));
+          //將物件裝進json中         
           var orderDetails = jsonofDetails.orderDetails;
           var orderDetailsArray = [];
           for (var i = 0; i < orderDetails.length; i++) {
@@ -200,10 +263,7 @@
                   window.location.href = "<c:url value='/ordercheck' />";
                 }, 800); // 延时800毫秒后跳转
               }
-              // else {
-              //   alert("無法提交訂單：已超過能取餐時間，請重新選擇取餐時間");
-              //   location.reload(); // 自動重新載入頁面
-              // }
+
             },
             error: function (xhr, status, error) {
               console.error("錯誤：" + xhr.status);
@@ -276,6 +336,7 @@
                         <th style="width: 20%;">單價</th>
                         <th style="width: 20%;">數量</th>
                       </tr>
+
 
                     </table>
 
