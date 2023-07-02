@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "checkout")
 @Access(AccessType.FIELD)
@@ -23,7 +25,7 @@ public class CheckoutBean {
 	@Column(name = "id", length = 200)
 	private Integer id;
 
-	@Column(name = "payTime", columnDefinition = "DATETIME NOT NULL COMMENT '結帳時間'")
+	@Column(name = "payTime", columnDefinition = "DATETIME COMMENT '結帳時間'")
 	private Date payTime;
 
 	@Column(name = "payStatus", columnDefinition = "VARCHAR(20) NOT NULL COMMENT '交易狀態Y,N'")
@@ -32,7 +34,7 @@ public class CheckoutBean {
 	@Column(name = "note", columnDefinition = "VARCHAR(200) DEFAULT NULL COMMENT '備註'")
 	private String note;
 	
-//	delete (cascade=CascadeType.PERSIST)
+	@JsonManagedReference
 	@OneToOne
     @JoinColumn(name="FK_orderId")
 	private OrderBean order;
