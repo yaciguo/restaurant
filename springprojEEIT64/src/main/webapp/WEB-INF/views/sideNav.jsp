@@ -34,7 +34,7 @@
 :root {
 	--main-color: #1d1f26;
 	--sec-color: #FAF0E6;
-	--main-radius: 10px;""
+	--main-radius: 10px;
 }
 
 .main-content {
