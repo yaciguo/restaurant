@@ -146,7 +146,6 @@ public class ActivityController {
 	}
 
 	@DeleteMapping("/deleteActivity")
-	@CrossOrigin(origins = "http://localhost:8080/") // 設置允許跨域的來源網址
 	public void deleteActivityById(@RequestParam Integer activityId) {
 		activityRepository.deleteById(activityId);
 	}
