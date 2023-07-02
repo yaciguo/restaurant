@@ -2,7 +2,6 @@ package com.ispan.eeit64.service.impl;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,11 @@ public class FdTableServiceImpl implements FdTableService {
     @Autowired
     FdTableRepository dao;
     
+    @Override
+    public boolean existsById(Integer id) {
+        return dao.existsById(id);
+    }
+
     @Override
     public FdTableBean findById(Integer id) {
         return dao.findById(id).get();

@@ -58,11 +58,6 @@
         border-radius: 8px;
     }
 
-    .panel {
-        /* for text on pannel */
-        margin-top: 0px;
-    }
-
     .panel-body {
         padding-top: 30px;
     }
@@ -177,483 +172,475 @@
     <!-- 左側導覽列 -->
     <%@ include file="sideNav.jsp" %>
 
-        <!-- 主要內容區域 -->
+    <!-- 主要內容區域 -->
 
-        <div id="main-content" class="main-content">
-            <ul class="nav nav-tabs" id="activity-tabs">
-                <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
-                        href="#basic-setting-div">基本設定</a></li>
-                <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
-                        href="#seat-setting-div">座位設定</a></li>
-                <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
-                        href="#opening-setting-div">營業設定</a></li>
-            </ul>
+    <div id="main-content" class="main-content">
+        <ul class="nav nav-tabs" id="activity-tabs">
+            <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
+                    href="#basic-setting-div">基本設定</a></li>
+            <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
+                    href="#opening-setting-div">營業設定</a></li>
+        </ul>
 
-            <!-- 分頁內容-->
-            <div class="tab-content">
-                <!-- basic setting tab -->
-                <div id="basic-setting-div" class="container-fluid tab-pane fade show active">
-                    <div class="row col-10 offset-1 pt-3">
-                        <div class="col-6 text-nowrap">
-                            <div class="row mb-4 px-2">
-                                <div class="panel-body panel scheduler-border pb-2">
-                                    <h5 class="text-on-pannel text-primary">
-                                        <strong class="text-uppercase">店名設定</strong>
-                                    </h5>
-                                    <input class="form-control" type="text" />
-                                </div>
+        <!-- 分頁內容-->
+        <div class="tab-content">
+            <!-- basic setting tab -->
+            <div id="basic-setting-div" class="container-fluid tab-pane fade show active">
+                <div class="row col-10 offset-1 pt-3">
+                    <div class="col-6 text-nowrap">
+                        <div class="row mb-4 px-2 pb-2 pt-4 scheduler-border">
+                            <h5 class="text-on-pannel text-primary w-auto">
+                                <strong class="text-uppercase">店名設定</strong>
+                            </h5>
+                            <input class="form-control  mb-2" type="text" />
+                            <div class="col offset-10 col-2 d-flex">
+                                <button type="button" class="btn btn-primary flex-fill">存檔</button>
                             </div>
-                            <div class="row px-2">
-                                <div class="panel-body panel scheduler-border pb-2">
-                                    <h5 class="text-on-pannel text-primary">
-                                        <strong class="text-uppercase">商標</strong>
-                                    </h5>
-                                    <div class="col mb-2" style="height: 200px;background-color: aqua;">
+                        </div>
+                        <div class="row px-2 panel-body panel scheduler-border pb-2">
+                            <h5 class="text-on-pannel text-primary w-auto">
+                                <strong class="text-uppercase">商標</strong>
+                            </h5>
+                            <div class="col mb-2" style="height: 200px;background-color: aqua;">
 
+                            </div>
+                            <div class="col offset-10 col-2 d-flex">
+                                <button type="button" class="btn btn-primary flex-fill">上傳</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-nowrap">
+                        <div class="row px-2">
+                            <div class="panel-body panel scheduler-border pb-2">
+                                <h5 class="text-on-pannel text-primary">
+                                    <strong class="text-uppercase">座位</strong>
+                                </h5>
+                                <div class="row mb-4 g-4 p-4 ">
+                                    <div class="col col-3 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-primary flex-fill p-0" data-bs-toggle="modal"
+                                            data-bs-target="#seatSettingModalDiv">
+                                            <div class="flex-fill h-100 seat-btn">
+                                                <span class="seat-num">桌號：<span>1</span></span>
+                                                <span class="seat-people ">座位人數：<span>4</span></span>
+                                            </div>
+                                        </button>
                                     </div>
-                                    <div class="col offset-10 col-2 d-flex">
-                                        <button type="button" class="btn btn-primary flex-fill">上傳商標</button>
+                                    <div class="col col-3 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-primary flex-fill p-0">
+                                            <div class="flex-fill h-100 seat-btn">
+                                                <span class="seat-num">桌號：<span>1</span></span>
+                                                <span class="seat-people ">座位人數：<span>4</span></span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="col col-3 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-primary flex-fill p-0">
+                                            <div class="flex-fill h-100 seat-btn">
+                                                <span class="seat-num">桌號：<span>1</span></span>
+                                                <span class="seat-people ">座位人數：<span>4</span></span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="col col-3 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-primary flex-fill p-0">
+                                            <div class="flex-fill h-100 seat-btn">
+                                                <span class="seat-num">桌號：<span>1</span></span>
+                                                <span class="seat-people ">座位人數：<span>4</span></span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="col col-3 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-primary flex-fill p-0">
+                                            <div class="flex-fill h-100 seat-btn">
+                                                <span class="seat-num">桌號：<span>1</span></span>
+                                                <span class="seat-people ">座位人數：<span>4</span></span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="col col-3 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-primary flex-fill p-0">
+                                            <div class="flex-fill h-100 seat-btn">
+                                                <span class="seat-num">桌號：<span>1</span></span>
+                                                <span class="seat-people ">座位人數：<span>4</span></span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="col col-3 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-primary flex-fill p-0">
+                                            <div class="flex-fill "
+                                                style="font-size: 80px; vertical-align: middle;">+
+                                            </div>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 text-nowrap">
-                            <div class="row ps-2 pe-3">
-                                <div class="panel-body panel scheduler-border pb-2">
+                    </div>
+                    <!-- <div class="col-6 text-nowrap">
+                        <div class="row ps-2 pe-3">
+                            <div class="panel-body panel scheduler-border pb-2">
+                                <h5 class="text-on-pannel text-primary">
+                                    <strong class="text-uppercase">樣式</strong>
+                                </h5>
+                                <div class="row mb-4">
+                                    <div class="col col-2 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-primary flex-fill p-0"></button>
+                                    </div>
+                                    <div class="col col-2 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-success flex-fill p-0"></button>
+                                    </div>
+                                    <div class="col col-2 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-danger flex-fill p-0"></button>
+                                    </div>
+                                    <div class="col col-2 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-warning flex-fill p-0"></button>
+                                    </div>
+                                    <div class="col col-2 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-info flex-fill p-0"></button>
+                                    </div>
+                                    <div class="col col-2 d-flex">
+                                        <button type="button"
+                                            class="style-set btn btn-light flex-fill p-0"></button>
+                                    </div>
+                                </div>
+                                <div class="panel-body panel scheduler-border pb-2 px-2">
                                     <h5 class="text-on-pannel text-primary">
-                                        <strong class="text-uppercase">樣式</strong>
+                                        <strong class="text-uppercase">樣式預覽</strong>
                                     </h5>
-                                    <div class="row mb-4">
-                                        <div class="col col-2 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-primary flex-fill p-0"></button>
-                                        </div>
-                                        <div class="col col-2 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-success flex-fill p-0"></button>
-                                        </div>
-                                        <div class="col col-2 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-danger flex-fill p-0"></button>
-                                        </div>
-                                        <div class="col col-2 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-warning flex-fill p-0"></button>
-                                        </div>
-                                        <div class="col col-2 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-info flex-fill p-0"></button>
-                                        </div>
-                                        <div class="col col-2 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-light flex-fill p-0"></button>
+                                    <div class="row">
+                                        <div class="col-3 d-flex">
+                                            <button class="btn btn-primary flex-fill">按鈕樣式</button>
                                         </div>
                                     </div>
-                                    <div class="panel-body panel scheduler-border pb-2 px-2">
+                                    <div class="row mb-1">
+                                        <div class="btn-group col-3 text-nowrap mt-3 mb-2" role="group"
+                                            aria-label="Basic radio toggle button group">
+                                            <input type="radio" class="btn-check" name="btnradio-style"
+                                                id="btnradio-style1" autocomplete="off" checked>
+                                            <label class="btn btn-outline-primary"
+                                                for="btnradio-style1">按鈕樣式</label>
+                                            <input type="radio" class="btn-check" name="btnradio-style"
+                                                id="btnradio-style2" autocomplete="off">
+                                            <label class="btn btn-outline-primary"
+                                                for="btnradio-style2">按鈕樣式</label>
+                                            <input type="radio" class="btn-check" name="btnradio-style"
+                                                id="btnradio-style3" autocomplete="off">
+                                            <label class="btn btn-outline-primary"
+                                                for="btnradio-style3">按鈕樣式</label>
+                                        </div>
+                                    </div>
+                                    <div class="row px-3 col-9">
+                                        <table class="table table-hover table-primary data">
+                                            <thead class="data">
+                                                <tr class="data">
+                                                    <th class="data">表格標題</th>
+                                                    <th class="data">表格標題</th>
+                                                    <th class="data">表格標題</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="data faq-body" style="height: 100px;">
+                                                <tr class="data">
+                                                    <td>表格內容</td>
+                                                    <td>表格內容</td>
+                                                    <td>表格內容</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td>表格內容</td>
+                                                    <td>表格內容</td>
+                                                    <td>表格內容</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td>表格內容</td>
+                                                    <td>表格內容</td>
+                                                    <td>表格內容</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- seat setting tab -->
+            <div id="seat-setting-div" class="container-fluid tab-pane fade">
+                <div class="row col-10 offset-1 pt-3">
+                    <div class="col-6 text-nowrap">
+                        <div class="row ps-2 pe-3 ">
+                            <div class="panel-body panel scheduler-border pb-2 ">
+                                <h5 class="text-on-pannel text-primary">
+                                    <strong class="text-uppercase">座位設定</strong>
+                                </h5>
+                                <div class="row col-8 offset-2 mb-4 px-2 mt-3">
+                                    <div class="panel-body panel scheduler-border pb-2">
                                         <h5 class="text-on-pannel text-primary">
-                                            <strong class="text-uppercase">樣式預覽</strong>
+                                            <strong class="text-uppercase">桌號</strong>
                                         </h5>
-                                        <div class="row">
-                                            <div class="col-3 d-flex">
-                                                <button class="btn btn-primary flex-fill">按鈕樣式</button>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-1">
-                                            <div class="btn-group col-3 text-nowrap mt-3 mb-2" role="group"
-                                                aria-label="Basic radio toggle button group">
-                                                <input type="radio" class="btn-check" name="btnradio-style"
-                                                    id="btnradio-style1" autocomplete="off" checked>
-                                                <label class="btn btn-outline-primary"
-                                                    for="btnradio-style1">按鈕樣式</label>
-                                                <input type="radio" class="btn-check" name="btnradio-style"
-                                                    id="btnradio-style2" autocomplete="off">
-                                                <label class="btn btn-outline-primary"
-                                                    for="btnradio-style2">按鈕樣式</label>
-                                                <input type="radio" class="btn-check" name="btnradio-style"
-                                                    id="btnradio-style3" autocomplete="off">
-                                                <label class="btn btn-outline-primary"
-                                                    for="btnradio-style3">按鈕樣式</label>
-                                            </div>
-                                        </div>
-                                        <div class="row px-3 col-9">
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </div>
+                                <div class="row col-8 offset-2 mb-4 px-2 mt-3">
+                                    <div class="panel-body panel scheduler-border pb-2">
+                                        <h5 class="text-on-pannel text-primary">
+                                            <strong class="text-uppercase">座位人數</strong>
+                                        </h5>
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="offset-6 col-2 d-flex px-2">
+                                        <button type="button" class="btn btn-primary flex-fill">移除</button>
+                                    </div>
+                                    <div class=" col-2 d-flex px-2 ">
+                                        <button type="button" class="btn btn-primary flex-fill">確定</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- opening hour tab -->
+            <div id="opening-setting-div" class="container-fluid tab-pane fade">
+                <div class="row col-10 offset-1 pt-3">
+                    <div class="col-4 text-nowrap">
+                        <div class="row px-2">
+                            <div class="panel-body panel scheduler-border pb-2">
+                                <h5 class="text-on-pannel text-primary">
+                                    <strong class="text-uppercase">營業時間</strong>
+                                </h5>
+                                <div class="row me-1">
+                                    <div style="overflow-x: auto; width: 100%;">
+                                        <div class="me-2">
                                             <table class="table table-hover table-primary data">
                                                 <thead class="data">
                                                     <tr class="data">
-                                                        <th class="data">表格標題</th>
-                                                        <th class="data">表格標題</th>
-                                                        <th class="data">表格標題</th>
+                                                        <th class="checkbox-td">勾選</th>
+                                                        <th class="table_Time">星期幾</th>
+                                                        <th class="targetItem">營業時間</th>
+                                                        <th class="data"></th>
+                                                        <th class="data">刪除</th>
+                                                        <th class="data">修改</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="data faq-body" style="height: 100px;">
+                                                <tbody class="faq-body data" id="openhourTody">
                                                     <tr class="data">
-                                                        <td>表格內容</td>
-                                                        <td>表格內容</td>
-                                                        <td>表格內容</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td>表格內容</td>
-                                                        <td>表格內容</td>
-                                                        <td>表格內容</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td>表格內容</td>
-                                                        <td>表格內容</td>
-                                                        <td>表格內容</td>
+                                                        <td class="checkbox-td data ">
+                                                            <input class="form-check-input "
+                                                                type="checkbox">
+                                                        </td>
+                                                        <td class="data">星期一</td>
+                                                        <td class="data">8:00</td>
+                                                        <td class="data">13:00</td>
+                                                        <td class="td-btn p-1">
+
+                                                            <div class="d-flex">
+                                                                <a class="btn btn-primary btn-sm flex-fill"
+                                                                    type="button">刪除</a>
+                                                            </div>
+                                                        </td>
+                                                        <td class="td-btn p-1">
+                                                            <div class="d-flex td-btn">
+                                                                <a class="btn btn-primary btn-sm flex-fill"
+                                                                    type="button" data-bs-toggle="modal"
+                                                                    data-bs-target="#tdItemModalDiv">修改</a>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row col-10 offset-1 pt-3">
-                        <div class="offset-10 col-2 d-flex">
-                            <button type="button" class="btn btn-primary flex-fill">上傳商標</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- seat setting tab -->
-                <div id="seat-setting-div" class="container-fluid tab-pane fade">
-                    <div class="row col-10 offset-1 pt-3">
-                        <div class="col-6 text-nowrap">
-                            <div class="row px-2">
-                                <div class="panel-body panel scheduler-border pb-2">
-                                    <h5 class="text-on-pannel text-primary">
-                                        <strong class="text-uppercase">座位</strong>
-                                    </h5>
-                                    <div class="row mb-4 g-4 p-4">
-                                        <div class="col col-3 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-primary flex-fill p-0">
-                                                <div class="flex-fill h-100 seat-btn">
-                                                    <span class="seat-num">桌號：<span>1</span></span>
-                                                    <span class="seat-people ">座位人數：<span>4</span></span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                        <div class="col col-3 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-primary flex-fill p-0">
-                                                <div class="flex-fill h-100 seat-btn">
-                                                    <span class="seat-num">桌號：<span>1</span></span>
-                                                    <span class="seat-people ">座位人數：<span>4</span></span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                        <div class="col col-3 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-primary flex-fill p-0">
-                                                <div class="flex-fill h-100 seat-btn">
-                                                    <span class="seat-num">桌號：<span>1</span></span>
-                                                    <span class="seat-people ">座位人數：<span>4</span></span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                        <div class="col col-3 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-primary flex-fill p-0">
-                                                <div class="flex-fill h-100 seat-btn">
-                                                    <span class="seat-num">桌號：<span>1</span></span>
-                                                    <span class="seat-people ">座位人數：<span>4</span></span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                        <div class="col col-3 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-primary flex-fill p-0">
-                                                <div class="flex-fill h-100 seat-btn">
-                                                    <span class="seat-num">桌號：<span>1</span></span>
-                                                    <span class="seat-people ">座位人數：<span>4</span></span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                        <div class="col col-3 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-primary flex-fill p-0">
-                                                <div class="flex-fill h-100 seat-btn">
-                                                    <span class="seat-num">桌號：<span>1</span></span>
-                                                    <span class="seat-people ">座位人數：<span>4</span></span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                        <div class="col col-3 d-flex">
-                                            <button type="button"
-                                                class="style-set btn btn-primary flex-fill p-0">
-                                                <div class="flex-fill "
-                                                    style="font-size: 80px; vertical-align: middle;">+
-                                                </div>
-                                            </button>
-                                        </div>
+                                <div class="row me-1">
+                                    <div class="col-2 d-flex ps-2 pe-1">
+                                        <a class="btn btn-primary btn-sm flex-fill" id="openhour-allCheck"
+                                            type="button">全選</a>
+                                        <a class="btn btn-primary btn-sm flex-fill"
+                                            id="openhour-removeAllCheck" type="button"
+                                            style="display: none;">清空</a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 text-nowrap">
-                            <div class="row ps-2 pe-3 ">
-                                <div class="panel-body panel scheduler-border pb-2 ">
-                                    <h5 class="text-on-pannel text-primary">
-                                        <strong class="text-uppercase">座位設定</strong>
-                                    </h5>
-                                    <div class="row col-8 offset-2 mb-4 px-2 mt-3">
-                                        <div class="panel-body panel scheduler-border pb-2">
-                                            <h5 class="text-on-pannel text-primary">
-                                                <strong class="text-uppercase">桌號</strong>
-                                            </h5>
-                                            <input class="form-control" type="text" />
-                                        </div>
+                                    <div class="offset-5 col-3 d-flex px-1">
+                                        <a class="btn btn-primary btn-sm flex-fill" type="button"
+                                            data-bs-toggle="modal" data-bs-target="#tdItemModalDiv"
+                                            id="openhour-deleteAllbtn">刪除選取</a>
                                     </div>
-                                    <div class="row col-8 offset-2 mb-4 px-2 mt-3">
-                                        <div class="panel-body panel scheduler-border pb-2">
-                                            <h5 class="text-on-pannel text-primary">
-                                                <strong class="text-uppercase">座位人數</strong>
-                                            </h5>
-                                            <input class="form-control" type="text" />
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="offset-6 col-2 d-flex px-2">
-                                            <button type="button" class="btn btn-primary flex-fill">移除</button>
-                                        </div>
-                                        <div class=" col-2 d-flex px-2 ">
-                                            <button type="button" class="btn btn-primary flex-fill">確定</button>
-                                        </div>
-
+                                    <div class="col-2 d-flex px-1">
+                                        <a class="btn btn-primary btn-sm flex-fill" type="button"
+                                            data-bs-toggle="modal" data-bs-target="#tdItemModalDiv"
+                                            id="openhour-addbtn">新增</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- opening hour tab -->
-                <div id="opening-setting-div" class="container-fluid tab-pane fade">
-                    <div class="row col-10 offset-1 pt-3">
-                        <div class="col-4 text-nowrap">
-                            <div class="row px-2">
-                                <div class="panel-body panel scheduler-border pb-2">
-                                    <h5 class="text-on-pannel text-primary">
-                                        <strong class="text-uppercase">營業時間</strong>
-                                    </h5>
-                                    <div class="row me-1">
-                                        <div style="overflow-x: auto; width: 100%;">
-                                            <div class="me-2">
-                                                <table class="table table-hover table-primary data">
-                                                    <thead class="data">
-                                                        <tr class="data">
-                                                            <th class="checkbox-td">勾選</th>
-                                                            <th class="table_Time">星期幾</th>
-                                                            <th class="targetItem">營業時間</th>
-                                                            <th class="data"></th>
-                                                            <th class="data">刪除</th>
-                                                            <th class="data">修改</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="faq-body data" id="openhourTody">
-                                                        <tr class="data">
-                                                            <td class="checkbox-td data ">
-                                                                <input class="form-check-input "
-                                                                    type="checkbox">
-                                                            </td>
-                                                            <td class="data">星期一</td>
-                                                            <td class="data">8:00</td>
-                                                            <td class="data">13:00</td>
-                                                            <td class="td-btn p-1">
-
-                                                                <div class="d-flex">
-                                                                    <a class="btn btn-primary btn-sm flex-fill"
-                                                                        type="button">刪除</a>
-                                                                </div>
-                                                            </td>
-                                                            <td class="td-btn p-1">
-                                                                <div class="d-flex td-btn">
-                                                                    <a class="btn btn-primary btn-sm flex-fill"
-                                                                        type="button" data-bs-toggle="modal"
-                                                                        data-bs-target="#tdItemModalDiv">修改</a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row me-1">
-                                        <div class="col-2 d-flex ps-2 pe-1">
-                                            <a class="btn btn-primary btn-sm flex-fill" id="openhour-allCheck"
-                                                type="button">全選</a>
-                                            <a class="btn btn-primary btn-sm flex-fill"
-                                                id="openhour-removeAllCheck" type="button"
-                                                style="display: none;">清空</a>
-                                        </div>
-                                        <div class="offset-5 col-3 d-flex px-1">
-                                            <a class="btn btn-primary btn-sm flex-fill" type="button"
-                                                data-bs-toggle="modal" data-bs-target="#tdItemModalDiv"
-                                                id="openhour-deleteAllbtn">刪除選取</a>
-                                        </div>
-                                        <div class="col-2 d-flex px-1">
-                                            <a class="btn btn-primary btn-sm flex-fill" type="button"
-                                                data-bs-toggle="modal" data-bs-target="#tdItemModalDiv"
-                                                id="openhour-addbtn">新增</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-8 text-nowrap">
-                            <div class="row ps-2 pe-3 ">
-                                <div class="panel-body panel scheduler-border pb-2 ">
-                                    <h5 class="text-on-pannel text-primary">
-                                        <strong class="text-uppercase">特定休假</strong>
-                                    </h5>
-                                    <div class="accordion accordion-flush " id="accordionFlushExample">
-                                        <div class="accordion-item ">
-                                            <h2 class="accordion-header " id="flush-headingOne">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                                    aria-controls="flush-collapseOne">
-                                                    休假
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseOne" class="accordion-collapse collapse show"
-                                                aria-labelledby="flush-headingOne"
-                                                data-bs-parent="#accordionFlushExample">
-                                                <div class="pe-1" style=" width: 100%;">
-                                                    <div class="me-2">
-                                                        <table class="table table-hover table-primary data">
-                                                            <thead class="data">
-                                                                <tr class="data">
-                                                                    <th class="checkbox-td">勾選</th>
-                                                                    <th class="rest-day-td">日期</th>
-                                                                    <th class="rest-weekDay-td">星期幾</th>
-                                                                    <th class="rest-time-td">休假時間</th>
-                                                                    <th class="data">說明</th>
-                                                                    <th class="rest-btn-td">刪除</th>
-                                                                    <th class="rest-btn-td">修改</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="faq-body data" id="closeTimeNewTbody">
-                                                                <tr class="data">
-                                                                    <td class="checkbox-td data ">
-                                                                        <input class="form-check-input "
-                                                                            type="checkbox">
-                                                                    </td>
-                                                                    <td class="rest-day-td">
-                                                                        <div>2023-06-05</div>
-                                                                        <div class="intervalTime"></div>
-                                                                        <div>2023-06-05</div>
-                                                                    </td>
-                                                                    <td class="rest-weekDay-td">
-                                                                        <div>星期一</div>
-                                                                        <div class="intervalTime">></div>
-                                                                        <div>星期一</div>
-                                                                    </td>
-                                                                    <td class="rest-time-td">
-                                                                        <div>8:00</div>
-                                                                        <div class="intervalTime"> </div>
-                                                                        <div>8:00</div>
-                                                                    </td>
-                                                                    <td class="data">
-                                                                        <p class="text-wrap">
-                                                                            說明
-                                                                        </p>
-                                                                    </td>
-                                                                    <td class="rest-btn-td p-1">
-                                                                        <div class="d-flex">
-                                                                            <a class="btn btn-primary btn-sm flex-fill"
-                                                                                type="button">刪除</a>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="rest-btn-td p-1">
-                                                                        <div class="d-flex td-btn">
-                                                                            <a class="btn btn-primary btn-sm flex-fill"
-                                                                                type="button"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#tdItemModalDiv">修改</a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="row m-2">
-                                                        <div class="col-2 d-flex ps-2 pe-1">
-                                                            <a class="btn btn-primary btn-sm flex-fill"
-                                                                id="closetime-allCheck" type="button">全選</a>
-                                                            <a class="btn btn-primary btn-sm flex-fill"
-                                                                id="closetime-removeAllCheck" type="button"
-                                                                style="display: none;">清空</a>
-                                                        </div>
-                                                        <div class="offset-5 col-3 d-flex px-1">
-                                                            <a id="closetime-deleteAllbtn"
-                                                                class="btn btn-primary btn-sm flex-fill"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#tdItemModalDiv"
-                                                                type="button">刪除選取</a>
-                                                        </div>
-                                                        <div class="col-2 d-flex px-1">
-                                                            <a id="closetime-addbtn"
-                                                                class="btn btn-primary btn-sm flex-fill"
-                                                                type="button" data-bs-toggle="modal"
-                                                                data-bs-target="#tdItemModalDiv">新增</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingTwo">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                                    aria-controls="flush-collapseTwo">
-                                                    過去休假
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                                aria-labelledby="flush-headingTwo"
-                                                data-bs-parent="#accordionFlushExample">
-                                                <div class="pe-1" style=" width: 100%;">
-                                                    <div class="me-2">
-                                                        <table class="table table-hover table-primary data">
-                                                            <thead class="data">
-                                                                <tr class="data">
-                                                                    <th class="rest-day-td">日期</th>
-                                                                    <th class="rest-weekDay-td">星期幾</th>
-                                                                    <th class="rest-time-td">休假時間</th>
-                                                                    <!-- <th class="rest-time-td"></th> -->
-                                                                    <th class="data">說明</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="faq-body data" id="closeTimeOldTbody">
-                                                                <tr class="data">
-                                                                    <td class="rest-day-td">
-                                                                        <div>2023-06-05</div>
-                                                                        <div class="intervalTime"></div>
-                                                                        <div>2023-06-05</div>
-                                                                    </td>
-                                                                    <td class="rest-weekDay-td">
-                                                                        <div>星期一</div>
-                                                                        <div class="intervalTime">></div>
-                                                                        <div>星期一</div>
-                                                                    </td>
-                                                                    <td class="rest-time-td">
-                                                                        <div>8:00</div>
-                                                                        <div class="intervalTime"> </div>
-                                                                        <div>8:00</div>
-                                                                    </td>
-                                                                    <!-- <td class="rest-time-td">13:00</td> -->
-                                                                    <td class="data text-wrap">
+                    <div class="col-8 text-nowrap">
+                        <div class="row ps-2 pe-3 ">
+                            <div class="panel-body panel scheduler-border pb-2 ">
+                                <h5 class="text-on-pannel text-primary">
+                                    <strong class="text-uppercase">特定休假</strong>
+                                </h5>
+                                <div class="accordion accordion-flush " id="accordionFlushExample">
+                                    <div class="accordion-item ">
+                                        <h2 class="accordion-header " id="flush-headingOne">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                                aria-controls="flush-collapseOne">
+                                                休假
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                                            aria-labelledby="flush-headingOne"
+                                            data-bs-parent="#accordionFlushExample">
+                                            <div class="pe-1" style=" width: 100%;">
+                                                <div class="me-2">
+                                                    <table class="table table-hover table-primary data">
+                                                        <thead class="data">
+                                                            <tr class="data">
+                                                                <th class="checkbox-td">勾選</th>
+                                                                <th class="rest-day-td">日期</th>
+                                                                <th class="rest-weekDay-td">星期幾</th>
+                                                                <th class="rest-time-td">休假時間</th>
+                                                                <th class="data">說明</th>
+                                                                <th class="rest-btn-td">刪除</th>
+                                                                <th class="rest-btn-td">修改</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="faq-body data" id="closeTimeNewTbody">
+                                                            <tr class="data">
+                                                                <td class="checkbox-td data ">
+                                                                    <input class="form-check-input "
+                                                                        type="checkbox">
+                                                                </td>
+                                                                <td class="rest-day-td">
+                                                                    <div>2023-06-05</div>
+                                                                    <div class="intervalTime"></div>
+                                                                    <div>2023-06-05</div>
+                                                                </td>
+                                                                <td class="rest-weekDay-td">
+                                                                    <div>星期一</div>
+                                                                    <div class="intervalTime">></div>
+                                                                    <div>星期一</div>
+                                                                </td>
+                                                                <td class="rest-time-td">
+                                                                    <div>8:00</div>
+                                                                    <div class="intervalTime"> </div>
+                                                                    <div>8:00</div>
+                                                                </td>
+                                                                <td class="data">
+                                                                    <p class="text-wrap">
                                                                         說明
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                                    </p>
+                                                                </td>
+                                                                <td class="rest-btn-td p-1">
+                                                                    <div class="d-flex">
+                                                                        <a class="btn btn-primary btn-sm flex-fill"
+                                                                            type="button">刪除</a>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="rest-btn-td p-1">
+                                                                    <div class="d-flex td-btn">
+                                                                        <a class="btn btn-primary btn-sm flex-fill"
+                                                                            type="button"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#tdItemModalDiv">修改</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="row m-2">
+                                                    <div class="col-2 d-flex ps-2 pe-1">
+                                                        <a class="btn btn-primary btn-sm flex-fill"
+                                                            id="closetime-allCheck" type="button">全選</a>
+                                                        <a class="btn btn-primary btn-sm flex-fill"
+                                                            id="closetime-removeAllCheck" type="button"
+                                                            style="display: none;">清空</a>
                                                     </div>
+                                                    <div class="offset-5 col-3 d-flex px-1">
+                                                        <a id="closetime-deleteAllbtn"
+                                                            class="btn btn-primary btn-sm flex-fill"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#tdItemModalDiv"
+                                                            type="button">刪除選取</a>
+                                                    </div>
+                                                    <div class="col-2 d-flex px-1">
+                                                        <a id="closetime-addbtn"
+                                                            class="btn btn-primary btn-sm flex-fill"
+                                                            type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#tdItemModalDiv">新增</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingTwo">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                                aria-controls="flush-collapseTwo">
+                                                過去休假
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                            aria-labelledby="flush-headingTwo"
+                                            data-bs-parent="#accordionFlushExample">
+                                            <div class="pe-1" style=" width: 100%;">
+                                                <div class="me-2">
+                                                    <table class="table table-hover table-primary data">
+                                                        <thead class="data">
+                                                            <tr class="data">
+                                                                <th class="rest-day-td">日期</th>
+                                                                <th class="rest-weekDay-td">星期幾</th>
+                                                                <th class="rest-time-td">休假時間</th>
+                                                                <!-- <th class="rest-time-td"></th> -->
+                                                                <th class="data">說明</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="faq-body data" id="closeTimeOldTbody">
+                                                            <tr class="data">
+                                                                <td class="rest-day-td">
+                                                                    <div>2023-06-05</div>
+                                                                    <div class="intervalTime"></div>
+                                                                    <div>2023-06-05</div>
+                                                                </td>
+                                                                <td class="rest-weekDay-td">
+                                                                    <div>星期一</div>
+                                                                    <div class="intervalTime">></div>
+                                                                    <div>星期一</div>
+                                                                </td>
+                                                                <td class="rest-time-td">
+                                                                    <div>8:00</div>
+                                                                    <div class="intervalTime"> </div>
+                                                                    <div>8:00</div>
+                                                                </td>
+                                                                <!-- <td class="rest-time-td">13:00</td> -->
+                                                                <td class="data text-wrap">
+                                                                    說明
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -664,110 +651,153 @@
                     </div>
                 </div>
             </div>
-            <div id="tdItemModalDiv" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content px-3">
-                        <div class="modal-header pb-1">
-                            <h5 class="modal-title" id="modalTitle">新增特定休假</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body pt-2 pb-2">
-                            <!-- day of week -->
-                            <div class="row" id="modalDayRowDiv">
-                                <div class="col-4 d-flex align-items-center">
-                                    <label class=" justify-content-center align-items-center">星期：</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select" aria-label="select day of week"
-                                        id="dayOfWeekSelect">
-                                        <option selected hidden class="default">選取星期</option>
-                                        <option value="0">星期日</option>
-                                        <option value="1">星期一</option>
-                                        <option value="2">星期二</option>
-                                        <option value="3">星期三</option>
-                                        <option value="4">星期四</option>
-                                        <option value="5">星期五</option>
-                                        <option value="6">星期六</option>
-                                    </select>
-                                </div>
+        </div>
+        
+        <!-- seat-setting-modal -->
+        <div id="seatSettingModalDiv" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content px-3">
+                    <div class="modal-header pb-1">
+                        <h5 class="modal-title" id="seatSettingModalTitle">新增特定休假</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body pt-2 pb-2">
+                        <div class="row">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">桌號：</label>
                             </div>
-
-                            <!-- start date -->
-                            <div class="row" id="modalStartDateRowDiv">
-                                <div class="col-4 d-flex align-items-center">
-                                    <label class=" justify-content-center align-items-center">開始日期：</label>
-                                </div>
-                                <div class="col-5">
-                                    <input class="form-control" id="setStartDate" name="setStartDate"
-                                        placeholder='yyyy-mm-dd' type="text" />
-                                </div>
-                            </div>
-
-                            <!-- start time -->
-                            <div class="row" id="modalStartTimeRowDiv">
-                                <div class="col-4 d-flex align-items-center">
-                                    <label class=" justify-content-center align-items-center">開始時間：</label>
-                                </div>
-                                <div class="col-5">
-                                    <button class="form-select " type="button" id="dropdownMenuStartTimeBtn"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        選取時間
-                                    </button>
-                                    <ul class="dropdown-menu timepicker"
-                                        aria-labelledby="dropdownMenuStartTimeBtn" id="startTimeUl">
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- end date -->
-                            <div class="row" id="modalEndDateRowDiv">
-                                <div class="col-4 d-flex align-items-center">
-                                    <label class=" justify-content-center align-items-center">結束日期：</label>
-                                </div>
-                                <div class="col-5">
-                                    <input class="form-control" id="setEndDate" name="setEndDate"
-                                        placeholder='選取日期' type="text" readonly />
-                                </div>
-                            </div>
-
-                            <!-- end time -->
-                            <div class="row" id="modalEndTimeRowDiv">
-                                <div class="col-4 d-flex align-items-center">
-                                    <label class=" justify-content-center align-items-center">結束時間：</label>
-                                </div>
-                                <div class="col-5">
-                                    <button class="form-select " type="button" id="dropdownMenuEndTimeBtn"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        選取時間
-                                    </button>
-                                    <ul class="dropdown-menu timepicker"
-                                        aria-labelledby="dropdownMenuEndTimeBtn" id="endTimeUl">
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- description -->
-                            <div class="row" id="modalDescriptionRowDiv">
-                                <div class="col-4 d-flex align-items-center">
-                                    <label class=" justify-content-center align-items-center">說明：</label>
-                                </div>
-                                <div class="col-8">
-                                    <textarea class="form-control text-wrap" type="text" style="height: 100px;"
-                                        id="description-textarea"></textarea>
-                                </div>
+                            <div class="col-5">
+                                <input class="form-control" type="text" />
                             </div>
                         </div>
-                        <div class="modal-footer px-0">
-                            <div class="row flex-fill">
-                                <!-- <button type="button" class="col col-md-3 btn btn-primary">清空</button> -->
-                                <button type="button" class="col col-md-3 btn btn-primary offset-sm-9"
-                                    id="sureBtn">確定</button>
+                        <div class="row">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">座位人數：</label>
                             </div>
+                            <div class="col-5">
+                                <input class="form-control" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer px-0">
+                        <div class="row flex-fill">
+                            <button type="button" class="col col-md-3 btn btn-primary offset-sm-5"
+                                id="seatSettingRemoveBtn">移除</button>
+                            <div class="col col-3 offset-6" hidden></div>
+                            <button type="button" class="col col-md-3 btn btn-primary offset-1"
+                                id="seatSettingSureBtn">確定</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- opening-setting-modal -->
+        <div id="tdItemModalDiv" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content px-3">
+                    <div class="modal-header pb-1">
+                        <h5 class="modal-title" id="modalTitle">新增特定休假</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body pt-2 pb-2">
+                        <!-- day of week -->
+                        <div class="row" id="modalDayRowDiv">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">星期：</label>
+                            </div>
+                            <div class="col-5">
+                                <select class="form-select" aria-label="select day of week"
+                                    id="dayOfWeekSelect">
+                                    <option selected hidden class="default">選取星期</option>
+                                    <option value="0">星期日</option>
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                    <option value="6">星期六</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- start date -->
+                        <div class="row" id="modalStartDateRowDiv">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">開始日期：</label>
+                            </div>
+                            <div class="col-5">
+                                <input class="form-control" id="setStartDate" name="setStartDate"
+                                    placeholder='yyyy-mm-dd' type="text" />
+                            </div>
+                        </div>
+
+                        <!-- start time -->
+                        <div class="row" id="modalStartTimeRowDiv">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">開始時間：</label>
+                            </div>
+                            <div class="col-5">
+                                <button class="form-select " type="button" id="dropdownMenuStartTimeBtn"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    選取時間
+                                </button>
+                                <ul class="dropdown-menu timepicker"
+                                    aria-labelledby="dropdownMenuStartTimeBtn" id="startTimeUl">
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- end date -->
+                        <div class="row" id="modalEndDateRowDiv">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">結束日期：</label>
+                            </div>
+                            <div class="col-5">
+                                <input class="form-control" id="setEndDate" name="setEndDate"
+                                    placeholder='選取日期' type="text" readonly />
+                            </div>
+                        </div>
+
+                        <!-- end time -->
+                        <div class="row" id="modalEndTimeRowDiv">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">結束時間：</label>
+                            </div>
+                            <div class="col-5">
+                                <button class="form-select " type="button" id="dropdownMenuEndTimeBtn"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    選取時間
+                                </button>
+                                <ul class="dropdown-menu timepicker"
+                                    aria-labelledby="dropdownMenuEndTimeBtn" id="endTimeUl">
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- description -->
+                        <div class="row" id="modalDescriptionRowDiv">
+                            <div class="col-4 d-flex align-items-center">
+                                <label class=" justify-content-center align-items-center">說明：</label>
+                            </div>
+                            <div class="col-8">
+                                <textarea class="form-control text-wrap" type="text" style="height: 100px;"
+                                    id="description-textarea"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer px-0">
+                        <div class="row flex-fill">
+                            <!-- <button type="button" class="col col-md-3 btn btn-primary">清空</button> -->
+                            <button type="button" class="col col-md-3 btn btn-primary offset-sm-9"
+                                id="sureBtn">確定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script>
