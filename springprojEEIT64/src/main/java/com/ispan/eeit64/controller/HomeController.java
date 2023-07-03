@@ -76,6 +76,11 @@ public class HomeController {
         return "restInfo";
     }
 	
+	@GetMapping("/dataAnalysis")
+	public String dataAnalysis() {
+	    return "dataAnalysis";
+	}
+	
 	
 	
 	

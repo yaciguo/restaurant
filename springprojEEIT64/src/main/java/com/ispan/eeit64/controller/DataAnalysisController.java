@@ -1,30 +1,29 @@
 package com.ispan.eeit64.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.ispan.eeit64.jsonBean.DishJson;
-import com.ispan.eeit64.jsonBean.OrderJson;
-import com.ispan.eeit64.jsonBean.reader.ReadJson;
+import com.ispan.eeit64.controller.APIResult.APIResult;
+import com.ispan.eeit64.controller.APIResult.StatusCode;
+import com.ispan.eeit64.service.impl.DataAnalysisServiceImpl;
 
 @Controller
+@RequestMapping("/basicSettings.api")
 public class DataAnalysisController {	
-
-	@GetMapping("/dataAnalysis")
-	public String dataAnalysis() {
-	    return "dataAnalysis";
-	}
-	
+	@Autowired
+	DataAnalysisServiceImpl service;
 //	@GetMapping("/dataAnalysis.api/CategoryAndDish")
 //	public @ResponseBody List<Object> getCategoryAndDishName(){
 //		List<Object> list = new ArrayList<>();
@@ -53,14 +52,22 @@ public class DataAnalysisController {
 //		return list;
 //	}            
 	
-	@GetMapping("/dataAnalysis.api/order")
-	public @ResponseBody List<OrderJson>  findMemberToUpdate(Model model) {
-		String jsonStr = ReadJson.getJsonFileString("/static/assets/json/orders.json");
-		if(jsonStr != null) {
-			List<OrderJson> json = new Gson().fromJson(jsonStr, new TypeToken<List<OrderJson>>() {}.getType());
-			return json;
-		}
-		List<OrderJson> list = new LinkedList<>();
-        return list;
+	@GetMapping("/getProfit")
+	public @ResponseBody APIResult  getProfit(
+		@RequestBody Map<String, Object> condition
+		) throws ParseException {
+		SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
+		int method = (int)condition.get("method");
+		Set<Integer> ids = new HashSet<>((List<Integer>)condition.get("ids"));
+		Date startDate = ymd.parse((String)condition.get("startDate"));
+		Date endDate = ymd.parse((String)condition.get("endDate"));
+		
+		APIResult apiResult = new APIResult();
+
+		List<Map<String,Object>> data = service.getProfit(method, ids, startDate, endDate);
+		apiResult.setData(data);
+		apiResult.setCode(StatusCode.SUCCESS);
+		apiResult.setMsg("成功提取資料");
+		return apiResult;
 	}
 }
