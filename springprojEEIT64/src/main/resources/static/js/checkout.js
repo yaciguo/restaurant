@@ -12,10 +12,12 @@ $(function () {
 	// 監聽 Bootstrap Tabs 切換事件
 	$('#payment-tabs').on('shown.bs.tab', function(e) {
 		var targetTab = $(e.target).attr('href');
-		if (targetTab === '#tab2') {
-			loadUnpaidData("takeOut");
-		}else{
+		if (targetTab === '#tab1') {
 			loadUnpaidData("eatIn");
+		}else if (targetTab === '#tab2'){
+			loadUnpaidData("takeOut");
+		}else if (targetTab === '#tab3'){
+			loadPaidData("paid");
 		}
 	});
 });
@@ -43,27 +45,54 @@ function loadUnpaidData(type, pageId) {
 	    }
 	});
 }
+
+// 讀取已付款訂單
+function loadPaidData(type, pageId) {
+	var pid = (pageId === undefined) ? 1 : pageId;
+	
+	$.ajax({
+		url: contextPath + '/queryPaid?pageNumber=' + pid + '&orderType=' + type,
+	    type: 'GET',
+	    beforeSend: function(xhr) {
+	        xhr.setRequestHeader(csrfHeaderName, csrfToken);
+	    },
+	    success: function(response) {
+	        console.log("--------------ajax-queryUnpaid " + response.number);
+	        console.log(response);
+	        console.log(response.content);
+	        var currentPage = response.number + 1;
+	        generatePaymentTable(response.content, type);
+	        generatePagination(type, response.totalPages, currentPage);
+	    },
+	    error: function(error) {
+	        console.log('未付款訂單讀取失敗:', error);
+	    }
+	});
+}
  
 // 動態生成表格內容
 function generatePaymentTable(response, type) {
     var target;
     if (type == "eatIn") {
         target = $('#eatInContent');
-    } else {
+    } else if (type == "takeOut"){
         target = $('#takeOutContent');
-    }
+    } else if (type == 'paid'){
+		target = $('#paidContent');
+	}
     target.empty();
 
     var htmlContent = '';
     for (var i = 0; i < response.length; i++) {
     	var result = response[i];
-        htmlContent += '<tr onclick="paymentAlert(this)">';
+    	
+        htmlContent += '<tr onclick="paymentAlert(this, \'' + type + '\')">';
         htmlContent += '<td id="id-cell">' + result.id + '</td>';
         htmlContent += '<td id="name-cell">' + result.order.customer + '</td>';
 
         var paymentType = result.order.type;
         // 資料表欄位oders.type = I/O (內用/外帶)
-        if (paymentType == "O") {
+        if (type != 'paid' && paymentType == "O") {
             htmlContent += '<td id="phone-cell">' + result.order.phone + '</td>';
         }
 
@@ -73,7 +102,22 @@ function generatePaymentTable(response, type) {
         	var bean = detailBean[j];
             orderDetailContent += bean.dish.name + "x" + bean.quantity+ ", " ;
         }
-        htmlContent += '<td id="meal-cell">' + orderDetailContent + '</td>';
+        if (type != 'paid') {
+       		htmlContent += '<td id="meal-cell">' + orderDetailContent + '</td>';
+        }else{
+	        htmlContent += '<input type="hidden" id="detailHidden" value="' + orderDetailContent + '">';
+		}
+		
+        if (type == 'paid')  {
+			var dateTime = new Date(result.payTime);
+			var month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
+			var date = dateTime.getDate().toString().padStart(2, '0');
+			var hours = dateTime.getHours().toString().padStart(2, '0');
+			var minutes = dateTime.getMinutes().toString().padStart(2, '0');
+			var formattedDateTime = `${month}/${date}-${hours}:${minutes}`;
+				
+			htmlContent += '<td id="time-cell">' + formattedDateTime + '</td>';
+		}
         
         htmlContent += '<td id="amount-cell">' + result.order.amount + '</td>';
         htmlContent += '</tr>';
@@ -87,27 +131,33 @@ function generatePagination(type, totalPages, currentPage){
     var target;
     if (type == "eatIn") {
         target = $('#eatInPagination');
-    } else {
+    } else if (type == "takeOut"){
         target = $('#takeOutPagination');
-    }
+    }else if (type === 'paid'){
+		target = $('#paidPagination');
+	}
     target.empty();
     
 	var htmlContent = '';
-	htmlContent += '<li class="page-item"><a class="page-link" onclick="changePage(\'prev\', ' + totalPages + ', ' + currentPage + ')">&laquo;</a></li>';
+	htmlContent += '<li class="page-item"><a class="page-link" onclick="changePage(\'' + type + '\', \'prev\', ' + totalPages + ', ' + currentPage + ')">&laquo;</a></li>';
 	for (var i = 1; i <= totalPages; i++) {
-        if (i == currentPage) {
-        	htmlContent += '<li class="page-item active"><a class="page-link" onclick="loadUnpaidData(\'' + type + '\', ' + i + ')">' + i + '</a></li>';
-        } else {
-            htmlContent += '<li class="page-item"><a class="page-link" onclick="loadUnpaidData(\'' + type + '\', ' + i + ')">' + i + '</a></li>';
-        }
+		if (i == currentPage) {
+		    htmlContent += '<li class="page-item active"><a class="page-link" onclick="';
+		    htmlContent += (type === 'paid') ? 'loadPaidData("paid")' : 'loadUnpaidData(\'' + type + '\', ' + i + ')';
+		    htmlContent += '">' + i + '</a></li>';
+		} else {
+		    htmlContent += '<li class="page-item"><a class="page-link" onclick="';
+		    htmlContent += (type === 'paid') ? 'loadPaidData("paid")' : 'loadUnpaidData(\'' + type + '\', ' + i + ')';
+		    htmlContent += '">' + i + '</a></li>';
+		}
     }
-	htmlContent+='<li class="page-item"><a class="page-link" onclick="changePage(\'next\', ' + totalPages + ', ' + currentPage + ')">&raquo;</a></li>';
+	htmlContent+='<li class="page-item"><a class="page-link" onclick="changePage(\'' + type + '\', \'next\', ' + totalPages + ', ' + currentPage + ')">&raquo;</a></li>';
 	
 	target.html(htmlContent);
 }
 	
 // 按鈕觸發換頁
-function changePage(option,totalPages, currentPage){
+function changePage(type, option, totalPages, currentPage){
 	var newPage;
 	if (option === 'prev') {
 	  newPage = Math.max(currentPage - 1, 1);
@@ -119,11 +169,16 @@ function changePage(option,totalPages, currentPage){
 		return
 	}
 	
-	loadUnpaidData(newPage);
+	if(type == "paid"){
+		loadPaidData(type, newPage);
+	}else{
+		loadUnpaidData(type, newPage);
+	}
+	
 }
  
 // 開啟 訂單明細&結帳
-function paymentAlert(event) {
+function paymentAlert(event, type) {
     var pModal = $('#payment-modal');
     var pBody = $('.paymentBody');
 
@@ -136,31 +191,54 @@ function paymentAlert(event) {
     col.each(function () {
         colText.push($(this).text());
     })
+    
+	var meal = $(event).find('#detailHidden').val();
+	if(type == "paid"){
+		colText.push(meal);
+	}
+	
+	for (var index = 0; index < colText.length; index++){
+		if (title[index]){
+	        var titleId = title[index].id;
+	        var titleText = title[index].textContent;
+        }
 
-    title.each(function (index) {
-        var titleId = $(this).attr('id');
-        var titleText = $(this).text();
-
+        htmlContent += '<div class="payment-detail">';
+        htmlContent += '<strong>' + titleText + '：</strong>';
+        
 		if (titleId === "id-titleCell") {
 			pBody.attr('data-id', colText[index]);
 		}
+		
 		if (titleId === "amount-titleCell") {
 			pBody.attr('data-amount', colText[index]);
 		}
-		
-        htmlContent += '<div class="payment-detail">';
-        htmlContent += '<strong>' + titleText + '：</strong>';
 
         if (titleId === "meal-titleCell") {
             htmlContent += '<textarea rows="4" class="w-100" disabled>' + colText[index] + '</textarea>';
         } else {
             htmlContent += '<input type="text" style="width: 100%;" disabled value="' + colText[index] + ' " >';
         }
+         
+        if (type == "paid" && index == title.length - 1){
+			titleText ="明細";
+			titleId = "meal-titleCell";
+		}
 
         htmlContent += '</div>';
-
-    });
+    };
+    
     pBody.html(htmlContent);
+    
+	if (type == "paid") {
+		$('.calculatorBody').removeClass('d-flex');
+	    $('.calculatorBody').hide();
+
+	    $('.paymentBody').removeClass('col-6');
+	} else {
+		$('.calculatorBody').addClass('d-flex');
+		$('.paymentBody').addClass('col-6');
+	}
 
     var modalInstance = new bootstrap.Modal(pModal);
     modalInstance.show();
@@ -231,24 +309,21 @@ function showConfirm() {
     
 // 付款 - 結單
 function calculate() {
-    console.log("-------calculate------")
-    var cashInput = $("#cashInput");
-    
     var paymentId = $('.paymentBody').attr('data-id');
     
-//         $.ajax({
-//         	url: contextPath + '/updateCheckoutBean?paymentId=' + paymentId,
-//             type: 'PUT',
-// 		    beforeSend: function(xhr) {
-// 		        xhr.setRequestHeader(csrfHeaderName, csrfToken);
-// 		    },
-// 		    success: function(response) {
-// 		    	console.log('-----付款成功-----');
-// 				loadUnpaidData();
-// 		    },
-// 		    error: function(error) {
-// 		        console.log('付款失敗:', error);
-// 		    }
-// 		});
+     $.ajax({
+     	url: contextPath + '/updateCheckoutBean?paymentId=' + paymentId,
+         type: 'PUT',
+	    beforeSend: function(xhr) {
+	        xhr.setRequestHeader(csrfHeaderName, csrfToken);
+	    },
+	    success: function() {
+	    	console.log('-----付款成功-----');
+			loadUnpaidData();
+	    },
+	    error: function(error) {
+	        console.log('付款失敗:', error);
+	    }
+	});
            
 }
