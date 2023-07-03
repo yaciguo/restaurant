@@ -13,6 +13,8 @@
   <title>booking</title> 
   <script type="text/javascript" src="<c:url value='/js/booking.js' />"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- fontAwesome - icon插件 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 </head>
 <style>
@@ -58,6 +60,45 @@ footer {
 
 </style>
 <script>
+
+//获取人数下拉列表元素==================test===========================================
+$('#pNumber').change(function () {
+  var selectedPNumber = $(this).val();
+  var selectedDate = $('#date').val();
+
+  $.ajax({
+    url: '${pageContext.request.contextPath}/custIndex/availableTimes',
+    type: 'GET',
+    data:{ pNumber: selectedPNumber, date: selectedDate },
+    dataType: 'json',
+    success: function (data) {
+      // 在這里處理從後端獲取的可用日期和時間數據
+      console.log(data);
+   // 清空时间选项
+      $('#startTime').empty();
+      
+      // 根据返回的可用桌子ID数组生成时间选项
+      for (var i = 0; i < data.availableTableIds.length; i++) {
+        var tableId = data.availableTableIds[i];
+        
+        // 在时间选项中添加可选项
+        $('#startTime').append('<option value="' + tableId + '">' + tableId + '</option>');
+      }
+      
+      
+      
+    },
+    error: function (xhr, textStatus, errorThrown) {
+      // 处理错误情况
+      console.log(errorThrown);
+    }
+  });
+});
+
+//================================上面test====================================================
+
+
+
 function validateAndRedirect() {
 	
 	var jsonData = {};
@@ -89,11 +130,15 @@ function validateAndRedirect() {
             		 // 重定向到 bookingcheck.jsp，并将成功信息和桌子号码作为URL参数传递
             		window.location.href = "/restaurant/bookingcheck"
                 }, 500); 
+            }else if (responseJson.hasOwnProperty('error')) {
+            	console.log(responseJson);
+                // 显示错误的提示信息
+                alert(responseJson.error);
             }
             
 	      } else {
 	        // 处理错误
-	        console.error("发生错误：" + xhr.status);
+	        console.error("發生錯誤：" + xhr.status);
 // 	        alert("no")
 	        
 	      }

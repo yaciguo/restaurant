@@ -2,9 +2,13 @@ package com.ispan.eeit64.service.impl;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +72,62 @@ public class ReservationServiceImpl implements ReservationService{
 
         return availableTableIds;
     }
+	
+	//=================================查對應的tableid及可用時間 map=================================
+	
+	public List<FdTableBean> getTableIdsByCapacity(Integer capacity) {
+	    return fdTableRepository.getTableIdsByCapacity(capacity);
+	}
+
+	public Map<Integer, List<Time>> getAvailableTimes(List<FdTableBean> tables, String dateString) {
+	    Date date = parseDateString(dateString);
+	    Map<Integer, List<Time>> availableTimesMap = new HashMap<>();
+
+	    // 先定义一个包含所有可用时间的列表
+	    List<Time> allTimes = new ArrayList<>();
+	    allTimes.add(Time.valueOf("11:00:00"));
+	    allTimes.add(Time.valueOf("12:00:00"));
+	    allTimes.add(Time.valueOf("13:00:00"));
+	    allTimes.add(Time.valueOf("16:00:00"));
+	    allTimes.add(Time.valueOf("17:00:00"));
+	    allTimes.add(Time.valueOf("18:00:00"));
+	    allTimes.add(Time.valueOf("19:00:00"));
+
+	    for (FdTableBean table : tables) {
+	        // 根据桌子ID和日期查询已被预订的时间
+	        List<Time> reservedTimes = reservationRepository.getReservedTimes(table, date);
+	        
+	        // 创建该桌子的可用时间列表，初始为所有时间
+	        List<Time> availableTimes = new ArrayList<>(allTimes);
+	        
+	        // 在可用时间列表中移除已被预订的时间
+	        availableTimes.removeAll(reservedTimes);
+	        
+	        // 将该桌子的可用时间列表添加到可用时间的映射中
+	        availableTimesMap.put(table.getTableId(), availableTimes);
+	    }
+
+	    return availableTimesMap;
+	}
+
+	private Date parseDateString(String dateString) {
+	    // 解析日期字符串为java.util.Date对象
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    Date parsedDate = null;
+	    try {
+	        parsedDate = (Date) dateFormat.parse(dateString);
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    // 转换为java.sql.Date对象
+	    return new java.sql.Date(parsedDate.getTime());
+	}
+	
+	
+	
+	
+	//========================================================================================
 
 	
 
