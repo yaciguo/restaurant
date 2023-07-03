@@ -30,33 +30,46 @@ button:hover {
     font-size: 20px;
 }
 
+/* 今日營業時間*/
+#openingHoursDiv p {
+    display: inline;
+    padding-right: 1px;
+
+}
+
+
 #categoryButtons {
-/*   display: grid; */
-/*   grid-auto-flow: column; 水平排列 */
-/*   grid-gap: 5px; 设置元素之间的间距 */
-display: flex;
-  flex-wrap: wrap; /* 自动换行 */
-  justify-content: flex-start; /* 左对齐 */
-  align-items: flex-start; /* 顶部对齐 */
+    /*   display: grid; */
+    /*   grid-auto-flow: column; 水平排列 */
+    /*   grid-gap: 5px; 设置元素之间的间距 */
+    display: flex;
+    flex-wrap: wrap;
+    /* 自动换行 */
+    justify-content: flex-start;
+    /* 左对齐 */
+    align-items: flex-start;
+    /* 顶部对齐 */
 }
 
 .box {
-/*     display: inline-block; */
-flex-basis: calc(100% /7); 
-/*   margin-right: 5px; 元素之间的间距 */
-	
-}
-@media (max-width: 767px) {
-  .box {
-    flex-basis: calc(100% / 6); /* 在较小的视窗下，每行显示6个元素 */
-  }
+    /*     display: inline-block; */
+    flex-basis: calc(100% /7);
+    /*   margin-right: 5px; 元素之间的间距 */
+
 }
 
-#restInfo{
-	border-radius: 10px;
+@media (max-width: 767px) {
+    .box {
+        flex-basis: calc(100% / 6);
+        /* 在较小的视窗下，每行显示6个元素 */
+    }
+}
+
+#restInfo {
+    border-radius: 10px;
     border: none;
     background-color: rgb(239, 164, 84);
-    font-size: 30px; 
+    font-size: 30px;
     color: white;
 }
 

@@ -36,7 +36,7 @@ public class BookingController {
 //        return modelAndView;
 //    }
 //===================================================ok
-    @PostMapping("/newbooking")
+    @PostMapping("/custIndex/newbooking")
     @ResponseBody
     public Map<String, String> createBooking(@RequestBody ReservationBean bean) {
         Map<String, String> response = new HashMap<>();

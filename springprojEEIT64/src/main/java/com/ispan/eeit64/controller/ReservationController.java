@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ispan.eeit64.entity.OrderBean;
 import com.ispan.eeit64.entity.ReservationBean;
 import com.ispan.eeit64.service.impl.ReservationServiceImpl;
 
@@ -98,29 +100,37 @@ public class ReservationController {
     
     
 //查詢預約頁面======================================================
-    @GetMapping("/reservation")
-    public String showReservationForm(@RequestParam(value = "name", required = false) String name,
-                                      @RequestParam(value = "phone", required = false) String phone,
-                                      Model model) {
-        if (name == null) {
-            name = "";
-        }
-        if (phone == null) {
-            phone = "";
-        }
-
-        model.addAttribute("name", name);
-        model.addAttribute("phone", phone);
-
-        return "searchbooking";
-    }
+//    @GetMapping("/reservation")
+//    public String showReservationForm(@RequestParam(value = "name", required = false) String name,
+//                                      @RequestParam(value = "phone", required = false) String phone,
+//                                      Model model) {
+//        if (name == null) {
+//            name = "";
+//        }
+//        if (phone == null) {
+//            phone = "";
+//        }
+//
+//        model.addAttribute("name", name);
+//        model.addAttribute("phone", phone);
+//
+//        return "searchbooking";
+//    }
 
     @PostMapping("/reservation")
-    public String submitReservationForm(@RequestParam("name") String name,
-                                        @RequestParam("phone") String phone,
-                                        Model model) {
+    public String submitReservationForm(@ModelAttribute ReservationBean bean, Model model) {
+    	String name = bean.getName();
+	    String phone = bean.getPhone();
+	    if (name == null || phone == null) {
+            // 前端未輸入值，直接返回 "searchorder" 視圖
+            return "searchbooking";
+        }
         List<ReservationBean> reservations = service.findBynameAndPhone(name, phone);
-        model.addAttribute("reservationList", reservations);
+        if (reservations.isEmpty()) {
+            model.addAttribute("noDataMessage", "查無此訂位資料，請重新查詢!");
+        } else {
+            model.addAttribute("reservationList", reservations);
+        }
 
         return "searchbooking";
     }
