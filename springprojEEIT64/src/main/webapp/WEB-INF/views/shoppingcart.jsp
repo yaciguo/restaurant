@@ -16,6 +16,8 @@
           crossorigin="anonymous"></script>
         <title>shoppingcart</title>
         <link rel="stylesheet" href="<c:url value='/css/shoppingcart.css' />">
+        <!-- fontAwesome - icon插件 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <%-- <script type="text/javascript" src="<c:url value='/js/shoppingcart.js' />"></script> --%>
 
       </head>

@@ -40,7 +40,7 @@ public class SearchOrderController {
 //        return "searchorder";
 //    }
 
-	@PostMapping("/custIndex/searchorders")
+	@PostMapping("/searchorders")
     public String submitOrderForm(@ModelAttribute OrderBean bean, Model model) {
 		String customer = bean.getCustomer();
 	    String phone = bean.getPhone();

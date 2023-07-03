@@ -77,7 +77,7 @@
             </div><br />
             <div class="row">
               <div class="col-sm-4">
-                <form:form action="${pageContext.request.contextPath}/custIndex/searchorders" method="POST">
+                <form:form action="${pageContext.request.contextPath}/searchorders" method="POST">
                   <fieldset>
                     <legend>取餐資料</legend>
                     <label for="">姓名</label><br />
@@ -114,7 +114,11 @@
 
                           <tr>
                             <th>活動名稱</th>
-                            <td>${order.activityBean.name}</td>
+                            <td>${order.activityBean.name}
+                              <c:if test="${order.activityBean.type eq 'gift'}">
+                                （贈品：${order.activityBean.dishBean.name}）
+                              </c:if>
+                            </td>
                           </tr>
 
                           <tr>

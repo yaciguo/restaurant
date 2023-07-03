@@ -62,7 +62,7 @@ function validateAndRedirect() {
 	
 	var jsonData = {};
 	jsonData.startTime = document.getElementById("startTime").value;
-	jsonData.date = document.getElementById("date").value;
+	jsonData.date = new Date(document.getElementById("date").value).toISOString().split("T")[0]; // 获取ISO格式的日期字符串
 	jsonData.pNumber = document.getElementById("pNumber").value;
 	jsonData.name = document.getElementById("name").value;
 	jsonData.phone = document.getElementById("phone").value;
@@ -83,10 +83,11 @@ function validateAndRedirect() {
 // 	        console.log(xhr.responseText);
 	        var responseJson = JSON.parse(xhr.responseText);
             console.log(responseJson); // 将 JSON 数据打印到控制台           
-            if (responseJson.success === "新增成功") {
+            if (responseJson.success) {
+//             	console.log(responseJson.success)
             	setTimeout(function() {
-                    // 重定向到 bookingcheck.jsp
-                    window.location.href = "<c:url value='/bookingcheck' />";
+            		 // 重定向到 bookingcheck.jsp，并将成功信息和桌子号码作为URL参数传递
+            		window.location.href = "/restaurant/bookingcheck"
                 }, 500); 
             }
             
@@ -121,9 +122,9 @@ function validateAndRedirect() {
       <hr />
     </div>
     <div><h4>訂位須知:</h4>
-    1. 只能預訂未來七天內的日期。請選擇日期時確保在可預訂的日期範圍內。<br>
+    1. 只能預訂未來七天內的日期，選擇日期時確保在可預訂的日期範圍內。<br>
 	2. 週六我們不營業，因此無法接受週六的訂位。<br>
-	3. 訂位時間為中午 12:00 至下午 6:00，請在這個時間範圍內進行選擇。<br>
+	3. 營業時間為11:00 至 14:00 及 16:00 至 20:00，請在這個時間範圍內進行選擇。<br>
 	4. 若訂位人數超過四人，請聯絡我們的客服專線進行訂位，電話：(04)23891234。<br><br>
 	謝謝您的合作，期待為您提供美味的餐點！  
     </div>
@@ -174,13 +175,16 @@ function validateAndRedirect() {
           <label for="startTime">時間:</label>
             <form:select path="startTime" id="startTime" required="true" disabled="true">    
               <form:option value="" label="請選擇時間" />
+      		  <form:option value="11:00:00" label="11:00" />
       		  <form:option value="12:00:00" label="12:00" />
 			  <form:option value="13:00:00" label="13:00" />
-			  <form:option value="14:00:00" label="14:00" />
-			  <form:option value="15:00:00" label="15:00" />
+<%-- 			  <form:option value="14:00:00" label="14:00" /> --%>
+<%-- 			  <form:option value="15:00:00" label="15:00" /> --%>
 			  <form:option value="16:00:00" label="16:00" />
 			  <form:option value="17:00:00" label="17:00" />
 			  <form:option value="18:00:00" label="18:00" />
+			  <form:option value="19:00:00" label="19:00" />
+			 
           	</form:select>
           	<form:errors path="startTime" cssClass="error" />
 <!--           	先選日期才能選時間 -->

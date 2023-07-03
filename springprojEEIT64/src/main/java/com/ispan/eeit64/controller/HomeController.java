@@ -70,6 +70,18 @@ public class HomeController {
 		return "menu";
 	}
 	
+	@GetMapping("/menutest")
+	public String menutest(Model model) {
+		LocalDate currentDate = LocalDate.now();
+	    DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
+	    
+	    if (currentDayOfWeek == DayOfWeek.SUNDAY) {
+	        model.addAttribute("closedMessage", "今日無營業"); // 添加關閉通知訊息
+	    }
+		
+		return "menutest";
+	}
+	
 	
 	@GetMapping("/ordercheck")
 	public String ordercheck() {

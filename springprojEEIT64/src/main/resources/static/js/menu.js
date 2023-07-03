@@ -120,14 +120,14 @@ function initializeMenu(contextPath) {
                         currentCategory = categoryName; // 更新当前类别
                     }
                     //"<c:url value='/images/cart.png' />"
-//                    console.log(obj.picture)
-                    let picurl ="/restaurant"+obj.picture
-//                    let picurl =obj.picture
+                    //                    console.log(obj.picture)
+                    let picurl = "/restaurant" + obj.picture
+                    //                    let picurl =obj.picture
                     console.log(picurl)
-                    
+
                     content += `
-	        <tr class="tableRow ${categoryName}">  
-	            <td id="td1" style="width: 15%;"><img src="<c:url value='${picurl}'/>" style="width: 120px;"> </td>
+	        <tr class="tableRow ${categoryName}"> 
+	            <td id="td1" style="width: 15%;"><img src='${picurl}' style="width: 120px;"> </td>
 	            <td id="td2" style="width: 15%;">${obj.name}</td>
 	            <td id="td5" style="width: 30%;">${obj.description}</td>	            
 	            <td id="td3" style="width: 5%;">$ ${obj.price}</td>	            

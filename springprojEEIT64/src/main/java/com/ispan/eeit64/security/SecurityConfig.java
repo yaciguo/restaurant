@@ -77,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/newbooking").permitAll()
                     .antMatchers("/bookingcheck").permitAll()
                     .antMatchers("/menu").permitAll()
+                    .antMatchers("/menutest").permitAll()
                     .antMatchers("/dishes2").permitAll()
                     .antMatchers("/restInfo").permitAll()
                     .antMatchers("/ordercheck").permitAll()
