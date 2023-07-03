@@ -1,6 +1,7 @@
 package com.ispan.eeit64.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class OrderDetailBean {
     @Column(name = "id", length = 10)
     private Integer id;
     
-    @OneToOne
+    @OneToOne //(fetch = FetchType.LAZY)
     @JoinColumn(name="dishId", nullable=false , foreignKey=@ForeignKey(name = "od_fk_dish"))
     private DishBean dish;
 
