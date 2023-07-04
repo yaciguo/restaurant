@@ -59,10 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/assets/img/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/images/**").permitAll()
-<<<<<<< HEAD
-=======
                     .antMatchers("/restaurant/images/**").permitAll()
->>>>>>> sara
                     .antMatchers("/").permitAll()
                     .antMatchers("/**/*.css").permitAll()
                     .antMatchers("/osLogin").permitAll()

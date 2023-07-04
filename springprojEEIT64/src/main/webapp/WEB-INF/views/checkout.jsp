@@ -16,6 +16,8 @@
 			data-bs-toggle="tab" href="#tab1">內用</a></li>
 		<li class="nav-item"><a class="payment-link nav-link"
 			data-bs-toggle="tab" href="#tab2">外帶</a></li>
+		<li class="nav-item"><a class="payment-link nav-link"
+			data-bs-toggle="tab" href="#tab3">已結帳</a></li>
 	</ul>
 
 	<!-- 分頁內容-->
@@ -62,6 +64,28 @@
 					id="takeOutPagination"></ul>
 			</nav>
 		</div>
+		
+		<!-- 標籤三 - 已結帳-->
+		<div class="tab-pane fade" id="tab3">
+			<table class="payment-table">
+				<thead>
+					<tr>
+						<th id="id-titleCell">結帳單號</th>
+						<th id="name-titleCell">顧客</th>
+						<th id="time-titleCell">結帳時間</th>
+						<th id="amount-titleCell">金額</th>
+					</tr>
+				</thead>
+
+				<tbody id="paidContent"></tbody>
+			</table>
+
+			<nav>
+				<ul class="pagination justify-content-center mt-4"
+					id="paidPagination"></ul>
+			</nav>
+		</div>
+		
 	</div>
 
 	<!-- 互動視窗 - 訂單付款 -->
@@ -78,10 +102,10 @@
 				<div class="modal-body px-2">
 					<div class="row">
 						<div class="col-6 paymentBody"></div>
-						<div class="col-6 d-flex ">
+						<div class="col-6 calculatorBody d-flex align-items-center">
 							<div class="calculator border text-center">
 								<input type="text" id="cashInput"
-									class="input m-2 text-end w-75 fs-3" maxlength="10" readonly>
+									class="input m-2 text-end w-75 fs-3 d-inline" maxlength="10" readonly>
 								<div class="row justify-content-center mx-2">
 									<div class="btn w-25 m-2 py-2 btn-warning"
 										onclick="appendToInput('7')">7</div>
@@ -143,7 +167,7 @@
 					<button type="button" class="btn btn-secondary px-5 py-2 mx-4"
 						data-bs-dismiss="modal">取消</button>
 					<button type="submit" class="btn btn-primary px-5 py-2 mx-4"
-						data-bs-dismiss="modal" onclick="calculate()">確認$</button>
+						data-bs-dismiss="modal" onclick="calculate()">確認</button>
 				</div>
 			</div>
 		</div>

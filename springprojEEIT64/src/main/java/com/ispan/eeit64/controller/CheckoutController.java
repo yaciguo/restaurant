@@ -39,7 +39,7 @@ public class CheckoutController {
 //	}
 	
 	@GetMapping("/queryUnpaid")
-	public Page<CheckoutBean> findCheckouts(@RequestParam(defaultValue = "eatIn") String orderType,
+	public Page<CheckoutBean> findUnpaidCheckouts(@RequestParam(defaultValue = "eatIn") String orderType,
 											@RequestParam(defaultValue = "0") int pageNumber,
 											@RequestParam(defaultValue = "4") int pageSize) {
 		
@@ -51,9 +51,19 @@ public class CheckoutController {
 	    }
 		
 		Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
-		Page<CheckoutBean> allCheckout =checkoutRepository.findByOrderType(oType, pageable);
+		Page<CheckoutBean> allUnpaidCheckout =checkoutRepository.findByOrderType(oType, pageable);
 		
-		return allCheckout;
+		return allUnpaidCheckout;
+	}
+	
+	@GetMapping("/queryPaid")
+	public Page<CheckoutBean> findPaidCheckouts(@RequestParam(defaultValue = "0") int pageNumber,
+											@RequestParam(defaultValue = "4") int pageSize) {
+		
+		Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+		Page<CheckoutBean> allPaidCheckout =checkoutRepository.findByPayStatus("Y", pageable);
+		
+	    return allPaidCheckout;
 	}
 	
 	@PutMapping("/updateCheckoutBean")
