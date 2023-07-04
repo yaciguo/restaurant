@@ -21,9 +21,15 @@ public class HomeController {
 	public String custIndex() {
 		return "custIndex";
 	}
+	
 	@GetMapping("/nav")
 	public String nav() {
 		return "nav";
+	}
+	
+	@GetMapping("/sideNav")
+	public String sideNav() {
+		return "sideNav";
 	}
 
 	@GetMapping("/question")
@@ -35,18 +41,21 @@ public class HomeController {
 	public String osLogin() {
 		return "osLogin";
 	}
-
+	
 	@GetMapping("/activity")
 	public String activity() {
 		return "activity";
+	}
+
+	@GetMapping("/checkout")
+	public String checkout() {
+		return "checkout";
 	}
 	  
     @GetMapping("/basicSettings")
     public String basicSettings() {
         return "basicSettings";
     }
-	
-
 	
 	@GetMapping("/searchbooking")
 	public String searchbooking() {
@@ -70,6 +79,7 @@ public class HomeController {
 		return "menu";
 	}
 	
+<<<<<<< HEAD
 	@GetMapping("/menutest")
 	public String menutest(Model model) {
 		LocalDate currentDate = LocalDate.now();
@@ -83,11 +93,12 @@ public class HomeController {
 	}
 	
 	
+=======
+>>>>>>> ling
 	@GetMapping("/ordercheck")
 	public String ordercheck() {
 		return "ordercheck";
 	}
-	
 	
 	@GetMapping("/bookingcheck")
     public String bookingcheck() {      
@@ -100,16 +111,23 @@ public class HomeController {
     }
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> ling
 	@GetMapping("/dataAnalysis")
 	public String dataAnalysis() {
 	    return "dataAnalysis";
 	}
+<<<<<<< HEAD
 =======
 	@GetMapping("/test")
     public String test() {      
         return "test";
     }
 >>>>>>> sara
+=======
+>>>>>>> ling
 	
 	
 	
@@ -126,4 +144,5 @@ public class HomeController {
 	
 	
 
+>>>>>>> ya
 }

@@ -59,7 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/assets/img/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/images/**").permitAll()
-                    .antMatchers("/restaurant/images/**").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("/**/*.css").permitAll()
                     .antMatchers("/osLogin").permitAll()
@@ -98,7 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //	                .defaultSuccessUrl("/activity")
                     .successHandler((request, response, authentication) -> {
                         System.out.println("Login Successful!");
-                        response.sendRedirect(request.getContextPath() + "/activity");
+                        response.sendRedirect(request.getContextPath() + "/sideNav");
                     })
                     .failureHandler((request, response, exception) -> {
                         System.out.println("Login Failed!");
