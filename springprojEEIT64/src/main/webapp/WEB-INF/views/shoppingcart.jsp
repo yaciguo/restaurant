@@ -164,7 +164,7 @@
                   var giftRow =
                     '<tr class="giftRow">' +
                     '<td colspan="3">' + '<hr>' +
-                    '<span>贈品</span>' +
+                    '<span style="font-size: 20px; font-weight: bold;">贈品</span>' +
                     '</td>' +
                     '</tr>' +
                     '<tr class="giftRow">' +
@@ -320,8 +320,8 @@
                 <h1 style="font-weight: bolder;">訂單結帳</h1>
               </header>
             </div><br>
-            <h5 style="text-align: center">xxxx店 <br />(外帶/內用)</h5>
-
+            <h3 style="text-align: center ;font-weight: bold;">墨竹亭-公益店 (外帶)</h3>
+            <!-- (外帶/內用) -->
             <br>
 
             <form id="myForm" onsubmit="return validateAndRedirect()">
@@ -387,7 +387,7 @@
                     <label>取餐時間:</label><br />
                     <select id="pickTime" required="required">
                       <option value="">請選擇時間</option>
-                      <option value="10:39:00">10:39</option>
+                      <!--                       <option value="10:39:00">10:39</option> -->
                       <option value="11:00:00">11:00</option>
                       <option value="11:30:00">11:30</option>
                       <option value="12:00:00">12:00</option>
@@ -406,6 +406,7 @@
                       <option value="18:30:00">18:30</option>
                       <option value="19:00:00">19:00</option>
                       <option value="19:30:00">19:30</option>
+                      <!--                       <option value="22:30:00">22:30</option> -->
                     </select>
 
                   </fieldset>

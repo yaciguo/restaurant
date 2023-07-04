@@ -14,8 +14,8 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
                 crossorigin="anonymous"></script>
-                <!-- fontAwesome - icon插件 -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+            <!-- fontAwesome - icon插件 -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
             <title>menu</title>
             <link rel="stylesheet" href="<c:url value='/css/menu.css' />">
 
@@ -30,8 +30,8 @@
                     </div>
                     <!--  -->
                     <div class="row" id="container-intro">
-                        <div class="col-sm-3">
-                            <div>xxx店</div><br>
+                        <div class="col-sm-4">
+                            <div>墨竹亭(公益店)</div><br>
                             <div>(外帶)</div>
                         </div>
 
@@ -45,7 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <br>&nbsp;
                             <input id="restInfo" type="button" value="餐廳資訊" onclick="restInfo()" />
                             <!--                 <button style="font-size: 30px; color: white">餐廳資訊</button> -->
@@ -280,7 +280,7 @@
                             let categoryName = obj.categoryBean.name;
                             if (categoryName !== currentCategory) {
                                 content += "<tr class='categoryRow'>" +
-                                    "<td colspan='5'>" + categoryName + "</td>" +
+                                    "<td colspan='5'><span>" + categoryName + "</span></td>" +
                                     "</tr>";
                                 currentCategory = categoryName; // 更新当前类别
                             }
@@ -288,16 +288,24 @@
                             console.log(obj.picture)
                             let pictureSrc = "<c:url value='" + "/restaurant" + obj.picture + "'/>";
                             //                             let pictureSrc = "<c:url value='/images/dumpling.png'/>"; 
+                            let statusText = obj.status === 'Y' ? '' : '售完';
+                            // 檢查是否為售完商品，若是則設定 disabled 屬性
+                            let addButton = obj.status === 'Y' ? "<button class='add' onclick='addToCard(" + index + ")'>+</button>"
+                                : "<button class='add' disabled style='background-color: gray;'>+</button>";
 
-                            content += "<tr class='tableRow " + categoryName + "'>" +
-                                "<td id='td1' style='width: 15%;'><img src='" + pictureSrc + "' style='width: 120px;'></td>" +
+                            let rowClass = obj.status === 'Y' ? '' : 'soldOutBackground';
+
+                            content += "<tr class='tableRow " + categoryName + " " + rowClass + "'>" +
+                                "<td id='td1' style='width: 12%;'><img src='" + pictureSrc + "' style='width: 120px;'></td>" +
+                                "<td id='td6' style='width: 5%;'>" + (obj.status === 'Y' ? statusText : "<span class='tdStatus'>" + statusText + "</span>") + "</td>" +
                                 "<td id='td2' style='width: 10%;'>" + obj.name + "</td>" +
                                 "<td id='td5' style='width: 30%;'>" + obj.description + "</td>" +
                                 "<td id='td3' style='width: 5%;'>$ " + obj.price + "</td>" +
-                                "<td id='td4' style='width: 10%;'>" +
-                                "<button class='add' onclick='addToCard(" + index + ")'>+</button>" +
+                                "<td id='td4' style='width: 10%;'>" + addButton +
                                 "</td>" +
                                 "<tr>";
+
+
 
                         })
                         $("#tableContainer").append(content)

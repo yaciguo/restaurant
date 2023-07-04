@@ -164,7 +164,7 @@ function validateAndRedirect() {
 	<%@ include file="nav.jsp" %>
 	
   <div class="title-intro">
-    <h1>xxxx店</h1>
+    <h1>墨竹亭(公益店)</h1>
     <div class="row">
       <div>
         餐廳地址: 台中市南屯區公益路二段42號			
@@ -174,12 +174,24 @@ function validateAndRedirect() {
       <div>餐廳電話: (04)23891234</div>
       <hr />
     </div>
-    <div><h4>訂位須知:</h4>
-    1. 只能預訂未來七天內的日期，選擇日期時確保在可預訂的日期範圍內。<br>
+    <div>
+    <fieldset class="fieldsetdata">
+          <legend>訂位須知</legend>
+          <div>
+          1. 只能預訂未來七天內的日期，選擇日期時確保在可預訂的日期範圍內。<br>
 	2. 週六我們不營業，因此無法接受週六的訂位。<br>
 	3. 營業時間為11:00 至 14:00 及 16:00 至 20:00，請在這個時間範圍內進行選擇。<br>
 	4. 若訂位人數超過四人，請聯絡我們的客服專線進行訂位，電話：(04)23891234。<br><br>
 	謝謝您的合作，期待為您提供美味的餐點！  
+          </div>      
+        </fieldset>
+     
+<!--     <h4>訂位須知:</h4> -->
+<!--     1. 只能預訂未來七天內的日期，選擇日期時確保在可預訂的日期範圍內。<br> -->
+<!-- 	2. 週六我們不營業，因此無法接受週六的訂位。<br> -->
+<!-- 	3. 營業時間為11:00 至 14:00 及 16:00 至 20:00，請在這個時間範圍內進行選擇。<br> -->
+<!-- 	4. 若訂位人數超過四人，請聯絡我們的客服專線進行訂位，電話：(04)23891234。<br><br> -->
+<!-- 	謝謝您的合作，期待為您提供美味的餐點！   -->
     </div>
   </div>
   <br />
@@ -190,7 +202,7 @@ function validateAndRedirect() {
         <fieldset class="fieldsetdata">
           <legend>訂位資料</legend>
           <label for="pNumber">人數:</label>
-          <form:select path="pNumber" id="pNumber" required="true">
+          <form:select path="pNumber" id="pNumber" required="true" onchange="enableDateSelection()">
 	        <form:option value="" label="請選擇人數" />
 	        <form:option value="1" label="1" />
 	        <form:option value="2" label="2" />
@@ -210,9 +222,9 @@ function validateAndRedirect() {
 			%>
 
           <label for="date">日期:</label>
-          <form:input path="date" id="date" type="date" required="true" pattern="yyyy-MM-dd"
-          	min="<%= dateFormat.format(tomorrow) %>" max="<%= dateFormat.format(sevenDaysLater) %>" 
-          	onchange="enableTimeOptions()"/>	
+         <form:input path="date" id="date" type="date" required="true" pattern="yyyy-MM-dd"
+  min="<%= dateFormat.format(tomorrow) %>" max="<%= dateFormat.format(sevenDaysLater) %>"
+  onchange="enableTimeOptions()" disabled="true"/>	
 			<form:errors path="date" cssClass="error" />
 <!-- 			<button onclick="printSelectedDate()">印日期</button> -->
 <!-- 			<script> -->
@@ -240,8 +252,27 @@ function validateAndRedirect() {
 			 
           	</form:select>
           	<form:errors path="startTime" cssClass="error" />
-<!--           	先選日期才能選時間 -->
           	<script>
+<!--           	先選人數才能選日期 -->
+function enableDateSelection() {
+    var pNumberSelect = document.getElementById("pNumber");
+    var dateInput = document.getElementById("date");
+    var selectedOption = pNumberSelect.options[pNumberSelect.selectedIndex];
+
+    if (selectedOption.value === "") {
+        dateInput.disabled = true;
+        dateInput.value = ""; // 清空日期值
+    } else {
+        dateInput.disabled = false;
+    }
+}
+
+document.getElementById("pNumber").addEventListener("change", function() {
+    // 清空日期值
+    document.getElementById("date").value = "";
+});
+          	<!--     	先選日期才能選時間 -->
+          	
 	          	function enableTimeOptions() {
 	          	    var dateInput = document.getElementById("date");
 	          	    var selectedDate = dateInput.value;
