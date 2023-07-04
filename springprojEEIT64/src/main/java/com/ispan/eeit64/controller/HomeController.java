@@ -79,7 +79,6 @@ public class HomeController {
 		return "menu";
 	}
 	
-<<<<<<< HEAD
 	@GetMapping("/menutest")
 	public String menutest(Model model) {
 		LocalDate currentDate = LocalDate.now();
@@ -93,8 +92,6 @@ public class HomeController {
 	}
 	
 	
-=======
->>>>>>> ling
 	@GetMapping("/ordercheck")
 	public String ordercheck() {
 		return "ordercheck";
@@ -110,31 +107,11 @@ public class HomeController {
         return "restInfo";
     }
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> ling
 	@GetMapping("/dataAnalysis")
 	public String dataAnalysis() {
 	    return "dataAnalysis";
 	}
-<<<<<<< HEAD
-=======
-	@GetMapping("/test")
-    public String test() {      
-        return "test";
-    }
->>>>>>> sara
-=======
->>>>>>> ling
 	
-	
-	
-	
-	
-	
-
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {
 		String message = visitor != null ? visitor + "，您好" : "訪客，您好";
@@ -143,6 +120,4 @@ public class HomeController {
 	}
 	
 	
-
->>>>>>> ya
 }

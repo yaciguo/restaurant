@@ -61,8 +61,6 @@ public class FdTableBean {
 		return "FdTableBean [tableId=" + tableId + ", capacity=" + capacity + ", reservationBean=" + reservationBean
 				+ "]";
 	}
-<<<<<<< HEAD
-=======
 
 	public Integer getTableId() {
 		return tableId;
@@ -88,6 +86,5 @@ public class FdTableBean {
 		this.reservationBean = reservationBean;
 	}
 	
->>>>>>> sara
 	
 }
