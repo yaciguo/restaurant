@@ -29,11 +29,6 @@ public class DishServiceImpl implements DishService{
 		return dishRepository.findAllOrderByCategoryId();
 	}
 
-//	@Override
-//	public List<DishBean> findAll() {
-//		return (List<DishBean>) dishRepository.findAll();
-//	}
-
 
 	@Override
 	public DishBean update(DishBean bean) {

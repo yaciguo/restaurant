@@ -61,5 +61,33 @@ public class FdTableBean {
 		return "FdTableBean [tableId=" + tableId + ", capacity=" + capacity + ", reservationBean=" + reservationBean
 				+ "]";
 	}
+<<<<<<< HEAD
+=======
+
+	public Integer getTableId() {
+		return tableId;
+	}
+
+	public void setTableId(Integer tableId) {
+		this.tableId = tableId;
+	}
+
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+
+	public Set<ReservationBean> getReservationBean() {
+		return reservationBean;
+	}
+
+	public void setReservationBean(Set<ReservationBean> reservationBean) {
+		this.reservationBean = reservationBean;
+	}
+	
+>>>>>>> sara
 	
 }
