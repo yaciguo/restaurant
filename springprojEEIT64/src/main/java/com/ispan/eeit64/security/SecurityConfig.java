@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.roles("USER");
     }
   
-    private boolean isCloseSecurity = true;
+    private boolean isCloseSecurity = false;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
         if(isCloseSecurity){
@@ -59,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/assets/img/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/images/**").permitAll()
+                    .antMatchers("/restaurant/images/**").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("/**/*.css").permitAll()
                     .antMatchers("/osLogin").permitAll()

@@ -62,38 +62,46 @@ footer {
 <script>
 
 //获取人数下拉列表元素==================test===========================================
-$('#pNumber').change(function () {
-  var selectedPNumber = $(this).val();
-  var selectedDate = $('#date').val();
-
-  $.ajax({
-    url: '${pageContext.request.contextPath}/custIndex/availableTimes',
-    type: 'GET',
-    data:{ pNumber: selectedPNumber, date: selectedDate },
-    dataType: 'json',
-    success: function (data) {
-      // 在這里處理從後端獲取的可用日期和時間數據
-      console.log(data);
-   // 清空时间选项
-      $('#startTime').empty();
-      
-      // 根据返回的可用桌子ID数组生成时间选项
-      for (var i = 0; i < data.availableTableIds.length; i++) {
-        var tableId = data.availableTableIds[i];
-        
-        // 在时间选项中添加可选项
-        $('#startTime').append('<option value="' + tableId + '">' + tableId + '</option>');
-      }
-      
-      
-      
-    },
-    error: function (xhr, textStatus, errorThrown) {
-      // 处理错误情况
-      console.log(errorThrown);
-    }
-  });
-});
+// 	$(document).ready(function () {
+	
+		 
+// $('#pNumber, #date').change(function () {
+// 	var selectedPNumber = $('#pNumber').val();
+// 	  var selectedDate = $('#date').val();
+// 	// 只有当两个选择器都选择了值时才执行代码
+// 	  if (selectedPNumber && selectedDate) {
+// 	    // 执行代码
+// 	    alert(1);
+	    
+// 	    $.ajax({
+// 	      url: '${pageContext.request.contextPath}/custIndex/availableTimes',
+// 	      type: 'GET',
+// 	      data:{ pNumber: selectedPNumber, date: selectedDate },
+// 	      dataType: 'json',
+// 	      success: function (data) {
+// 	        // 在这里处理从后端获取的可用时间数据
+// 	        console.log(data);
+	        
+// 	        // 获取可预订的时间列表，假设data.availableTimes是一个List<String>类型
+// 	        var times = data.availableTimes; 
+	        
+// 	        // 清空时间选项
+// 	        $('#startTime').empty();
+	        
+// 	        // 在时间选项中添加可选项
+// 	        for (var i = 0; i < times.length; i++) {
+// 	          var time = times[i];
+// 	          $('#startTime').append('<option value="' + time + '">' + time + '</option>');
+// 	        }   
+// 	      },
+// 	      error: function (xhr, textStatus, errorThrown) {
+// 	        // 处理错误情况
+// 	        console.log(errorThrown);
+// 	      }
+// 	    });
+// 	  }
+// });
+// 	})
 
 //================================上面test====================================================
 

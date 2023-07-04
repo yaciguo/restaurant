@@ -97,7 +97,7 @@ public class BookingController {
                     response.put("error", "無法獲取選定的桌子信息。請稍後再試。");
                 }
             } else {
-                response.put("error", "所選日期已無可容納您的人數之座位。");
+                response.put("error", "所選日期已無座位。");
             }
         }
 

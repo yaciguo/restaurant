@@ -192,7 +192,7 @@ public class fakeDataInit {
         for (DishJson jsonBean : json) {
             Optional<CategoryBean> cbeanOptional = categoryDao.findById(jsonBean.category+1);
             CategoryBean cbean = cbeanOptional.get();
-            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "/images/dumpling.png", jsonBean.description,  "Y");
+            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "/images/dumpling.png", jsonBean.description, "Y");
 
             dishDao.save(bean);
         }
