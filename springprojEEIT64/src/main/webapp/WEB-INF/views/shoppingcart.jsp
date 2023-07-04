@@ -328,10 +328,10 @@
               <!-- 訂單內容 -->
               <div class="row">
 
-                <fieldset class="col-sm-12">
+                <fieldset class="col-sm-12" style="display: flex; flex-direction: column;">
                   <legend>訂單內容</legend>
                   <!--新增=============================-->
-                  <div>
+                  <div style="flex-grow: 1; overflow-y: auto;">
                     <table class="store" style="width: 100%;">
                       <tr>
                         <th style="width: 50%;">餐點名稱</th>

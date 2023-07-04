@@ -17,25 +17,37 @@
   <title>test</title>
 </head>
 <script type="text/javascript">
-$(document).ready(function () {
-	$.ajax({  
-	        url: '${pageContext.request.contextPath}/custIndex/getActivity',
-	        type: "GET",
-	        dataType: "json",
-	        success: function(response) {
-	            activities = response; // 得到返回的分類
-	          var activityJsonString = JSON.stringify(activities);
+$('#pNumber, #date').change(function () {
+    alert(1)
+    var selectedPNumber = $('#pNumber').val();
+    var selectedDate = $('#date').val();
 
-	        // 將 JSON 字串插入到指定的 <div> 元素中
-	        $('#activityDiv').text(activityJsonString);
-	        
-	            
-	        },
-	        error: function(xhr, status, error) {
-	            console.log("Error: " + error);
-	        }
-	    }); 
-})
+    $.ajax({
+      url: '${pageContext.request.contextPath}/custIndex/availableTimes',
+      type: 'GET',
+      data: { pNumber: selectedPNumber, date: selectedDate },
+      dataType: 'json',
+      success: function (data) {
+        // 在這里處理從後端獲取的可用時間數據
+        console.log(data);
+        // 获取可预订的时间列表// 假设data.availableTimes是一个List<String>类型
+        var times = data.availableTimes;
+        // 清空时间选项
+        $('#startTime').empty();
+        // 在时间选项中添加可选项
+        for (var i = 0; i < times.length; i++) {
+          var time = times[i];
+          $('#startTime').append('<option value="' + time + '">' + time + '</option>');
+        }
+
+
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        // 处理错误情况
+        console.log(errorThrown);
+      }
+    });
+  });
 </script>
 
 <body>
