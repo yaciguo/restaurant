@@ -310,7 +310,7 @@ async function sureBtnClick() {
                 contentType: "application/json",
                 data: JSON.stringify(closeTimeData),
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+                    xhr.setRequestHeader(header, token);
                 }
             })
             break;

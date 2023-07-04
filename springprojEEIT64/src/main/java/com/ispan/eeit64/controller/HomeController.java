@@ -94,4 +94,27 @@ public class HomeController {
         return "restInfo";
     }
 	
+<<<<<<< HEAD
+=======
+	@GetMapping("/dataAnalysis")
+	public String dataAnalysis() {
+	    return "dataAnalysis";
+	}
+	
+	
+	
+	
+	
+	
+
+	@GetMapping("/hello")
+	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {
+		String message = visitor != null ? visitor + "，您好" : "訪客，您好";
+		model.addAttribute("helloMessage", message);
+		return "greeting";
+	}
+	
+	
+
+>>>>>>> ya
 }
