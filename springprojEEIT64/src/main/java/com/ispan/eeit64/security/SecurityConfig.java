@@ -59,6 +59,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/assets/img/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/images/**").permitAll()
+<<<<<<< HEAD
+=======
+                    .antMatchers("/restaurant/images/**").permitAll()
+>>>>>>> sara
                     .antMatchers("/").permitAll()
                     .antMatchers("/**/*.css").permitAll()
                     .antMatchers("/osLogin").permitAll()
@@ -76,9 +80,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/newbooking").permitAll()
                     .antMatchers("/bookingcheck").permitAll()
                     .antMatchers("/menu").permitAll()
+                    .antMatchers("/menutest").permitAll()
+                    .antMatchers("/dishes2").permitAll()
                     .antMatchers("/restInfo").permitAll()
                     .antMatchers("/ordercheck").permitAll()
-                    .antMatchers("/testOD").permitAll()
                     .anyRequest().authenticated()
                     )
             .cors(cors -> cors.disable())

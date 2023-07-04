@@ -10,9 +10,11 @@
 	<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>booking</title>
-  <script type="text/javascript" src="/js/booking.js"></script>
+  <title>booking</title> 
+  <script type="text/javascript" src="<c:url value='/js/booking.js' />"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- fontAwesome - icon插件 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 </head>
 <style>
@@ -58,11 +60,58 @@ footer {
 
 </style>
 <script>
+
+//获取人数下拉列表元素==================test===========================================
+// 	$(document).ready(function () {
+	
+		 
+// $('#pNumber, #date').change(function () {
+// 	var selectedPNumber = $('#pNumber').val();
+// 	  var selectedDate = $('#date').val();
+// 	// 只有当两个选择器都选择了值时才执行代码
+// 	  if (selectedPNumber && selectedDate) {
+// 	    // 执行代码
+// 	    alert(1);
+	    
+// 	    $.ajax({
+// 	      url: '${pageContext.request.contextPath}/custIndex/availableTimes',
+// 	      type: 'GET',
+// 	      data:{ pNumber: selectedPNumber, date: selectedDate },
+// 	      dataType: 'json',
+// 	      success: function (data) {
+// 	        // 在这里处理从后端获取的可用时间数据
+// 	        console.log(data);
+	        
+// 	        // 获取可预订的时间列表，假设data.availableTimes是一个List<String>类型
+// 	        var times = data.availableTimes; 
+	        
+// 	        // 清空时间选项
+// 	        $('#startTime').empty();
+	        
+// 	        // 在时间选项中添加可选项
+// 	        for (var i = 0; i < times.length; i++) {
+// 	          var time = times[i];
+// 	          $('#startTime').append('<option value="' + time + '">' + time + '</option>');
+// 	        }   
+// 	      },
+// 	      error: function (xhr, textStatus, errorThrown) {
+// 	        // 处理错误情况
+// 	        console.log(errorThrown);
+// 	      }
+// 	    });
+// 	  }
+// });
+// 	})
+
+//================================上面test====================================================
+
+
+
 function validateAndRedirect() {
 	
 	var jsonData = {};
 	jsonData.startTime = document.getElementById("startTime").value;
-	jsonData.date = document.getElementById("date").value;
+	jsonData.date = new Date(document.getElementById("date").value).toISOString().split("T")[0]; // 获取ISO格式的日期字符串
 	jsonData.pNumber = document.getElementById("pNumber").value;
 	jsonData.name = document.getElementById("name").value;
 	jsonData.phone = document.getElementById("phone").value;
@@ -72,7 +121,7 @@ function validateAndRedirect() {
 	console.log(jsonData)
 	  // 创建 XMLHttpRequest 对象并发送 JSON 数据到后端
 	  var xhr = new XMLHttpRequest();
-	  xhr.open("POST", "<c:url value='/newbooking' />", true);
+	  xhr.open("POST", "${pageContext.request.contextPath}/custIndex/newbooking", true);
 	  xhr.setRequestHeader("Content-Type", "application/json");
 	  xhr.send(JSON.stringify(jsonData));
 	  xhr.onreadystatechange = function() {
@@ -83,16 +132,21 @@ function validateAndRedirect() {
 // 	        console.log(xhr.responseText);
 	        var responseJson = JSON.parse(xhr.responseText);
             console.log(responseJson); // 将 JSON 数据打印到控制台           
-            if (responseJson.success === "新增成功") {
+            if (responseJson.success) {
+//             	console.log(responseJson.success)
             	setTimeout(function() {
-                    localStorage.clear();
-                    window.location.href = "/bookingcheck";
-                }, 800); 
+            		 // 重定向到 bookingcheck.jsp，并将成功信息和桌子号码作为URL参数传递
+            		window.location.href = "/restaurant/bookingcheck"
+                }, 500); 
+            }else if (responseJson.hasOwnProperty('error')) {
+            	console.log(responseJson);
+                // 显示错误的提示信息
+                alert(responseJson.error);
             }
             
 	      } else {
 	        // 处理错误
-	        console.error("发生错误：" + xhr.status);
+	        console.error("發生錯誤：" + xhr.status);
 // 	        alert("no")
 	        
 	      }
@@ -113,24 +167,25 @@ function validateAndRedirect() {
     <h1>xxxx店</h1>
     <div class="row">
       <div>
-        餐廳地址: 台中市南屯區公益路二段42號
-        <a href="<c:url value='https://goo.gl/maps/tYQZqHMS9LfWwVoE9' />" target="_blank"><img src="/images/mapicon.png" alt=""
+        餐廳地址: 台中市南屯區公益路二段42號			
+        <a href="<c:url value='https://goo.gl/maps/tYQZqHMS9LfWwVoE9' />" target="_blank"><img src="<c:url value='/images/mapicon.png' />" alt=""
             style="width: 30px" /></a>
       </div>
       <div>餐廳電話: (04)23891234</div>
       <hr />
     </div>
     <div><h4>訂位須知:</h4>
-    1. 只能預訂未來七天內的日期。請選擇日期時確保在可預訂的日期範圍內。<br>
+    1. 只能預訂未來七天內的日期，選擇日期時確保在可預訂的日期範圍內。<br>
 	2. 週六我們不營業，因此無法接受週六的訂位。<br>
-	3. 訂位時間為中午 12:00 至下午 6:00，請在這個時間範圍內進行選擇。<br>
+	3. 營業時間為11:00 至 14:00 及 16:00 至 20:00，請在這個時間範圍內進行選擇。<br>
 	4. 若訂位人數超過四人，請聯絡我們的客服專線進行訂位，電話：(04)23891234。<br><br>
 	謝謝您的合作，期待為您提供美味的餐點！  
     </div>
   </div>
   <br />
   <div>
-    <form:form id="myForm" modelAttribute="newbooking">
+    <form:form id="myForm" 
+    	onsubmit="return validateAndRedirect()" modelAttribute="newbooking">
       <div class="fieldset-container">
         <fieldset class="fieldsetdata">
           <legend>訂位資料</legend>
@@ -173,13 +228,16 @@ function validateAndRedirect() {
           <label for="startTime">時間:</label>
             <form:select path="startTime" id="startTime" required="true" disabled="true">    
               <form:option value="" label="請選擇時間" />
+      		  <form:option value="11:00:00" label="11:00" />
       		  <form:option value="12:00:00" label="12:00" />
 			  <form:option value="13:00:00" label="13:00" />
-			  <form:option value="14:00:00" label="14:00" />
-			  <form:option value="15:00:00" label="15:00" />
+<%-- 			  <form:option value="14:00:00" label="14:00" /> --%>
+<%-- 			  <form:option value="15:00:00" label="15:00" /> --%>
 			  <form:option value="16:00:00" label="16:00" />
 			  <form:option value="17:00:00" label="17:00" />
 			  <form:option value="18:00:00" label="18:00" />
+			  <form:option value="19:00:00" label="19:00" />
+			 
           	</form:select>
           	<form:errors path="startTime" cssClass="error" />
 <!--           	先選日期才能選時間 -->
@@ -237,7 +295,7 @@ function validateAndRedirect() {
       </div>
 
       <footer>
-        <input type="button" value="送出訂位" class="button2" onclick="validateAndRedirect()"/>
+        <input type="submit" value="送出訂位" class="button2" />
       </footer>
     </form:form>
   </div>

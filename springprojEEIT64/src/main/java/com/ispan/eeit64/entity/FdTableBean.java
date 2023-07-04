@@ -13,6 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "fdtable")
 @Access(AccessType.FIELD)
@@ -26,6 +35,7 @@ public class FdTableBean {
 	private Integer capacity;
 	
 	// edit cascade = { CascadeType.ALL } fetch=FetchType.LAZY,
+	@JsonBackReference
 	@OneToMany(mappedBy = "fdTableBean", fetch=FetchType.LAZY, 
 	        cascade = { CascadeType.ALL }, orphanRemoval = false)
     //@JoinColumn(name = "reserveId", nullable = false, foreignKey = @ForeignKey(name = "tb_fk_res"))
@@ -45,4 +55,36 @@ public class FdTableBean {
 		this.tableId = tableId;
 		this.capacity = capacity;
 	}
+
+	@Override
+	public String toString() {
+		return "FdTableBean [tableId=" + tableId + ", capacity=" + capacity + ", reservationBean=" + reservationBean
+				+ "]";
+	}
+
+	public Integer getTableId() {
+		return tableId;
+	}
+
+	public void setTableId(Integer tableId) {
+		this.tableId = tableId;
+	}
+
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+
+	public Set<ReservationBean> getReservationBean() {
+		return reservationBean;
+	}
+
+	public void setReservationBean(Set<ReservationBean> reservationBean) {
+		this.reservationBean = reservationBean;
+	}
+	
+	
 }
