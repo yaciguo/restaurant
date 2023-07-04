@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ispan.eeit64.entity.CategoryBean;
+import com.ispan.eeit64.entity.DishBean;
+import com.ispan.eeit64.repository.CategoryRepository;
 import com.ispan.eeit64.repository.OrderRepository;
 
 @Service
@@ -30,6 +33,8 @@ public class DataAnalysisServiceImpl {
 
     @Autowired
     OrderRepository dao;
+    @Autowired
+    CategoryRepository cDao;
 
     public List<Map<String,Object>> splitDate(int method, Date startDate, Date endDate){
         SimpleDateFormat y = new SimpleDateFormat("yyyy");
@@ -60,6 +65,46 @@ public class DataAnalysisServiceImpl {
             sections.add(map);
         }
         return sections;
+    }
+
+    public List<Map<String,Object>> getCategoryAndDish(){
+        List<CategoryBean> cList = cDao.findAll();
+        List<Map<String,Object>> result = new ArrayList<>();
+        for(CategoryBean cBean : cList){
+            Map<String,Object> cMap = new HashMap<>();
+            cMap.put("id", cBean.getId());
+            cMap.put("name", cBean.getName());
+            List<Map<String,Object>> dList = new ArrayList<>();
+            cMap.put("items", dList);
+            for(DishBean dBean : cBean.getDishBean()){
+                Map<String,Object> dMap = new HashMap<>();
+                dMap.put("id", dBean.getId());
+                dMap.put("name", dBean.getName());
+                dList.add(dMap);
+            }
+            result.add(cMap);
+        }
+
+        return result;
+    }
+
+    public List<Map<String,Object>> getCategory(){
+        List<CategoryBean> cList = cDao.findAll();
+        List<Map<String,Object>> result = new ArrayList<>();
+        Map<String,Object> map = new HashMap<>();
+        map.put("name", "全品項");
+        map.put("id", 0);
+        List<Map<String,Object>> list = new ArrayList<>();
+        map.put("items", list);
+        for(CategoryBean cBean : cList){
+            Map<String,Object> cMap = new HashMap<>();
+            cMap.put("id", cBean.getId());
+            cMap.put("name", cBean.getName());
+            list.add(cMap);
+        }
+        result.add(map);
+
+        return result;
     }
 
     public List<Map<String,Object>> getQuantity(int method, Set<Integer> ids, Date startDate, Date endDate){

@@ -20,7 +20,7 @@ import com.ispan.eeit64.controller.APIResult.StatusCode;
 import com.ispan.eeit64.service.impl.DataAnalysisServiceImpl;
 
 @Controller
-@RequestMapping("/basicSettings.api")
+@RequestMapping("/dataAnalysis.api")
 public class DataAnalysisController {	
 	@Autowired
 	DataAnalysisServiceImpl service;
@@ -50,7 +50,24 @@ public class DataAnalysisController {
 //		list.add(categoryDishMap); 
 //		 
 //		return list;
-//	}            
+//	}
+	@GetMapping("/getCategoryAndDish")
+	public @ResponseBody APIResult getCategoryAndDish(){
+		APIResult apiResult = new APIResult();
+		apiResult.setData(service.getCategoryAndDish());
+		apiResult.setCode(StatusCode.SUCCESS);
+		apiResult.setMsg("成功提取資料");
+		return apiResult;
+	}
+	@GetMapping("/getCategory")
+	public @ResponseBody APIResult getCategory(){
+		APIResult apiResult = new APIResult();
+		apiResult.setData(service.getCategory());
+		apiResult.setCode(StatusCode.SUCCESS);
+		apiResult.setMsg("成功提取資料");
+		return apiResult;
+	}
+
 	
 	@GetMapping("/getProfit")
 	public @ResponseBody APIResult  getProfit(

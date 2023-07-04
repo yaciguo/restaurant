@@ -174,8 +174,6 @@
 </style>
 
 <body>
-    <!-- 左側導覽列 -->
-    <%@ include file="sideNav.jsp" %>
 
     <!-- 主要內容區域 -->
 
@@ -199,8 +197,8 @@
                                     <strong class="text-uppercase">店名設定</strong>
                                 </h5>
                                 <input class="form-control  mb-2" type="text" />
-                                <div class="col offset-10 col-2 d-flex">
-                                    <button type="button" class="btn btn-primary flex-fill">存檔</button>
+                                <div class="col offset-8 col-4" style=" text-align: right;">
+                                    <button type="button" class="btn btn-primary ">確定</button>
                                 </div>
                             </div>
                             <div class="row px-2 panel-body panel scheduler-border pb-2">
@@ -210,8 +208,8 @@
                                 <div class="col mb-2" style="height: 200px;background-color: aqua;">
     
                                 </div>
-                                <div class="col offset-10 col-2 d-flex">
-                                    <button type="button" class="btn btn-primary flex-fill">上傳</button>
+                                <div class="col offset-8 col-4" style=" text-align: right;">
+                                    <button type="button" class="btn btn-primary">上傳</button>
                                 </div>
                             </div>
                         </div>

@@ -158,9 +158,7 @@ public class fakeDataInit {
     public <T, ID> void resetTable(String tableName, JpaRepository<T, ID> dao) throws Exception {
         System.out.println(dao.findAll().size());
         if (dao.findAll().size() != 0) {
-            System.out.println(1);
             dao.deleteAll();
-            System.out.println(2);
         }
         ucDao.resetAutoId(tableName);
     }
@@ -194,7 +192,7 @@ public class fakeDataInit {
         for (DishJson jsonBean : json) {
             Optional<CategoryBean> cbeanOptional = categoryDao.findById(jsonBean.category+1);
             CategoryBean cbean = cbeanOptional.get();
-            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "null", jsonBean.description, "null");
+            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "/images/dumpling.png", jsonBean.description,  "Y");
 
             dishDao.save(bean);
         }
