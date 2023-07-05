@@ -163,9 +163,25 @@
                                             </strong>
                                         </h5>
                                         <div id="data-style-div" class="d-flex mb-2" style="height: 120px;">
-                                            <img src="<c:url value='/images/bar_chart.png' />" id="bar-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
-                                            <img src="<c:url value='/images/line_chart.png' />" id="line-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
-                                            <img src="<c:url value='/images/pie_chart.png' />" id="pie-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
+                                            <div id="bar-chart-btn">
+                                                <input type="radio" class="btn-check" name="btnradio" id="bar-chart-input" autocomplete="off" checked>
+                                                <label class="btn btn-outline-primary flex-fill data-style-btn me-1 p-0" for="bar-chart-input">
+                                                    <img src="<c:url value='/images/bar_chart.png' />" id="bar-chart-img" >
+                                                </label>
+                                            </div>
+                                            
+                                            <div id="line-chart-btn">
+                                                <input type="radio" class="btn-check" name="btnradio" id="line-chart-input" autocomplete="off">
+                                                <label class="btn btn-outline-primary flex-fill data-style-btn me-1 p-0" for="line-chart-input">
+                                                    <img src="<c:url value='/images/line_chart.png' />" id="line-chart-img" >
+                                                </label>
+                                            </div>
+                                            <div id="pie-chart-btn">
+                                                <input type="radio" class="btn-check" name="btnradio" id="pie-chart-input" autocomplete="off">
+                                                <label class="btn btn-outline-primary flex-fill data-style-btn me-1 p-0" for="pie-chart-input">
+                                                    <img src="<c:url value='/images/pie_chart.png' />" id="pie-chart-img" >
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

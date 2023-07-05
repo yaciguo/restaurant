@@ -20,7 +20,7 @@ function setStyleHeight() {
     $("#ChartDiv").css("height",$("#ChartDiv").width()*0.7)
 
     $("#data-style-div").height(divHeight)
-    $("img.data-style-btn").each((idx, el) => {
+    $("img.data-style-img").each((idx, el) => {
         $(el).width(divHeight)
         $(el).height(divHeight)
     })
@@ -170,13 +170,19 @@ async function getData(){
 }
 
 function setChart(element, chartType, dataTypeName, data){
+	let labels = [];
+	let dataValues = [];
+	data.forEach((obj)=>{
+		labels.push(obj.target);
+		dataValues.push(obj.value);
+	})
     new Chart(element, {
         type: chartType,
         data: {
-            labels: ['項目A', '項目B', '項目C', '項目D', '項目E', '項目F'],
+            labels: labels,//['項目A', '項目B', '項目C', '項目D', '項目E', '項目F'],
             datasets: [{
                 label: dataTypeName,
-                data: [12, 19, 3, 5, 2, 3],
+                data: dataValues,//[12, 19, 3, 5, 2, 3],
                 borderWidth: 1
             }]
         },
