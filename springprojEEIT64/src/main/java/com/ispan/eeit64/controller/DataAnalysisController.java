@@ -77,12 +77,15 @@ public class DataAnalysisController {
 		SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
 		
 		int method = (int)condition.get("method");
-		Set<Integer> ids = new HashSet<>((List<Integer>)condition.get("ids"));
+		Set<Integer> ids = null;
+		if(condition.get("ids") != null){
+			ids = new HashSet<>((List<Integer>)condition.get("ids"));
+		}
 		Date startDate = ymd.parse((String)condition.get("startDate"));
 		Date endDate = ymd.parse((String)condition.get("endDate"));
 		
 		APIResult apiResult = new APIResult();
-
+		System.out.println("getProfit");
 		List<Map<String,Object>> data = service.getProfit(method, ids, startDate, endDate);
 		apiResult.setData(data);
 		apiResult.setCode(StatusCode.SUCCESS);

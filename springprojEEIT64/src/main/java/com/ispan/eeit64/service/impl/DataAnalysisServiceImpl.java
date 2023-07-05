@@ -25,11 +25,11 @@ public class DataAnalysisServiceImpl {
     public final int MONTH = 1;
     public final int DAY = 2;
 
-    public final int DISH_METHOD = 0;
     public final int CATEGORY_METHOD = 1;
-    public final int YEAR_METHOD = 2;
-    public final int MONTH_METHOD = 3;
-    public final int DAY_METHOD = 4;
+    public final int DISH_METHOD = 2;
+    public final int YEAR_METHOD = 3;
+    public final int MONTH_METHOD = 4;
+    public final int DAY_METHOD = 5;
 
     @Autowired
     OrderRepository dao;
@@ -154,6 +154,7 @@ public class DataAnalysisServiceImpl {
         }else if(method == this.DISH_METHOD){
             result = dao.sumProfitByDishIdsAndOrderTime(ids, startTime, endTime);
         }else if(method == this.YEAR_METHOD){
+		    System.out.println(method);
             dateList = splitDate(this.YEAR, startDate, endDate);
         }else if(method == this.MONTH_METHOD){
             dateList = splitDate(this.MONTH, startDate, endDate);
