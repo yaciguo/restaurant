@@ -103,7 +103,6 @@ public class DataAnalysisServiceImpl {
             list.add(cMap);
         }
         result.add(map);
-
         return result;
     }
 

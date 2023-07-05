@@ -1,3 +1,4 @@
+
 function setStyleBtnHeight() {
     $("button.style-set").each((idx, el) => {
         $(el).height($(el).width())
@@ -35,7 +36,7 @@ function setTimeDropdown(selector, buttonSelector, interval, startHour, endHour)
     });
 }
 
-$(() => {
+$(function () {
     setStyleBtnHeight()
     setTimeDropdown("#startTimeUl", "#dropdownMenuStartTimeBtn", "30", "00", "24");
     setTimeDropdown("#endTimeUl", "#dropdownMenuEndTimeBtn", "30", "00", "24");

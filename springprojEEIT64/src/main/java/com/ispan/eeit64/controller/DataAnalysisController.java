@@ -11,6 +11,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,11 +70,12 @@ public class DataAnalysisController {
 	}
 
 	
-	@GetMapping("/getProfit")
+	@PostMapping("/getProfit")
 	public @ResponseBody APIResult  getProfit(
 		@RequestBody Map<String, Object> condition
 		) throws ParseException {
 		SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
+		
 		int method = (int)condition.get("method");
 		Set<Integer> ids = new HashSet<>((List<Integer>)condition.get("ids"));
 		Date startDate = ymd.parse((String)condition.get("startDate"));

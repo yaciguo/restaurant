@@ -1,10 +1,10 @@
-const dayOfWeek = { 0: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" }
-let runTrClick = true;
-let updateId;
-let openingHourData;
-let closingTimeData;
-let sureBtnType;
-let deleteIds = [];
+var dayOfWeek = { 0: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" }
+var runTrClick = true;
+var updateId;
+var openingHourData;
+var closingTimeData;
+var sureBtnType;
+var deleteIds = [];
 // var token = $("meta[name='_csrf']").attr("content");
 // var header = $("meta[name='_csrf_header']").attr("content");
 

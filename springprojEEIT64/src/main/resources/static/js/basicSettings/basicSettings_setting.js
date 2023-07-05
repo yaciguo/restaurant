@@ -1,6 +1,6 @@
-let fdTableData;
-let seat_updateId;
-let seat_sureBtnType;
+var fdTableData;
+var seat_updateId;
+var seat_sureBtnType;
 
 
 async function getFdTableData(){

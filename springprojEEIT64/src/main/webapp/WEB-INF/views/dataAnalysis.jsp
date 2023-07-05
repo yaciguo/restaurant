@@ -17,13 +17,13 @@
     <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
 
     <!-- Include Date Range Picker -->
-    <script type="text/javascript"
+    <!-- <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" /> -->
 
     <!-- chart -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
 </head>
 
@@ -31,6 +31,16 @@
     body {
         background-color: #EEE;
     }
+
+    .main-content {
+        min-width: 580px;
+        margin: 20px 20px 20px calc(60px + 20px);
+        padding: 15px;
+        transition: margin-left 0.3s ease-in-out;
+        background-color: #FFF;
+        border-radius: var(--main-radius);
+    }
+
     div.scheduler-border {
         border: 1px groove #4070ff !important;
         box-shadow: 0px 0px 0px 0px #000;
@@ -141,10 +151,10 @@
     <!-- 分頁內容-->
     <div class="tab-content">
         <div id="data-chart-div" class="container-fluid tab-pane fade show active">
-            <div class="row g-2 pt-3" style="height: 700px;">
+            <div class="row g-2 pt-3">
                 <div class="col offset-md-1 col-md-3 me-4">
                     <div class="row g-2 panel scheduler-border">
-                        <div class="col px-3 panel-body">
+                        <div class="col px-3 panel-body" id="chart-conditions-div">
                             <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 生成圖表 </strong></h5>
                             <div class="col">
                                 <div class="row g-2 panel scheduler-border mb-2">
@@ -242,14 +252,14 @@
 
                                 </div>
                                 <div class="row g-2 container mb-2">
-                                    <button type="button" class="btn btn-primary">生成圖表</button>
+                                    <button id="chart-generation-btm" type="button" class="btn btn-primary">生成圖表</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="ChartDiv" class="col col-md-7">
-                    <canvas id="myChart" height="784"></canvas>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
