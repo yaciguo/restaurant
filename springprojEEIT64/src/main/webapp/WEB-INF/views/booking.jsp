@@ -179,7 +179,7 @@ function validateAndRedirect() {
           <legend>訂位須知</legend>
           <div>
           1. 只能預訂未來七天內的日期，選擇日期時確保在可預訂的日期範圍內。<br>
-	2. 週六我們不營業，因此無法接受週六的訂位。<br>
+	2. 週日我們不營業，因此無法接受週日的訂位。<br>
 	3. 營業時間為11:00 至 14:00 及 16:00 至 20:00，請在這個時間範圍內進行選擇。<br>
 	4. 若訂位人數超過四人，請聯絡我們的客服專線進行訂位，電話：(04)23891234。<br><br>
 	謝謝您的合作，期待為您提供美味的餐點！  
@@ -188,7 +188,7 @@ function validateAndRedirect() {
      
 <!--     <h4>訂位須知:</h4> -->
 <!--     1. 只能預訂未來七天內的日期，選擇日期時確保在可預訂的日期範圍內。<br> -->
-<!-- 	2. 週六我們不營業，因此無法接受週六的訂位。<br> -->
+<!-- 	2. 週日我們不營業，因此無法接受週日的訂位。<br> -->
 <!-- 	3. 營業時間為11:00 至 14:00 及 16:00 至 20:00，請在這個時間範圍內進行選擇。<br> -->
 <!-- 	4. 若訂位人數超過四人，請聯絡我們的客服專線進行訂位，電話：(04)23891234。<br><br> -->
 <!-- 	謝謝您的合作，期待為您提供美味的餐點！   -->
@@ -283,9 +283,9 @@ document.getElementById("pNumber").addEventListener("change", function() {
 	          	    var dayOfWeek = new Date(selectedDate).getDay();
 	
 	          	    // 如果是星期六（dayOfWeek为6），则禁用时间选项
-	          	    if (dayOfWeek === 6) {
+	          	    if (dayOfWeek === 0) {
 			            startTimeSelect.disabled = true; // 禁用时间选项
-			            alert("週六未營業，請改選其他日期"); // 显示提醒消息
+			            alert("週日未營業，請改選其他日期"); // 显示提醒消息
 			        	}else {
 			            startTimeSelect.disabled = false; // 启用时间选项
 			        }

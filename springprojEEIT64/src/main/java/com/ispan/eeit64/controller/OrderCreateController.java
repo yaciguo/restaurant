@@ -50,6 +50,14 @@ public class OrderCreateController {
 	    return "shoppingcart";
 	}
 	
+	
+	@GetMapping("/shoppingcartInner")
+	public String shoppingcartInner(Model model) {
+//	    model.addAttribute("newOrder", new OrderBean());
+	    return "/shoppingcartInner";
+	}
+	
+	
 	@PostMapping("/custIndex/newOrder")
 	@ResponseBody
 //  public Map<String, String> newOrder(@RequestBody OrderBean bean, @RequestParam("orderDetails") List<Integer> dishIds) {
