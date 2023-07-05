@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=., initial-scale=1.0">
     <title>Document</title>
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
     
     <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
 
     <!-- Include Date Range Picker -->
     <script type="text/javascript"
@@ -28,6 +28,9 @@
 </head>
 
 <style>
+    body {
+        background-color: #EEE;
+    }
     div.scheduler-border {
         border: 1px groove #4070ff !important;
         box-shadow: 0px 0px 0px 0px #000;
@@ -128,387 +131,385 @@
 <body>
     <!-- 主要內容區域 -->
 
-    <div id="main-content" class="main-content">
-        <ul class="nav nav-tabs" id="activity-tabs">
-            <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
-                    href="#data-chart-div">數據視圖</a></li>
-            <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
-                    href="#data-output-div">下載CSV檔案</a></li>
-        </ul>
+    <ul class="nav nav-tabs" id="activity-tabs">
+        <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
+                href="#data-chart-div">數據視圖</a></li>
+        <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
+                href="#data-output-div">下載CSV檔案</a></li>
+    </ul>
 
-        <!-- 分頁內容-->
-        <div class="tab-content">
-            <div id="data-chart-div" class="container-fluid tab-pane fade show active">
-                <div class="row g-2" style="height: 700px;">
-                    <div class="col offset-md-1 col-md-3 me-4">
-                        <div class="row g-2 panel scheduler-border">
-                            <div class="col px-3 panel-body">
-                                <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 生成圖表 </strong></h5>
-                                <div class="col">
-                                    <div class="row g-2 panel scheduler-border mb-2">
-                                        <div class="col px-3 panel-body">
-                                            <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 圖表模式
-                                                </strong>
-                                            </h5>
-                                            <div id="data-style-div" class="d-flex mb-2" style="height: 120px;">
-                                                <img src="<c:url value='/images/bar_chart.png' />" id="bar-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
-                                                <img src="<c:url value='/images/line_chart.png' />" id="line-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
-                                                <img src="<c:url value='/images/pie_chart.png' />" id="pie-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
-                                            </div>
+    <!-- 分頁內容-->
+    <div class="tab-content">
+        <div id="data-chart-div" class="container-fluid tab-pane fade show active">
+            <div class="row g-2 pt-3" style="height: 700px;">
+                <div class="col offset-md-1 col-md-3 me-4">
+                    <div class="row g-2 panel scheduler-border">
+                        <div class="col px-3 panel-body">
+                            <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 生成圖表 </strong></h5>
+                            <div class="col">
+                                <div class="row g-2 panel scheduler-border mb-2">
+                                    <div class="col px-3 panel-body">
+                                        <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 圖表模式
+                                            </strong>
+                                        </h5>
+                                        <div id="data-style-div" class="d-flex mb-2" style="height: 120px;">
+                                            <img src="<c:url value='/images/bar_chart.png' />" id="bar-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
+                                            <img src="<c:url value='/images/line_chart.png' />" id="line-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
+                                            <img src="<c:url value='/images/pie_chart.png' />" id="pie-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
                                         </div>
                                     </div>
-                                    <div class="row g-2 panel scheduler-border mb-2">
-                                        <div class="col px-3 panel-body">
-                                            <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 時間範圍
-                                                </strong>
-                                            </h5>
-                                            <div class="col">
-                                                <div class="row">
-                                                    <div class="col d-flex mb-1 text-nowrap">
-                                                        <button id="this-year-btn" type="button" class="btn btn-primary flex-fill me-1">今年</button>
-                                                        <button id="this-month-btn" type="button" class="btn btn-primary flex-fill me-1">本月</button>
-                                                        <button id="this-week-btn" type="button" class="btn btn-primary flex-fill me-1">本周</button>
-                                                        <button id="this-day-btn" type="button" class="btn btn-primary flex-fill">當日</button>
-                                                    </div>
-                                                </div>
-                                                <div class="row text-nowrap mb-1">
-                                                    <div class="col">
-                                                        <label
-                                                            class=" d-flex justify-content-center align-items-center">結束時間</label>
-                                                        <input class="form-control" id="startdate" name="startdate"
-                                                            placeholder='yyyy-mm-dd' type="text" />
-                                                    </div>
-                                                    <div style="width:10%;font-size: large;">~</div>
-                                                    <div class="col">
-                                                        <label
-                                                            class=" d-flex justify-content-center align-items-center">結束時間</label>
-                                                        <input class="form-control" id="enddate" name="enddate"
-                                                            placeholder='yyyy-mm-dd' type="text" />
-                                                    </div>
+                                </div>
+                                <div class="row g-2 panel scheduler-border mb-2">
+                                    <div class="col px-3 panel-body">
+                                        <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 時間範圍
+                                            </strong>
+                                        </h5>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col d-flex mb-1 text-nowrap">
+                                                    <button id="this-year-btn" type="button" class="btn btn-primary flex-fill me-1">今年</button>
+                                                    <button id="this-month-btn" type="button" class="btn btn-primary flex-fill me-1">本月</button>
+                                                    <button id="this-week-btn" type="button" class="btn btn-primary flex-fill me-1">本周</button>
+                                                    <button id="this-day-btn" type="button" class="btn btn-primary flex-fill">當日</button>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row g-2 panel scheduler-border mb-2">
-                                        <div class="col panel-body px-3">
-                                            <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 圖表內容
-                                                </strong>
-                                            </h5>
-                                            <div class="row text-nowrap">
-                                                <div class="mb-1 btn-label">數據內容：</div>
-                                                <div class="col mb-1">
-                                                    <select class="form-select">
-                                                        <option value="1">銷售數量</option>
-                                                        <option value="2">銷售佔比</option>
-                                                        <option value="3">銷售額</option>
-                                                        <option value="4">利潤</option>
-                                                        <option value="5">訂單數</option>
-                                                        <option value="6">成本</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row text-nowrap mb-3">
-                                                <div class="mb-1 btn-label">對比內容：</div>
+                                            <div class="row text-nowrap mb-1">
                                                 <div class="col">
-                                                    <select class="form-select">
-                                                        <option value="1">品項</option>
-                                                        <option value="2">產品</option>
-                                                        <option value="3">年</option>
-                                                        <option value="4">月</option>
-                                                        <option value="5">日</option>
-                                                    </select>
+                                                    <label
+                                                        class=" d-flex justify-content-center align-items-center">結束時間</label>
+                                                    <input class="form-control" id="startdate" name="startdate"
+                                                        placeholder='yyyy-mm-dd' type="text" />
+                                                </div>
+                                                <div style="width:10%;font-size: large;">~</div>
+                                                <div class="col">
+                                                    <label
+                                                        class=" d-flex justify-content-center align-items-center">結束時間</label>
+                                                    <input class="form-control" id="enddate" name="enddate"
+                                                        placeholder='yyyy-mm-dd' type="text" />
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-2 panel scheduler-border mb-2">
+                                    <div class="col panel-body px-3">
+                                        <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 圖表內容
+                                            </strong>
+                                        </h5>
+                                        <div class="row text-nowrap">
+                                            <div class="mb-1 btn-label">數據內容：</div>
+                                            <div class="col mb-1">
+                                                <select class="form-select">
+                                                    <option value="1">銷售數量</option>
+                                                    <option value="2">銷售佔比</option>
+                                                    <option value="3">銷售額</option>
+                                                    <option value="4">利潤</option>
+                                                    <option value="5">訂單數</option>
+                                                    <option value="6">成本</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row text-nowrap mb-3">
+                                            <div class="mb-1 btn-label">對比內容：</div>
+                                            <div class="col">
+                                                <select class="form-select">
+                                                    <option value="1">品項</option>
+                                                    <option value="2">產品</option>
+                                                    <option value="3">年</option>
+                                                    <option value="4">月</option>
+                                                    <option value="5">日</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                            <div class="row g-2 mb-2 panel scheduler-border">
-                                                <div class="col panel-body">
-                                                    <h5 class="text-on-pannel text-primary">
-                                                        <strong class="text-uppercase me-1">對比項目</strong>
-                                                        <a href="#" class="btn btn-primary btn-sm flex-fill" type="button"
-                                                            data-bs-toggle="modal" data-bs-target="#compareItemsDiv">選取</a>
-                                                        <!-- <button type="button" class="btn btn-primary btn-sm flex-fill">選取</button> -->
-                                                    </h5>
-                                                    <div class="container">
-                                                        <div id="target-items-div" class="row mb-2 g-1">
-                                                            <!-- js setTargerItemsDiv -->
-                                                        </div>
+                                        <div class="row g-2 mb-2 panel scheduler-border">
+                                            <div class="col panel-body">
+                                                <h5 class="text-on-pannel text-primary">
+                                                    <strong class="text-uppercase me-1">對比項目</strong>
+                                                    <a href="#" class="btn btn-primary btn-sm flex-fill" type="button"
+                                                        data-bs-toggle="modal" data-bs-target="#compareItemsDiv">選取</a>
+                                                    <!-- <button type="button" class="btn btn-primary btn-sm flex-fill">選取</button> -->
+                                                </h5>
+                                                <div class="container">
+                                                    <div id="target-items-div" class="row mb-2 g-1">
+                                                        <!-- js setTargerItemsDiv -->
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
 
                                     </div>
-                                    <div class="row g-2 container mb-2">
-                                        <button type="button" class="btn btn-primary">生成圖表</button>
-                                    </div>
+
+                                </div>
+                                <div class="row g-2 container mb-2">
+                                    <button type="button" class="btn btn-primary">生成圖表</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="ChartDiv" class="col col-md-7">
-                        <canvas id="myChart" height="784"></canvas>
                     </div>
                 </div>
+                <div id="ChartDiv" class="col col-md-7">
+                    <canvas id="myChart" height="784"></canvas>
+                </div>
             </div>
-            <div id="data-output-div" class="container-fluid tab-pane fade">
-                <div class="row g-2">
-                    <div class="col col-md-10 offset-md-1 me-4 ">
-                        <div class="row text-nowrap">
-                            <label class="col col-md-1 d-flex align-items-center">設定時間：</label>
-                            <div class="col-md-2 px-0">
-                                <input class="col form-control " id="output-startdate" name="output-startdate" placeholder='開始 yyyy-mm-dd'
-                                    type="text" />
-                            </div>
-                            <div class="col col-md-1 d-flex justify-content-center align-items-center"
-                                style="width:5%;font-size: large;">~</div>
-                            <div class="col-md-2 px-0">
-                                <input class="col form-control" id="output-enddate" name="output-enddate" placeholder='結束 yyyy-mm-dd'
-                                    type="text" />
-                            </div>
+        </div>
+        <div id="data-output-div" class="container-fluid tab-pane fade">
+            <div class="row g-2 pt-3">
+                <div class="col col-md-10 offset-md-1 me-4 ">
+                    <div class="row text-nowrap">
+                        <label class="col col-md-1 d-flex align-items-center">設定時間：</label>
+                        <div class="col-md-2 px-0">
+                            <input class="col form-control " id="output-startdate" name="output-startdate" placeholder='開始 yyyy-mm-dd'
+                                type="text" />
                         </div>
-                        <div class="row text-nowrap">
-                            <label class="col col-md-1 d-flex align-items-center">數據內容：</label>
-                            <div class="col col-md-6 ">
-                                <div class="row justify-content-start">
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">銷售數量</label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">銷售佔比 </label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">銷售額 </label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">利潤 </label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">訂單數 </label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">成本 </label>
-                                    </div>
+                        <div class="col col-md-1 d-flex justify-content-center align-items-center"
+                            style="width:5%;font-size: large;">~</div>
+                        <div class="col-md-2 px-0">
+                            <input class="col form-control" id="output-enddate" name="output-enddate" placeholder='結束 yyyy-mm-dd'
+                                type="text" />
+                        </div>
+                    </div>
+                    <div class="row text-nowrap">
+                        <label class="col col-md-1 d-flex align-items-center">數據內容：</label>
+                        <div class="col col-md-6 ">
+                            <div class="row justify-content-start">
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">銷售數量</label>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row text-nowrap mb-2">
-                            <label class="col col-md-1 d-flex align-items-center">對比內容：</label>
-                            <div class="col col-md-6 ">
-                                <div class="row">
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">品項</label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">產品 </label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">年</label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">月</label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">周</label>
-                                    </div>
-                                    <div class="col-md-2  form-check">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox6">日</label>
-                                    </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">銷售佔比 </label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">銷售額 </label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">利潤 </label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">訂單數 </label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">成本 </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="row ">
-                            <div class="col col-md-12 align-items-center mb-1">
-                                <div class="row col-md-12 ">
-                                    <div class="col col-md-1">
-                                        <input type="radio" class="btn-check " name="btnradio" id="btnradio1" autocomplete="off"
-                                            checked>
-                                        <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-                                            for="btnradio1">品項</label>
-                                    </div>
-        
-                                    <div class="col col-md-1">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                                        <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-                                            for="btnradio2">產品</label>
-                                    </div>
-        
-                                    <div class="col col-md-1">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                                        <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-                                            for="btnradio3">年</label>
-                                    </div>
-        
-                                    <div class="col col-md-1">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-                                        <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-                                            for="btnradio4">月</label>
-                                    </div>
-        
-                                    <div class="col col-md-1">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
-                                        <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-                                            for="btnradio5">周</label>
-                                    </div>
-        
-                                    <div class="col col-md-1">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
-                                        <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
-                                            for="btnradio6">日</label>
+                    </div>
+                    <div class="row text-nowrap mb-2">
+                        <label class="col col-md-1 d-flex align-items-center">對比內容：</label>
+                        <div class="col col-md-6 ">
+                            <div class="row">
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">品項</label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">產品 </label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">年</label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">月</label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">周</label>
+                                </div>
+                                <div class="col-md-2  form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                    <label class="form-check-label" for="inlineCheckbox6">日</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col col-md-12 align-items-center mb-1">
+                            <div class="row col-md-12 ">
+                                <div class="col col-md-1">
+                                    <input type="radio" class="btn-check " name="btnradio" id="btnradio1" autocomplete="off"
+                                        checked>
+                                    <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+                                        for="btnradio1">品項</label>
+                                </div>
+    
+                                <div class="col col-md-1">
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                                    <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+                                        for="btnradio2">產品</label>
+                                </div>
+    
+                                <div class="col col-md-1">
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                                    <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+                                        for="btnradio3">年</label>
+                                </div>
+    
+                                <div class="col col-md-1">
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+                                    <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+                                        for="btnradio4">月</label>
+                                </div>
+    
+                                <div class="col col-md-1">
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+                                    <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+                                        for="btnradio5">周</label>
+                                </div>
+    
+                                <div class="col col-md-1">
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
+                                    <label class="btn btn-outline-primary d-flex justify-content-center align-items-center"
+                                        for="btnradio6">日</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-12 align-items-center pb-0">
+                            <div class="row col-md-12">
+                                <div style="overflow-x: auto; width: 100%;">
+                                    <div class="me-2">
+                                        <table class="table table-hover table-primary data">
+                                            <thead  class="data">
+                                                <tr class="data">
+                                                    <th class="table_Time">開始時間</th>
+                                                    <th class="table_Time">結束時間</th>
+                                                    <th class="targetItem">對比項目</th>
+                                                    <th class="data">銷售數量</th>
+                                                    <th class="data">銷售佔比</th>
+                                                    <th class="data">銷售額</th>
+                                                    <th class="data">利潤</th>
+                                                    <th class="data">訂單數</th>
+                                                    <th class="data">成本</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="faq-body data" >
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                                <tr class="data">
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="table_Time">2023-06-07</td>
+                                                    <td class="targetItem">項目A</td>
+                                                    <td class="data">100</td>
+                                                    <td class="data">10%</td>
+                                                    <td class="data">1000</td>
+                                                    <td class="data">500</td>
+                                                    <td class="data">10</td>
+                                                    <td class="data">500</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col col-md-12 align-items-center pb-0">
-                                <div class="row col-md-12">
-                                    <div style="overflow-x: auto; width: 100%;">
-                                        <div class="me-2">
-                                            <table class="table table-hover table-primary data">
-                                                <thead  class="data">
-                                                    <tr class="data">
-                                                        <th class="table_Time">開始時間</th>
-                                                        <th class="table_Time">結束時間</th>
-                                                        <th class="targetItem">對比項目</th>
-                                                        <th class="data">銷售數量</th>
-                                                        <th class="data">銷售佔比</th>
-                                                        <th class="data">銷售額</th>
-                                                        <th class="data">利潤</th>
-                                                        <th class="data">訂單數</th>
-                                                        <th class="data">成本</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="faq-body data" >
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                    <tr class="data">
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="table_Time">2023-06-07</td>
-                                                        <td class="targetItem">項目A</td>
-                                                        <td class="data">100</td>
-                                                        <td class="data">10%</td>
-                                                        <td class="data">1000</td>
-                                                        <td class="data">500</td>
-                                                        <td class="data">10</td>
-                                                        <td class="data">500</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col offset-md-10 col-md-2 align-items-center">
-                                <a href="#" class="btn btn-primary btn-lg d-flex justify-content-center align-items-center me-1"
-                                    type="button">下載CSV檔案</a>
-                            </div>
+                        </div>
+                        <div class="col offset-md-10 col-md-2 align-items-center">
+                            <a href="#" class="btn btn-primary btn-lg d-flex justify-content-center align-items-center me-1"
+                                type="button">下載CSV檔案</a>
                         </div>
                     </div>
                 </div>
@@ -542,6 +543,6 @@
     var header = "${_csrf.headerName}";
 </script>
 
-<script type="text/javascript" src="<c:url value='/js/dataAnalysis/dataAnalysis.js'/>"></script>
+<script type="text/javascript" src="<c:url value='js/dataAnalysis/dataAnalysis.js'/>"></script>
 
 </html>

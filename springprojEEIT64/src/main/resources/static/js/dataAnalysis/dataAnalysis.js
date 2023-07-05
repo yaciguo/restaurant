@@ -28,6 +28,7 @@ function setStyleBtnHeight() {
 }
 
 function quickDateBtn() {
+	console.log(123)
 	let nowDate = new Date(Date.now())
 	let thisYear = nowDate.getFullYear()
 	let thisMonth = nowDate.getMonth() + 1
@@ -166,7 +167,6 @@ $(() => {
 
 	$("#modal-target-sure-btn").click(() => {
 		let targetList = getModalTargetCheckedIds();
-		console.log(targetList)
 		setTargerItemsDiv(targetList);
 	})
 	// bar-chart-btn line-chart-btn pie-chart-btn
