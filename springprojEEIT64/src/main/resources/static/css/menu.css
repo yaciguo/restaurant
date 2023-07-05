@@ -24,7 +24,6 @@ button:hover {
 #container-intro {
 
     background-color: wheat;
-
     padding: 10px;
     color: black;
     font-size: 20px;
@@ -56,6 +55,7 @@ button:hover {
     flex-basis: calc(100% /7);
     /*   margin-right: 5px; 元素之间的间距 */
 
+
 }
 
 @media (max-width: 767px) {
@@ -77,6 +77,7 @@ button:hover {
 .btsort {
     font-size: 20px;
     color: white;
+    font-weight: 700;
 }
 
 /*按鈕*/
@@ -156,6 +157,29 @@ button:hover {
 .tableRow {
     background-color: #f2f6f7;
     box-shadow: 0 10px 20px #dde1e1;
+}
+
+.soldOutBackground {
+    background-color: rgb(196, 201, 201);
+    box-shadow: 0 10px 20px #dde1e1;
+}
+
+.tdStatus {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    font-size: 10px;
+    padding: 2px 5px
+}
+
+.categoryRow td span {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 7px 10px;
+    font-weight: 700;
+
 }
 
 /*

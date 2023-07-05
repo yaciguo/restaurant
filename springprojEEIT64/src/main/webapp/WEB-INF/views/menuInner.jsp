@@ -32,7 +32,7 @@
                     <div class="row" id="container-intro">
                         <div class="col-sm-4">
                             <div>墨竹亭(公益店)</div><br>
-                            <div>(外帶)</div>
+                            <div>內用 5桌</div>
                         </div>
 
                         <div class="col-sm-5">
@@ -120,7 +120,7 @@
                     alert("購物車為空");
                     event.preventDefault(); // 取消事件的默认行为
                 } else {
-                    window.location.href = "<c:url value='/shoppingcart' />";
+                    window.location.href = "<c:url value='/shoppingcartInner' />";
                 }
             }
 

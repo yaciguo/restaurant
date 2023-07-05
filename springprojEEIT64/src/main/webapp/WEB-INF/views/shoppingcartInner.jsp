@@ -320,42 +320,43 @@
                 <h1 style="font-weight: bolder;">訂單結帳</h1>
               </header>
             </div><br>
-            <h3 style="text-align: center ;font-weight: bold;">墨竹亭-公益店 (外帶)</h3>
+            <h3 style="text-align: center ;font-weight: bold;">墨竹亭-公益店 (5桌)</h3>
             <!-- (外帶/內用) -->
             <br>
 
             <form id="myForm" onsubmit="return validateAndRedirect()">
               <!-- 訂單內容 -->
               <div class="row">
-
-                <fieldset class="col-sm-12" style="display: flex; flex-direction: column;">
-                  <legend>訂單內容</legend>
-                  <!--新增=============================-->
-                  <div style="flex-grow: 1; overflow-y: auto;">
-                    <table class="store" style="width: 100%;">
-                      <tr>
-                        <th style="width: 50%;">餐點名稱</th>
-                        <th style="width: 20%;">單價</th>
-                        <th style="width: 20%;">數量</th>
-                      </tr>
-
-
-                    </table>
-
+	              <div class="col-sm-12">
+	
+	                <fieldset  style="display: flex; flex-direction: column;">
+	                  <legend>訂單內容</legend>
+	                  <!--新增=============================-->
+	                  <div style="flex-grow: 1; overflow-y: auto;">
+	                    <table class="store" style="width: 100%;">
+	                      <tr>
+	                        <th style="width: 50%;">餐點名稱</th>
+	                        <th style="width: 20%;">單價</th>
+	                        <th style="width: 20%;">數量</th>
+	                      </tr>
+	
+	
+	                    </table>
+	
+	                  </div>
                   </div>
 
                 </fieldset>
               </div><br>
 
-              <div class="row">
-                <div class="col-sm-4">
-                  <fieldset>
+              <div class="row" >
+                <div class="col-sm-6">
+                  <fieldset >
                     <legend>餐點備註</legend>
                     <textarea id="note" rows="8" cols="20" style="width: 98%" placeholder="請輸入餐點備註"></textarea>
                   </fieldset>
                 </div>
-
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                   <fieldset>
                     <legend>訂單金額</legend>
                     <span>商品小計:</span>
@@ -373,44 +374,44 @@
                   </fieldset>
                 </div>
 
-                <div class="col-sm-4">
-                  <fieldset>
-                    <legend>取餐資料</legend>
-                    <label for="">姓名:</label><br />
-                    <input id="customer" type="text" placeholder="請輸入訂購人" style="width: 90%;"
-                      required="required" /><br /><br />
+<!--                 <div class="col-sm-4"> -->
+<!--                   <fieldset> -->
+<!--                     <legend>取餐資料</legend> -->
+<!--                     <label for="">姓名:</label><br /> -->
+<!--                     <input id="customer" type="text" placeholder="請輸入訂購人" style="width: 90%;" -->
+<!--                       required="required" /><br /><br /> -->
 
-                    <label for="">手機:</label><br />
-                    <input id="phone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;"
-                      pattern="[0]{1}[9]{1}[0-9]{8}" required="required" /><br /><br />
+<!--                     <label for="">手機:</label><br /> -->
+<!--                     <input id="phone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;" -->
+<!--                       pattern="[0]{1}[9]{1}[0-9]{8}" required="required" /><br /><br /> -->
 
-                    <label>取餐時間:</label><br />
-                    <select id="pickTime" required="required">
-                      <option value="">請選擇時間</option>
-                      <!--                       <option value="10:39:00">10:39</option> -->
-                      <option value="11:00:00">11:00</option>
-                      <option value="11:30:00">11:30</option>
-                      <option value="12:00:00">12:00</option>
-                      <option value="12:30:00">12:30</option>
-                      <option value="13:00:00">13:00</option>
-                      <option value="13:30:00">13:30</option>
-                      <option value="14:00:00">14:00</option>
-                      <!-- <option value="14:30:00">14:30</option> -->
-                      <!-- <option value="15:00:00">15:00</option> -->
-                      <!-- <option value="15:30:00">15:30</option> -->
-                      <option value="16:00:00">16:00</option>
-                      <option value="16:30:00">16:30</option>
-                      <option value="17:00:00">17:00</option>
-                      <option value="17:30:00">17:30</option>
-                      <option value="18:00:00">18:00</option>
-                      <option value="18:30:00">18:30</option>
-                      <option value="19:00:00">19:00</option>
-                      <option value="19:30:00">19:30</option>
-                      <!--                       <option value="22:30:00">22:30</option> -->
-                    </select>
+<!--                     <label>取餐時間:</label><br /> -->
+<!--                     <select id="pickTime" required="required"> -->
+<!--                       <option value="">請選擇時間</option> -->
+<!--                                             <option value="10:39:00">10:39</option> -->
+<!--                       <option value="11:00:00">11:00</option> -->
+<!--                       <option value="11:30:00">11:30</option> -->
+<!--                       <option value="12:00:00">12:00</option> -->
+<!--                       <option value="12:30:00">12:30</option> -->
+<!--                       <option value="13:00:00">13:00</option> -->
+<!--                       <option value="13:30:00">13:30</option> -->
+<!--                       <option value="14:00:00">14:00</option> -->
+<!--                       <option value="14:30:00">14:30</option> -->
+<!--                       <option value="15:00:00">15:00</option> -->
+<!--                       <option value="15:30:00">15:30</option> -->
+<!--                       <option value="16:00:00">16:00</option> -->
+<!--                       <option value="16:30:00">16:30</option> -->
+<!--                       <option value="17:00:00">17:00</option> -->
+<!--                       <option value="17:30:00">17:30</option> -->
+<!--                       <option value="18:00:00">18:00</option> -->
+<!--                       <option value="18:30:00">18:30</option> -->
+<!--                       <option value="19:00:00">19:00</option> -->
+<!--                       <option value="19:30:00">19:30</option> -->
+<!--                                             <option value="22:30:00">22:30</option> -->
+<!--                     </select> -->
 
-                  </fieldset>
-                </div>
+<!--                   </fieldset> -->
+<!--                 </div> -->
               </div>
               <footer>
                 <input type="button" value="繼續加點" class="button2" onclick="menuPage()" /> <!--上一頁-->
@@ -423,7 +424,7 @@
       </body>
       <script>
         function menuPage() {
-          window.location.href = "<c:url value='/menu' />";
+          window.location.href = "<c:url value='/menuInner' />";
         }
 
         //時間設定

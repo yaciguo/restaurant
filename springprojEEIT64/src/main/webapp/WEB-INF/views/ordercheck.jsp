@@ -99,9 +99,10 @@
         <header>
           <h1 style="margin-top: 20px;">訂購完成</h1>
         </header>
+        <br><br>
 
         <div class="container">
-          <div class="row">
+          <div class="row" style="text-align: center;">
             <h1>感謝您的訂購！</h1>
           </div>
           <!--     <div class="row">  -->

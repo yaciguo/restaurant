@@ -79,7 +79,7 @@ public class HomeController {
 		return "menu";
 	}
 	
-	@GetMapping("/menutest")
+	@GetMapping("/menuInner")
 	public String menutest(Model model) {
 		LocalDate currentDate = LocalDate.now();
 	    DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
@@ -88,7 +88,7 @@ public class HomeController {
 	        model.addAttribute("closedMessage", "今日無營業"); // 添加關閉通知訊息
 	    }
 		
-		return "menutest";
+		return "menuInner";
 	}
 	
 	
