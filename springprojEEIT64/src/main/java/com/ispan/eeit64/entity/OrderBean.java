@@ -21,6 +21,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -70,7 +72,7 @@ public class OrderBean {
 	@JsonManagedReference
 	private Set<OrderDetailBean> orderDetailBean = new LinkedHashSet<>();
 
-	@JsonBackReference
+	@JsonIgnoreProperties("order")
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private CheckoutBean checkoutBean;
 

@@ -158,9 +158,7 @@ public class fakeDataInit {
     public <T, ID> void resetTable(String tableName, JpaRepository<T, ID> dao) throws Exception {
         System.out.println(dao.findAll().size());
         if (dao.findAll().size() != 0) {
-            System.out.println(1);
             dao.deleteAll();
-            System.out.println(2);
         }
         ucDao.resetAutoId(tableName);
     }

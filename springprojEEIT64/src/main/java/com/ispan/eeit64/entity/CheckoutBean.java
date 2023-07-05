@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -34,7 +37,7 @@ public class CheckoutBean {
 	@Column(name = "note", columnDefinition = "VARCHAR(200) DEFAULT NULL COMMENT '備註'")
 	private String note;
 	
-	@JsonManagedReference
+	@JsonIgnoreProperties("checkoutBean")
 	@OneToOne
     @JoinColumn(name="FK_orderId")
 	private OrderBean order;

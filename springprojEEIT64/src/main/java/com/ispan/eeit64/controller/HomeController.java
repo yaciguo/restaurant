@@ -79,6 +79,19 @@ public class HomeController {
 		return "menu";
 	}
 	
+	@GetMapping("/menutest")
+	public String menutest(Model model) {
+		LocalDate currentDate = LocalDate.now();
+	    DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
+	    
+	    if (currentDayOfWeek == DayOfWeek.SUNDAY) {
+	        model.addAttribute("closedMessage", "今日無營業"); // 添加關閉通知訊息
+	    }
+		
+		return "menutest";
+	}
+	
+	
 	@GetMapping("/ordercheck")
 	public String ordercheck() {
 		return "ordercheck";
@@ -93,5 +106,18 @@ public class HomeController {
     public String restInfo() {      
         return "restInfo";
     }
+	
+	@GetMapping("/dataAnalysis")
+	public String dataAnalysis() {
+	    return "dataAnalysis";
+	}
+	
+	@GetMapping("/hello")
+	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {
+		String message = visitor != null ? visitor + "，您好" : "訪客，您好";
+		model.addAttribute("helloMessage", message);
+		return "greeting";
+	}
+	
 	
 }
