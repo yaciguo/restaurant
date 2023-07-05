@@ -43,16 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private boolean isCloseSecurity = true;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-        if(isCloseSecurity){
-            http
-                .authorizeRequests(requests -> requests
-                        .anyRequest().permitAll()
-                        )
-                .cors(cors -> cors.disable())
-                .csrf(csrf -> csrf.ignoringAntMatchers("/**"))
-                ;
-            return;
-        }
+//        if(isCloseSecurity){
+//            http
+//                .authorizeRequests(requests -> requests
+//                        .anyRequest().permitAll()
+//                        )
+//                .cors(cors -> cors.disable())
+//                .csrf(csrf -> csrf.ignoringAntMatchers("/**"))
+//                ;
+//            return;
+//        }
         http
             .authorizeRequests(requests -> requests
                     .antMatchers("/resources/**").permitAll()
@@ -82,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/dishes2").permitAll()
                     .antMatchers("/restInfo").permitAll()
                     .antMatchers("/ordercheck").permitAll()
+                    .antMatchers("/test").permitAll()
                     .anyRequest().authenticated()
                     )
             .cors(cors -> cors.disable())

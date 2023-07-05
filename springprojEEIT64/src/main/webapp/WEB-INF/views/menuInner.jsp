@@ -285,25 +285,24 @@
                                 currentCategory = categoryName; // 更新当前类别
                             }
                             //"<c:url value='/images/cart.png' />"
-                            console.log(obj.picture)
-                            let pictureSrc = "<c:url value='" + "/restaurant" + obj.picture + "'/>";
-                            //                             let pictureSrc = "<c:url value='/images/dumpling.png'/>"; 
+//                             console.log(obj.picture)
+                            let base64Image  = obj.picture; 
                             let statusText = obj.status === 'Y' ? '' : '售完';
                             // 檢查是否為售完商品，若是則設定 disabled 屬性
                             let addButton = obj.status === 'Y' ? "<button class='add' onclick='addToCard(" + index + ")'>+</button>"
                                 : "<button class='add' disabled style='background-color: gray;'>+</button>";
 
-                            let rowClass = obj.status === 'Y' ? '' : 'soldOutBackground';
+                            let rowClass = obj.status === 'Y' ? '' : 'soldOutBackground noHover';
 
                             content += "<tr class='tableRow " + categoryName + " " + rowClass + "'>" +
-                                "<td id='td1' style='width: 12%;'><img src='" + pictureSrc + "' style='width: 120px;'></td>" +
-                                "<td id='td6' style='width: 5%;'>" + (obj.status === 'Y' ? statusText : "<span class='tdStatus'>" + statusText + "</span>") + "</td>" +
-                                "<td id='td2' style='width: 10%;'>" + obj.name + "</td>" +
-                                "<td id='td5' style='width: 30%;'>" + obj.description + "</td>" +
-                                "<td id='td3' style='width: 5%;'>$ " + obj.price + "</td>" +
-                                "<td id='td4' style='width: 10%;'>" + addButton +
-                                "</td>" +
-                                "<tr>";
+                            "<td id='td1' style='width: 8%;'><img src='" + base64Image  + "' style='width: 160px;'></td>" +
+                            "<td id='td6' style='width: 9%;'>" + (obj.status === 'Y' ? statusText : "<span class='tdStatus'>" + statusText + "</span>") + "</td>" +
+                            "<td id='td2' style='width: 10%;font-size: 23px;font-weight:900;'>" + obj.name + "</td>" +
+                            "<td id='td5' style='width: 25%;font-size: 18px'>" + obj.description + "</td>" +
+                            "<td id='td3' style='width: 10%;font-size: 23px;font-weight:900;'>$ " + obj.price + "</td>" +
+                            "<td id='td4' style='width: 7%;'>" + addButton +
+                            "</td>" +
+                            "<tr>";
 
 
 
