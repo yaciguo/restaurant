@@ -40,19 +40,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.roles("USER");
     }
   
-//    private boolean isCloseSecurity = true;
+    private boolean isCloseSecurity = true;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//        if(isCloseSecurity){
-//            http
-//                .authorizeRequests(requests -> requests
-//                        .anyRequest().permitAll()
-//                        )
-//                .cors(cors -> cors.disable())
-//                .csrf(csrf -> csrf.ignoringAntMatchers("/**"))
-//                ;
-//            return;
-//        }
+        if(isCloseSecurity){
+            http
+                .authorizeRequests(requests -> requests
+                        .anyRequest().permitAll()
+                        )
+                .cors(cors -> cors.disable())
+                .csrf(csrf -> csrf.ignoringAntMatchers("/**"))
+                ;
+            return;
+        }
         http
             .authorizeRequests(requests -> requests
                     .antMatchers("/resources/**").permitAll()
@@ -99,7 +99,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //	                .defaultSuccessUrl("/activity")
                     .successHandler((request, response, authentication) -> {
                         System.out.println("Login Successful!");
-                        response.sendRedirect(request.getContextPath() + "/activity");
+                        response.sendRedirect(request.getContextPath() + "/sideNav");
                     })
                     .failureHandler((request, response, exception) -> {
                         System.out.println("Login Failed!");

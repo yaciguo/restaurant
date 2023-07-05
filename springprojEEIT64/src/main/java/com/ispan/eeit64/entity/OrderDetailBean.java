@@ -1,6 +1,7 @@
 package com.ispan.eeit64.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,16 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "orderDetail")
 public class OrderDetailBean {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", length = 10)
     private Integer id;
     
-    @OneToOne
+    @OneToOne //(fetch = FetchType.LAZY)
     @JoinColumn(name="dishId", nullable=false , foreignKey=@ForeignKey(name = "od_fk_dish"))
     private DishBean dish;
 
@@ -28,7 +30,8 @@ public class OrderDetailBean {
     
     @ManyToOne
 	@JoinColumn(name="FK_orderId", nullable=false , foreignKey=@ForeignKey(name = "orders_id_fk"))  
-	private OrderBean orderBean;
+    @JsonBackReference
+    private OrderBean orderBean;
 
 	@Override
 	public String toString() {
@@ -92,6 +95,5 @@ public class OrderDetailBean {
 	public void setOrderBean(OrderBean orderBean) {
 		this.orderBean = orderBean;
 	}
-    
     
 }

@@ -21,9 +21,15 @@ public class HomeController {
 	public String custIndex() {
 		return "custIndex";
 	}
+	
 	@GetMapping("/nav")
 	public String nav() {
 		return "nav";
+	}
+	
+	@GetMapping("/sideNav")
+	public String sideNav() {
+		return "sideNav";
 	}
 
 	@GetMapping("/question")
@@ -35,18 +41,21 @@ public class HomeController {
 	public String osLogin() {
 		return "osLogin";
 	}
-
+	
 	@GetMapping("/activity")
 	public String activity() {
 		return "activity";
+	}
+
+	@GetMapping("/checkout")
+	public String checkout() {
+		return "checkout";
 	}
 	  
     @GetMapping("/basicSettings")
     public String basicSettings() {
         return "basicSettings";
     }
-	
-
 	
 	@GetMapping("/searchbooking")
 	public String searchbooking() {
@@ -88,7 +97,6 @@ public class HomeController {
 		return "ordercheck";
 	}
 	
-	
 	@GetMapping("/bookingcheck")
     public String bookingcheck() {      
         return "bookingcheck";
@@ -99,17 +107,11 @@ public class HomeController {
         return "restInfo";
     }
 	
-	@GetMapping("/test")
-    public String test() {      
-        return "test";
-    }
+	@GetMapping("/dataAnalysis")
+	public String dataAnalysis() {
+	    return "dataAnalysis";
+	}
 	
-	
-	
-	
-	
-	
-
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {
 		String message = visitor != null ? visitor + "，您好" : "訪客，您好";
@@ -118,5 +120,4 @@ public class HomeController {
 	}
 	
 	
-
 }
