@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
     <!-- Include Date Range Picker -->
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
@@ -176,7 +176,6 @@
 <body>
 
     <!-- 主要內容區域 -->
-
     <div id="main-content" class="main-content">
         <ul class="nav nav-tabs" id="activity-tabs">
             <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
@@ -728,8 +727,8 @@
     var header = "${_csrf.headerName}";
 </script>
 
-<script type="text/javascript" src="<c:url value='/js/basicSettings/basicSettings.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/basicSettings/basicSettings_setting.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/basicSettings/basicSettings_openingSetting.js'/>"></script>
+<script type="text/javascript" src="<c:url value='js/basicSettings/basicSettings.js'/>"></script>
+<script type="text/javascript" src="<c:url value='js/basicSettings/basicSettings_setting.js'/>"></script>
+<script type="text/javascript" src="<c:url value='js/basicSettings/basicSettings_openingSetting.js'/>"></script>
 
 </html>
