@@ -14,17 +14,14 @@
 <link href="assets/img/s-logo.png" rel="icon">
 
 <!-- bootstrap5 - 前端框架 -->
-<link href="./assets/src/plugins/bootstrap5.2/bootstrap.min.css"
-	rel="stylesheet">
-<script src="./assets/src/plugins/bootstrap5.2/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- jquery 框架 -->
-<script type="text/javascript"
-	src="./assets/src/plugins/jquery/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <!-- fontAwesome - icon插件 -->
-<link href="./assets/src/plugins/fontawesome/css/all.min.css"
-	rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"  />
 
 <link rel='stylesheet' href="<c:url value='/css/question.css' />" />
 

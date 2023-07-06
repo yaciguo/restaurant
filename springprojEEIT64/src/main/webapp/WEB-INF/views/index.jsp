@@ -25,11 +25,11 @@
 		<br>
 		<a href="<c:url value='/basicSettings' />"> 後台-基本設定 </a>
 		<br>
-		<a href="<c:url value='activity' />"> 後台-活動頁 </a>
+		<a href="<c:url value='/activity' />"> 後台-活動頁 </a>
 		<br> <br>
-		<a href="<c:url value='product' />"> 產品新增</a>
+		<a href="<c:url value='product' />"> 後台-餐點管理 </a>
 		<br> <br>
-		<a href="<c:url value='checkout' />">結帳管理</a>
+		<a href="<c:url value='/table' />"> 後台-桌位管理 </a>
 		<br> <br>
 	</div>
 

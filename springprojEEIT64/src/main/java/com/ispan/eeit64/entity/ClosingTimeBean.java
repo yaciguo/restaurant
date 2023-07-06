@@ -1,6 +1,7 @@
 package com.ispan.eeit64.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "closingtime")
@@ -19,13 +20,15 @@ public class ClosingTimeBean {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "startDate", nullable = false, columnDefinition = "Date COMMENT '開始休假時間'")
-	private java.sql.Date startDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+	@Column(name = "startDate", nullable = false, columnDefinition = "DateTime COMMENT '開始休假時間'")
+	private Date startDate;
 	
-	@Column(name = "endDate", nullable = false, columnDefinition = "Date COMMENT '結束休假時間'")
-	private java.sql.Date endDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+	@Column(name = "endDate", nullable = false, columnDefinition = "DateTime COMMENT '結束休假時間'")
+	private Date endDate;
 	
-	@Column(name = "description", nullable = false, columnDefinition = "VARCHAR(1000) COMMENT '休假說明'")
+	@Column(name = "description", nullable = true, columnDefinition = "VARCHAR(1000) COMMENT '休假說明'")
 	private String description;
 
 	@Override
@@ -36,6 +39,13 @@ public class ClosingTimeBean {
 
 	public ClosingTimeBean() {
 		super();
+	}
+
+	public ClosingTimeBean(Date startDate, Date endDate, String description) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.description = description;
 	}
 
 	public ClosingTimeBean(Integer id, Date startDate, Date endDate, String description) {
@@ -54,19 +64,19 @@ public class ClosingTimeBean {
 		this.id = id;
 	}
 
-	public java.sql.Date getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(java.sql.Date startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public java.sql.Date getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(java.sql.Date endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

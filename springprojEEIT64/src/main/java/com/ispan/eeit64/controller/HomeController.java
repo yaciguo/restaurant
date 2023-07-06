@@ -36,13 +36,17 @@ public class HomeController {
 		return "activity";
 	}
 	
-	@GetMapping("/product")
-	public String product() {
-		return "product";
-	}
+//	@GetMapping("/product")
+//	public String product() {
+//		return "product";
+//	}
 	@GetMapping("/checkout")
 	public String checkout() {
 		return "checkout";
+	}
+	@GetMapping("/table")
+	public String table() {
+		return "table";
 	}
 
 	@GetMapping("/hello")

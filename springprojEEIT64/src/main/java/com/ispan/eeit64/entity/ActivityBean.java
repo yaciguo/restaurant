@@ -2,7 +2,6 @@ package com.ispan.eeit64.entity;
 
 import java.sql.Date;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Access;
@@ -16,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "activity")
@@ -47,6 +48,7 @@ public class ActivityBean {
 	@OneToMany(mappedBy = "activityBean")
 	private Set<OrderBean> orderBean = new LinkedHashSet<>();
 
+	@JsonIgnoreProperties("activityBean") // 忽略属性的序列化sara===========
 	@ManyToOne
 	@JoinColumn(name = "FK_Dish_Id")
 	private DishBean dishBean;

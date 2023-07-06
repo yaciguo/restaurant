@@ -17,11 +17,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "reservation")
 public class ReservationBean {
-
+	//有更改id型態為Integer================
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", length = 10)
-    private int id;
+    private Integer id;
 
     @Column(name = "name", columnDefinition = "varchar(11) NOT NULL COMMENT '姓名'")
     private String name;
@@ -29,11 +29,11 @@ public class ReservationBean {
     @Column(name = "gender", columnDefinition = "varchar(11) NOT NULL COMMENT '性別F, M'")
     private String gender;
 
-    @Column(name = "phone", columnDefinition = "int(20) NOT NULL COMMENT '電話'")
-    private String phone;
+    @Column(name = "phone", columnDefinition = "varchar(20) NOT NULL COMMENT '電話'")
+    private String  phone;
 
     @Column(name = "pNumber", columnDefinition = "int(11) NOT NULL COMMENT '人數'")
-    private int pNumber;
+    private Integer pNumber;
 
     @Column(name = "date", columnDefinition = "date NOT NULL COMMENT '日期'")
     private Date date;
@@ -53,10 +53,11 @@ public class ReservationBean {
     @Column(name = "submitTime", columnDefinition = "datetime NOT NULL COMMENT ' 送出時間'")
     private java.sql.Timestamp submitTime;
     
-    //delete (cascade=CascadeType.ALL)
-    @ManyToOne
+    //是不是要可以null?有更改成nullable = true 
+    @ManyToOne//delete (cascade=CascadeType.ALL)
     @JoinColumn(name = "FK_FdTableBean_Id", nullable = true, foreignKey = @ForeignKey(name = "res_fk_tb"))
     private FdTableBean fdTableBean;
+    
     
 
 	public ReservationBean() {
@@ -241,4 +242,10 @@ public class ReservationBean {
 	public void setFdTableBean(FdTableBean fdTableBean) {
 		this.fdTableBean = fdTableBean;
 	}
+
+
+	
+	
+    
+    
 }

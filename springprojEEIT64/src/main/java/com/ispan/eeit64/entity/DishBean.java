@@ -3,7 +3,6 @@ package com.ispan.eeit64.entity;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -15,10 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "dish")
 public class DishBean {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", length = 100)
@@ -26,9 +27,10 @@ public class DishBean {
 
 	@Column(name = "name", columnDefinition = "varchar(100) NOT NULL COMMENT'餐點名稱'")
 	private String name;
-
+	
+	@JsonIgnoreProperties("dishBean") // 忽略属性的序列化sara================
 	@ManyToOne
-	@JoinColumn(name = "FK_categoryId", nullable = false, foreignKey = @ForeignKey(name = "dish_id_fk"))
+	@JoinColumn(name = "FK_categoryId", nullable = false, foreignKey = @ForeignKey(name = "dish_ibfk_1"))
 	private CategoryBean categoryBean;
 
 	@Column(name = "price", columnDefinition = "INT(10) NOT NULL COMMENT'餐點價格'")
@@ -45,14 +47,33 @@ public class DishBean {
 
 	@Column(name = "status", columnDefinition = "varchar(10) NOT NULL COMMENT'餐點狀態 N無,Y有'")
 	private String status;
+	
+	@Column(name = "categoryId", nullable = false)
+	private int categoryId;
 
-	@OneToMany(mappedBy = "dishBean", cascade = { CascadeType.ALL })
+	public int getCategoryId() {
+	    return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+	    this.categoryId = categoryId;
+	}
+
+
+	@JsonBackReference
+	@JsonIgnoreProperties("dishBean") // 忽略属性的序列化sara==============
+	@OneToMany(mappedBy = "dishBean")
 	private Set<ActivityBean> activityBean = new LinkedHashSet<>();
 
 	public DishBean() {
 		super();
 	}
-	
+	public DishBean(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
 	public DishBean(String name, CategoryBean categoryBean, Integer price, Integer cost, String picture, String description, String status) {
 		super();
 		this.name = name;
@@ -63,6 +84,9 @@ public class DishBean {
 		this.description = description;
 		this.status = status;
 	}
+
+
+
 
 	public DishBean(Integer id, String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
 			String description, String status) {
@@ -76,7 +100,6 @@ public class DishBean {
 		this.description = description;
 		this.status = status;
 	}
-
 
 	public DishBean(Integer id, String name, CategoryBean categoryBean, Integer price, Integer cost, String picture,
 			String description, String status, Set<ActivityBean> activityBean) {
@@ -109,7 +132,11 @@ public class DishBean {
 	}
 
 	public CategoryBean getCategoryBean() {
-		return categoryBean;
+//		  if (categoryBean == null) {
+//		        categoryBean = new CategoryBean();
+//		    }
+		    return categoryBean;
+		
 	}
 
 	public void setCategoryBean(CategoryBean categoryBean) {
