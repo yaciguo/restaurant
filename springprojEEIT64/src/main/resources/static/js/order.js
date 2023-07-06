@@ -1,8 +1,11 @@
-	var contextPath;
-	
+var contextPath;
+var csrfHeaderName ;
+var csrfToken;
+
 	$(function(){
 		contextPath = document.querySelector('meta[name="_contextPath"]').getAttribute('content');
-
+		csrfHeaderName = $("meta[name='_csrf_header']").attr("content");
+		csrfToken = $("meta[name='_csrf']").attr("content"); 
 		
 		//進入加載
 		var orderIndex = contextPath + '/orders/orderStatus/1' ;
@@ -58,7 +61,10 @@
 				  url: contextPath + '/orders/orderId',
 				  type: 'PUT',
 				  contentType: 'application/json',
-				  data: JSON.stringify(selectedOrders),
+				  data: JSON.stringify(selectedOrders),      
+				  beforeSend: function(xhr) {
+            	  	xhr.setRequestHeader(csrfHeaderName, csrfToken);
+            	  },
 				  success: function(response) {
 					console.log("OK")
 					
@@ -155,7 +161,10 @@
 		$.ajax({
 			url: urlAddress,
 			type: 'GET',
-			dataType: 'json',
+			dataType: 'json',      
+		    beforeSend: function(xhr) {
+    	  	   xhr.setRequestHeader(csrfHeaderName, csrfToken);
+    	    },
 			success: function(data) {
 				console.log(data);
 				console.log(data['content'].length)
