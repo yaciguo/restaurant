@@ -1,5 +1,7 @@
 package com.ispan.eeit64.service.impl;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,7 +34,8 @@ public class DataAnalysisServiceImpl {
     public final int METHOD_DAY = 5;
     
     public final int VALUE_TYPE_QUANTITY = 1;
-    public final int VALUE_TYPE_SALESPRICE = 3;
+    public final int VALUE_TYPE_SALESPRICE = 2;
+    public final int VALUE_TYPE_SALESPRICEPROPORTION = 3;
     public final int VALUE_TYPE_PROFIT = 4;
     public final int VALUE_TYPE_COUNTORDERS = 5;
     public final int VALUE_TYPE_COST = 6;
@@ -201,15 +204,8 @@ public class DataAnalysisServiceImpl {
             result = getCategoryResult(value_type, ids, startTime, endTime);
         }else if(method == this.METHOD_DISH){
             result = getDishResult(value_type, ids, startTime, endTime);
-        }else if(method == this.METHOD_YEAR){
-            dateList = splitDate(this.METHOD_YEAR, startDate, endDate);
-        }else if(method == this.METHOD_MONTH){
-            dateList = splitDate(this.METHOD_MONTH, startDate, endDate);
-        }else if(method == this.METHOD_DAY){
-            dateList = splitDate(this.METHOD_DAY, startDate, endDate);
-        }
-
-        if(method == this.METHOD_YEAR || method == this.METHOD_MONTH || method == this.METHOD_DAY){
+        }else if(method == this.METHOD_YEAR || method == this.METHOD_MONTH || method == this.METHOD_DAY){
+            dateList = splitDate(method, startDate, endDate);
             result = getDateResult(value_type, dateList);
         }
 
@@ -235,6 +231,14 @@ public class DataAnalysisServiceImpl {
             result = dao.sumSalesPriceByCategoryIdsAndOrderTime(ids, startTime, endTime);
         }else if(value_type == this.VALUE_TYPE_COST){
             result = dao.sumCostByCategoryIdsAndOrderTime(ids, startTime, endTime);
+        }else if(value_type == this.VALUE_TYPE_SALESPRICEPROPORTION){
+            Integer sumSalesPrice = dao.sumSalesPriceByAllCategoryIdsAndOrderTime(startTime, endTime);
+            result = dao.sumSalesPriceByCategoryIdsAndOrderTime(ids, startTime, endTime);
+            for(Object[] obj : result){
+                BigDecimal bd = new BigDecimal((long)obj[1]/(float)sumSalesPrice*100);
+                bd = bd.setScale(2, RoundingMode.DOWN);
+                obj[1] = bd.doubleValue();
+            }
         }
         return result;
     }
@@ -251,17 +255,31 @@ public class DataAnalysisServiceImpl {
             result = dao.sumSalesPriceByDishIdsAndOrderTime(ids, startTime, endTime);
         }else if(value_type == this.VALUE_TYPE_COST){
             result = dao.sumCostByDishIdsAndOrderTime(ids, startTime, endTime);
+        }else if(value_type == this.VALUE_TYPE_SALESPRICEPROPORTION){
+            Integer sumSalesPrice = dao.sumSalesPriceByAllDishIdsAndOrderTime(startTime, endTime);
+            result = dao.sumSalesPriceByDishIdsAndOrderTime(ids, startTime, endTime);
+            for(Object[] obj : result){
+                BigDecimal bd = new BigDecimal((long)obj[1]/(float)sumSalesPrice*100);
+                bd = bd.setScale(2, RoundingMode.DOWN);
+                obj[1] = bd.doubleValue();
+            }
         }
         return result;
     }
     
     public List<Object[]> getDateResult(int value_type, List<Map<String,Object>> dateList){
         List<Object[]> result = new ArrayList<>();
+        Integer allValue = null;
+        if(value_type == this.VALUE_TYPE_SALESPRICEPROPORTION){
+            Timestamp startTime = new Timestamp((Long)dateList.get(0).get("start"));
+            Timestamp endTime = new Timestamp((Long)dateList.get(dateList.size()-1).get("end"));
+            allValue = dao.sumSalesPriceByOrderTime(startTime, endTime);
+        }
         for(Map<String,Object> map : dateList ){
             Timestamp startTime = new Timestamp((Long)map.get("start"));
             Timestamp endTime = new Timestamp((Long)map.get("end"));
 
-            Integer value = null;
+            Object value = null;
             
             if(value_type == this.VALUE_TYPE_QUANTITY){
                 value = dao.sumQuantityByOrderTime( startTime, endTime);
@@ -273,7 +291,16 @@ public class DataAnalysisServiceImpl {
                 value = dao.sumSalesPriceByOrderTime( startTime, endTime);
             }else if(value_type == this.VALUE_TYPE_COST){
                 value = dao.sumCostByOrderTime( startTime, endTime);
-            }
+            }else if(value_type == this.VALUE_TYPE_SALESPRICEPROPORTION){
+                value = dao.sumSalesPriceByOrderTime( startTime, endTime);
+                if(value == null){
+                    value = 0;
+                }
+                
+                BigDecimal bd = new BigDecimal((Integer)value/(float)allValue*100);
+                bd = bd.setScale(2, RoundingMode.DOWN);
+                value = bd.doubleValue();
+            }            
 
             Object[] obj = {
                 (String)map.get("target"), 

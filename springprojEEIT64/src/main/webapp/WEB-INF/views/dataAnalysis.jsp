@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -229,8 +228,8 @@
                                             <div class="col mb-1">
                                                 <select class="form-select" id="chart-data-select">
                                                     <option value="1">銷售數量</option>
-                                                    <option value="2">銷售佔比</option>
-                                                    <option value="3">銷售額</option>
+                                                    <option value="2">銷售額</option>
+                                                    <option value="3">銷售佔比</option>
                                                     <option value="4">利潤</option>
                                                     <option value="5">訂單數</option>
                                                     <option value="6">成本</option>

@@ -155,6 +155,7 @@ function getModalTargetCheckedIds(){
 async function getData(){
 	let condition = {
 		"method":parseInt($("#chart-target-select").find(":selected").val()),
+        "value_type":parseInt($("#chart-data-select").find(":selected").val()),
 		"startDate" : $("#startdate").val(),
 		"endDate" : $("#enddate").val()
 	};
@@ -167,7 +168,7 @@ async function getData(){
     }
     let response = await $.ajax({
         type: "post",
-        url: contextPath + "/dataAnalysis.api/getProfit",
+        url: contextPath + "/dataAnalysis.api/getData",
 		contentType: "application/json",
 		data: JSON.stringify(condition),
 		beforeSend: function (xhr) {

@@ -60,6 +60,7 @@ public class DataAnalysisController {
 		apiResult.setMsg("成功提取資料");
 		return apiResult;
 	}
+	
 	@GetMapping("/getCategory")
 	public @ResponseBody APIResult getCategory(){
 		APIResult apiResult = new APIResult();
@@ -87,7 +88,7 @@ public class DataAnalysisController {
 		
 		APIResult apiResult = new APIResult();
 
-		System.out.println("getProfit");		
+		System.out.println("++++++++++getData");		
 		List<Map<String,Object>> data = service.getData(method, value_type, ids, startDate, endDate);
 		apiResult.setData(data);
 		apiResult.setCode(StatusCode.SUCCESS);

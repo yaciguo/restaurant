@@ -30,56 +30,63 @@ public interface OrderRepository extends JpaRepository<OrderBean, Integer>{
 	@Query("SELECT COUNT(DISTINCT o) "+ BASE_QUERY)
 	Integer countOrdersByOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
-	@Query("SELECT od.dish.name, COUNT(od) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id")
+	@Query("SELECT od.dish.name, COUNT(od) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id ORDER BY od.dish.id")
 	List<Object[]> countOrdersByDishIdsAndOrderTime(@Param("dishIds") Set<Integer> dishIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 	
-	@Query("SELECT od.dish.categoryBean.name, COUNT(od) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id")
+	@Query("SELECT od.dish.categoryBean.name, COUNT(od) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id ORDER BY od.dish.categoryBean.id")
 	List<Object[]> countOrdersByCategoryIdsAndOrderTime(@Param("categoryIds") Set<Integer> categoryIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
 	// SalesPrice
 	@Query("SELECT SUM(od.dish.price*od.quantity) "+ BASE_QUERY)
 	Integer sumSalesPriceByOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
-	@Query("SELECT od.dish.name, SUM(od.dish.price*od.quantity) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id")
+	@Query("SELECT od.dish.name, SUM(od.dish.price*od.quantity) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id ORDER BY od.dish.id")
 	List<Object[]> sumSalesPriceByDishIdsAndOrderTime(@Param("dishIds") Set<Integer> dishIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
-	@Query("SELECT od.dish.categoryBean.id, SUM(od.dish.price*od.quantity) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id")
+	@Query("SELECT od.dish.categoryBean.name, SUM(od.dish.price*od.quantity) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id ORDER BY od.dish.categoryBean.id")
 	List<Object[]> sumSalesPriceByCategoryIdsAndOrderTime(@Param("categoryIds") Set<Integer> categoryIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
+	// All SalesPrice
+	@Query("SELECT SUM(od.dish.price*od.quantity) "+ BASE_QUERY)
+	Integer sumSalesPriceByAllDishIdsAndOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
+		
+	@Query("SELECT SUM(od.dish.price*od.quantity) "+ BASE_QUERY)
+	Integer sumSalesPriceByAllCategoryIdsAndOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
+	
 	// Profit
 	@Query("SELECT SUM((od.dish.price - od.dish.cost)*od.quantity) "+ BASE_QUERY)
 	Integer sumProfitByOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
-	@Query("SELECT od.dish.name, SUM((od.dish.price - od.dish.cost)*od.quantity) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id")
+	@Query("SELECT od.dish.name, SUM((od.dish.price - od.dish.cost)*od.quantity) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id ORDER BY od.dish.id")
 	List<Object[]> sumProfitByDishIdsAndOrderTime(@Param("dishIds") Set<Integer> dishIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 	
-	@Query("SELECT od.dish.categoryBean.name, SUM((od.dish.price - od.dish.cost)*od.quantity) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id")
+	@Query("SELECT od.dish.categoryBean.name, SUM((od.dish.price - od.dish.cost)*od.quantity) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id ORDER BY od.dish.categoryBean.id")
 	List<Object[]> sumProfitByCategoryIdsAndOrderTime(@Param("categoryIds") Set<Integer> categoryIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
 	// quantity
 	@Query("SELECT SUM(od.quantity) "+ BASE_QUERY)
 	Integer sumQuantityByOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
-	@Query("SELECT od.dish.name, SUM(od.quantity) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id")
+	@Query("SELECT od.dish.name, SUM(od.quantity) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id ORDER BY od.dish.id")
 	List<Object[]> sumQuantityByDishIdsAndOrderTime(@Param("dishIds") Set<Integer> dishIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 	
-	@Query("SELECT od.dish.categoryBean.name, SUM(od.quantity) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id")
+	@Query("SELECT od.dish.categoryBean.name, SUM(od.quantity) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id ORDER BY od.dish.categoryBean.id")
 	List<Object[]> sumQuantityByCategoryIdsAndOrderTime(@Param("categoryIds") Set<Integer> categoryIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
 	// All quantity
-	@Query("SELECT od.dish.name, SUM(od.quantity) "+ BASE_QUERY+" GROUP BY od.dish.id")
+	@Query("SELECT od.dish.name, SUM(od.quantity) "+ BASE_QUERY+" GROUP BY od.dish.id ORDER BY od.dish.id")
 	List<Object[]> sumQuantityByAllDishIdsAndOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 	
-	@Query("SELECT od.dish.categoryBean.name, SUM(od.quantity) "+ BASE_QUERY+"  GROUP BY od.dish.categoryBean.id")
+	@Query("SELECT od.dish.categoryBean.name, SUM(od.quantity) "+ BASE_QUERY+"  GROUP BY od.dish.categoryBean.id ORDER BY od.dish.categoryBean.id")
 	List<Object[]> sumQuantityByAllCategoryIdsAndOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
-	
+
 	// cost 
 	@Query("SELECT SUM(od.dish.cost*od.quantity) "+ BASE_QUERY)
 	Integer sumCostByOrderTime(@Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
-	@Query("SELECT od.dish.name, SUM(od.dish.cost*od.quantity) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id")
+	@Query("SELECT od.dish.name, SUM(od.dish.cost*od.quantity) "+ BASE_QUERY+" AND od.dish.id IN :dishIds GROUP BY od.dish.id ORDER BY od.dish.id")
 	List<Object[]> sumCostByDishIdsAndOrderTime(@Param("dishIds") Set<Integer> dishIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 
-	@Query("SELECT od.dish.categoryBean.id, SUM(od.dish.cost*od.quantity) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id")
+	@Query("SELECT od.dish.categoryBean.name, SUM(od.dish.cost*od.quantity) "+ BASE_QUERY+" AND od.dish.categoryBean.id IN :categoryIds GROUP BY od.dish.categoryBean.id ORDER BY od.dish.categoryBean.id")
 	List<Object[]> sumCostByCategoryIdsAndOrderTime(@Param("categoryIds") Set<Integer> categoryIds, @Param("startTime") Timestamp startTime, @Param("endTime") Timestamp endTime);
 }
