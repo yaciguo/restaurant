@@ -117,7 +117,7 @@ public class orderTest {
 		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM");
 		Date s = f.parse("2023-01-10");
 		Date e = f.parse("2023-08-12");
-		System.out.println(t.getCountOrders(t.MONTH_METHOD, null, s, e));
+		// System.out.println(t.getCountOrders(t.MONTH_METHOD, null, s, e));
 		// for(Map a : t.splitDate(t.DAY, s, e)){
 		// 	System.out.println(a);
 		// }

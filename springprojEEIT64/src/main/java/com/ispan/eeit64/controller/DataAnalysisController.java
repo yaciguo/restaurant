@@ -70,13 +70,14 @@ public class DataAnalysisController {
 	}
 
 	
-	@PostMapping("/getProfit")
-	public @ResponseBody APIResult  getProfit(
+	@PostMapping("/getData")
+	public @ResponseBody APIResult  getData(
 		@RequestBody Map<String, Object> condition
 		) throws ParseException {
 		SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
 		
 		int method = (int)condition.get("method");
+		int value_type = (int)condition.get("value_type");
 		Set<Integer> ids = null;
 		if(condition.get("ids") != null){
 			ids = new HashSet<>((List<Integer>)condition.get("ids"));
@@ -85,8 +86,9 @@ public class DataAnalysisController {
 		Date endDate = ymd.parse((String)condition.get("endDate"));
 		
 		APIResult apiResult = new APIResult();
-		System.out.println("getProfit");
-		List<Map<String,Object>> data = service.getProfit(method, ids, startDate, endDate);
+
+		System.out.println("getProfit");		
+		List<Map<String,Object>> data = service.getData(method, value_type, ids, startDate, endDate);
 		apiResult.setData(data);
 		apiResult.setCode(StatusCode.SUCCESS);
 		apiResult.setMsg("成功提取資料");
