@@ -137,7 +137,7 @@ function validateAndRedirect() {
             	setTimeout(function() {
             		 // 重定向到 bookingcheck.jsp，并将成功信息和桌子号码作为URL参数传递
             		window.location.href = "/restaurant/bookingcheck"
-                }, 500); 
+                }, 200); 
             }else if (responseJson.hasOwnProperty('error')) {
             	console.log(responseJson);
                 // 显示错误的提示信息
@@ -156,6 +156,10 @@ function validateAndRedirect() {
 	  // 阻止表单的默认提交行为
 // 	  alert("no")
 	  return false;
+	  
+	  
+	  
+	  
 	}
 </script>
 
