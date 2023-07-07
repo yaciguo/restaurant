@@ -78,6 +78,7 @@
 							</select></li>
 	
 							<li class="order-statechoose"><select class="form-select" id="form-select1">
+									<option>訂單成立</option>
 									<option>訂單準備中</option>
 									<option>訂單完成</option>
 									<option>訂單取消</option>

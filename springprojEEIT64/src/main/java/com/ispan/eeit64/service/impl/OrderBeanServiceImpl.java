@@ -111,14 +111,19 @@ public class OrderBeanServiceImpl implements OrderBeanService{
               System.out.println(status);
               System.out.println(orderBean.getId());
               
-              if (status.equals("訂單準備中")) {
+              if (status.equals("訂單成立")) {
+            	  System.out.println("6666AAA5555");
+            	  record.setOrderEstablish(new Timestamp(System.currentTimeMillis()));
+            	  orders.setCheckoutBean(new CheckoutBean(null,"N",orderBean));
+              } else if (status.equals("訂單準備中")) {
             	  System.out.println("AAA5555");
             	  record.setOrderDeal(new Timestamp(System.currentTimeMillis()));
               }else if(status.equals("訂單取消")) {
             	  record.setOrderCancel(new Timestamp(System.currentTimeMillis()));
               }else if(status.equals("訂單完成")) {
             	  record.setOrderFinish(new Timestamp(System.currentTimeMillis()));
-            	  orders.setCheckoutBean(new CheckoutBean(null,"N",orderBean));
+//            	  orders.setCheckoutBean(new CheckoutBean(null,"N",orderBean));
+            	  
               } 
               orderRecordBeanRepository.save(record);                         
               orderBeanRepository.save(order);
