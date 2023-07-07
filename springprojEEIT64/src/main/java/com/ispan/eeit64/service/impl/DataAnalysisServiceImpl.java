@@ -5,8 +5,10 @@ import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +41,31 @@ public class DataAnalysisServiceImpl {
     public final int VALUE_TYPE_PROFIT = 4;
     public final int VALUE_TYPE_COUNTORDERS = 5;
     public final int VALUE_TYPE_COST = 6;
+    
+    // public final List<Integer> ALL_METHOD = Arrays.asList(
+    //     this.METHOD_CATEGORY,
+    //     this.METHOD_DISH,
+    //     this.METHOD_YEAR,
+    //     this.METHOD_MONTH,
+    //     this.METHOD_DAY
+    // );
+
+    public final Map<Integer,String> ALL_METHOD = Map.of(
+        this.METHOD_CATEGORY, "Category",
+        this.METHOD_DISH, "Dish",
+        this.METHOD_YEAR, "Year",
+        this.METHOD_MONTH, "Month",
+        this.METHOD_DAY, "Day"
+    );
+
+    public final Map<Integer, String> ALL_VALUE_TYPE = Map.of(
+        this.VALUE_TYPE_QUANTITY, "Quantity",
+        this.VALUE_TYPE_SALESPRICE, "Sales_Price",
+        this.VALUE_TYPE_SALESPRICEPROPORTION, "Sales_Price_Proportion",
+        this.VALUE_TYPE_PROFIT, "Profit",
+        this.VALUE_TYPE_COUNTORDERS, "Count_Orders",
+        this.VALUE_TYPE_COST, "Cost"
+    );
 
 
 
@@ -47,11 +74,13 @@ public class DataAnalysisServiceImpl {
     @Autowired
     CategoryRepository cDao;
 
-    public List<Map<String,Object>> splitDate(int method, Date startDate, Date endDate){
+    public List<Map<String,Object>> splitDate(int method, Date origStartDate, Date origEndDate){
         SimpleDateFormat y = new SimpleDateFormat("yyyy");
         SimpleDateFormat ym = new SimpleDateFormat("yyyy-MM");
         SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
         List<Map<String,Object>> sections = new ArrayList<>();
+        Date startDate = new Date(origStartDate.getTime());
+        Date endDate = new Date(origEndDate.getTime());
         while(startDate.getTime() < endDate.getTime()){
             Map<String,Object> map = new HashMap<>();
             map.put("start", startDate.getTime());
@@ -116,84 +145,63 @@ public class DataAnalysisServiceImpl {
         result.add(map);
         return result;
     }
-
-    public List<Map<String,Object>> getQuantity(int method, Set<Integer> ids, Date startDate, Date endDate){
-        Timestamp startTime = new Timestamp(startDate.getTime());
-        Timestamp endTime = new Timestamp(endDate.getTime());
-        List<Object[]> result = new ArrayList<>();
-        List<Map<String,Object>> dateList = new ArrayList<>();
-        if(method == this.METHOD_CATEGORY){
-            result = dao.sumQuantityByCategoryIdsAndOrderTime(ids, startTime, endTime);
-        }else if(method == this.METHOD_DISH){
-            result = dao.sumQuantityByDishIdsAndOrderTime(ids, startTime, endTime);
-        }else if(method == this.METHOD_YEAR){
-            dateList = splitDate(this.YEAR, startDate, endDate);
-        }else if(method == this.METHOD_MONTH){
-            dateList = splitDate(this.MONTH, startDate, endDate);
-        }else if(method == this.METHOD_DAY){
-            dateList = splitDate(this.DAY, startDate, endDate);
-        }
-        if(method == this.METHOD_YEAR || method == this.METHOD_MONTH || method == this.METHOD_DAY){
-            for(Map<String,Object> map : dateList ){                
-                Object[] obj = {
-                    (String)map.get("target"), 
-                    dao.sumQuantityByOrderTime(
-                        new Timestamp((Long)map.get("start")),
-                        new Timestamp((Long)map.get("end")))
-                };
-                result.add(obj);
-            }
-        }
-
-        List<Map<String,Object>> data = new ArrayList<>();
-        for(Object[] obj : result){
-            Map<String,Object> map = new HashMap<>();
-            map.put("target", obj[0]);
-            map.put("value", obj[1]);
-            data.add( map);
-        }
-        return data;
-    }
-
-    public List<Map<String,Object>> getProfit(int method, Set<Integer> ids, Date startDate, Date endDate){
-        Timestamp startTime = new Timestamp(startDate.getTime());
-        Timestamp endTime = new Timestamp(endDate.getTime());
-        List<Object[]> result = new ArrayList<>();
-        List<Map<String,Object>> dateList = new ArrayList<>();
-        if(method == this.METHOD_CATEGORY){
-            result = dao.sumProfitByCategoryIdsAndOrderTime(ids, startTime, endTime);
-        }else if(method == this.METHOD_DISH){
-            result = dao.sumProfitByDishIdsAndOrderTime(ids, startTime, endTime);
-        }else if(method == this.METHOD_YEAR){
-		    System.out.println(method);
-            dateList = splitDate(this.YEAR, startDate, endDate);
-        }else if(method == this.METHOD_MONTH){
-            dateList = splitDate(this.MONTH, startDate, endDate);
-        }else if(method == this.METHOD_DAY){
-            dateList = splitDate(this.DAY, startDate, endDate);
-        }
-        if(method == this.METHOD_YEAR || method == this.METHOD_MONTH || method == this.METHOD_DAY){
-            for(Map<String,Object> map : dateList ){                
-                Object[] obj = {
-                    (String)map.get("target"), 
-                    dao.sumProfitByOrderTime(
-                        new Timestamp((Long)map.get("start")),
-                        new Timestamp((Long)map.get("end")))
-                };
-                result.add(obj);
-            }
-        }
-
-        List<Map<String,Object>> data = new ArrayList<>();
-        for(Object[] obj : result){
-            Map<String,Object> map = new HashMap<>();
-            map.put("target", obj[0]);
-            map.put("value", obj[1]);
-            data.add( map);
-        }
-        return data;
-    }
         
+    public Map<String, List<Map<String, Object>>> getAllData(Date startDate, Date endDate) {        
+        List<CategoryBean> cList = cDao.findAll();
+        Set<Integer> cIds = new HashSet<>();
+        Set<Integer> dIds = new HashSet<>();
+        for(CategoryBean cBean : cList){
+            cIds.add(cBean.getId());
+            for(DishBean dBean : cBean.getDishBean()){
+                dIds.add(dBean.getId());
+            }
+        }
+        
+        Map<String, Map<String, Object>> allresult = new HashMap<>();
+        for(Integer method : this.ALL_METHOD.keySet()){
+            Set<Integer> ids = new HashSet<>();
+            if(method == this.METHOD_CATEGORY){
+                ids = cIds;
+            }else if(method == this.METHOD_DISH){
+                ids = dIds;
+            }else{
+                ids = null;
+            }
+
+            Map<String, Object> map = new HashMap<>();
+            allresult.put(this.ALL_METHOD.get(method), map);
+            for(Integer value_type : this.ALL_VALUE_TYPE.keySet()){
+                List<Map<String,Object>> result = new ArrayList<>();
+                result = getData(method, value_type, ids, startDate, endDate);
+                map.put( this.ALL_VALUE_TYPE.get(value_type), result);
+            }
+        }
+
+        Map<String, List<Map<String, Object>>> allData = new HashMap<>();
+        for(Integer method : this.ALL_METHOD.keySet()){
+            Map<String, Object> map = allresult.get(this.ALL_METHOD.get(method));
+            List<Map<String,Object>> result;
+
+            List<Map<String, Object>> methodData = new ArrayList<>();
+            allData.put(this.ALL_METHOD.get(method), methodData);
+            for(Integer value_type : this.ALL_VALUE_TYPE.keySet()){
+                result = (List<Map<String, Object>>) map.get(this.ALL_VALUE_TYPE.get(value_type));
+                for(int i=0; i<result.size(); i++){
+                    Map<String,Object> data = result.get(i);
+                    Map<String,Object> oneData = i<methodData.size() ? methodData.get(i) : null;
+                    if(oneData == null){
+                        oneData = new HashMap<>();
+                        oneData.put("target", data.get("target"));
+                        methodData.add(i, oneData);
+                    }
+                    oneData.put(this.ALL_VALUE_TYPE.get(value_type), data.get("value"));
+                }
+            }
+        }
+        
+        return allData;
+    }
+
     public List<Map<String,Object>> getData(int method, int value_type, Set<Integer> ids, Date startDate, Date endDate){
         Timestamp startTime = new Timestamp(startDate.getTime());
         Timestamp endTime = new Timestamp(endDate.getTime());
@@ -204,7 +212,7 @@ public class DataAnalysisServiceImpl {
             result = getCategoryResult(value_type, ids, startTime, endTime);
         }else if(method == this.METHOD_DISH){
             result = getDishResult(value_type, ids, startTime, endTime);
-        }else if(method == this.METHOD_YEAR || method == this.METHOD_MONTH || method == this.METHOD_DAY){
+        }else if(method == this.METHOD_YEAR || method == this.METHOD_MONTH || method == this.METHOD_DAY){            
             dateList = splitDate(method, startDate, endDate);
             result = getDateResult(value_type, dateList);
         }
@@ -213,11 +221,12 @@ public class DataAnalysisServiceImpl {
         for(Object[] obj : result){
             Map<String,Object> map = new HashMap<>();
             map.put("target", obj[0]);
-            map.put("value", obj[1]);
-            data.add( map);
+            map.put("value", obj[1] == null ? 0 : obj[1]);
+            data.add(map);
         }
         return data;
     }
+
 
     public List<Object[]> getCategoryResult(int value_type, Set<Integer> ids, Timestamp startTime, Timestamp endTime){
         List<Object[]> result = new ArrayList<>();
@@ -270,7 +279,8 @@ public class DataAnalysisServiceImpl {
     public List<Object[]> getDateResult(int value_type, List<Map<String,Object>> dateList){
         List<Object[]> result = new ArrayList<>();
         Integer allValue = null;
-        if(value_type == this.VALUE_TYPE_SALESPRICEPROPORTION){
+        System.out.println(dateList);
+        if(value_type == this.VALUE_TYPE_SALESPRICEPROPORTION){            
             Timestamp startTime = new Timestamp((Long)dateList.get(0).get("start"));
             Timestamp endTime = new Timestamp((Long)dateList.get(dateList.size()-1).get("end"));
             allValue = dao.sumSalesPriceByOrderTime(startTime, endTime);
@@ -311,5 +321,6 @@ public class DataAnalysisServiceImpl {
 
         return result;
     }
+
     
 }

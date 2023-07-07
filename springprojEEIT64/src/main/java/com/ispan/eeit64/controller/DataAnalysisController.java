@@ -85,11 +85,26 @@ public class DataAnalysisController {
 		}
 		Date startDate = ymd.parse((String)condition.get("startDate"));
 		Date endDate = ymd.parse((String)condition.get("endDate"));
-		
-		APIResult apiResult = new APIResult();
-
+				
 		System.out.println("++++++++++getData");		
 		List<Map<String,Object>> data = service.getData(method, value_type, ids, startDate, endDate);
+
+		APIResult apiResult = new APIResult();
+		apiResult.setData(data);
+		apiResult.setCode(StatusCode.SUCCESS);
+		apiResult.setMsg("成功提取資料");
+		return apiResult;
+	}
+	@PostMapping("/getAllData")
+	public @ResponseBody APIResult  getAllData(
+		@RequestBody Map<String, Object> condition
+		) throws ParseException {	
+		SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = ymd.parse((String)condition.get("startDate"));
+		Date endDate = ymd.parse((String)condition.get("endDate"));
+
+		Map<String, List<Map<String, Object>>> data = service.getAllData(startDate, endDate);
+		APIResult apiResult = new APIResult();
 		apiResult.setData(data);
 		apiResult.setCode(StatusCode.SUCCESS);
 		apiResult.setMsg("成功提取資料");
