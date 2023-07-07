@@ -1,7 +1,6 @@
 var contextPath;
 var csrfHeaderName ;
 var csrfToken;
-var csrfToken;
 
 $(function() {
 	contextPath = $("meta[name='_contextPath']").attr("content"); 
