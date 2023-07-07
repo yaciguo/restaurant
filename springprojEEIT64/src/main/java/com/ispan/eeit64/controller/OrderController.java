@@ -58,26 +58,26 @@ public class OrderController {
            @RequestParam(required = false, defaultValue = "0") int pageNumber) {
    	
 	    	Page<OrderBean> allOrders = null;
-	    	String orderStatus = "已成立";
+	    	String orderStatus = "order_establish";
 	    	String payStatus = "N";
 	    	
 	    	switch (status) {
 	    	    case 1:
 	    	    	return orderBeanService.findAll(pageSize, pageNumber);	 
 	    	    case 2 :
-	    	    	orderStatus = "已成立";
+	    	    	orderStatus = "order_establish";
 	    	    	return orderBeanService.findByOrderStatus(orderStatus, pageSize, pageNumber);
 
 	    	    case 3 :  
-	    	    	orderStatus = "處理中";
+	    	    	orderStatus = "order_deal";
 	    	    	return orderBeanService.findByOrderStatus(orderStatus, pageSize, pageNumber);
 
 	    	    case 4 :
-	    	    	orderStatus = "已完成";
+	    	    	orderStatus = "order_finish";
 	    	    	return orderBeanService.findByOrderStatus(orderStatus, pageSize, pageNumber);
 
 	    	    case 5 :
-	    	    	orderStatus = "已取消";
+	    	    	orderStatus = "order_cancel";
 	    	    	return orderBeanService.findByOrderStatus(orderStatus, pageSize, pageNumber);
 	    	    case 6 :
 	    	    	payStatus = "N";

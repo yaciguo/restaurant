@@ -70,7 +70,7 @@ var csrfToken;
 					
 				  },
 				  error: function(error) {
-					console.log(contextPath + '/orders/orderId')
+					console.log("Not OK")
 				  }
 				});
 		  });
@@ -118,20 +118,6 @@ var csrfToken;
 			}
 		})	
 		
-//		//按下更新
-//		$('#order-statechoose-refresh').click(function() {
-//		    const selectedOrders = [];
-//		    $('.orders-table tbody tr').each(function() {
-//		      const checkbox = $(this).find('input[type="checkbox"]');
-//		      if (checkbox.prop('checked')) {
-//		        const orderId = $(this).find('td:nth-child(2)').text();
-//		        selectedOrders.push(orderId);
-//		      }
-//		    });
-//		    
-//		    
-////		    console.log(selectedOrders); 
-//		})
 			    
 		//匯出訂單
 		$(".data-expo").click(function() {
@@ -268,8 +254,6 @@ var csrfToken;
 		});
 	}
 	
-
-
 
 	
 	//按下訂單產生互動視窗     
