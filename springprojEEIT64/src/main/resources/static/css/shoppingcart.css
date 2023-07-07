@@ -1,0 +1,122 @@
+body {
+  margin-right: 10%;
+  margin-left: 10%;
+  /*   display: flex; */
+  /*   justify-content: center; */
+}
+
+header {
+  /* display: flex;
+      justify-content: center; */
+  text-align: center;
+  color: white;
+  background-color: rgb(239, 164, 84);
+  border-radius: 10px;
+}
+
+ul {
+  list-style-type: none;
+  /* 去除列表样式的圆点符号 */
+  padding-left: 0;
+  /* 去除列表的默认内边距 */
+}
+
+li {
+  text-align: left;
+  /* 列表项左对齐 */
+}
+
+.dish {
+  width: 85%;
+}
+
+.btedit1 {
+  width: 13%;
+}
+
+.btedit2 {
+  width: 5%;
+}
+
+/* .counter{
+      
+      overflow: hidden;
+      display: inline-block; 
+    } */
+.counter1 {
+  display: inline;
+}
+
+fieldset {
+  background-color: rgb(241, 237, 230);
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 280px;
+}
+
+.col-sm-4 {
+  padding: 2px;
+}
+
+/* .fieldset-container {
+  display: flex;
+  justify-content: space-between;
+}
+.fieldsetdata {
+  flex: 1;
+} */
+legend {
+  font-size: 20px;
+  font-weight: bold;
+  color: orange;
+  border-bottom: 1px solid #ccc;
+}
+
+.store tr {
+  font-size: 20px;
+}
+
+.tableRow {
+  font-size: 18px;
+}
+
+
+footer {
+  text-align: center;
+}
+
+.button2 {
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(239, 164, 84);
+  color: white;
+  font-size: larger;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 5%;
+}
+
+.button2:hover {
+  /* 懸停時的樣式 */
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+/* card內div並排 */
+.units div {
+  display: inline-block;
+  width: 15%;
+  color: black;
+  /* 根据需要调整宽度 */
+}
+
+.units button {
+  display: inline-block;
+  width: 40px;
+  color: white;
+  border-radius: 50%;
+  background-color: #E8BC0E;
+
+  /* 根据需要调整宽度 */
+}

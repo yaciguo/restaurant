@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+body {
+	background-color: #EEE;
+}
+
+.activity-link {
+	font-size: 1.25rem;
+	font-weight: bold;
+	letter-spacing: 2px;
+	color: var(--main-color) !important;
+}
+
+.activity-text {
+	width: 100%;
+	font-size: 1.3em;
+	margin-top: 30px;
+	margin-bottom: 5px;
+}
+
+.add-activity {
+	width: 60px;
+	height: 60px;
+	margin-left: 20px;
+	font-size: 2rem;
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.activity-detail {
+	margin: 0.5rem;
+	padding: 0.5rem;
+}
+
+.activity-detail input {
+	border: 1px solid #ccc;
+	line-height: 1.8rem;
+}
+
+.activity-table {
+	border-collapse: collapse;
+	width: 100%;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.activity-table tr:hover {
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.activity-table th, td {
+	padding: 20px 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom: 1px solid #ddd;
+}
+
+.activity-table th {
+	background-color: #f2f2f2;
+}
+
+.activity-table tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.fa-trash {
+	cursor: pointer;
+	color: red;
+	font-size: 1.75em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
