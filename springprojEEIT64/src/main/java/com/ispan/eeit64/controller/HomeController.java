@@ -67,6 +67,11 @@ public class HomeController {
 		return "searchorder";
 	}
 	
+	@GetMapping("/order")
+	public String order() {
+		return "order";
+	}
+	
 	@GetMapping("/menu")
 	public String menu(Model model) {
 		LocalDate currentDate = LocalDate.now();

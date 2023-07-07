@@ -41,10 +41,10 @@ public class OrderRecordBean {
 	private OrderBean orderBean;
 
 	@Override
-	public String toString() {
-		return "OrderRecordBean [id=" + id + ", orderEstablish=" + orderEstablish + ", orderDeal=" + orderDeal
-				+ ", orderFinish=" + orderFinish + ", orderCancel=" + orderCancel + ", orderBean=" + orderBean + "]";
-	}
+    public String toString() {
+        return "OrderRecordBean [id=" + id + ", orderEstablish=" + orderEstablish + ", orderDeal=" + orderDeal
+                + ", orderFinish=" + orderFinish + ", orderCancel=" + orderCancel + "]";
+    }
 
 	public OrderRecordBean() {
 		super();

@@ -62,10 +62,9 @@ public class OrderBean {
 	@JoinColumn(name = "FK_Activity_Id")
 	private ActivityBean activityBean;
 
-	//edit @OneToOne ? add cascade = {CascadeType.ALL}
+    @JsonIgnoreProperties("orderBean")
     @OneToOne(mappedBy = "orderBean", cascade = {CascadeType.ALL})
     private OrderRecordBean orderRecordBean;
-//    private Set<OrderRecordBean> orderRecordBean= new LinkedHashSet<>();
     
 	@OneToMany(mappedBy = "orderBean", fetch = FetchType.EAGER, cascade = {
 			CascadeType.ALL}, orphanRemoval = false)
@@ -76,13 +75,12 @@ public class OrderBean {
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private CheckoutBean checkoutBean;
 
-	@Override
-	public String toString() {
-		return "OrderBean [id=" + id + ", type=" + type + ", pickTime=" + pickTime + ", orderTime=" + orderTime
-				+ ", amount=" + amount + ", orderStatus=" + orderStatus + ", note=" + note + ", customer=" + customer
-				+ ", phone=" + phone + ", activityBean=" + activityBean + ", orderRecordBean=" + orderRecordBean
-				+ ", orderDetailBean=" + orderDetailBean + ", checkoutBean=" + checkoutBean + "]";
-	}
+    @Override
+    public String toString() {
+        return "OrderBean [id=" + id + ", type=" + type + ", pickTime=" + pickTime + ", orderTime=" + orderTime
+                + ", amount=" + amount + ", orderStatus=" + orderStatus + ", note=" + note + ", customer=" + customer
+                + ", phone=" + phone + "]";
+    }
 
 	public OrderBean() {
 		super();
