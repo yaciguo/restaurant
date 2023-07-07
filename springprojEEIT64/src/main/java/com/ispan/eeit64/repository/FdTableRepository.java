@@ -15,9 +15,9 @@ public interface FdTableRepository extends JpaRepository<FdTableBean, Integer>{
 	 @Query("SELECT t FROM FdTableBean t WHERE t.capacity = :capacity")
 	  FdTableBean findTableByCapacity(@Param("capacity") Integer capacity);
 	 
+	 @Query("SELECT t.tableId FROM FdTableBean t WHERE t.capacity = :capacity")
+	 List<Integer> getTableIdsByCapacity(@Param("capacity") Integer capacity);
+
+
 	 
-	 List<FdTableBean> getTableIdsByCapacity(Integer capacity);
-
-
-
 }

@@ -115,6 +115,7 @@ public class HomeController {
 	public String test() {
 		return "test";
 	}
+
 	
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {

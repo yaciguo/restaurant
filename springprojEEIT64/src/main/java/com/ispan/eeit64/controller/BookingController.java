@@ -3,6 +3,8 @@ package com.ispan.eeit64.controller;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,6 +45,12 @@ public class BookingController {
 	    model.addAttribute("newbooking", new ReservationBean());
 	    return "booking";
 	}
+	//test=====================
+	@GetMapping("/booktest")
+	public String booktest(Model model) {
+		model.addAttribute("newbooking", new ReservationBean());
+		return "booktest";
+	}
 	
 
 //===================================================ok
@@ -61,6 +69,7 @@ public class BookingController {
         bean.setSubmitTime(new Timestamp(System.currentTimeMillis()));
         //設定startime及endtime
         Time startTime = bean.getStartTime();
+        
         bean.setStartTime(startTime);
         long startTimeMillis = bean.getStartTime().getTime();
         long endTimeMillis = startTimeMillis + (60 * 60 * 1000);
@@ -95,8 +104,8 @@ public class BookingController {
                     service.save(bean);
                     // 印出插入後的 ID
                     System.out.println(bean.getId());
-                 // 发送电子邮件通知
-                    sendEmailNotification(bean);
+                 // 发送电子邮件通知 先關掉==============
+//                    sendEmailNotification(bean);
 
                     response.put("success", "預定成功！您的桌子號碼為：" + selectedTableId);
                 } else {
@@ -126,9 +135,12 @@ public class BookingController {
     	String resPhone = "(04)23891234。";
     	String recipientEmail = bean.getEmail();
     	String subject = "訂位確認通知-墨竹亭(公益店)";
-    	String content =bean.getName()+" " + gender +" "+"您好:\n\n"+ "您的訂位已確認，已為您安排桌位!\n" + "訂位人數:"+bean.getpNumber()+" "+"位"+
-    			"\n訂位日期：" + bean.getDate() + "\n" + "訂位時間：" + bean.getStartTime()+"\n"+"若有任何訂位問題歡迎聯絡我們!"+
-    			"\n聯絡電話:"+resPhone+"\n\n\n\n"+resName+" "+"敬上";
+    	String content =bean.getName()+" " + gender +" "+"您好:\n\n"+ "您的訂位已確認，已為您安排桌位!" +
+    			"\n訂位姓名:"+bean.getName()+
+    			"\n用餐人數:"+bean.getpNumber()+" "+"位"+
+    			"\n用餐日期：" + bean.getDate() + "\n" + "用餐時間：" + bean.getStartTime()+
+    			"\n\n若有任何訂位問題歡迎聯絡我們!"+
+    			"\n聯絡電話:"+resPhone+"\n\n\n"+resName+" "+"敬上";
     	String from ="diandianeatfood@gmail.com";
     	// 调用发送邮件的方法，例如通过调用 SimpleEmailService 的 sendEmail 方法发送邮件
     	emailService.sendEmail(recipientEmail, from, subject, content);
@@ -154,7 +166,7 @@ public class BookingController {
     
     
     
-    //=================================前端提供人數來找可用日期================================================================
+    //=================================前端提供人數日期來找可用時間================================================================
     @GetMapping("/custIndex/availableTimes")
     @ResponseBody
     public List<String> getAvailableTimes(@RequestParam("pNumber") String pNumber, @RequestParam("date") String dateString) {
@@ -162,9 +174,11 @@ public class BookingController {
         
         // 將 pNumber 轉整數
         Integer numberOfPeople = Integer.parseInt(pNumber);
+        java.sql.Date date = parseDateString(dateString);
+        
         
      // 根据人数查询对应的桌子ID数组
-        List<FdTableBean> availableTableIds = new ArrayList<>();
+        List<Integer> availableTableIds = new ArrayList<>();
         if (numberOfPeople <= 2) {
             availableTableIds = service.getTableIdsByCapacity(2);
         } else if (numberOfPeople <= 4) {
@@ -182,6 +196,21 @@ public class BookingController {
         
         return new ArrayList<>(distinctTimes);
     }
+    
+    
+    //===時間處裡=================
+    private java.sql.Date parseDateString(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date parsedDate = null;
+        try {
+            parsedDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new java.sql.Date(parsedDate.getTime());
+    }
+
     
     
     
