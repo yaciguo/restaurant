@@ -42,14 +42,6 @@ public class DataAnalysisServiceImpl {
     public final int VALUE_TYPE_COUNTORDERS = 5;
     public final int VALUE_TYPE_COST = 6;
     
-    // public final List<Integer> ALL_METHOD = Arrays.asList(
-    //     this.METHOD_CATEGORY,
-    //     this.METHOD_DISH,
-    //     this.METHOD_YEAR,
-    //     this.METHOD_MONTH,
-    //     this.METHOD_DAY
-    // );
-
     public final Map<Integer,String> ALL_METHOD = Map.of(
         this.METHOD_CATEGORY, "Category",
         this.METHOD_DISH, "Dish",
@@ -78,9 +70,9 @@ public class DataAnalysisServiceImpl {
         SimpleDateFormat y = new SimpleDateFormat("yyyy");
         SimpleDateFormat ym = new SimpleDateFormat("yyyy-MM");
         SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
-        List<Map<String,Object>> sections = new ArrayList<>();
         Date startDate = new Date(origStartDate.getTime());
         Date endDate = new Date(origEndDate.getTime());
+        List<Map<String,Object>> sections = new ArrayList<>();
         while(startDate.getTime() < endDate.getTime()){
             Map<String,Object> map = new HashMap<>();
             map.put("start", startDate.getTime());

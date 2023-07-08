@@ -187,20 +187,23 @@
                             <h5 class="text-on-pannel text-primary w-auto">
                                 <strong class="text-uppercase">店名設定</strong>
                             </h5>
-                            <input class="form-control  mb-2" type="text" />
+                            <input class="form-control  mb-2" type="text" id="shopName-input"/>
                             <div class="col offset-8 col-4" style=" text-align: right;">
-                                <button type="button" class="btn btn-primary ">確定</button>
+                                <button type="button" class="btn btn-primary " id="save-shopName-btn">確定</button>
                             </div>
                         </div>
                         <div class="row px-2 panel-body panel scheduler-border pb-2">
                             <h5 class="text-on-pannel text-primary w-auto">
                                 <strong class="text-uppercase">商標</strong>
                             </h5>
-                            <div class="col mb-2" style="height: 200px;background-color: aqua;">
-
+                            <div class="col mb-2" style="height: 200px;">
+                                <img id="image-preview" src="<c:url value='images\wait_load.png'/>" alt="Preview" style="height: 200px;">
                             </div>
                             <div class="col offset-8 col-4" style=" text-align: right;">
-                                <button type="button" class="btn btn-primary">上傳</button>
+                                <label class="btn btn-primary">
+                                    上傳
+                                    <input type="file" id="upload-logo-btn" hidden />
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -235,96 +238,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-6 text-nowrap">
-                    <div class="row ps-2 pe-3">
-                        <div class="panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary">
-                                <strong class="text-uppercase">樣式</strong>
-                            </h5>
-                            <div class="row mb-4">
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-primary flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-success flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-danger flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-warning flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-info flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-light flex-fill p-0"></button>
-                                </div>
-                            </div>
-                            <div class="panel-body panel scheduler-border pb-2 px-2">
-                                <h5 class="text-on-pannel text-primary">
-                                    <strong class="text-uppercase">樣式預覽</strong>
-                                </h5>
-                                <div class="row">
-                                    <div class="col-3 d-flex">
-                                        <button class="btn btn-primary flex-fill">按鈕樣式</button>
-                                    </div>
-                                </div>
-                                <div class="row mb-1">
-                                    <div class="btn-group col-3 text-nowrap mt-3 mb-2" role="group"
-                                        aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="btnradio-style"
-                                            id="btnradio-style1" autocomplete="off" checked>
-                                        <label class="btn btn-outline-primary"
-                                            for="btnradio-style1">按鈕樣式</label>
-                                        <input type="radio" class="btn-check" name="btnradio-style"
-                                            id="btnradio-style2" autocomplete="off">
-                                        <label class="btn btn-outline-primary"
-                                            for="btnradio-style2">按鈕樣式</label>
-                                        <input type="radio" class="btn-check" name="btnradio-style"
-                                            id="btnradio-style3" autocomplete="off">
-                                        <label class="btn btn-outline-primary"
-                                            for="btnradio-style3">按鈕樣式</label>
-                                    </div>
-                                </div>
-                                <div class="row px-3 col-9">
-                                    <table class="table table-hover table-primary data">
-                                        <thead class="data">
-                                            <tr class="data">
-                                                <th class="data">表格標題</th>
-                                                <th class="data">表格標題</th>
-                                                <th class="data">表格標題</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="data faq-body" style="height: 100px;">
-                                            <tr class="data">
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                            </tr>
-                                            <tr class="data">
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                            </tr>
-                                            <tr class="data">
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
 

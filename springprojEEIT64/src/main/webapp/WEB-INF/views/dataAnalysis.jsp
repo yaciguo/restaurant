@@ -349,7 +349,7 @@
                                     <input class="form-check-input output-target-checkbox" type="checkbox" id="Month-checkbox" value="Month" checked>
                                     <label class="form-check-label" for="Month-checkbox">月</label>
                                 </div>
-                                <div class="col-md-2  form-check">
+                                <div class="col-md-2  form-check" style="position: relative;z-index: 2;">
                                     <input class="form-check-input output-target-checkbox" type="checkbox" id="Day-checkbox" value="Day" checked>
                                     <label class="form-check-label" for="Day-checkbox">日</label>
                                 </div>
@@ -375,7 +375,7 @@
                                     <label class="btn btn-outline-primary d-flex justify-content-center align-items-center" id="page-Year-label" for="btnradio3">年</label>
                                 </div>
     
-                                <div class="col col-md-1" id="page-Month-div">
+                                <div class="col col-md-1" id="page-Month-div" >
                                     <input type="radio" class="btn-check" name="page-data-radio" id="btnradio4" autocomplete="off" value="Month">
                                     <label class="btn btn-outline-primary d-flex justify-content-center align-items-center" id="page-Month-label" for="btnradio4">月</label>
                                 </div>
@@ -412,7 +412,7 @@
                             </div>
                             <div class="col offset-md-10 col-md-2 align-items-center">
                                 <a href="#" class="btn btn-primary btn-lg d-flex justify-content-center align-items-center me-1"
-                                    type="button">下載CSV檔案</a>
+                                    type="button" id="csv-download-btn">下載CSV檔案</a>
                             </div>
                         </div>
                     </div>
