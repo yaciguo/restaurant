@@ -101,48 +101,53 @@
 	<!-- 主要內容區域 -->
 	<div id="main-content" class="main-content">
 		<br> <br>
-		<div class="row text-nowrap mb-1">
-			<div class="col-6">
-				<div class="row">
-					<div class="col">
-						<div class="d-flex justify-content-center align-items-center">
-							<label for="startdate">訂位日期：</label>
-							<p>
-								<input class="form-control" id="startdate" name="startdate"
-									placeholder='yyyy-mm-dd' type="text" />
-						</div>
-					</div>
-					<!-- 					<div class="col" id="selectTime"> -->
-					<!-- 						<div class="btn-group"> -->
-					<!-- 							<button type="button" class="btn btn-primary  dropdown-toggle" -->
-					<!-- 								data-bs-toggle="dropdown" aria-expanded="false">請選擇時間</button> -->
-					<!-- 							<ul class="dropdown-menu"> -->
-					<!-- 								<li><a class="dropdown-item" href="#">12:00</a></li> -->
-					<!-- 								<li><a class="dropdown-item" href="#">13:00</a></li> -->
-					<!-- 								<li><a class="dropdown-item" href="#">14:00</a></li> -->
-					<!-- 								<li><a class="dropdown-item" href="#">15:00</a></li> -->
-					<!-- 								<li><a class="dropdown-item" href="#">16:00</a></li> -->
-					<!-- 								<li><a class="dropdown-item" href="#">17:00</a></li> -->
-					<!-- 								<li><a class="dropdown-item" href="#">18:00</a></li> -->
-					<!-- 							</ul> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
-					<!-- 另外一種下拉式選單 -->
-					<div class="d-flex justify-content-center align-items-center">
-						<label for="pNumber">訂位時間:</label> <select id="pNumber">
-							<option value="" label="請選擇時間" />
-							<option value="1" label="12:00" />
-							<option value="2" label="13:00" />
-							<option value="3" label="14:00" />
-							<option value="4" label="15:00" />
-							<option value="5" label="16:00" />
-							<option value="6" label="17:00" />
-							<option value="7" label="18:00" />
-						</select>
-					</div>
-				</div>
+		<!-- 		<div class="row text-nowrap mb-1"> -->
+		<!-- 			<div class="col-6"> -->
+		<!-- 					<div class="col"> -->
+		<!-- 						<div class="d-flex justify-content-center align-items-center"> -->
+		<!-- 							<label for="startdate">訂位日期：</label> -->
+		<!-- 							<p> -->
+		<!-- 								<input class="form-control" id="startdate" name="startdate" -->
+		<!-- 									placeholder='yyyy-mm-dd' type="text" /> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+		<!-- 					另外一種下拉式選單 -->
+		<!-- 					<div class="d-flex justify-content-center align-items-center"> -->
+		<!-- 						<label for="pNumber">訂位時間:</label> <select id="pNumber"> -->
+		<!-- 							<option value="" label="請選擇時間" /> -->
+		<!-- 							<option value="1" label="12:00" /> -->
+		<!-- 							<option value="2" label="13:00" /> -->
+		<!-- 							<option value="3" label="14:00" /> -->
+		<!-- 							<option value="4" label="15:00" /> -->
+		<!-- 							<option value="5" label="16:00" /> -->
+		<!-- 							<option value="6" label="17:00" /> -->
+		<!-- 							<option value="7" label="18:00" /> -->
+		<!-- 						</select> -->
+		<!-- 					</div> -->
+		<!-- 				</div> -->
+		<!-- 將時間跟日期放在畫面中同一行 -->
+		<!-- 				<div class="row"> -->
+			<div class="col-auto d-flex justify-content-center align-items-center">
+				<label for="startdate" style="width:130px">訂位日期：</label> <input class="form-control"
+					id="startdate" name="startdate" placeholder='yyyy-mm-dd'
+					type="text" style="width:150px "/>
 			</div>
-		</div>
+			<div class="col-auto d-flex justify-content-center align-items-center">
+				<label for="pNumber" style="width:172px ">訂位時間:</label><select id="selectTime"
+					onchange="selectTime()">
+					<option value="" label="請選擇時間" />
+					<option value="1" label="12:00" />
+					<option value="2" label="13:00" />
+					<option value="3" label="14:00" />
+					<option value="4" label="15:00" />
+					<option value="5" label="16:00" />
+					<option value="6" label="17:00" />
+					<option value="7" label="18:00" />
+				</select>
+			</div>
+		
+		<!-- 				</div> -->
+		<!-- 			</div> -->
 		<!-- 		<input type="text" name="findphone" id="fphone" placeholder="請輸入電話查詢"> -->
 		<section class="container">
 			<div class="tab-content">
@@ -151,7 +156,7 @@
 						<div class="box">1桌</div>
 					</div>
 					<div class="col-2">
-						<div class="box blue-bg" onclick="ordertable()" id="table2">2桌</div>
+						<div class="box" onclick="ordertable()" id="table2">2桌</div>
 					</div>
 					<div class="col-2">
 						<div class="box">3桌</div>
@@ -169,16 +174,16 @@
 					</div>
 					<div class="col-2">
 						<div class="box" id="table7" onclick="callIntable()">
-							<span class="guests-seven"></span> <span class="table-name">7桌</span></div>
+							<span class="guests-seven">7桌</span>
+						</div>
 					</div>
 					<div class="col-2">
 						<div class="box">8桌</div>
 					</div>
 					<div class="col-2">
 						<div class="box" id="table9" onclick="showIntable()">
-							<span class="guests-count"></span> <span class="table-name">9桌</span>
+							<span class="guests-count"> 9桌</span>
 						</div>
-
 					</div>
 					<div class="col-2">
 						<div class="box">10桌</div>
@@ -189,31 +194,29 @@
 
 		<!----------------- 桌位藍色 訂單資訊 ---------------->
 		<div id="ordertable" class="bluetable">
-			<div class="test-content">
-				<span class="close" onclick="closeorder()">&times;</span>
-				<h2>訂位詳細資訊</h2>
-				<form id="orderForm">
-					<label for="orderDate">訂位日期：</label> <input type="text"
-						id="orderDate" name="orderDate" value="2023-07-19" readonly><br>
-					<label for="orderTime">訂位時間：</label> <input type="text"
-						id="orderTime" name="orderTime" value="12:00" readonly><br>
-					<label for="orderName">訂位者姓名：</label> <input type="text"
-						id="orderName" name="orderName" value="賴雅慧" readonly><br>
-					<label for="orderGender">性別：</label> <input type="text"
-						id="orderGender" name="orderGender" value="小姐" readonly><br>
-					<label for="orderPhone">電話：</label> <input type="text"
-						id="orderPhone" name="orderPhone" value="0978090605" readonly><br>
-					<label for="orderGuests">訂位人數：</label> <input type="text"
-						id="orderGuests" name="orderGuests" value="3人" readonly><br>
-				</form>
-				<!-- 修改按鈕 -->
-				<button type="button" class="btn btn-primary" onclick="enableEdit()">修改</button>
-				<!-- 刪除按鈕 -->
-				<button type="button" class="btn btn-danger" onclick="deleteOrder()">刪除</button>
-				<!-- 確認按鈕 -->
-				<button type="button" class="btn btn-success"
-					onclick="confirmOrder()">確認</button>
-			</div>
+			<span class="close" onclick="closeorder()">&times;</span>
+			<h2>訂位詳細資訊</h2>
+			<form id="orderForm">
+				<label for="orderDate">訂位日期：</label> <input type="text"
+					id="orderDate" name="orderDate" value="2023-07-19" readonly><br>
+				<label for="orderTime">訂位時間：</label> <input type="text"
+					id="orderTime" name="orderTime" value="12:00" readonly><br>
+				<label for="orderName">訂位者姓名：</label> <input type="text"
+					id="orderName" name="orderName" value="賴雅慧" readonly><br>
+				<label for="orderGender">性別：</label> <input type="text"
+					id="orderGender" name="orderGender" value="小姐" readonly><br>
+				<label for="orderPhone">電話：</label> <input type="text"
+					id="orderPhone" name="orderPhone" value="0978090605" readonly><br>
+				<label for="orderGuests">訂位人數：</label> <input type="text"
+					id="orderGuests" name="orderGuests" value="3人" readonly><br>
+			</form>
+			<!-- 修改按鈕 -->
+			<button type="button" class="btn btn-primary" onclick="enableEdit()">修改</button>
+			<!-- 刪除按鈕 -->
+			<button type="button" class="btn btn-danger" onclick="deleteOrder()">刪除</button>
+			<!-- 確認按鈕 -->
+			<button type="button" class="btn btn-success"
+				onclick="confirmOrder()">確認</button>
 		</div>
 		<!----------------- 桌位藍色 訂單資訊 ---------------->
 
@@ -254,12 +257,20 @@
 			<br>
 			<div class="right-panel">
 				<!-- 右邊的內容 -->
-				<div class="modal-content right-panel">
+				<div class="modal-content left-panel">
 					<span class="close" onclick="closewait()">&times;</span> <label
 						for="dateInput">日期：</label> <input type="date" id="dateInput">
-					<br> <label for="timeInput">時間：</label> <input type="time"
-						id="timeInput"> <br> <label for="nameInput">姓名：</label>
-					<input type="text" id="nameInput" readonly> <br> <label
+					<br> <label for="timeInput">時間：</label> <select id="pNumber">
+						<option value="" label="請選擇時間" />
+						<option value="1" label="12:00" />
+						<option value="2" label="13:00" />
+						<option value="3" label="14:00" />
+						<option value="4" label="15:00" />
+						<option value="5" label="16:00" />
+						<option value="6" label="17:00" />
+						<option value="7" label="18:00" />
+					</select><br> <label for="nameInput">姓名：</label> <input type="text"
+						id="nameInput" readonly> <br> <label
 						for="genderInput">性別：</label> <input type="radio" id="maleInput"
 						class="gender" value="M"> <label for="maleInput">先生</label>
 					<input type="radio" id="femaleInput" class="gender" value="F">
@@ -276,7 +287,7 @@
 		<div id="calltable" class="test3" style="display: none">
 			<div class="left-panel">
 				<!-- 左邊的內容 -->
-				<div class="modal-content">
+				<div class="modal-content left-panel">
 					<span class="close" onclick="closewait()">&times;</span> <label
 						for="guestsInput">人數：</label> <br> <select id="guestsInput">
 						<option value="" label="請選擇人數"></option>
@@ -292,18 +303,25 @@
 			<div class="right-panel">
 				<!-- 右邊的內容 -->
 				<div class="modal-content right-panel">
-					<span class="close" onclick="closewait()">&times;</span> <label
+					<span class="close" onclick="callclose()">&times;</span><label
 						for="dateInput">日期：</label> <input type="date" id="dateInput">
-					<br> <label for="timeInput">時間：</label> <input type="time"
-						id="timeInput"> <br> <label for="nameInput">姓名：</label>
-					<input type="text" id="nameInput" readonly> <br> <label
-						for="genderInput">性別：</label> <input type="radio" id="maleInput"
-						name="gender" value="M"> <label for="maleInput">先生</label>
-					<input type="radio" id="femaleInput" name="gender" value="F">
-					<label for="femaleInput">小姐</label> <br> <label
-						for="phoneInput">手機：</label> <input type="tel" id="phoneInput"
-						placeholder="請輸入09xxxxxxxx" pattern="[0]{1}[9]{1}[0-9]{8}">
-					<br>
+					<br> <label>時間：</label> <select id="timeInput">
+						<option value="" label="請選擇時間" />
+						<option value="1" label="12:00" />
+						<option value="2" label="13:00" />
+						<option value="3" label="14:00" />
+						<option value="4" label="15:00" />
+						<option value="5" label="16:00" />
+						<option value="6" label="17:00" />
+						<option value="7" label="18:00" />
+					</select> <br> <label for="nameInput">姓名：</label> <input type="text"
+						id="nameInput"> <br> <label for="genderInput">性別：</label>
+					<input type="radio" id="maleInput" name="gender" value="M">
+					<label for="maleInput">先生</label> <input type="radio"
+						id="femaleInput" name="gender" value="F"> <label
+						for="femaleInput">小姐</label> <br> <label for="phoneInput">手機：</label>
+					<input type="tel" id="phoneInput" placeholder="請輸入09xxxxxxxx"
+						pattern="[0]{1}[9]{1}[0-9]{8}"> <br>
 					<button onclick="callwait()">確認</button>
 				</div>
 			</div>
@@ -311,8 +329,8 @@
 		<!-------------- 現場候位與電話預約7桌--------------->
 
 	</div>
+	</div>
 	<!-- /主要內容區域 -->
-
 </body>
 <script type="text/javascript" src="<c:url value='/js/table/table.js'/>"></script>
 </html>

@@ -18,13 +18,12 @@ $(document).ready(function() {
 
 //==================================假功能
 //選擇時間後 桌位變成藍色
-//function selectTime() {
-//  var tableElement = document.querySelector("selectTime");
-//  if (tableElement) {
-//    tableElement.classList.remove("blue-bg");
-//    tableElement.classList.add("grey-bg");
-//  }
-//}
+function selectTime() {
+  var twotableElement = document.querySelector("#table2");
+  if (twotableElement) {
+    twotableElement.classList.add("blue-bg");
+  }
+}
 
 
 //點開藍色桌位視窗
@@ -107,13 +106,7 @@ function showIntable() {
 	intableWindow.style.display = "block";
 }
 
-//XX關閉
-function closewait() {
-	// 獲取視窗元素
-	var test2 = document.getElementById("intable");
-	// 隱藏視窗
-	test2.style.display = "none";
-}
+
 
 //輸入幾人按確認後，十字架會出現人數
 function confirmwait() {
@@ -132,62 +125,45 @@ function confirmwait() {
 
 	closewait();
 }
+
+//XX關閉
+function closewait() {
+	// 獲取視窗元素
+	var test2 = document.getElementById("intable");
+	// 隱藏視窗
+	test2.style.display = "none";
+}
 /////////////////////////////////////////////////////9桌
 /////////////////////////////////////////////////////7桌
+
 function callIntable() {
 	// 獲取視窗元素
 	var intableWindow = document.getElementById("calltable");
 	// 顯示視窗
 	intableWindow.style.display = "block";
 }
-//確認
-//function callwait() {
-//	//儲存資料
-//	//變色// 修改桌位類別
-//	var callTableElement = document.querySelector(".table7");
-//	if (callTableElement) {
-//		callTableElement.classList.remove("grey-bg");
-//		callTableElement.classList.add("blue-bg");
-//	}
-//}
-//確認鍵 輸入幾人按確認後，十字架會出現人數
+//按確認
 function callwait() {
-	var dateInput = document.getElementById("dateInput"); //日期
-	var dateGuests = dateInput.value;
-	var timeInput = document.getElementById("timeInput"); //時間
-	var timeGuests = timeInput.value;
-	var nameInput = document.getElementById("nameInput"); //姓名
-	var nameGuests = nameInput.value;
-	var maleInput = document.getElementsByClassName("maleInput"); //男
-	var MGuests = maleInput.value;
-	var femaleInput = document.getElementsByClassName("femaleInput"); //女
-	var GGuests = femaleInput.value;
-	var phoneInput = document.getElementsByClassName("phoneInput"); //電話
-	var phGuests = phoneInput.value;
+  var dateInput = document.getElementById('dateInput').value;
+  var timeInput = document.getElementById('timeInput').value;
+  var nameInput = document.getElementById('nameInput').value;
+  var maleInput = document.getElementById('maleInput').checked;
+  var femaleInput = document.getElementById('femaleInput').checked;
+  var phoneInput = document.getElementById('phoneInput').value;
 
-	var calltableElement = document.querySelector("#table9");
-	console.log("1")
-	if (calltableElement) {
-		var guestsCountElement = calltableElement.querySelector(".guests-seven");
-		if (guestsCountElement) {
-			guestsCountElement.innerText = dateGuests + "日期";
-			guestsCountElement.innerText = timeGuests + "時間";
-			guestsCountElement.innerText = nameGuests + "姓名";
-			guestsCountElement.innerText = MGuests + "先生";
-			guestsCountElement.innerText = GGuests + "小姐";
-			guestsCountElement.innerText = phGuests + "電話";
-		}
-		calltableElement.classList.add("blue-bg");
-	}
-
-	closewait();
+  var seventableElement = document.querySelector("#table7");
+  if (seventableElement) {
+    seventableElement.style.backgroundColor = 'skyblue';
+    }
+  callclose();
 }
+
 
 //XX關閉
-function callwait() {
-	// 獲取視窗元素
-	var test2 = document.getElementById("calltable");
-	// 隱藏視窗
-	test2.style.display = "none";
-}
+function callclose() {
+	var calltableElement = document.querySelector("#calltable");	
+    calltableElement.style.display = "none";
+  }
+
+
 /////////////////////////////////////////////////////7桌

@@ -105,6 +105,7 @@ public class fakeDataInit {
     @Test
     void test() {
         try {
+        	List<FdTableJson> json = getJson("/static/assets/json/fdtable.json", FdTableJson.class);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -147,6 +148,7 @@ public class fakeDataInit {
         List<T> json = new LinkedList<>();
         
         if (jsonStr != null) {
+        	System.out.println(jsonStr);
             Type listType = TypeToken.getParameterized(List.class, type).getType();
             json = new Gson().fromJson(jsonStr, listType);
         } else {

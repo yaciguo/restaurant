@@ -102,7 +102,12 @@ body {
   .btn-group input[type="radio"]:checked + label {
     background-color: #ccc;
   }
-  
+
+
+element.style {
+    width: 300px;
+}
+
   
 /*   ==============================假功能 */
 
@@ -115,7 +120,7 @@ body {
 	transform: translate(-50%, -50%);
 	padding: 10px;
 	border: 1px solid #888;
-	width: 400px;
+	width: 26%;
 	display: none;
 	 border-radius: 10px; /* 添加圓角效果 */
 }
@@ -171,7 +176,7 @@ body {
 /* 輸入的人數 */
 .guests-count {
   position: absolute;
-  right: 5px;
+  left: 5px;
 }
 .left-panel, .right-panel {
   flex: 1;
