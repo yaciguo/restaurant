@@ -116,6 +116,11 @@ public class HomeController {
 	public String dataAnalysis() {
 	    return "dataAnalysis";
 	}
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
+
 	
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {

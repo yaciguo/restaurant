@@ -175,6 +175,8 @@ var csrfToken;
 						}
 						
 						//活動
+						var activityBeandiscount = '';
+						var activityBeandishBeanname ='';
 						var activityBeanType = '';
 						if (orderData.activityBean != null){
 							if (orderData.activityBean.type == 'discount') {
