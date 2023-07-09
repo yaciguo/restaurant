@@ -36,7 +36,7 @@
     }
 
     div.scheduler-border {
-        border: 1px groove #4070ff !important;
+        border: 1px groove #444444 !important;
         box-shadow: 0px 0px 0px 0px #000;
     }
 
@@ -47,7 +47,7 @@
         padding: 3px 5px;
         position: absolute;
         margin-top: -49px;
-        border: 1px solid #337ab7;
+        border: 1px solid #444444;
         border-radius: 8px;
     }
 
@@ -164,15 +164,34 @@
         max-height: 600px;
         overflow: auto;
     }
+    
+    li {  
+        padding-top: 2px;
+        list-style: none;
+    }
+
+    .li-link {
+        font-size: 1.25rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: var(--main-color) !important;
+    }
+
+    .accordion-class{
+        border-radius: 10rem;
+        border: 1px solid #007ea1;
+    }
+
+
 </style>
 
 <body>
 
     <!-- 主要內容區域 -->
     <ul class="nav nav-tabs" id="activity-tabs">
-        <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
+        <li class="nav-item"><a class="activity-link nav-link active li-link " data-bs-toggle="tab"
                 href="#basic-setting-div">基本設定</a></li>
-        <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
+        <li class="nav-item"><a class="activity-link nav-link li-link " data-bs-toggle="tab"
                 href="#opening-setting-div">營業設定</a></li>
     </ul>
 
@@ -184,7 +203,7 @@
                 <div class="col-4 text-nowrap ">
                     <div class="m-2">
                         <div class="row mb-4 px-2 pb-2 pt-4 scheduler-border">
-                            <h5 class="text-on-pannel text-primary w-auto">
+                            <h5 class="text-on-pannel w-auto">
                                 <strong class="text-uppercase">店名設定</strong>
                             </h5>
                             <input class="form-control  mb-2" type="text" id="shopName-input"/>
@@ -193,7 +212,7 @@
                             </div>
                         </div>
                         <div class="row px-2 panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary w-auto">
+                            <h5 class="text-on-pannel w-auto">
                                 <strong class="text-uppercase">商標</strong>
                             </h5>
                             <div class="col mb-2" style="height: 200px;">
@@ -211,7 +230,7 @@
                 <div class="col-8 text-nowrap">
                     <div class="m-2">
                         <div class="row px-2 panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary w-auto">
+                            <h5 class="text-on-pannel w-auto">
                                 <strong class="text-uppercase">座位</strong>
                             </h5>
                             <div class="row mb-4 g-2 faq-body" id="seatButtonDiv">
@@ -247,7 +266,7 @@
                 <div class="col-4 text-nowrap">
                     <div class="row px-2">
                         <div class="panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary">
+                            <h5 class="text-on-pannel ">
                                 <strong class="text-uppercase">營業時間</strong>
                             </h5>
                             <div class="row me-1">
@@ -318,13 +337,13 @@
                 <div class="col-8 text-nowrap">
                     <div class="row ps-2 pe-3 ">
                         <div class="panel-body panel scheduler-border pb-2 ">
-                            <h5 class="text-on-pannel text-primary">
+                            <h5 class="text-on-pannel">
                                 <strong class="text-uppercase">特定休假</strong>
                             </h5>
                             <div class="accordion accordion-flush " id="accordionFlushExample">
                                 <div class="accordion-item ">
                                     <h2 class="accordion-header " id="flush-headingOne">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed accordion-class" type="button"
                                             data-bs-toggle="collapse"
                                             data-bs-target="#flush-collapseOne" aria-expanded="false"
                                             aria-controls="flush-collapseOne">
@@ -419,7 +438,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-headingTwo">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed accordion-class" type="button"
                                             data-bs-toggle="collapse"
                                             data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                             aria-controls="flush-collapseTwo">

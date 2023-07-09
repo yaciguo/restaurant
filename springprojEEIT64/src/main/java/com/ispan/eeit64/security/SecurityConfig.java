@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.roles("USER");
     }
   
-    private boolean isCloseSecurity = true;
+    private boolean isCloseSecurity = false;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
         if(isCloseSecurity){

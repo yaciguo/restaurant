@@ -2,12 +2,10 @@ async function getAllSettings(){
     let settings = await $.ajax({
         type: "get",
         url: contextPath + "/basicSettings.api/getBasicSettings",
-        // data: JSON.stringify(closeTimeData),
         beforeSend: function (xhr) {
             xhr.setRequestHeader(header, token);
         }
     })
-    console.log(settings);
     setSettings(settings.data);
 }
 
@@ -24,6 +22,7 @@ function saveSetting(target){
                 "setName" : "shopName",
                 "setValue": $("#shopName-input").val()
             }
+            $("#sidenav-title").html(data.setValue);
             sendSettings(data);
             break;
         case "logoImg":
@@ -38,6 +37,7 @@ function saveSetting(target){
                     "setName" : "logoImg",
                     "setValue": base64String
                 }
+                $("#sideNav-shopLogo-img").attr("src", data.setValue);
                 sendSettings(data);
             };
             reader.readAsDataURL(file);

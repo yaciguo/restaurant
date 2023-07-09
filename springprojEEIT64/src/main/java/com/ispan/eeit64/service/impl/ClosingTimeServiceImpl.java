@@ -77,7 +77,7 @@ public class ClosingTimeServiceImpl implements ClosingTimeService {
             map.put("start", startDateMap);
             map.put("end", endDateMap);
             map.put("description", bean.getDescription());
-            if(nowDate.getTime() >= sdf.parse(bean.getStartDate().toString()).getTime()){
+            if(nowDate.getTime() >= sdf.parse(bean.getEndDate().toString()).getTime()){
                 oldList.add(map);
             }else{
                 nowList.add(map);

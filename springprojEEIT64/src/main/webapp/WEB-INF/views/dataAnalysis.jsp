@@ -44,7 +44,7 @@
     }
 
     div.scheduler-border {
-        border: 1px groove #4070ff !important;
+        border: 1px groove #444444 !important;
         box-shadow: 0px 0px 0px 0px #000;
     }
 
@@ -55,7 +55,7 @@
         padding: 3px 5px;
         position: absolute;
         margin-top: -49px;
-        border: 1px solid #337ab7;
+        border: 1px solid #444444;
         border-radius: 8px;
     }
 
@@ -136,6 +136,19 @@
         table-layout: fixed;
         /* even columns width , fix width of table too*/
     }
+    
+    li {  
+        padding-top: 2px;
+        list-style: none;
+    }
+
+    .li-link {
+        font-size: 1.25rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: var(--main-color) !important;
+    }
+
 </style>
 <script>
 </script>
@@ -144,9 +157,9 @@
     <!-- 主要內容區域 -->
 
     <ul class="nav nav-tabs" id="activity-tabs">
-        <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
+        <li class="nav-item"><a class="activity-link nav-link active li-link" data-bs-toggle="tab"
                 href="#data-chart-div">數據視圖</a></li>
-        <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
+        <li class="nav-item"><a class="activity-link nav-link li-link" data-bs-toggle="tab"
                 href="#data-output-div">下載CSV檔案</a></li>
     </ul>
 
@@ -157,11 +170,11 @@
                 <div class="col offset-md-1 col-md-3 me-4">
                     <div class="row g-2 panel scheduler-border">
                         <div class="col px-3 panel-body" id="chart-conditions-div">
-                            <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 生成圖表 </strong></h5>
+                            <h5 class="text-on-pannel"><strong class="text-uppercase"> 生成圖表 </strong></h5>
                             <div class="col">
                                 <div class="row g-2 panel scheduler-border mb-2">
                                     <div class="col px-3 panel-body">
-                                        <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 圖表模式
+                                        <h5 class="text-on-pannel"><strong class="text-uppercase"> 圖表模式
                                             </strong>
                                         </h5>
                                         <div id="data-style-div" class="col d-flex mb-2" style="height: 120px;">
@@ -188,7 +201,7 @@
                                 </div>
                                 <div class="row g-2 panel scheduler-border mb-2">
                                     <div class="col px-3 panel-body">
-                                        <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 時間範圍
+                                        <h5 class="text-on-pannel"><strong class="text-uppercase"> 時間範圍
                                             </strong>
                                         </h5>
                                         <div class="col">
@@ -220,7 +233,7 @@
                                 </div>
                                 <div class="row g-2 panel scheduler-border mb-2">
                                     <div class="col panel-body px-3">
-                                        <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 圖表內容
+                                        <h5 class="text-on-pannel"><strong class="text-uppercase"> 圖表內容
                                             </strong>
                                         </h5>
                                         <div class="row text-nowrap">
@@ -251,7 +264,7 @@
 
                                         <div id="select-target-div" class="row g-2 mb-2 panel scheduler-border">
                                             <div class="col panel-body">
-                                                <h5 class="text-on-pannel text-primary">
+                                                <h5 class="text-on-pannel">
                                                     <strong class="text-uppercase me-1">對比項目</strong>
                                                     <a href="#" class="btn btn-primary btn-sm flex-fill" type="button"
                                                         data-bs-toggle="modal" data-bs-target="#compareItemsDiv">選取</a>
