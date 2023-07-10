@@ -96,8 +96,6 @@
 </head>
 
 <body>
-	<!-- 左側導覽列 -->
-	<%@ include file="sideNav.jsp"%>
 	<!-- 主要內容區域 -->
 	<div id="main-content" class="main-content">
 		<br> <br>
