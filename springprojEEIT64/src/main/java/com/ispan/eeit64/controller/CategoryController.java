@@ -17,7 +17,7 @@ public class CategoryController {
 		this.service = service;
 	}
 	
-	@GetMapping("/showCategories")
+	@GetMapping("/custIndex/showCategories")
 	public @ResponseBody List<String> findAllCategories(){
 		return service.findAllbyName();
 	}

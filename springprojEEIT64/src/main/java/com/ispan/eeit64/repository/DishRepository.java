@@ -14,8 +14,8 @@ import com.ispan.eeit64.entity.DishBean;
 public interface DishRepository extends JpaRepository<DishBean, Integer>{
 	@Query("SELECT d FROM DishBean d ORDER BY d.categoryBean.id")
 	List<DishBean> findAllOrderByCategoryId();
-
-	Page<DishBean> findByCategoryId(int categoryId, Pageable pageable);
+	
+	Page<DishBean> findByCategoryBeanId(Integer categoryId, Pageable pageable);
 
 	void save(Map<String, Object> dish);
 

@@ -20,10 +20,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "orders")
 public class OrderBean {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -42,7 +46,6 @@ public class OrderBean {
 	@Column(name = "amount", columnDefinition = "int(100) NOT NULL COMMENT '金額'")
 	private Integer amount;
 
-	// edit varchar(20)
 	@Column(name = "orderStatus", columnDefinition = "varchar(20) NOT NULL COMMENT '訂單狀態4種'")
 	private String orderStatus;
 
@@ -52,7 +55,6 @@ public class OrderBean {
 	@Column(name = "customer", columnDefinition = "varchar(100) NOT NULL COMMENT '顧客名稱 內用代桌號'")
 	private String customer;
 	
-	//delete NOT NULL
 	@Column(name = "phone", columnDefinition = "varchar(100) COMMENT '電話'")
 	private String phone;
 
@@ -60,32 +62,30 @@ public class OrderBean {
 	@JoinColumn(name = "FK_Activity_Id")
 	private ActivityBean activityBean;
 
-	//edit @OneToOne ? add cascade = {CascadeType.ALL}
+    @JsonIgnoreProperties("orderBean")
     @OneToOne(mappedBy = "orderBean", cascade = {CascadeType.ALL})
     private OrderRecordBean orderRecordBean;
-//    private Set<OrderRecordBean> orderRecordBean= new LinkedHashSet<>();
     
 	@OneToMany(mappedBy = "orderBean", fetch = FetchType.EAGER, cascade = {
 			CascadeType.ALL}, orphanRemoval = false)
+	@JsonManagedReference
 	private Set<OrderDetailBean> orderDetailBean = new LinkedHashSet<>();
 
-	// edit cascade = CascadeType.ALL
+	@JsonIgnoreProperties("order")
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private CheckoutBean checkoutBean;
 
-	@Override
-	public String toString() {
-		return "OrderBean [id=" + id + ", type=" + type + ", pickTime=" + pickTime + ", orderTime=" + orderTime
-				+ ", amount=" + amount + ", orderStatus=" + orderStatus + ", note=" + note + ", customer=" + customer
-				+ ", phone=" + phone + ", activityBean=" + activityBean + ", orderRecordBean=" + orderRecordBean
-				+ ", orderDetailBean=" + orderDetailBean + ", checkoutBean=" + checkoutBean + "]";
-	}
+    @Override
+    public String toString() {
+        return "OrderBean [id=" + id + ", type=" + type + ", pickTime=" + pickTime + ", orderTime=" + orderTime
+                + ", amount=" + amount + ", orderStatus=" + orderStatus + ", note=" + note + ", customer=" + customer
+                + ", phone=" + phone + "]";
+    }
 
 	public OrderBean() {
 		super();
 	}
 
-	// add ActivityBean activityBean   OrderRecordBean orderRecordBean
 	public OrderBean(String type, Date pickTime, Timestamp orderTime, Integer amount, String orderStatus,
 			String note, String customer, String phone, OrderRecordBean orderRecordBean
 			,Set<OrderDetailBean> orderDetailBean, ActivityBean activityBean) {
@@ -231,6 +231,4 @@ public class OrderBean {
 		this.checkoutBean = checkoutBean;
 	}
 	
-	
-
 }

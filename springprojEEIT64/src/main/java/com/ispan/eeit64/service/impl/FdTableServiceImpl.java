@@ -1,47 +1,53 @@
 package com.ispan.eeit64.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ispan.eeit64.entity.FdTableBean;
+import com.ispan.eeit64.repository.FdTableRepository;
 import com.ispan.eeit64.service.FdTableService;
 
+@Service
+@Transactional
 public class FdTableServiceImpl implements FdTableService {
+    @Autowired
+    FdTableRepository dao;
+    
+    @Override
+    public boolean existsById(Integer id) {
+        return dao.existsById(id);
+    }
 
     @Override
     public FdTableBean findById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return dao.findById(id).get();
     }
 
     @Override
     public List<FdTableBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return dao.findAll();
     }
 
     @Override
-    public Map<String, Object> save(FdTableBean bean) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    public FdTableBean saveAndUpdate(FdTableBean bean) {
+        dao.save(bean);
+        return bean;
     }
 
     @Override
-    public Map<String, Object> update(FdTableBean bean) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void deleteById(Integer id) {
+        List<Integer> ids = Arrays.asList(id);
+        deleteByIdList(ids);
     }
 
     @Override
-    public Map<String, Object> deleteById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
-    }
-
-    @Override
-    public Map<String, Object> deleteByIdList(List<Integer> ids) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteByIdList'");
-    }
-    
+    public void deleteByIdList(List<Integer> ids) {
+        for(Integer id: ids){
+            dao.deleteById(id);
+        }
+    }    
 }

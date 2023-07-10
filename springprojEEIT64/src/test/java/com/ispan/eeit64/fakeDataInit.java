@@ -1,9 +1,14 @@
 package com.ispan.eeit64;
 
+import java.io.File;
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,11 +24,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ispan.eeit64.entity.ActivityBean;
+import com.ispan.eeit64.entity.BasicSettingsBean;
 import com.ispan.eeit64.entity.CategoryBean;
 import com.ispan.eeit64.entity.CheckoutBean;
 import com.ispan.eeit64.entity.ClosingTimeBean;
@@ -46,6 +53,7 @@ import com.ispan.eeit64.jsonBean.OrderRecordJson;
 import com.ispan.eeit64.jsonBean.ReservationsJson;
 import com.ispan.eeit64.jsonBean.reader.ReadJson;
 import com.ispan.eeit64.repository.ActivityRepository;
+import com.ispan.eeit64.repository.BasicSettingsRepository;
 import com.ispan.eeit64.repository.CategoryRepository;
 import com.ispan.eeit64.repository.CheckoutRepository;
 import com.ispan.eeit64.repository.ClosingTimeRepository;
@@ -90,6 +98,9 @@ public class fakeDataInit {
     @Autowired
     ClosingTimeRepository ClosingTimeDao;
 
+    @Autowired
+    BasicSettingsRepository BasicSettingsDao;
+
     @BeforeEach
     public void before(TestInfo testInfo) {
         System.out.println("");
@@ -105,7 +116,7 @@ public class fakeDataInit {
     @Test
     void test() {
         try {
-        	List<FdTableJson> json = getJson("/static/assets/json/fdtable.json", FdTableJson.class);
+            addBasicSettingsData();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -129,6 +140,7 @@ public class fakeDataInit {
             }
             
             // add fake data
+            addBasicSettingsData();
             addFdTableData();
             addReservationData();
             addOpeningHourData();
@@ -148,7 +160,6 @@ public class fakeDataInit {
         List<T> json = new LinkedList<>();
         
         if (jsonStr != null) {
-        	System.out.println(jsonStr);
             Type listType = TypeToken.getParameterized(List.class, type).getType();
             json = new Gson().fromJson(jsonStr, listType);
         } else {
@@ -160,15 +171,33 @@ public class fakeDataInit {
     public <T, ID> void resetTable(String tableName, JpaRepository<T, ID> dao) throws Exception {
         System.out.println(dao.findAll().size());
         if (dao.findAll().size() != 0) {
-            System.out.println(1);
             dao.deleteAll();
-            System.out.println(2);
         }
         ucDao.resetAutoId(tableName);
     }
+
+    public void addBasicSettingsData() throws Exception {
+        String imagePath = "/static/assets/img/logo.png";
+        ClassPathResource cpr = new ClassPathResource(imagePath);
+        String mimeType = Files.probeContentType(Paths.get(imagePath));
+
+        InputStream is = cpr.getInputStream();
+        File source = cpr.getFile();
+        
+        byte[] buf = new byte[(int)source.length()];
+        is.read(buf);						
+        is.close();
+
+        String base64String = Base64.getEncoder().encodeToString(buf);
+
+        BasicSettingsBean shopNameBean = new BasicSettingsBean("shopName", "webDesign-RS");
+        BasicSettingsDao.save(shopNameBean);
+        BasicSettingsBean logoImgBean = new BasicSettingsBean("logoImg", "data:"+mimeType+";base64,"+base64String);
+        BasicSettingsDao.save(logoImgBean);
+    }
     
 
-    void addOpeningHourData() throws Exception {
+    public void addOpeningHourData() throws Exception {
         List<OpeningHourJson> json = getJson("/static/assets/json/openingHours.json", OpeningHourJson.class);
 
         SimpleDateFormat formatDate = new SimpleDateFormat("HH:mm");
@@ -196,7 +225,7 @@ public class fakeDataInit {
         for (DishJson jsonBean : json) {
             Optional<CategoryBean> cbeanOptional = categoryDao.findById(jsonBean.category+1);
             CategoryBean cbean = cbeanOptional.get();
-            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "null", jsonBean.description, "null");
+            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "/images/dumpling.png", jsonBean.description, "Y");
 
             dishDao.save(bean);
         }

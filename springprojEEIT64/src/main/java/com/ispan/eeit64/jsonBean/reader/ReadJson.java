@@ -10,7 +10,6 @@ public class ReadJson {
 	public static String getJsonFileString(String filePath) {
 		ClassPathResource cpr = new ClassPathResource(filePath);
 		try {
-			System.out.println(cpr);
 			InputStream is = cpr.getInputStream();
 			File source = cpr.getFile();
 			

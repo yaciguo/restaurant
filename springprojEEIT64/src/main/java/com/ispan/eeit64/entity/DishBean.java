@@ -68,6 +68,10 @@ public class DishBean {
 	public DishBean() {
 		super();
 	}
+	
+	
+	
+	
 	public DishBean(Integer id) {
 		super();
 		this.id = id;

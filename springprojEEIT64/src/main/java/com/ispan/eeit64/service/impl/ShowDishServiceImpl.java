@@ -117,7 +117,7 @@ public class ShowDishServiceImpl implements ShowDishService {
 	    Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
 	    // 查询数据并返回分页结果
-	    Page<DishBean> result = dishRepository.findByCategoryId(categoryId, pageable);
+	    Page<DishBean> result = dishRepository.findByCategoryBeanId(categoryId, pageable);
 	    return result;
 	}
 
