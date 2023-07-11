@@ -128,13 +128,5 @@ public class HomeController {
 		return "greeting";
 	}
 	
-	@GetMapping("/table")
-	public String table() {
-		return "table";
-	}
-	
-
-	
-	
 	
 }

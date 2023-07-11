@@ -112,7 +112,7 @@
 					<tr class="tr-title">
 						<td>${item.id}</td>
 						<td>${item.name}</td>
-						<td>${item.price}</td>
+						<!-- <td>${item.price}</td> -->
 						<td>${item.cost}</td>
 <%-- 						<td>${item.description}</td> --%>
 						<td>${item.status}</td>
