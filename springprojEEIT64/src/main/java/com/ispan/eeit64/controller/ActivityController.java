@@ -59,6 +59,7 @@ public class ActivityController {
 	@GetMapping("/queryActivity")
 	public Page<ActivityBean> findAllActivitys(@RequestParam(defaultValue = "0") int pageNumber,
 												@RequestParam(defaultValue = "5") int pageSize) {
+		
 		return activityService.findAllWithPagination(pageNumber-1, pageSize);
 	}
 
@@ -145,7 +146,6 @@ public class ActivityController {
 	}
 
 	@DeleteMapping("/deleteActivity")
-	@CrossOrigin(origins = "http://localhost:8080/") // 設置允許跨域的來源網址
 	public void deleteActivityById(@RequestParam Integer activityId) {
 		activityRepository.deleteById(activityId);
 	}

@@ -156,45 +156,21 @@ public class ShowDishController {
 	       return response;
 	}
 	
-	// 查詢產品訊息並進行分頁展示
-	@GetMapping("/queryProducts")
-	public Page<DishBean> findAllProducts(@RequestParam(defaultValue = "0") int pageNumber,
-			@RequestParam(defaultValue = "5") int pageSize) {
-		return productService.findAllWithPagination(pageNumber - 1, pageSize);
-	}
-	// 產品排序
-	@GetMapping("/resortProducts")
-	public List<DishBean> resortProductsByColumn(@RequestParam("sortColumn") String sortColumn,
-			@RequestParam("sortDirection") String sortDirection) {
-		List<DishBean> sortedProducts = productService.resortProductsByColumn(sortColumn, sortDirection);
-
-		return sortedProducts;
-	}
+	
 
 	// 獲取所有的類別訊息，並將其返回给前端
-	@GetMapping("/getAllCategories")
-	public List<CategoryBean> getAllCategories() {
-		List<CategoryBean> allCategories = categoryRepository.findAll();
-		return allCategories;
-	}
+	// @GetMapping("/getAllCategories")
+	// public List<CategoryBean> getAllCategories() {
+	// 	List<CategoryBean> allCategories = categoryRepository.findAll();
+	// 	return allCategories;
+	// }
 
-	// 查詢餐點 不確定會不會用到
-	@GetMapping("/queryProduct")
-	public Set<DishBean> findDishByCategoryId(@RequestParam Integer categoryId) {
-		Optional<CategoryBean> categoryOptional = categoryRepository.findById(categoryId);
-		if (categoryOptional.isPresent()) {
-			CategoryBean category = categoryOptional.get();
-			return category.getDishBean();
-		} else {
-			return new HashSet<>();
-		}
-	}
-
+	
 	// 刪除餐點
-	@DeleteMapping("/deleteProduct/{productId}")
-	@CrossOrigin(origins = "http://localhost:8080/") // 設置允許跨域的來源網址
-	public void deleteProductById(@PathVariable Integer productId) {
-		dishRepository.deleteById(productId);
-	}
+	// @DeleteMapping("/deleteProduct/{productId}")
+	// @CrossOrigin(origins = "http://localhost:8080/") // 設置允許跨域的來源網址
+	// public void deleteProductById(@PathVariable Integer productId) {
+	// 	dishRepository.deleteById(productId);
+	// }
 
 }

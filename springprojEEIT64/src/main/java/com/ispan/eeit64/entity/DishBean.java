@@ -48,16 +48,16 @@ public class DishBean {
 	@Column(name = "status", columnDefinition = "varchar(10) NOT NULL COMMENT'餐點狀態 N無,Y有'")
 	private String status;
 	
-	@Column(name = "categoryId", nullable = false)
-	private int categoryId;
+//	@Column(name = "categoryId", nullable = false)
+//	private int categoryId;
 
-	public int getCategoryId() {
-	    return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-	    this.categoryId = categoryId;
-	}
+//	public int getCategoryId() {
+//	    return categoryId;
+//	}
+//
+//	public void setCategoryId(int categoryId) {
+//	    this.categoryId = categoryId;
+//	}
 
 
 	@JsonBackReference
@@ -68,6 +68,10 @@ public class DishBean {
 	public DishBean() {
 		super();
 	}
+	
+	
+	
+	
 	public DishBean(Integer id) {
 		super();
 		this.id = id;

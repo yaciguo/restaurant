@@ -96,35 +96,11 @@
 </head>
 
 <body>
-	<!-- 左側導覽列 -->
-	<%@ include file="sideNav.jsp"%>
+
 	<!-- 主要內容區域 -->
 	<div id="main-content" class="main-content">
 		<br> <br>
-		<!-- 		<div class="row text-nowrap mb-1"> -->
-		<!-- 			<div class="col-6"> -->
-		<!-- 					<div class="col"> -->
-		<!-- 						<div class="d-flex justify-content-center align-items-center"> -->
-		<!-- 							<label for="startdate">訂位日期：</label> -->
-		<!-- 							<p> -->
-		<!-- 								<input class="form-control" id="startdate" name="startdate" -->
-		<!-- 									placeholder='yyyy-mm-dd' type="text" /> -->
-		<!-- 						</div> -->
-		<!-- 					</div> -->
-		<!-- 					另外一種下拉式選單 -->
-		<!-- 					<div class="d-flex justify-content-center align-items-center"> -->
-		<!-- 						<label for="pNumber">訂位時間:</label> <select id="pNumber"> -->
-		<!-- 							<option value="" label="請選擇時間" /> -->
-		<!-- 							<option value="1" label="12:00" /> -->
-		<!-- 							<option value="2" label="13:00" /> -->
-		<!-- 							<option value="3" label="14:00" /> -->
-		<!-- 							<option value="4" label="15:00" /> -->
-		<!-- 							<option value="5" label="16:00" /> -->
-		<!-- 							<option value="6" label="17:00" /> -->
-		<!-- 							<option value="7" label="18:00" /> -->
-		<!-- 						</select> -->
-		<!-- 					</div> -->
-		<!-- 				</div> -->
+		
 		<!-- 將時間跟日期放在畫面中同一行 -->
 		<!-- 				<div class="row"> -->
 			<div class="col-auto d-flex justify-content-center align-items-center">

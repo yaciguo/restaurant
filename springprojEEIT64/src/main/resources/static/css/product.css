@@ -1,7 +1,4 @@
 @charset "UTF-8";
-body {
-	background-color: #EEE;
-}
 /* Modal框样式 */
 .modal, .fdmixview {
   display: none;
@@ -99,6 +96,7 @@ ul {
 li {
 	margin-bottom: 8px;
 }
+
 
 .table-product {
   border-collapse: collapse;

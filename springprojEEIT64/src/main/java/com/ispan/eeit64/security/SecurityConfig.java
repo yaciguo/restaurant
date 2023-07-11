@@ -57,28 +57,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests(requests -> requests
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/assets/img/**").permitAll()
+                    .antMatchers("/js/**").permitAll()
+                    .antMatchers("/images/**").permitAll()
+                    .antMatchers("/restaurant/images/**").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("/**/*.css").permitAll()
                     .antMatchers("/osLogin").permitAll()
                     .antMatchers("/custIndex/**").permitAll()
+//                    .antMatchers("/custIndex/newOrder").permitAll()
 //                    .antMatchers("/custIndex/queryBanner").permitAll()
                     .antMatchers("/searchorder").permitAll()
+                    .antMatchers("/searchorders").permitAll()
                     .antMatchers("/searchbooking").permitAll()
+                    .antMatchers("/reservation").permitAll()
+                    .antMatchers("/shoppingcart").permitAll()
+                    .antMatchers("/shoppingcartInner").permitAll()
                     .antMatchers("/question").permitAll()
                     .antMatchers("/booking").permitAll()
+                    .antMatchers("/restaurant/newbooking").permitAll()
+                    .antMatchers("/newbooking").permitAll()
+                    .antMatchers("/bookingcheck").permitAll()
+                    .antMatchers("/booktest").permitAll()
                     .antMatchers("/menu").permitAll()
-                    //=================================77=====================
-                    .antMatchers("/addProduct").permitAll()
-                    .antMatchers("/product").permitAll()
-                    .antMatchers("/product?").permitAll()
-                    .antMatchers("/addType").permitAll()
-                    //=============================================
-                    
+                    .antMatchers("/menuInner").permitAll()
+                    .antMatchers("/dishes2").permitAll()
+                    .antMatchers("/restInfo").permitAll()
+                    .antMatchers("/ordercheck").permitAll()
+                    .antMatchers("/test").permitAll()
                     .anyRequest().authenticated()
                     )
             .cors(cors -> cors.disable())
             .csrf(csrf -> csrf
             		.ignoringAntMatchers("/custIndex")
+            		.ignoringAntMatchers("/custIndex/**")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                	// .csrf(csrf -> csrf.disable())
             
@@ -90,7 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //	                .defaultSuccessUrl("/activity")
                     .successHandler((request, response, authentication) -> {
                         System.out.println("Login Successful!");
-                        response.sendRedirect(request.getContextPath() + "/activity");
+                        response.sendRedirect(request.getContextPath() + "/sideNav");
                     })
                     .failureHandler((request, response, exception) -> {
                         System.out.println("Login Failed!");

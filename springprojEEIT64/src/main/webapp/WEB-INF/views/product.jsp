@@ -94,7 +94,7 @@
 			<table class="table-product">
 				<thead>
 					<tr class="text-center">
-						<td colspan="8">餐點總表</td>
+						<td colspan="5">餐點總表</td>
 					</tr>
 					<tr class="text-center">
 						<td>餐點編號</td>
@@ -102,7 +102,7 @@
 						<td>餐點名稱</td>
 						<td>餐點價格</td>
 						<td>餐點成本</td>
-						<td>餐點描述</td>
+<!-- 						<td>餐點描述</td> -->
 						<td>餐點狀態</td>
 					</tr>
 				</thead>
@@ -114,14 +114,15 @@
 						<td>${item.name}</td>
 						<td>${item.price}</td>
 						<td>${item.cost}</td>
-						<td>${item.description}</td>
+<%-- 						<td>${item.description}</td> --%>
 						<td>${item.status}</td>
 						<%-- 						<td><c:forEach var="activity" items="${item.activityBean}"> --%>
-						<%-- 						${activity.name}</c:forEach></td>  --%>
+						<%--        	 					${activity.name}</c:forEach></td> --%>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
+		<!-- 互動視窗 - 活動設定 -->
 		<!-- 修改新增產品彈跳視窗-->
 		<div class="modal" id="myModal" tabindex="-1"
 			aria-labelledby="addp-modalLabel" aria-hidden="true">
@@ -138,10 +139,10 @@
 							<select id="category-select" required="required">								
 							</select>
 						</div>
-						<div class="py-4">
+						<!-- <div class="py-4">
 							<span><B>新增餐點圖：</B></span> <input type="file" accept=".jpg, .png"
 								id="fdpictureInput">
-						</div>
+						</div> -->
 						<div class="addproduct-detail">
 							<strong>餐點名稱：</strong> <input type="text" id="add-name" required>
 						</div>
