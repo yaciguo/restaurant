@@ -240,10 +240,10 @@
             "orderDetails": orderDetailsArray,
             "amount": document.getElementById("totalAmount").value,
             "FK_Activity_Id": document.getElementById("selectedActivityId").value,
-            "type": "O",
-            "customer": document.getElementById("customer").value,
-            "phone": document.getElementById("phone").value,
-            "pickTime": document.getElementById("pickTime").value,
+            "type": "I",
+            "customer": "5",
+//             "phone": document.getElementById("phone").value,
+//             "pickTime": document.getElementById("pickTime").value,
             "note": document.getElementById("note").value,
 
           };
@@ -251,7 +251,7 @@
           console.log(jsonData);
           // 创建 XMLHttpRequest 对象并发送 JSON 数据到后端===================
           $.ajax({
-            url: '${pageContext.request.contextPath}/custIndex/newOrder',
+            url: '${pageContext.request.contextPath}/custIndex/newOrderInner',
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(jsonData),
@@ -374,44 +374,6 @@
                   </fieldset>
                 </div>
 
-<!--                 <div class="col-sm-4"> -->
-<!--                   <fieldset> -->
-<!--                     <legend>取餐資料</legend> -->
-<!--                     <label for="">姓名:</label><br /> -->
-<!--                     <input id="customer" type="text" placeholder="請輸入訂購人" style="width: 90%;" -->
-<!--                       required="required" /><br /><br /> -->
-
-<!--                     <label for="">手機:</label><br /> -->
-<!--                     <input id="phone" type="tel" placeholder="請輸入手機號碼" style="width: 90%;" -->
-<!--                       pattern="[0]{1}[9]{1}[0-9]{8}" required="required" /><br /><br /> -->
-
-<!--                     <label>取餐時間:</label><br /> -->
-<!--                     <select id="pickTime" required="required"> -->
-<!--                       <option value="">請選擇時間</option> -->
-<!--                                             <option value="10:39:00">10:39</option> -->
-<!--                       <option value="11:00:00">11:00</option> -->
-<!--                       <option value="11:30:00">11:30</option> -->
-<!--                       <option value="12:00:00">12:00</option> -->
-<!--                       <option value="12:30:00">12:30</option> -->
-<!--                       <option value="13:00:00">13:00</option> -->
-<!--                       <option value="13:30:00">13:30</option> -->
-<!--                       <option value="14:00:00">14:00</option> -->
-<!--                       <option value="14:30:00">14:30</option> -->
-<!--                       <option value="15:00:00">15:00</option> -->
-<!--                       <option value="15:30:00">15:30</option> -->
-<!--                       <option value="16:00:00">16:00</option> -->
-<!--                       <option value="16:30:00">16:30</option> -->
-<!--                       <option value="17:00:00">17:00</option> -->
-<!--                       <option value="17:30:00">17:30</option> -->
-<!--                       <option value="18:00:00">18:00</option> -->
-<!--                       <option value="18:30:00">18:30</option> -->
-<!--                       <option value="19:00:00">19:00</option> -->
-<!--                       <option value="19:30:00">19:30</option> -->
-<!--                                             <option value="22:30:00">22:30</option> -->
-<!--                     </select> -->
-
-<!--                   </fieldset> -->
-<!--                 </div> -->
               </div>
               <footer>
                 <input type="button" value="繼續加點" class="button2" onclick="menuPage()" /> <!--上一頁-->
@@ -427,9 +389,9 @@
           window.location.href = "<c:url value='/menuInner' />";
         }
 
-        //時間設定
+        //時間設定============================================
 
-        var pickTimeSelect = document.getElementById('pickTime');
+//         var pickTimeSelect = document.getElementById('pickTime');
         var currentTime = new Date();
         var currentHour = currentTime.getHours();
         var currentMinute = currentTime.getMinutes();
@@ -439,29 +401,29 @@
         var currentDayOfWeek = daysOfWeek[currentTime.getDay()];
         if (currentDayOfWeek === '星期日') {
           alert('今日星期日無營業');
-          for (var i = 0; i < pickTimeSelect.options.length; i++) {
-            pickTimeSelect.options[i].disabled = true;
-          }
+//           for (var i = 0; i < pickTimeSelect.options.length; i++) {
+//             pickTimeSelect.options[i].disabled = true;
+//           }
 
         }
 
 
-        // 禁止選擇過去的時間和相差不到10分鐘的時間
-        for (var i = 0; i < pickTimeSelect.options.length; i++) {
-          var optionValue = pickTimeSelect.options[i].value;
-          var optionTimeParts = optionValue.split(':');
-          var optionHour = parseInt(optionTimeParts[0]);
-          var optionMinute = parseInt(optionTimeParts[1]);
+        // 禁止選擇過去的時間和相差不到10分鐘的時間內用關掉===============================
+//         for (var i = 0; i < pickTimeSelect.options.length; i++) {
+//           var optionValue = pickTimeSelect.options[i].value;
+//           var optionTimeParts = optionValue.split(':');
+//           var optionHour = parseInt(optionTimeParts[0]);
+//           var optionMinute = parseInt(optionTimeParts[1]);
 
-          if (optionHour < currentHour || (optionHour === currentHour && optionMinute < currentMinute)) {
-            pickTimeSelect.options[i].disabled = true;
-          } else {
-            var timeDifference = (optionHour * 60 + optionMinute) - (currentHour * 60 + currentMinute);
-            if (timeDifference <= 10) {
-              pickTimeSelect.options[i].disabled = true;
-            }
-          }
-        }
+//           if (optionHour < currentHour || (optionHour === currentHour && optionMinute < currentMinute)) {
+//             pickTimeSelect.options[i].disabled = true;
+//           } else {
+//             var timeDifference = (optionHour * 60 + optionMinute) - (currentHour * 60 + currentMinute);
+//             if (timeDifference <= 10) {
+//               pickTimeSelect.options[i].disabled = true;
+//             }
+//           }
+//         }
 
 
       </script>

@@ -23,6 +23,6 @@ public interface ReservationRepository extends JpaRepository<ReservationBean, In
 	boolean checkTableAvailability(@Param("tableId") Integer tableId, @Param("date") Date date, @Param("startTime") Time startTime);
 	
 	@Query("SELECT r.startTime FROM ReservationBean r WHERE r.fdTableBean.id = :tableId AND r.date = :date")
-	List<Time> getReservedTimes(@Param("tableId") FdTableBean tableId, @Param("date") Date date);
+	List<Time> getReservedTimes(@Param("tableId") Integer table, @Param("date") Date date);
 
 }

@@ -183,6 +183,8 @@ var csrfToken;
 						}
 						
 						//活動
+						var activityBeandiscount = '';
+						var activityBeandishBeanname ='';
 						var activityBeanType = '';
 						var activityBeandiscount = '';
 						var activityBeandishBeanname = '';

@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+body {
+	background-color: #EEE;
+}
+.main-content {
+	min-width: 580px;
+	margin: 20px 20px 20px calc(60px + 20px);
+	padding: 15px;
+	transition: margin-left 0.3s ease-in-out;
+	background-color: #FFF;
+	border-radius: var(--main-radius);
+}
+
+.main-content.active {
+	margin-left: 180px;
+}
+
+.table-link {
+	font-size: 1.25rem;
+	font-weight: bold;
+	letter-spacing: 2px;
+	color: var(--main-color) !important;
+}
+.container{
+    display: flex;
+    gap:10px;
+    flex-wrap: wrap;
+    /* width: 500px; */
+    justify-content: center;
+}
+.container .box{
+    margin-top: 30px;
+    position: relative;
+    height: 100px;
+    width: 110px;
+    border-radius: 10px;
+    border: 2px solid gray;
+}
+
+.box {
+    position: relative;
+    /* width: 50px; */
+    height: 50px;
+    background-color: #ccc;
+    cursor: pointer;
+  }
+  
+
+  
+  .box::before,
+  .box::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 4px;
+    background-color: #fff;
+    transform: translate(-50%, -50%);
+  }
+  
+  .box::before {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  
+  .btn-group {
+    display: inline-flex;
+    border-radius: 6px;
+    justify-content: right;
+   
+  }
+  
+  .btn-group input[type="radio"] {
+    display: none;
+  }
+  
+  .btn-group {
+    /* display: flex; */
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    justify-content: flex-end;
+  }
+  
+  .btn-group input[type="radio"] {
+    display: none;
+  }
+  
+  .btn-group label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    cursor: pointer;
+   
+  }
+  
+  .btn-group label:last-child {
+    border-right: none;
+  }
+  
+  .btn-group input[type="radio"]:checked + label {
+    background-color: #ccc;
+  }
+
+
+element.style {
+    width: 300px;
+}
+
+  
+/*   ==============================假功能 */
+
+/*   ==============================2桌 */
+.bluetable {
+	background-color: #fefefe;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	border: 1px solid #888;
+	width: 26%;
+	display: none;
+	 border-radius: 10px; /* 添加圓角效果 */
+}
+
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+/* 修改桌位背景色 */
+.blue-bg {
+	background-color: skyblue;
+}
+
+.yellow-bg {
+	background-color: #ffd700;
+}
+
+.green-bg {
+	background-color: lightgreen;
+}
+
+.grey-bg {
+	background-color: #ccc;
+}
+/*   ==============================2桌 */
+/*   ==============================9桌 */
+.test2{
+	background-color: #fefefe;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	border: 1px solid #888;
+	width: 600px;
+/* 	display: none; */
+	border-radius: 10px; /* 添加圓角效果 */
+	 display: flex;
+  justify-content: space-between;
+}
+#table9 {
+  position: relative;
+}
+/* 輸入的人數 */
+.guests-count {
+  position: absolute;
+  left: 5px;
+}
+.left-panel, .right-panel {
+  flex: 1;
+   width: 50%; 
+}
+
+#intable {
+    display: flex; 
+}
+/*   ==============================9桌 */
+/*   ==============================7桌 */
+.test3{
+	background-color: #fefefe;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	border: 1px solid #888;
+	width: 600px;
+	border-radius: 10px; /* 添加圓角效果 */
+	 display: flex;
+  justify-content: space-between;
+}
+#table7 {
+  position: relative;
+}
+.left-panel, .right-panel {
+  flex: 1;
+   width: 50%; 
+}
+#calltable {
+    display: flex; 
+}
+/*   ==============================7桌 */
