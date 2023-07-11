@@ -1,35 +1,37 @@
 package com.ispan.eeit64.controller;
 
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ispan.eeit64.service.TableService;
+
 @RestController
-@Controller
 public class TableController {
-	public TableController() {
-		
-	}
-	
-	//篩選日期時間
-	 @PostMapping("/filter")
-	 @CrossOrigin(origins = "http://localhost:8080") // 設置允許跨域的來源網址
-	    public List<Reservation> filterData(@RequestBody FilterRequest filterRequest) {
-	        // 獲取前端傳來的日期和時間值
-	        String startDate = filterRequest.getStartDate();
-	        String selectedTime = filterRequest.getSelectedTime();
 
-	        // 在這裡根據日期和時間值進行資料篩選的操作
-	        // 假設你有一個名為"reservations"的資料表，並使用某種資料庫連線方式進行查詢
-	        // 這裡僅為示範，你需要根據你的資料庫操作進行修改
+    private final TableService tableService;
 
-	        // 假設使用Spring Data JPA，Reservation為實體類對應資料庫表
-	        List<Reservation> reservations = reservationRepository.findByDateAndTime(startDate, selectedTime);
-	        return reservations;
-	    }
+    @Autowired
+    public TableController(TableService tableService) {
+        this.tableService = tableService;
+    }
 
+//    @PostMapping("/filter")
+//    public ResponseEntity<List<Reservation>> filterTableData(@RequestBody Map<String, String> requestData) {
+//        String startDate = requestData.get("date");
+//        String selectedTime = requestData.get("startTime");
+//
+//        List<Reservation> reservations = tableService.filterTableData(startDate, selectedTime);
+//
+//        return ResponseEntity.ok(reservations);
+//    }
 }
+

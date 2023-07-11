@@ -50,7 +50,7 @@ function addProduct() {
 			cost: productCost,
 			description: productDescription,
 			FK_categoryId: "1",
-			picture: base64Image,
+			imageBase64: base64Image,
 		};
 		console.log('${pageContext.request.contextPath}');
 		console.log(productData);
@@ -71,6 +71,7 @@ function addProduct() {
 				//			alert('新增成功！');
 			},
 			error: function(xhr, error) {
+							alert('新增失敗！');
 				console.log('產品保存失敗:');
 				console.log('狀態碼:', xhr.status);
 				console.log('錯誤訊息:', error);
@@ -198,6 +199,8 @@ function typesave(event) {
 			console.log('錯誤訊息:', error);
 		}
 	});
+	let modal = document.getElementById("myType");
+	modal.style.display = "none";
 }
 
 //==========================/新增產品種類

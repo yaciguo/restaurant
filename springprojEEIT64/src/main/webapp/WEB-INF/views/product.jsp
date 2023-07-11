@@ -78,7 +78,6 @@
 
 <body>
 	<!-- 左側導覽列 -->
-	<%@ include file="sideNav.jsp"%>
 	<!-- 主要內容區域 -->
 	<div id="main-content" class="main-content">
 		<!-- 上方列按鈕-->
@@ -102,7 +101,7 @@
 						<td>餐點名稱</td>
 						<td>餐點價格</td>
 						<td>餐點成本</td>
-<!-- 						<td>餐點描述</td> -->
+						<td>餐點描述</td>
 						<td>餐點狀態</td>
 					</tr>
 				</thead>
@@ -112,9 +111,9 @@
 					<tr class="tr-title">
 						<td>${item.id}</td>
 						<td>${item.name}</td>
-						<!-- <td>${item.price}</td> -->
+						<td>${item.price}</td>
 						<td>${item.cost}</td>
-<%-- 						<td>${item.description}</td> --%>
+						<td>${item.description}</td>
 						<td>${item.status}</td>
 						<%-- 						<td><c:forEach var="activity" items="${item.activityBean}"> --%>
 						<%--        	 					${activity.name}</c:forEach></td> --%>
@@ -139,10 +138,10 @@
 							<select id="category-select" required="required">								
 							</select>
 						</div>
-						<!-- <div class="py-4">
+						<div class="py-4">
 							<span><B>新增餐點圖：</B></span> <input type="file" accept=".jpg, .png"
 								id="fdpictureInput">
-						</div> -->
+						</div>
 						<div class="addproduct-detail">
 							<strong>餐點名稱：</strong> <input type="text" id="add-name" required>
 						</div>
@@ -156,6 +155,7 @@
 							<strong>餐點描述：</strong> <input type="text" id="add-description"
 								required>
 						</div>
+						
 					</div>
 					<div class="modal-footer justify-content-center">
 						<button type="button" class="btn btn-secondary px-5 py-2 mx-4"

@@ -37,7 +37,7 @@ import com.ispan.eeit64.validator.OpeningHourValidator;
 
 @Controller
 @RequestMapping("/basicSettings.api")
-public class BasicSettingsController {    
+public class basicSettingsController {    
     @Autowired
     OpeningHourServiceImpl openingHourService;
     @Autowired
