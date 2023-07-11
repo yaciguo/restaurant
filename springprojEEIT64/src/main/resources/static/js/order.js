@@ -41,39 +41,47 @@ var csrfToken;
 		        initialize(urlAddress);				
 			} 
 		})
+
 		
-		  // 按下更新鍵
-		  $('#order-statechoose-refresh').click(function() {
-		    var selectedOrders = [];
-		    $('.orders-table tbody tr').each(function() {
-		      const checkbox = $(this).find('input[type="checkbox"]');
-		      if (checkbox.prop('checked')) {
-		        var id = $(this).find('td:nth-child(2)').text();				
-		        var orderStatus = $('#form-select1 option:selected').val();
-		        var note = $('#form-control1').val();	
-		        selectedOrders.push({ "id": id, "orderStatus": orderStatus, "note":note});		    	        
-		      }
-		      
-		    }); 
-		    	console.log(selectedOrders);
-		      
-		    $.ajax({
-				  url: contextPath + '/orders/orderId',
-				  type: 'PUT',
-				  contentType: 'application/json',
-				  data: JSON.stringify(selectedOrders),      
-				  beforeSend: function(xhr) {
-            	  	xhr.setRequestHeader(csrfHeaderName, csrfToken);
-            	  },
-				  success: function(response) {
-					console.log("OK")
-					
-				  },
-				  error: function(error) {
-					console.log("Not OK")
-				  }
-				});
+		$('#order-statechoose-refresh').click(async function() {
+		  var selectedOrders = [];
+		  $('.orders-table tbody tr').each(function() {
+		    const checkbox = $(this).find('input[type="checkbox"]');
+		    if (checkbox.prop('checked')) {
+		      var id = $(this).find('td:nth-child(2)').text();
+		      var orderStatus = $('#form-select1 option:selected').val();
+		      var note = $('#form-control1').val();
+		      selectedOrders.push({ "id": id, "orderStatus": orderStatus, "note": note });
+		
+		      var requestUrl = contextPath + '/orders/orderId';
+		      var requestUrl2 = contextPath + '/orders/orderId/' + id;
+		
+		      $.ajax({
+		        url: requestUrl,
+		        type: 'PUT',
+		        contentType: 'application/json',
+		        data: JSON.stringify(selectedOrders),
+		        beforeSend: function(xhr) {
+		          xhr.setRequestHeader(csrfHeaderName, csrfToken);
+		        },
+		        success: function(response) {
+		          console.log("OK");
+		          $('#modal-title').html('<span class="modal-icon text-success"><i class="fas fa-check-circle"></i></span> 訂單記錄更新成功');
+		          $('#success-modal').modal('show');
+		          console.log("----");
+		          console.log(requestUrl2);
+		          initialize(requestUrl2);
+		        },
+		        error: function(error) {
+		          console.log("Not OK");
+		          $('#modal-title').html('<span class="modal-icon text-danger"><i class="fas fa-times-circle"></i></span> 訂單記錄更新失敗');
+		          $('#success-modal').modal('show');
+		          initialize(orderIndex);
+		        }
+		      });
+		    }
 		  });
+		});
 		     
 		//清除button
 		$("#order-search-clear").click(function() {
@@ -142,8 +150,11 @@ var csrfToken;
 		var myselect = $(".form-select").val();
 		$('#search-placeholder').attr('placeholder', '請輸入' + myselect);	
 	}
+
 	
 	function initialize(urlAddress) {
+		console.log(urlAddress)
+		
 		$.ajax({
 			url: urlAddress,
 			type: 'GET',
@@ -152,16 +163,13 @@ var csrfToken;
     	  	   xhr.setRequestHeader(csrfHeaderName, csrfToken);
     	    },
 			success: function(data) {
-				console.log(data);
-				console.log(data['content'].length)
 				let tableHtml = '';
 		        let tbody = $("#orderData-tbody");
 		        tbody.empty();
-			
+		        		
 				if ( data.numberOfElements > 0 ) {
 					for (var i = 0; i < data['content'].length; i++) {
 						var orderData = data['content'][i];
-						console.log(data['content'][i].id);
 						
 						//判斷單別、電話/桌號
 						var orderType = '';
@@ -176,6 +184,8 @@ var csrfToken;
 						
 						//活動
 						var activityBeanType = '';
+						var activityBeandiscount = '';
+						var activityBeandishBeanname = '';
 						if (orderData.activityBean != null){
 							if (orderData.activityBean.type == 'discount') {
 								activityBeanType = '折扣';
@@ -232,7 +242,7 @@ var csrfToken;
 			                                <td id="type-cell">${orderType}</td>
 			                                <td id="phone-cell">${orderPhone}</td>
 			                                <td id="time-cell">${orderData.pickTime}</td>
-											<td id="items-cell">${orderDetailsHtml}</td>
+											<td id="items-cell" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 10px;  max-width: 175px;">${orderDetailsHtml}</td>
 			                                <td id="price-cell">${orderData.amount}</td>
 			                                <td id="picktime-cell">${orderData.phone}</td>
 			                                <td id="statusO-cell">${orderStatus}</td>
@@ -247,15 +257,41 @@ var csrfToken;
 					tableHtml += `<tr><td colspan="10" id="id-cell">目前無相對應資料</td></tr>`;
 				}
 					tbody.append(tableHtml);
+				
+//
+//		        let pageHtml = '';
+//		        let pagebody = $("#paidPagination");
+//		        pagebody.empty();
+//		        
+//		        	console.log(urlAddress)
+//		        	
+//				  if (data['totalPages'] > 1) {
+//					  let newUrlAddress = '';
+//					  
+//				    pageHtml += `<li id="prevpgbutton" onclick="initialize('${newUrlAddress}')">&laquo;</li>`;
+//				    for (let i = 1; i <= data.totalPages; i++) {
+//						newUrlAddress = `${urlAddress}?pageNumber=${i - 1}`;
+//				        pageHtml += `<li class="pagebutton" onclick="initialize('${newUrlAddress}')">${i}</li>`;
+//
+//				    }
+//				    pageHtml += `<li id="prevpgbutton" onclick="initialize('${urlAddress}')">&raquo;</li>`;
+//				  } else {
+//				    pageHtml += `
+//				      <li id="prevpgbutton">&laquo;</li>
+//				      <li class="pagebutton active">1</li>
+//				      <li id="nextpgbutton">&raquo;</li>`;
+//  
+//				}	
+//				pagebody.html(pageHtml);
+				
 			},
 			error: function(error) {
 				console.log(error);
 			}
 		});
 	}
-	
 
-	
+
 	//按下訂單產生互動視窗     
 	function openModal(row) {
 		var orderId = row.querySelector('#id-cell').textContent;
