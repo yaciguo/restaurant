@@ -50,6 +50,7 @@
 //			OrderDetailBean odBean = new OrderDetailBean(dishBean, elementCountMap.get(id));
 //			dBeans.add(odBean);
 //		}
+
 //		
 ////		OrderBean oBean = new OrderBean("type", new Date(), new Timestamp(System.currentTimeMillis()), 1000, "Status",
 ////				"note", "customer", "phone", dBeans);
@@ -125,3 +126,4 @@
 //	}
 //
 //}
+

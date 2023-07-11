@@ -25,6 +25,9 @@
     <!-- chart -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
+    <!-- fontAwesome - icon插件 -->
+    <link href="./assets/src/plugins/fontawesome/css/all.min.css" rel="stylesheet">
+
 </head>
 
 <style>
@@ -162,10 +165,25 @@
                                         <h5 class="text-on-pannel text-primary"><strong class="text-uppercase"> 圖表模式
                                             </strong>
                                         </h5>
-                                        <div id="data-style-div" class="d-flex mb-2" style="height: 120px;">
-                                            <img src="<c:url value='/images/bar_chart.png' />" id="bar-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
-                                            <img src="<c:url value='/images/line_chart.png' />" id="line-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
-                                            <img src="<c:url value='/images/pie_chart.png' />" id="pie-chart-btn" type="button" class="btn btn-primary flex-fill data-style-btn me-1 p-0">
+                                        <div id="data-style-div" class="col d-flex mb-2" style="height: 120px;">
+                                            <div id="bar-chart-btn" class="col-4 d-flex">
+                                                <input type="radio" class="btn-check" name="chart-btnradio" id="bar-chart-input" autocomplete="off" value="bar" checked>
+                                                <label class="btn btn-outline-primary flex-fill data-style-btn me-1 p-0" for="bar-chart-input">
+                                                    <img src="<c:url value='/images/bar_chart.png' />" id="bar-chart-img" class="data-chart-img">
+                                                </label>
+                                            </div>                                            
+                                            <div id="line-chart-btn" class="col-4 d-flex">
+                                                <input type="radio" class="btn-check" name="chart-btnradio" id="line-chart-input" autocomplete="off" value="line">
+                                                <label class="btn btn-outline-primary flex-fill data-style-btn me-1 p-0" for="line-chart-input">
+                                                    <img src="<c:url value='/images/line_chart.png' />" id="line-chart-img" class="data-chart-img">
+                                                </label>
+                                            </div>
+                                            <div id="pie-chart-btn" class="col-4 d-flex">
+                                                <input type="radio" class="btn-check" name="chart-btnradio" id="pie-chart-input" autocomplete="off" value="pie">
+                                                <label class="btn btn-outline-primary flex-fill data-style-btn me-1 p-0" for="pie-chart-input">
+                                                    <img src="<c:url value='/images/pie_chart.png' />" id="pie-chart-img" class="data-chart-img">
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -209,7 +227,7 @@
                                         <div class="row text-nowrap">
                                             <div class="mb-1 btn-label">數據內容：</div>
                                             <div class="col mb-1">
-                                                <select class="form-select">
+                                                <select class="form-select" id="chart-data-select">
                                                     <option value="1">銷售數量</option>
                                                     <option value="2">銷售佔比</option>
                                                     <option value="3">銷售額</option>
@@ -219,7 +237,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="row text-nowrap mb-3">
+                                        <div class="row text-nowrap mb-3" id="chart-target-select">
                                             <div class="mb-1 btn-label">對比內容：</div>
                                             <div class="col">
                                                 <select class="form-select">
@@ -232,7 +250,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row g-2 mb-2 panel scheduler-border">
+                                        <div id="select-target-div" class="row g-2 mb-2 panel scheduler-border">
                                             <div class="col panel-body">
                                                 <h5 class="text-on-pannel text-primary">
                                                     <strong class="text-uppercase me-1">對比項目</strong>
@@ -259,7 +277,6 @@
                     </div>
                 </div>
                 <div id="ChartDiv" class="col col-md-7">
-                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
