@@ -153,12 +153,13 @@ function getModalTargetCheckedIds(){
 }
 
 async function getData(){
-	let condition = {
-		"method":parseInt($("#chart-target-select").find(":selected").val()),
-		"startDate" : $("#startdate").val(),
-		"endDate" : $("#enddate").val()
-	};
-    console.log(condition)
+    let condition = {
+        "method":parseInt($("#chart-target-select").find(":selected").val()),
+        "value_type":parseInt($("#chart-data-select").find(":selected").val()),
+        "startDate" : $("#startdate").val(),
+        "endDate" : $("#enddate").val()
+    };
+    
     if(["1", "2"].includes($("#chart-target-select").find(":selected").val())){
         condition.ids = []
         $("#target-items-div div").each((idx, el)=>{
@@ -167,25 +168,25 @@ async function getData(){
     }
     let response = await $.ajax({
         type: "post",
-        url: contextPath + "/dataAnalysis.api/getProfit",
-		contentType: "application/json",
-		data: JSON.stringify(condition),
-		beforeSend: function (xhr) {
-			xhr.setRequestHeader(header, token);
-		}
+        url: contextPath + "/dataAnalysis.api/getData",
+        contentType: "application/json",
+        data: JSON.stringify(condition),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        }
     })
     let chartType = $('input[name="chart-btnradio"]:checked').val();
     let dataTypeName = $("#chart-data-select").find(":selected").html();
-	setChart($("#ChartDiv"), chartType, dataTypeName, response.data);
+    setChart($("#ChartDiv"), chartType, dataTypeName, response.data);
 }
 
 function setChart(element, chartType, dataTypeName, data){
-	let labels = [];
-	let dataValues = [];
-	data.forEach((obj)=>{
-		labels.push(obj.target);
-		dataValues.push(obj.value);
-	})
+    let labels = [];
+    let dataValues = [];
+    data.forEach((obj)=>{
+        labels.push(obj.target);
+        dataValues.push(obj.value);
+    })
     element.empty();
     element.append('<canvas id="myChart"></canvas>');
     new Chart($("#myChart"), {
@@ -249,9 +250,9 @@ $(function(){
         $('#compareItemsDiv').modal('hide');
     })
 
-	$("#chart-generation-btm").click(()=>{
-		getData();
-	})
+    $("#chart-generation-btn").click(()=>{
+        getData();
+    })
 
     $("#chart-target-select").change(function() {
         switch($(this).find(":selected").val()){

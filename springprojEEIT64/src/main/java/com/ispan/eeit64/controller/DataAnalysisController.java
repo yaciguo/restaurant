@@ -25,33 +25,7 @@ import com.ispan.eeit64.service.impl.DataAnalysisServiceImpl;
 public class DataAnalysisController {	
 	@Autowired
 	DataAnalysisServiceImpl service;
-//	@GetMapping("/dataAnalysis.api/CategoryAndDish")
-//	public @ResponseBody List<Object> getCategoryAndDishName(){
-//		List<Object> list = new ArrayList<>();
-//		List<DishJson> json = new ArrayList<>();
-//		String jsonStr = ReadJson.getJsonFileString("/static/assets/json/menu.json");
-//		if(jsonStr != null) {
-//			json = new Gson().fromJson(jsonStr, new TypeToken<List<DishJson>>() {}.getType());
-//		}
-//		
-//		
-//		List<String> checkList = new ArrayList<>();
-//		Map<Integer, String> categoryMap = new HashMap<>();
-//		Map<Integer, Map> categoryDishMap = new HashMap<>();
-//		
-//		Integer categoryId = 0;
-//		for(DishJson dish:json) {
-//			if(categoryMap.values().contains(dish.category) == false) {
-//				categoryMap.put(categoryId, dish.category);
-//				categoryDishMap.put(categoryId++, new HashMap<>());
-//			}
-//			categoryDishMap.get(categoryId-1).put(dish.id, dish.name);
-//		}
-//		list.add(categoryMap);
-//		list.add(categoryDishMap); 
-//		 
-//		return list;
-//	}
+
 	@GetMapping("/getCategoryAndDish")
 	public @ResponseBody APIResult getCategoryAndDish(){
 		APIResult apiResult = new APIResult();
@@ -60,6 +34,7 @@ public class DataAnalysisController {
 		apiResult.setMsg("成功提取資料");
 		return apiResult;
 	}
+	
 	@GetMapping("/getCategory")
 	public @ResponseBody APIResult getCategory(){
 		APIResult apiResult = new APIResult();
@@ -68,7 +43,6 @@ public class DataAnalysisController {
 		apiResult.setMsg("成功提取資料");
 		return apiResult;
 	}
-
 	
 	@PostMapping("/getData")
 	public @ResponseBody APIResult  getData(
@@ -84,11 +58,27 @@ public class DataAnalysisController {
 		}
 		Date startDate = ymd.parse((String)condition.get("startDate"));
 		Date endDate = ymd.parse((String)condition.get("endDate"));
-		
-		APIResult apiResult = new APIResult();
-
-		System.out.println("getProfit");		
+				
+		System.out.println("++++++++++getData");		
 		List<Map<String,Object>> data = service.getData(method, value_type, ids, startDate, endDate);
+
+		APIResult apiResult = new APIResult();
+		apiResult.setData(data);
+		apiResult.setCode(StatusCode.SUCCESS);
+		apiResult.setMsg("成功提取資料");
+		return apiResult;
+	}
+	
+	@PostMapping("/getAllData")
+	public @ResponseBody APIResult  getAllData(
+		@RequestBody Map<String, Object> condition
+		) throws ParseException {	
+		SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = ymd.parse((String)condition.get("startDate"));
+		Date endDate = ymd.parse((String)condition.get("endDate"));
+
+		Map<String, List<Map<String, Object>>> data = service.getAllData(startDate, endDate);
+		APIResult apiResult = new APIResult();
 		apiResult.setData(data);
 		apiResult.setCode(StatusCode.SUCCESS);
 		apiResult.setMsg("成功提取資料");
