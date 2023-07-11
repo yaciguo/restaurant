@@ -223,10 +223,11 @@ public class fakeDataInit {
         List<DishJson> json = getJson("/static/assets/json/dish.json", DishJson.class);
         
         for (DishJson jsonBean : json) {
-            Optional<CategoryBean> cbeanOptional = categoryDao.findById(jsonBean.category);
+            Optional<CategoryBean> cbeanOptional = categoryDao.findById(jsonBean.category+1);
             CategoryBean cbean = cbeanOptional.get();
             DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "/images/dumpling.png", jsonBean.description, "Y");
 
+            System.out.println(456);
             dishDao.save(bean);
         }
     }

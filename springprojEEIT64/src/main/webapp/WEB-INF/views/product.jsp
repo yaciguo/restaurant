@@ -138,10 +138,10 @@
 							<select id="category-select" required="required">								
 							</select>
 						</div>
-						<!-- <div class="py-4">
+						<div class="py-4">
 							<span><B>新增餐點圖：</B></span> <input type="file" accept=".jpg, .png"
 								id="fdpictureInput">
-						</div> -->
+						</div>
 						<div class="addproduct-detail">
 							<strong>餐點名稱：</strong> <input type="text" id="add-name" required>
 						</div>
@@ -155,6 +155,7 @@
 							<strong>餐點描述：</strong> <input type="text" id="add-description"
 								required>
 						</div>
+						
 					</div>
 					<div class="modal-footer justify-content-center">
 						<button type="button" class="btn btn-secondary px-5 py-2 mx-4"
