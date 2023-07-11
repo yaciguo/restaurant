@@ -15,6 +15,45 @@ $(document).ready(function() {
   setDatepicker(startdate_input);
 });
 
+//===========================================以下連線給後端
+//日期時間傳送到後端進行篩選
+// 監聽日期輸入框的值變化事件
+document.getElementById("startdate").addEventListener("change", function() {
+  filterData();
+});
+
+// 監聽時間選擇框的值變化事件ㄋ
+document.getElementById("selectTime").addEventListener("change", function() {
+  filterData();
+});
+
+// 篩選資料函式
+function filterData() {
+  // 獲取日期和時間的值
+  var startDate = document.getElementById("startdate").value;
+  var selectedTime = document.getElementById("selectTime").value;
+
+  // 使用Ajax發送請求到後端
+  $.ajax({
+    url: contextPath+"/filter",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({
+      startDate: startDate,
+      selectedTime: selectedTime
+    }),
+    success: function() {
+      // 在此處理後端回傳的資料
+      console.log('success測試成功:');
+    },
+    error: function(error) {
+      // 處理錯誤
+      console.log(error);
+    }
+  });
+}
+
+
 
 //==================================假功能
 //選擇時間後 桌位變成藍色
