@@ -159,7 +159,7 @@ element.style {
 	transform: translate(-50%, -50%);
 	padding: 10px;
 	border: 1px solid #888;
-	width: 500px;
+	width: 550px;
 	/* 	display: none; */
 	border-radius: 10px; /* 添加圓角效果 */
 	display: flex;

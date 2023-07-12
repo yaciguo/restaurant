@@ -103,7 +103,7 @@
                         <c:forEach var="order" items="${orderList}">
                           <tr>
                             <th>成立時間</th>
-                            <td>${order.orderTime}</td>
+                            <td>2023-07-12</td>
                           </tr>
                           <tr>
                             <th>應付金額</th>

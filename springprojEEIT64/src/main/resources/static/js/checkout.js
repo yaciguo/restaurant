@@ -151,7 +151,11 @@ function generatePagination(type, totalPages, currentPage){
 	htmlContent += '<li class="page-item"><a class="page-link" onclick="changePage(\'' + type + '\', \'prev\', ' + totalPages + ', ' + currentPage + ')">&laquo;</a></li>';
 	
 	var startPage = Math.max(1, currentPage - 2);
-	var endPage = Math.min(totalPages, startPage + 4);
+	var endPage = Math.min(totalPages, currentPage + 2);
+	
+	if (endPage - startPage < 4) {
+	  endPage = Math.min(totalPages, startPage + 4);
+	}
 	
 	
 	for (var i = startPage; i <= endPage; i++) {

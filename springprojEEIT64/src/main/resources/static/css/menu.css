@@ -52,7 +52,7 @@ button:hover {
 
 .box {
     /*     display: inline-block; */
-    flex-basis: calc(100% /7);
+    flex-basis: calc(100% /8);
     /*   margin-right: 5px; 元素之间的间距 */
 
 

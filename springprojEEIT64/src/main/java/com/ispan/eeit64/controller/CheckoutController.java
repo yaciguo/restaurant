@@ -61,7 +61,7 @@ public class CheckoutController {
 											@RequestParam(defaultValue = "4") int pageSize) {
 		
 		Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
-		Page<CheckoutBean> allPaidCheckout =checkoutRepository.findByPayStatus("Y", pageable);
+		Page<CheckoutBean> allPaidCheckout =checkoutRepository.findByPayStatusOrderByPayTimeDesc("Y", pageable);
 		
 	    return allPaidCheckout;
 	}

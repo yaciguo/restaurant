@@ -263,7 +263,7 @@
         <!-- opening hour tab -->
         <div id="opening-setting-div" class="container-fluid tab-pane fade">
             <div class="row col-10 offset-1 pt-3">
-                <div class="col-4 text-nowrap">
+                <div class="col-5 text-nowrap">
                     <div class="row px-2">
                         <div class="panel-body panel scheduler-border pb-2">
                             <h5 class="text-on-pannel ">
@@ -276,7 +276,7 @@
                                             <thead class="data">
                                                 <tr class="data">
                                                     <th class="checkbox-td">勾選</th>
-                                                    <th class="table_Time">星期幾</th>
+                                                    <th class="table_Time">星期</th>
                                                     <th class="targetItem">營業時間</th>
                                                     <th class="data"></th>
                                                     <th class="data">刪除</th>
@@ -334,7 +334,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8 text-nowrap">
+                <div class="col-7 text-nowrap">
                     <div class="row ps-2 pe-3 ">
                         <div class="panel-body panel scheduler-border pb-2 ">
                             <h5 class="text-on-pannel">

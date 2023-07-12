@@ -53,7 +53,7 @@ function addProduct() {
 			price: productPrice,
 			cost: productCost,
 			description: productDescription,
-			FK_categoryId: "1",
+			FK_categoryId: "8",
 			imageBase64: base64Image,
 		};
 		console.log('${pageContext.request.contextPath}');

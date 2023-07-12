@@ -213,19 +213,19 @@
                                                     <button id="this-day-btn" type="button" class="btn btn-primary flex-fill">當日</button>
                                                 </div>
                                             </div>
-                                            <div class="row text-nowrap mb-1">
+                                            <div class="row text-nowrap mb-1 px-0">
                                                 <div class="col">
                                                     <label
                                                         class=" d-flex justify-content-center align-items-center">結束時間</label>
                                                     <input class="form-control" id="startdate" name="startdate"
-                                                        placeholder='yyyy-mm-dd' type="text" />
+                                                        placeholder='yyyy-mm-dd' type="text" style="font-size:15px" />
                                                 </div>
-                                                <div style="width:10%;font-size: large;">~</div>
+                                                <div style="width:5%;font-size: large;">~</div>
                                                 <div class="col">
                                                     <label
                                                         class=" d-flex justify-content-center align-items-center">結束時間</label>
                                                     <input class="form-control" id="enddate" name="enddate"
-                                                        placeholder='yyyy-mm-dd' type="text" />
+                                                        placeholder='yyyy-mm-dd' type="text" style="font-size:15px" />
                                                 </div>
                                             </div>
                                         </div>

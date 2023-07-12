@@ -66,7 +66,7 @@ public class OrderBean {
     @OneToOne(mappedBy = "orderBean", cascade = {CascadeType.ALL})
     private OrderRecordBean orderRecordBean;
     
-	@OneToMany(mappedBy = "orderBean", fetch = FetchType.EAGER, cascade = {
+	@OneToMany(mappedBy = "orderBean", fetch = FetchType.LAZY, cascade = {
 			CascadeType.ALL}, orphanRemoval = false)
 	@JsonManagedReference
 	private Set<OrderDetailBean> orderDetailBean = new LinkedHashSet<>();
