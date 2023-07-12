@@ -32,6 +32,14 @@
 
 </head>
 
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="客服小幫手"
+  agent-id="7e5cb99d-89c5-4d61-bbd0-9a3d6d61b9ba"
+  language-code="zh-tw"
+></df-messenger>
+
 <body>
 	<!-- 導覽列 -->
 	<%@ include file="nav.jsp" %>

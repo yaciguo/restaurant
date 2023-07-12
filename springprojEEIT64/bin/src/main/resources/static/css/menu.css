@@ -24,39 +24,52 @@ button:hover {
 #container-intro {
 
     background-color: wheat;
-
     padding: 10px;
     color: black;
     font-size: 20px;
 }
 
+/* 今日營業時間*/
+#openingHoursDiv p {
+    display: inline;
+    padding-right: 1px;
+
+}
+
+
 #categoryButtons {
-/*   display: grid; */
-/*   grid-auto-flow: column; 水平排列 */
-/*   grid-gap: 5px; 设置元素之间的间距 */
-display: flex;
-  flex-wrap: wrap; /* 自动换行 */
-  justify-content: flex-start; /* 左对齐 */
-  align-items: flex-start; /* 顶部对齐 */
+    /*   display: grid; */
+    /*   grid-auto-flow: column; 水平排列 */
+    /*   grid-gap: 5px; 设置元素之间的间距 */
+    display: flex;
+    flex-wrap: wrap;
+    /* 自动换行 */
+    justify-content: flex-start;
+    /* 左对齐 */
+    align-items: flex-start;
+    /* 顶部对齐 */
 }
 
 .box {
-/*     display: inline-block; */
-flex-basis: calc(100% /7); 
-/*   margin-right: 5px; 元素之间的间距 */
-	
-}
-@media (max-width: 767px) {
-  .box {
-    flex-basis: calc(100% / 6); /* 在较小的视窗下，每行显示6个元素 */
-  }
+    /*     display: inline-block; */
+    flex-basis: calc(100% /7);
+    /*   margin-right: 5px; 元素之间的间距 */
+
+
 }
 
-#restInfo{
-	border-radius: 10px;
+@media (max-width: 767px) {
+    .box {
+        flex-basis: calc(100% / 6);
+        /* 在较小的视窗下，每行显示6个元素 */
+    }
+}
+
+#restInfo {
+    border-radius: 10px;
     border: none;
     background-color: rgb(239, 164, 84);
-    font-size: 30px; 
+    font-size: 30px;
     color: white;
 }
 
@@ -64,6 +77,7 @@ flex-basis: calc(100% /7);
 .btsort {
     font-size: 20px;
     color: white;
+    font-weight: 700;
 }
 
 /*按鈕*/
@@ -78,7 +92,12 @@ flex-basis: calc(100% /7);
     border-radius: 50%;
     color: white;
     background-color: rgb(249, 199, 50);
-    font-weight: bolder;
+    font-weight: 900;
+    font-size: 27px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding: 2px;
 }
 
 
@@ -102,7 +121,6 @@ flex-basis: calc(100% /7);
     cursor: pointer;
 }
 
-.shopping {}
 
 .shopping span {
     background: red;
@@ -143,6 +161,41 @@ flex-basis: calc(100% /7);
 .tableRow {
     background-color: #f2f6f7;
     box-shadow: 0 10px 20px #dde1e1;
+}
+
+
+
+.tableRow:not(.noHover):hover {
+    background-color: #FDF5E6;
+    transition: background-color 0.3s ease;
+    transform: translateY(-4px);
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.soldOutBackground {
+    background-color: rgb(196, 201, 201);
+    box-shadow: 0 10px 20px #dde1e1;
+}
+
+.tdStatus {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 2px 5px
+}
+
+.categoryRow td span {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 7px 10px;
+    font-weight: 700;
+
 }
 
 /*

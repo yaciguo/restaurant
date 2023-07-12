@@ -1,0 +1,101 @@
+
+    body {
+        background-color: #EEE;
+    }
+
+    .main-content {
+        min-width: 580px;
+        margin: 20px 20px 20px calc(60px + 20px);
+        padding: 15px;
+        transition: margin-left 0.3s ease-in-out;
+        background-color: #FFF;
+        border-radius: var(--main-radius);
+    }
+
+    .main-content.active {
+        margin-left: 180px;
+    }
+    
+	#item-cell {
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  text-align: left;
+	}	
+	
+    .orders-link {
+        font-size: 1.25rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: var(--main-color) !important;
+    }
+
+    .activity-banner i,
+    .activity-table i {
+        color: red;
+        font-size: 1.75em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .orders-detail {
+        margin: 0.5rem;
+        padding: 1rem;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .orders-detail input {
+        border: none;
+        border-bottom: 1px solid black;
+    }
+
+    .orders-table {
+        border-collapse: collapse;
+        width: 100%;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .orders-table tr:hover {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .orders-table th,
+    td {
+        padding: 20px 10px;
+        text-align: center;
+        vertical-align: middle;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .orders-table th {
+        background-color: #f2f2f2;
+    }
+
+    .orders-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .order-search{
+        display: inline-flex;
+    }
+
+    .order-search button{
+        background-color: pink;
+    }
+
+
+    .order-statechoose{
+        display: inline-flex;
+    }
+
+/*這個在留意是否蓋到別人*/
+    li {  
+        padding-top: 2px;
+        list-style: none;
+    }
+
+    .fa-circle-down {
+        font-size:40px;
+        color:orange;
+    }
