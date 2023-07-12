@@ -141,14 +141,10 @@ function generatePagination(type, totalPages, currentPage){
 	var htmlContent = '';
 	htmlContent += '<li class="page-item"><a class="page-link" onclick="changePage(\'' + type + '\', \'prev\', ' + totalPages + ', ' + currentPage + ')">&laquo;</a></li>';
 	for (var i = 1; i <= totalPages; i++) {
-		if (i == currentPage) {
-		    htmlContent += '<li class="page-item active"><a class="page-link" onclick="';
-		    htmlContent += (type === 'paid') ? 'loadPaidData("paid")' : 'loadUnpaidData(\'' + type + '\', ' + i + ')';
-		    htmlContent += '">' + i + '</a></li>';
+		if (i === currentPage) {
+		    htmlContent += `<li class="page-item active"><a class="page-link" onclick="${(type === 'paid') ? `loadPaidData('paid', ${i})` : `loadUnpaidData('${type}', ${i})`}">${i}</a></li>`;
 		} else {
-		    htmlContent += '<li class="page-item"><a class="page-link" onclick="';
-		    htmlContent += (type === 'paid') ? 'loadPaidData("paid")' : 'loadUnpaidData(\'' + type + '\', ' + i + ')';
-		    htmlContent += '">' + i + '</a></li>';
+		    htmlContent += `<li class="page-item"><a class="page-link" onclick="${(type === 'paid') ? `loadPaidData('paid', ${i})` : `loadUnpaidData('${type}', ${i})`}">${i}</a></li>`;
 		}
     }
 	htmlContent+='<li class="page-item"><a class="page-link" onclick="changePage(\'' + type + '\', \'next\', ' + totalPages + ', ' + currentPage + ')">&raquo;</a></li>';
