@@ -46,7 +46,6 @@ public class HomeController {
 	public String activity() {
 		return "activity";
 	}
-
 	@GetMapping("/checkout")
 	public String checkout() {
 		return "checkout";
@@ -116,6 +115,16 @@ public class HomeController {
 	public String dataAnalysis() {
 	    return "dataAnalysis";
 	}
+	@GetMapping("/table")
+	public String table() {
+		return "table";
+	}
+
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
+
 	
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", required = false) String visitor, Model model) {

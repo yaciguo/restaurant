@@ -78,6 +78,7 @@
 							</select></li>
 	
 							<li class="order-statechoose"><select class="form-select" id="form-select1">
+									<option>訂單成立</option>
 									<option>訂單準備中</option>
 									<option>訂單完成</option>
 									<option>訂單取消</option>
@@ -180,10 +181,33 @@
 						<tbody id="orderData-tbody">
 	
 						</tbody>
+												
 					</table>
+							<nav>
+								<ul class="pagination justify-content-center mt-4"	id="paidPagination">
+		
+								</ul>
+							</nav>
 				</div>
 			</div>
 	
+	
+			<!-- 顯示成功模态框 -->
+				<div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+						<div class="modal-title text-center d-block mx-auto" id="modal-title"></div>
+				      </div>
+				      <div class="modal-body">
+				        <div class="text-center">
+				         	<button type="button" class="btn btn-primary px-3 py-1 mx-2" data-bs-dismiss="modal">確認</button>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			
 			<!-- 互動視窗 - 訂單明細 -->
 			<div class="modal" id="orders-modal" tabindex="-1"
 				aria-labelledby="orders-modalLabel" aria-hidden="true">

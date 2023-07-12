@@ -10,7 +10,7 @@
     <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
     <!-- Include Date Range Picker -->
     <!-- <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        src="https://cdnjs.cloudflare.com/ajax/libs/boㄌotstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" /> -->
 
@@ -36,7 +36,7 @@
     }
 
     div.scheduler-border {
-        border: 1px groove #4070ff !important;
+        border: 1px groove #444444 !important;
         box-shadow: 0px 0px 0px 0px #000;
     }
 
@@ -47,7 +47,7 @@
         padding: 3px 5px;
         position: absolute;
         margin-top: -49px;
-        border: 1px solid #337ab7;
+        border: 1px solid #444444;
         border-radius: 8px;
     }
 
@@ -164,15 +164,34 @@
         max-height: 600px;
         overflow: auto;
     }
+    
+    li {  
+        padding-top: 2px;
+        list-style: none;
+    }
+
+    .li-link {
+        font-size: 1.25rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: var(--main-color) !important;
+    }
+
+    .accordion-class{
+        border-radius: 10rem;
+        border: 1px solid #007ea1;
+    }
+
+
 </style>
 
 <body>
 
     <!-- 主要內容區域 -->
     <ul class="nav nav-tabs" id="activity-tabs">
-        <li class="nav-item"><a class="activity-link nav-link active" data-bs-toggle="tab"
+        <li class="nav-item"><a class="activity-link nav-link active li-link " data-bs-toggle="tab"
                 href="#basic-setting-div">基本設定</a></li>
-        <li class="nav-item"><a class="activity-link nav-link" data-bs-toggle="tab"
+        <li class="nav-item"><a class="activity-link nav-link li-link " data-bs-toggle="tab"
                 href="#opening-setting-div">營業設定</a></li>
     </ul>
 
@@ -184,23 +203,26 @@
                 <div class="col-4 text-nowrap ">
                     <div class="m-2">
                         <div class="row mb-4 px-2 pb-2 pt-4 scheduler-border">
-                            <h5 class="text-on-pannel text-primary w-auto">
+                            <h5 class="text-on-pannel w-auto">
                                 <strong class="text-uppercase">店名設定</strong>
                             </h5>
-                            <input class="form-control  mb-2" type="text" />
+                            <input class="form-control  mb-2" type="text" id="shopName-input"/>
                             <div class="col offset-8 col-4" style=" text-align: right;">
-                                <button type="button" class="btn btn-primary ">確定</button>
+                                <button type="button" class="btn btn-primary " id="save-shopName-btn">確定</button>
                             </div>
                         </div>
                         <div class="row px-2 panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary w-auto">
+                            <h5 class="text-on-pannel w-auto">
                                 <strong class="text-uppercase">商標</strong>
                             </h5>
-                            <div class="col mb-2" style="height: 200px;background-color: aqua;">
-
+                            <div class="col mb-2" style="height: 200px;">
+                                <img id="image-preview" src="<c:url value='images\wait_load.png'/>" alt="Preview" style="height: 200px;">
                             </div>
                             <div class="col offset-8 col-4" style=" text-align: right;">
-                                <button type="button" class="btn btn-primary">上傳</button>
+                                <label class="btn btn-primary">
+                                    上傳
+                                    <input type="file" id="upload-logo-btn" hidden />
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -208,7 +230,7 @@
                 <div class="col-8 text-nowrap">
                     <div class="m-2">
                         <div class="row px-2 panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary w-auto">
+                            <h5 class="text-on-pannel w-auto">
                                 <strong class="text-uppercase">座位</strong>
                             </h5>
                             <div class="row mb-4 g-2 faq-body" id="seatButtonDiv">
@@ -235,96 +257,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-6 text-nowrap">
-                    <div class="row ps-2 pe-3">
-                        <div class="panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary">
-                                <strong class="text-uppercase">樣式</strong>
-                            </h5>
-                            <div class="row mb-4">
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-primary flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-success flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-danger flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-warning flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-info flex-fill p-0"></button>
-                                </div>
-                                <div class="col col-2 d-flex">
-                                    <button type="button"
-                                        class="style-set btn btn-light flex-fill p-0"></button>
-                                </div>
-                            </div>
-                            <div class="panel-body panel scheduler-border pb-2 px-2">
-                                <h5 class="text-on-pannel text-primary">
-                                    <strong class="text-uppercase">樣式預覽</strong>
-                                </h5>
-                                <div class="row">
-                                    <div class="col-3 d-flex">
-                                        <button class="btn btn-primary flex-fill">按鈕樣式</button>
-                                    </div>
-                                </div>
-                                <div class="row mb-1">
-                                    <div class="btn-group col-3 text-nowrap mt-3 mb-2" role="group"
-                                        aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="btnradio-style"
-                                            id="btnradio-style1" autocomplete="off" checked>
-                                        <label class="btn btn-outline-primary"
-                                            for="btnradio-style1">按鈕樣式</label>
-                                        <input type="radio" class="btn-check" name="btnradio-style"
-                                            id="btnradio-style2" autocomplete="off">
-                                        <label class="btn btn-outline-primary"
-                                            for="btnradio-style2">按鈕樣式</label>
-                                        <input type="radio" class="btn-check" name="btnradio-style"
-                                            id="btnradio-style3" autocomplete="off">
-                                        <label class="btn btn-outline-primary"
-                                            for="btnradio-style3">按鈕樣式</label>
-                                    </div>
-                                </div>
-                                <div class="row px-3 col-9">
-                                    <table class="table table-hover table-primary data">
-                                        <thead class="data">
-                                            <tr class="data">
-                                                <th class="data">表格標題</th>
-                                                <th class="data">表格標題</th>
-                                                <th class="data">表格標題</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="data faq-body" style="height: 100px;">
-                                            <tr class="data">
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                            </tr>
-                                            <tr class="data">
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                            </tr>
-                                            <tr class="data">
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                                <td>表格內容</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
 
@@ -334,7 +266,7 @@
                 <div class="col-4 text-nowrap">
                     <div class="row px-2">
                         <div class="panel-body panel scheduler-border pb-2">
-                            <h5 class="text-on-pannel text-primary">
+                            <h5 class="text-on-pannel ">
                                 <strong class="text-uppercase">營業時間</strong>
                             </h5>
                             <div class="row me-1">
@@ -405,13 +337,13 @@
                 <div class="col-8 text-nowrap">
                     <div class="row ps-2 pe-3 ">
                         <div class="panel-body panel scheduler-border pb-2 ">
-                            <h5 class="text-on-pannel text-primary">
+                            <h5 class="text-on-pannel">
                                 <strong class="text-uppercase">特定休假</strong>
                             </h5>
                             <div class="accordion accordion-flush " id="accordionFlushExample">
                                 <div class="accordion-item ">
                                     <h2 class="accordion-header " id="flush-headingOne">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed accordion-class" type="button"
                                             data-bs-toggle="collapse"
                                             data-bs-target="#flush-collapseOne" aria-expanded="false"
                                             aria-controls="flush-collapseOne">
@@ -506,7 +438,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-headingTwo">
-                                        <button class="accordion-button collapsed" type="button"
+                                        <button class="accordion-button collapsed accordion-class" type="button"
                                             data-bs-toggle="collapse"
                                             data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                             aria-controls="flush-collapseTwo">

@@ -16,11 +16,10 @@ function setDatepicker(element) {
 
 function setStyleHeight() {
     let divHeight = $("#data-style-div").width()/3-5;
-    console.log($("#ChartDiv").width())
     $("#ChartDiv").css("height",$("#ChartDiv").width()*0.7)
 
     $("#data-style-div").height(divHeight)
-    $("img.data-style-btn").each((idx, el) => {
+    $("img.data-chart-img").each((idx, el) => {
         $(el).width(divHeight)
         $(el).height(divHeight)
     })
@@ -62,11 +61,9 @@ function setTargerItemsDiv(targetList) {
     $("#target-items-div").empty();
     for (let i = 0; i < targetList.length; i++) {
         let content = `
-                <div class="col-3">
-                    <div data-id = "${targetList[i].id}" class="p-1 border bg-light d-flex justify-content-center align-items-center">
-                        <label>${targetList[i].name}</label>
-                    </div>
-                </div>`;
+            <div data-id = "${targetList[i].id}" class="col-3 p-1 border bg-light d-flex justify-content-center align-items-center">
+                <label>${targetList[i].name}</label>
+            </div>`;
         $("#target-items-div").append(content);
     }
 }
@@ -74,20 +71,20 @@ function setTargerItemsDiv(targetList) {
 async function setTargerModal(){
 
     function setTargerModalItemsDiv(data, type) {
-        console.log(data)
         const TYPE_ID = type + data.id;
         $("#modal-dialog-body-div").append(`
-        <div id="target-modal-${TYPE_ID}">
+        <div id="target-modal-${TYPE_ID}" class="${type}-target-div target-item-div">
             <div class="row mb-1">
                 <button id="target-modal-${TYPE_ID}-btn" type="button" class="col col-md-3 btn btn-primary">${data.name}</button>
             </div>
             <div id="target-modal-${TYPE_ID}-items" class="row mb-3">
             </div>
         </div>`)
+
         data.items.forEach((item, idx) => {
             $(`#target-modal-${TYPE_ID}-items`).append(`
             <div class="col-md-3 form-check">
-                <input class="form-check-input ${TYPE_ID}-class" type="checkbox"
+                <input class="form-check-input ${TYPE_ID}-class target-item ${type}-target-item" type="checkbox"
                 data-id="${item.id}"
                 id="input-${TYPE_ID}-${item.id}">
                 <label class="form-check-label" for="input-${TYPE_ID}-${item.id}">${item.name}</label>
@@ -132,51 +129,73 @@ async function setTargerModal(){
     categoryAndDish.data.forEach((data) => {
         setTargerModalItemsDiv(data, "category");
     })
-
+    $("#chart-target-select").change();
 }
 
 function getModalTargetCheckedIds(){
     let result = [];
-    $("#modal-dialog-body-div").children().find("input").each((idx, el)=>{
-        let id = $(el).attr("id");
-        if($(`#${id}`).prop("checked") == true){
-            let obj = {
-                "id" : $(el).attr("data-id"),
-                "name" : $(`label[for="${id}"]`).html()
-            };
-            result.push(obj);    
+    $(".target-item-div").each(function(){
+        if($(this).css("display") != "none"){
+            $(this).find("input").each((idx, el)=>{
+                let id = $(el).attr("id");
+                
+                if($(`#${id}`).prop("checked") == true){
+                    let obj = {
+                        "id" : $(el).attr("data-id"),
+                        "name" : $(`label[for="${id}"]`).html()
+                    };
+                    result.push(obj);    
+                }
+            })
         }
     })
     return result;
 }
 
 async function getData(){
-	let condition = {
-		"method":1,
-		"ids" :[1,2,3,4],
-		"startDate" : "2023-06-01",
-		"endDate" : "2023-06-30"
-	};
+    let condition = {
+        "method":parseInt($("#chart-target-select").find(":selected").val()),
+        "value_type":parseInt($("#chart-data-select").find(":selected").val()),
+        "startDate" : $("#startdate").val(),
+        "endDate" : $("#enddate").val()
+    };
+    
+    if(["1", "2"].includes($("#chart-target-select").find(":selected").val())){
+        condition.ids = []
+        $("#target-items-div div").each((idx, el)=>{
+            condition.ids.push(parseInt($(el).attr("data-id")));
+        })
+    }
     let response = await $.ajax({
         type: "post",
-        url: contextPath + "/dataAnalysis.api/getProfit",
-		contentType: "application/json",
-		data: JSON.stringify(condition),
-		beforeSend: function (xhr) {
-			xhr.setRequestHeader(header, token);
-		}
+        url: contextPath + "/dataAnalysis.api/getData",
+        contentType: "application/json",
+        data: JSON.stringify(condition),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        }
     })
-	setChart($("#myChart"), 'bar', '銷售數量', response.data);
+    let chartType = $('input[name="chart-btnradio"]:checked').val();
+    let dataTypeName = $("#chart-data-select").find(":selected").html();
+    setChart($("#ChartDiv"), chartType, dataTypeName, response.data);
 }
 
 function setChart(element, chartType, dataTypeName, data){
-    new Chart(element, {
+    let labels = [];
+    let dataValues = [];
+    data.forEach((obj)=>{
+        labels.push(obj.target);
+        dataValues.push(obj.value);
+    })
+    element.empty();
+    element.append('<canvas id="myChart"></canvas>');
+    new Chart($("#myChart"), {
         type: chartType,
         data: {
-            labels: ['項目A', '項目B', '項目C', '項目D', '項目E', '項目F'],
+            labels: labels,//['項目A', '項目B', '項目C', '項目D', '項目E', '項目F'],
             datasets: [{
                 label: dataTypeName,
-                data: [12, 19, 3, 5, 2, 3],
+                data: dataValues,//[12, 19, 3, 5, 2, 3],
                 borderWidth: 1
             }]
         },
@@ -217,14 +236,53 @@ $(function(){
     $("#modal-target-sure-btn").click(() => {
         let targetList = getModalTargetCheckedIds();
         setTargerItemsDiv(targetList);
+        $('#compareItemsDiv').modal('hide');
     })
 
-	$("#chart-generation-btm").click(()=>{
-		getData();
-	})
-    // bar-chart-btn line-chart-btn pie-chart-btn
+    $("#modal-target-clear-btn").click(() => {
+        $(".target-item-div").each(function(){
+            if($(this).css("display") != "none"){
+                $(this).find("input").each((idx, el)=>{
+                    $(el).prop("checked", false);
+                })
+            }                    
+        })
+        $('#compareItemsDiv').modal('hide');
+    })
+
+    $("#chart-generation-btn").click(()=>{
+        getData();
+    })
+
+    $("#chart-target-select").change(function() {
+        switch($(this).find(":selected").val()){
+            case "1":
+                $("#select-target-div").show()
+                $(".allCategory-target-div").each((idx, el) => {
+                    $(el).show();
+                })
+                $(".category-target-div").each((idx, el)=>{
+                    $(el).hide();
+                })
+                $("#modal-target-sure-btn").click();
+                break;
+            case "2":
+                $("#select-target-div").show()
+                $(".allCategory-target-div").each((idx, el) => {
+                    $(el).hide();
+                })
+                $(".category-target-div").each((idx, el)=>{
+                    $(el).show();
+                })
+                $("#modal-target-sure-btn").click();
+                break;
+            default:
+                $("#select-target-div").hide()
+                break;
+        }
+    })
+    $("#chart-target-select").change();
     Chart.defaults.font.size = 30;
-    // const ctx = document.getElementById('myChart');
     $('#myChart').css('width', '100%');
 
     $(window).resize(() => {

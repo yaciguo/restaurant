@@ -25,8 +25,8 @@ public interface OrderBeanRepository extends JpaRepository<OrderBean, Integer> {
     Page<OrderBean> findByOrderStatus(String orderStatus, Pageable pageable);
 
     // 訂單狀態 (未付款)
-    @Query("SELECT o FROM OrderBean o WHERE o.orderStatus != '已完成' OR (o.orderStatus = '已完成' AND (o.checkoutBean.payStatus != 'Y' OR o.checkoutBean IS NULL))")
-    Page<OrderBean> findByCheckoutBeanPayStatus(String payStatus, Pageable pageable);
+    @Query("SELECT o FROM OrderBean o LEFT JOIN o.checkoutBean c WHERE c.id IS NULL or c.payStatus != 'Y'" )
+    Page<OrderBean> findByCheckoutBeanPayStatus(@Param("payStatus") String payStatus, Pageable pageable);
     
     // 訂單查詢
     Page<OrderBean> findById(Integer id, Pageable pageable);
@@ -35,7 +35,7 @@ public interface OrderBeanRepository extends JpaRepository<OrderBean, Integer> {
     @Query(value = "SELECT * FROM orders WHERE phone = :phone", nativeQuery = true)
     Page<OrderBean> findByPhone(@Param("phone") String phone, Pageable pageable);
     
-    // 搜尋名字(無法驗證別人是否有認真填寫，須再討論)
+    // 搜尋名字
     @Query(value = "SELECT * FROM orders WHERE customer = :customer", nativeQuery = true)
     Page<OrderBean> findByCustomer(@Param("customer") String customer, Pageable pageable);   
     

@@ -75,11 +75,11 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	//=================================查對應的tableid及可用時間 map=================================
 	
-	public List<FdTableBean> getTableIdsByCapacity(Integer capacity) {
+	public List<Integer> getTableIdsByCapacity(Integer capacity) {
 	    return fdTableRepository.getTableIdsByCapacity(capacity);
 	}
 
-	public Map<Integer, List<Time>> getAvailableTimes(List<FdTableBean> tables, String dateString) {
+	public Map<Integer, List<Time>> getAvailableTimes(List<Integer> availableTableIds, String dateString) {
 	    Date date = parseDateString(dateString);
 	    Map<Integer, List<Time>> availableTimesMap = new HashMap<>();
 
@@ -93,7 +93,7 @@ public class ReservationServiceImpl implements ReservationService{
 	    allTimes.add(Time.valueOf("18:00:00"));
 	    allTimes.add(Time.valueOf("19:00:00"));
 
-	    for (FdTableBean table : tables) {
+	    for (Integer table : availableTableIds) {
 	        // 根据桌子ID和日期查询已被预订的时间
 	        List<Time> reservedTimes = reservationRepository.getReservedTimes(table, date);
 	        
@@ -104,18 +104,18 @@ public class ReservationServiceImpl implements ReservationService{
 	        availableTimes.removeAll(reservedTimes);
 	        
 	        // 将该桌子的可用时间列表添加到可用时间的映射中
-	        availableTimesMap.put(table.getTableId(), availableTimes);
+	        availableTimesMap.put(table, availableTimes);
 	    }
 
 	    return availableTimesMap;
 	}
 
-	private Date parseDateString(String dateString) {
+	private java.sql.Date parseDateString(String dateString) {
 	    // 解析日期字符串为java.util.Date对象
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    Date parsedDate = null;
+	    java.util.Date parsedDate = null;
 	    try {
-	        parsedDate = (Date) dateFormat.parse(dateString);
+	        parsedDate =dateFormat.parse(dateString);
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }
