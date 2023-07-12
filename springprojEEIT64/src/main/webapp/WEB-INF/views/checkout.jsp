@@ -73,7 +73,7 @@
 				<thead>
 					<tr>
 						<th id="id-titleCell">結帳單號</th>
-						<th id="name-titleCell">顧客</th>
+						<th id="name-titleCell">顧客/桌號</th>
 						<th id="time-titleCell">結帳時間</th>
 						<th id="amount-titleCell">金額</th>
 					</tr>

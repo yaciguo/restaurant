@@ -395,9 +395,9 @@
                       <option value="13:00:00">13:00</option>
                       <!-- <option value="13:30:00">13:30</option>
                       <option value="14:00:00">14:00</option> -->
-                      <!-- <option value="14:30:00">14:30</option> -->
-                      <!-- <option value="15:00:00">15:00</option> -->
-                      <!-- <option value="15:30:00">15:30</option> -->
+                      <option value="14:30:00">14:30</option>
+                      <option value="15:00:00">15:00</option>
+                      <option value="15:30:00">15:30</option>
                       <option value="16:00:00">16:00</option>
                       <option value="16:30:00">16:30</option>
                       <option value="17:00:00">17:00</option>
@@ -429,7 +429,7 @@
         //時間設定
 
         var pickTimeSelect = document.getElementById('pickTime');
-        var currentTime = new Date("2023-07-12T16:00:00");
+        var currentTime = new Date();
         var currentHour = currentTime.getHours();
         var currentMinute = currentTime.getMinutes();
 

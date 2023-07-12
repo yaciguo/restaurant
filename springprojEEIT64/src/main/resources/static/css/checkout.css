@@ -85,3 +85,12 @@ body {
 		border-color: -internal-light-dark;
 	}
 }
+
+.meal-cell-class{
+	text-align: left; 
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; 
+	width: 600px;
+	padding-left: 5%;
+}

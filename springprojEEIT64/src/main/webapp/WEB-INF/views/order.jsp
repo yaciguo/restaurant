@@ -170,7 +170,7 @@
 								<th><input id="order-checkboxAll" class="form-check-input fs-4" type="checkbox"></th>					
 								<th>編號</th>
 								<th>單別</th>
-								<th>顧客名</th>
+								<th>顧客名/桌號</th>
 								<th>取餐時間</th>
 								<th>明細</th>
 								<th>總金額</th>

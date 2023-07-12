@@ -86,7 +86,8 @@ function addProduct() {
 		$('#add-cost').val("");
 		$('#add-description').val("");
 		$('#fdpictureInput').val("");
-		$("#myModal").modal('hide')
+		$("#myModal").modal('hide');
+		closeModal()
 
 	};
 	reader.readAsDataURL(file);

@@ -87,10 +87,12 @@ function generatePaymentTable(response, type) {
     var htmlContent = '';
     for (var i = 0; i < response.length; i++) {
     	var result = response[i];
-    	
+    	console.log(result.order.type);
+
         htmlContent += '<tr onclick="paymentAlert(this, \'' + type + '\')">';
         htmlContent += '<td id="id-cell">' + result.id + '</td>';
-        htmlContent += '<td id="name-cell">' + result.order.customer + '</td>';
+
+        htmlContent += '<td id="name-cell">' + (result.order.type == "O" ? result.order.customer : ("內用："+result.order.customer+ "桌")) + '</td>';
 
         var paymentType = result.order.type;
         // 資料表欄位oders.type = I/O (內用/外帶)
@@ -99,24 +101,26 @@ function generatePaymentTable(response, type) {
         }
 
         var detailBean = result.order.orderDetailBean;
+		
         var orderDetailContent = '';
         for (var j = 0; j < detailBean.length; j++) {
         	var bean = detailBean[j];
             orderDetailContent += bean.dish.name + "x" + bean.quantity+ ", " ;
         }
         if (type != 'paid') {
-       		htmlContent += '<td id="meal-cell">' + orderDetailContent + '</td>';
+       		htmlContent += '<td id="meal-cell" class="meal-cell-class">' + orderDetailContent + '</td>';
         }else{
 	        htmlContent += '<input type="hidden" id="detailHidden" value="' + orderDetailContent + '">';
 		}
 		
         if (type == 'paid')  {
 			var dateTime = new Date(result.payTime);
+			var year = dateTime.getFullYear();
 			var month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
 			var date = dateTime.getDate().toString().padStart(2, '0');
 			var hours = dateTime.getHours().toString().padStart(2, '0');
 			var minutes = dateTime.getMinutes().toString().padStart(2, '0');
-			var formattedDateTime = `${month}/${date}-${hours}:${minutes}`;
+			var formattedDateTime = `${year}-${month}-${date} ${hours}:${minutes}`;
 				
 			htmlContent += '<td id="time-cell">' + formattedDateTime + '</td>';
 		}

@@ -127,35 +127,35 @@ public class fakeDataInit {
     @Test
     void addFakeData() {
         System.out.println("----------------------------------------------");
-        // try {
-        //     if(isDeleteOldData) {
-        //         resetTable("fdtable", fdTableDao);
-        //         resetTable("reservation", reservationDao);
-        //         resetTable("orders", orderDao);
-        //         ucDao.resetAutoId("orderdetail");
-        //         ucDao.resetAutoId("orderrecord");
-        //         resetTable("checkout", checkoutDao);
-        //         resetTable("openinghour", openHourdao);
-        //         resetTable("closingtime", ClosingTimeDao);
-        //         resetTable("category", categoryDao);
-        //         resetTable("dish", dishDao);
-        //         resetTable("activity", activityDao);
-        //     }
+        try {
+            // if(isDeleteOldData) {
+            //     resetTable("fdtable", fdTableDao);
+            //     resetTable("reservation", reservationDao);
+            //     resetTable("orders", orderDao);
+            //     ucDao.resetAutoId("orderdetail");
+            //     ucDao.resetAutoId("orderrecord");
+            //     resetTable("checkout", checkoutDao);
+            //     resetTable("openinghour", openHourdao);
+            //     resetTable("closingtime", ClosingTimeDao);
+            //     resetTable("category", categoryDao);
+            //     resetTable("dish", dishDao);
+            //     resetTable("activity", activityDao);
+            // }
             
-        //     // add fake data
-        //     addBasicSettingsData();
-        //     addFdTableData();
-        //     addReservationData();
-        //     addOpeningHourData();
-        //     addClosingTimeData();
-        //     addCategoryData();
-        //     addDishData();
-        //     addActivityData();
-        //     addOrderData();
-        //     addCheckoutData();
-        // } catch (Exception e) {
-        //     System.out.println(e);
-        // }
+            // add fake data
+            // addBasicSettingsData();
+            // addFdTableData();
+            // addReservationData();
+            // addOpeningHourData();
+            // addClosingTimeData();
+            // addCategoryData();
+            // addDishData();
+            // addActivityData();
+            // addOrderData();
+            // addCheckoutData();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public <T> List<T> getJson(String jsonPath, Class<T> type) throws Exception {

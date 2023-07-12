@@ -172,7 +172,8 @@ var csrfToken;
 
 		          // 判斷備註
 		          var orderNote = '';
-		          if (orderData.note == 'null'){
+				  console.log(orderData.note)
+		          if (orderData.note == null){
 					  orderNote = '';
 				  }else {
 					  orderNote = orderData.note ;
