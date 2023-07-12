@@ -303,6 +303,7 @@ public class fakeDataInit {
             orderDao.save(oBean);
         }
     }
+    
     public void addFdTableData() throws Exception {
         List<FdTableJson> json = getJson("/static/assets/json/fdtable.json", FdTableJson.class);
             
@@ -319,7 +320,10 @@ public class fakeDataInit {
         SimpleDateFormat formatYMDDate = new SimpleDateFormat("yyyy-MM-dd");
         for(ReservationsJson jsonBean : json) {
             Optional<FdTableBean> fdTableBeanOptional = fdTableDao.findById(jsonBean.FK_FdTableBean_Id);
-            FdTableBean fBean = fdTableBeanOptional.get();
+            FdTableBean fBean = null; 
+            if(!fdTableBeanOptional.isEmpty()){
+                fBean = fdTableBeanOptional.get();
+            }
             
             ReservationBean rBean = new ReservationBean(
                     jsonBean.name, 
@@ -351,8 +355,7 @@ public class fakeDataInit {
                 jsonBean.payStatus,
                 oBean
             );
-            checkoutDao.save(cBean);
-            
+            checkoutDao.save(cBean);            
         }
     }
     
