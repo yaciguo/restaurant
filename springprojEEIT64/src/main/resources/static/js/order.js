@@ -2,7 +2,8 @@ var contextPath;
 var csrfHeaderName ;
 var csrfToken;
 
-	$(function(){
+
+	$(function(){	
 		contextPath = document.querySelector('meta[name="_contextPath"]').getAttribute('content');
 		csrfHeaderName = $("meta[name='_csrf_header']").attr("content");
 		csrfToken = $("meta[name='_csrf']").attr("content"); 
@@ -176,18 +177,24 @@ var csrfToken;
 		          if (orderData.note == 'null'){
 					  orderNote = '';
 				  }
-		          		
+				  		          		
 		          // 判斷單別、電話/桌號
 		          var orderType = '';
-		          var orderPhone = '';
+		          var orderDataPhone = '';
 		          if (orderData.type == 'I') {
 		            orderType = '內用';
-		            orderPhone = orderData.customer
+		            orderCustomer = orderData.customer + '號桌';
 		          } else if (orderData.type == 'O') {
 		            orderType = '外帶';
-		            orderPhone = orderData.customer
+		            orderCustomer = orderData.customer;
 		          }
-		
+					console.log(orderData.phone)
+				  if (orderData.phone == null) {
+		          	orderDataPhone = '';
+		          }else {
+					  orderDataPhone = orderData.phone;
+				  }
+		          
 		          // 活動
 		          var activityBeandiscount = '';
 		          var activityBeandishBeanname = '';
@@ -246,11 +253,11 @@ var csrfToken;
 		              </td>
 		              <td id="id-cell">${orderData.id}</td>
 		              <td id="type-cell">${orderType}</td>
-		              <td id="phone-cell">${orderPhone}</td>
+		              <td id="phone-cell">${orderCustomer}</td>
 		              <td id="time-cell">${orderData.pickTime}</td>
 		              <td id="items-cell" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 10px; max-width: 175px;">${orderDetailsHtml}</td>
 		              <td id="price-cell">${orderData.amount}</td>
-		              <td id="picktime-cell">${orderData.phone}</td>
+		              <td id="picktime-cell">${orderDataPhone}</td>
 		              <td id="statusO-cell">${orderStatus}</td>
 		              <td id="statusP-cell">${payStatus}</td>
 		              <td id="note-cell">${orderNote}</td>
@@ -343,10 +350,6 @@ var csrfToken;
 		    }
 		  });
 		}
-
-
-
-
 
 
 

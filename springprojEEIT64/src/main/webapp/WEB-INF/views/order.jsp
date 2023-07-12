@@ -9,6 +9,8 @@
 	<meta name="_contextPath" content="${pageContext.request.contextPath}" />
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	<meta name="_csrf" content="${_csrf.token}"/>
+<!-- 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css"> -->
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script> -->
 	
 	
 	<body>
@@ -74,12 +76,12 @@
 							</li>
 							<li class="order-statechoose"><select class="form-select">
 									<option>更改狀態</option>
-									<option>刪除</option>
+<!-- 									<option>刪除</option> -->
 									<option>備註修改</option>
 							</select></li>
 	
 							<li class="order-statechoose"><select class="form-select" id="form-select1">
-									<option>訂單成立</option>
+<!-- 									<option>訂單成立</option> -->
 									<option>訂單準備中</option>
 									<option>訂單完成</option>
 									<option>訂單取消</option>

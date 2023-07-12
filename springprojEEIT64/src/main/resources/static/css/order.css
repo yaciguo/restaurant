@@ -83,7 +83,10 @@
     .order-search button{
         background-color: pink;
     }
-
+    
+    .order-statechoose button{
+        background-color: pink;
+    }
 
     .order-statechoose{
         display: inline-flex;

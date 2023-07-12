@@ -9,6 +9,8 @@ $(function () {
 	
     loadUnpaidData("eatIn");
     
+    console.log("Target selector: " + target.selector);
+
 	// 監聽 Bootstrap Tabs 切換事件
 	$('#payment-tabs').on('shown.bs.tab', function(e) {
 		var targetTab = $(e.target).attr('href');

@@ -5,6 +5,8 @@
 
 <link rel='stylesheet' href="<c:url value='/css/checkout.css' />" />
 <script src="<c:url value='js/checkout.js' />"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <meta name="_contextPath" content="${pageContext.request.contextPath}" />
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
