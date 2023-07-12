@@ -10,88 +10,88 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel='stylesheet' href="<c:url value='/css/table.css' />" />
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-	crossorigin="anonymous"></script>
+<!-- <link -->
+<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" -->
+<!-- 	rel="stylesheet" -->
+<!-- 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" -->
+<!-- 	crossorigin="anonymous" /> -->
+<!-- <script -->
+<!-- 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" -->
+<!-- 	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" -->
+<!-- 	crossorigin="anonymous"></script> -->
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<meta name="_csrf" content="${_csrf.token}" />
-<meta name="_csrf_header" content="${_csrf.headerName}" />
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<%-- <meta name="_csrf" content="${_csrf.token}" /> --%>
+<%-- <meta name="_csrf_header" content="${_csrf.headerName}" /> --%>
 
 <title>table</title>
 
 <!-- Favicons -->
-<link href="assets/img/s-logo.png" rel="icon">
+<!-- <link href="assets/img/s-logo.png" rel="icon"> -->
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
+<!-- <link -->
+<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" -->
+<!-- 	rel="stylesheet" -->
+<!-- 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" -->
+<!-- 	crossorigin="anonymous"> -->
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" -->
+<!-- 	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" -->
+<!-- 	crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-	integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-	crossorigin="anonymous">
+<!-- <script -->
+<!-- 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" -->
+<!-- 	integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" -->
+<!-- 	crossorigin="anonymous"> -->
 	
-</script>
+<!-- </script> -->
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"
-	integrity="sha512-nhY06wKras39lb9lRO76J4397CH1XpRSLfLJSftTeo3+q2vP7PaebILH9TqH+GRpnOhfAGjuYMVmVTOZJ+682w=="
-	crossorigin="anonymous" referrerpolicy="no-referrer">
+<!-- <script -->
+<!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js" -->
+<!-- 	integrity="sha512-nhY06wKras39lb9lRO76J4397CH1XpRSLfLJSftTeo3+q2vP7PaebILH9TqH+GRpnOhfAGjuYMVmVTOZJ+682w==" -->
+<!-- 	crossorigin="anonymous" referrerpolicy="no-referrer"> -->
 	
-</script>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- </script> -->
+<%-- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> --%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 
 
 <!-- bootstrap5 - 前端框架 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+<!-- <link -->
+<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" -->
+<!-- 	rel="stylesheet" -->
+<!-- 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" -->
+<!-- 	crossorigin="anonymous"> -->
 
 <!-- jquery 框架 -->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"
-	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-	crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" -->
+<!-- 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" -->
+<!-- 	crossorigin="anonymous"></script> -->
 
 <!-- fontAwesome - icon插件 -->
 <!-- css都要有rel="stylesheet" js就不用 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
 
 <!-- 引入 Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
 
 <!-- 引入 Bootstrap JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<!-- <script -->
+<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+<!-- <script -->
+<!-- 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4@5.1.2/js/tempusdominus-bootstrap-4.min.js"></script> -->
 
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+<!-- <script type="text/javascript" -->
+<!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script> -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" /> -->
 
 </head>
 
@@ -103,14 +103,14 @@
 		<!-- 將時間跟日期放在畫面中同一行 -->
 		<!-- 				<div class="row"> -->
 		<div class="col-auto d-flex justify-content-center align-items-center">
-			<label for="startdate" style="width: 130px" >訂位日期：</label> <input
-				class="form-control" id="startdate" name="startdate"
+			<label for="startdate" style="width: 130px" >訂位日期：</label> 
+			<input	class="form-control" id="startdate" name="startdate"
 				placeholder='yyyy-mm-dd' type="text" style="width: 150px" />
 		</div>
 		<br>
 		<div class="col-auto d-flex justify-content-center align-items-center">
-			<label for="pNumber" style="width: 172px">訂位時間:</label><select
-				id="selectTime" onchange="selectTime()">
+			<label for="pNumber" style="width: 172px">訂位時間:</label>
+			<select	id="selectTime" onchange="selectTime()">
 				<option value="" label="請選擇時間" />
 				<option value="1" label="12:00" />
 				<option value="2" label="13:00" />
@@ -122,9 +122,6 @@
 			</select>
 		</div>
 
-		<!-- 				</div> -->
-		<!-- 			</div> -->
-		<!-- 		<input type="text" name="findphone" id="fphone" placeholder="請輸入電話查詢"> -->
 		<section class="container">
 			<div class="tab-content">
 				<div class="row">

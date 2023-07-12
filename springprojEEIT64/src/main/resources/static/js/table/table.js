@@ -35,7 +35,7 @@ function filterData() {
 
   // 使用Ajax發送請求到後端
   $.ajax({
-    url: contextPath+"/filter",
+    url: contextPath+"/filterData",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({
