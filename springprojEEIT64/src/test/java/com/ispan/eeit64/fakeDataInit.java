@@ -46,6 +46,7 @@ import com.ispan.eeit64.jsonBean.CategoryJson;
 import com.ispan.eeit64.jsonBean.CheckoutJson;
 import com.ispan.eeit64.jsonBean.ClosingTimeJson;
 import com.ispan.eeit64.jsonBean.DishJson;
+import com.ispan.eeit64.jsonBean.DishJson2;
 import com.ispan.eeit64.jsonBean.FdTableJson;
 import com.ispan.eeit64.jsonBean.OpeningHourJson;
 import com.ispan.eeit64.jsonBean.OrderJson;
@@ -116,7 +117,7 @@ public class fakeDataInit {
     @Test
     void test() {
         try {
-            addBasicSettingsData();
+            addDishData();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -220,14 +221,14 @@ public class fakeDataInit {
     }
 
     public void addDishData() throws Exception {
-        List<DishJson> json = getJson("/static/assets/json/dish.json", DishJson.class);
+        List<DishJson2> json = getJson("/static/assets/json/dish2.json", DishJson2.class);
         
-        for (DishJson jsonBean : json) {
-            Optional<CategoryBean> cbeanOptional = categoryDao.findById(jsonBean.category+1);
+        for (DishJson2 jsonBean : json) {
+            Integer cid = ((Double)jsonBean.categoryBean.get("id")).intValue();
+            Optional<CategoryBean> cbeanOptional = categoryDao.findById(cid);
             CategoryBean cbean = cbeanOptional.get();
-            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "/images/dumpling.png", jsonBean.description, "Y");
+            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, jsonBean.picture, jsonBean.description, jsonBean.status);
 
-            System.out.println(456);
             dishDao.save(bean);
         }
     }
