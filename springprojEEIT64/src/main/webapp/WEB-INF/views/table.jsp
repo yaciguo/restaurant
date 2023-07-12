@@ -112,13 +112,15 @@
 			<label for="pNumber" style="width: 172px">訂位時間:</label>
 			<select	id="selectTime" onchange="selectTime()">
 				<option value="" label="請選擇時間" />
+				<option value="0" label="11:00" />
 				<option value="1" label="12:00" />
 				<option value="2" label="13:00" />
 				<option value="3" label="14:00" />
-				<option value="4" label="15:00" />
 				<option value="5" label="16:00" />
 				<option value="6" label="17:00" />
 				<option value="7" label="18:00" />
+				<option value="7" label="19:00" />
+				<option value="7" label="20:00" />
 			</select>
 		</div>
 

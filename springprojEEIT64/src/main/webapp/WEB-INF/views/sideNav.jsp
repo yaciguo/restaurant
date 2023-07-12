@@ -181,7 +181,7 @@
 
 <script>
 	$(function() {
-		loadPage("/restaurant/checkout")
+		loadPage("/restaurant/order","訂單管理")
 		getAndSetAllSettings();
 
 		// 導覽列控制設定
@@ -197,22 +197,23 @@
 			e.preventDefault();
 
 			var navTitle = $(this).find('.nav-title').text();
-			$('.page-title').text(navTitle);
+			// $('.page-title').text(navTitle);
 
 			var href = $(this).attr('href');
 			if (href) {
-				loadPage(href);
+				loadPage(href,navTitle);
 			}
 		});
 	});
 	
 	// 載入頁面內容
-	function loadPage(url) {
+	function loadPage(url,navTitle) {
 		$.ajax({
 			url : url,
 			method : 'GET',
 			success : function(response) {
 				$('#main-content').html(response);
+				$('.page-title').text(navTitle);
 			},
 			error : function(error) {
 				console.log('載入頁面失敗:', error);

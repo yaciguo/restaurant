@@ -72,12 +72,12 @@ function ordertable() {
 	// 顯示視窗
 	ordertableWindow.style.display = "block";
 	// 設定訂位資訊內容
-	document.getElementById("orderDate").value = "訂位日期：2023-07-19";
-	document.getElementById("orderTime").value = "訂位時間：12:00";
-	document.getElementById("orderName").value = "訂位者姓名：賴雅慧";
-	document.getElementById("orderGender").value = "性別：小姐";
-	document.getElementById("orderPhone").value = "電話：0978090605";
-	document.getElementById("orderGuests").value = "訂位人數：3人";
+	document.getElementById("orderDate").value = "2023-07-19";
+	document.getElementById("orderTime").value = "12:00";
+	document.getElementById("orderName").value = "賴雅慧";
+	document.getElementById("orderGender").value = "小姐";
+	document.getElementById("orderPhone").value = "0978090605";
+	document.getElementById("orderGuests").value = "3人";
 }
 
 //XX關閉

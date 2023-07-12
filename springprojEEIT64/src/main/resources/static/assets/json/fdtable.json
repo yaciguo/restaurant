@@ -30,5 +30,13 @@
 	{
 	  "id": 8,
 	  "capacity": 2
+	},
+	{
+	  "id": 9,
+	  "capacity": 2
+	},
+	{
+	  "id": 10,
+	  "capacity": 2
 	}
 ]

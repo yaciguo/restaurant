@@ -1,4 +1,8 @@
 var contextPath = document.getElementById('contextPath').value;
+var contextPath;
+var csrfHeaderName ;
+var csrfToken;
+
 //==========================新增產品確認與取消按鈕
 function addfd() {
 	let modal = document.getElementById("myModal");
@@ -61,17 +65,16 @@ function addProduct() {
 			type: 'POST',
 			data: JSON.stringify(productData),
 			contentType: 'application/json',
-			//與SecurityConfig安全性有關，先強行通過
-			//		//				beforeSend: function(xhr) {
-			//		//					xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
-			//		//				},
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfToken);
+			},
 			success: function() {
 				//productData();
 				console.log('success測試成功:');
 				//			alert('新增成功！');
 			},
 			error: function(xhr, error) {
-							alert('新增失敗！');
+				alert('新增失敗！');
 				console.log('產品保存失敗:');
 				console.log('狀態碼:', xhr.status);
 				console.log('錯誤訊息:', error);
@@ -92,9 +95,9 @@ function sendPictureData(base64Image) {
 		type: 'POST',
 		data: JSON.stringify({ imageBase64: base64Image }),
 		contentType: 'application/json',
-		//        beforeSend: function(xhr) {
-		//            xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
-		//        },
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfToken);
+		},
 		success: function(response) {
 			loadPictureData();
 			$('#fdpictureInput').val('');
@@ -186,10 +189,9 @@ function typesave(event) {
 		type: 'POST',
 		data: JSON.stringify(typeData),
 		contentType: 'application/json',
-		// 如果需要 CSRF 驗證，請替換為正確的 CSRF token
-		//    beforeSend: function(xhr) {
-		//      xhr.setRequestHeader('X-CSRF-TOKEN', 'your-csrf-token'); 
-		//    },
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfToken);
+		},
 		success: function() {
 			console.log('success測試成功:');
 		},
@@ -209,6 +211,10 @@ function typesave(event) {
 //==========================下拉式選單接收新增種類
 
 $(()=>{
+	
+	contextPath = $("meta[name='_contextPath']").attr("content"); 
+	csrfHeaderName = $("meta[name='_csrf_header']").attr("content");
+	csrfToken = $("meta[name='_csrf']").attr("content"); 
 	$.ajax({
 		url: contextPath + '/getCategories', // 替換為後端 API 的 URL
 		type: 'GET',

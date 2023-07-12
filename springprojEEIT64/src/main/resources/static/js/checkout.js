@@ -8,8 +8,6 @@ $(function () {
 	csrfToken = $("meta[name='_csrf']").attr("content"); 
 	
     loadUnpaidData("eatIn");
-    
-    console.log("Target selector: " + target.selector);
 
 	// 監聽 Bootstrap Tabs 切換事件
 	$('#payment-tabs').on('shown.bs.tab', function(e) {
@@ -26,6 +24,7 @@ $(function () {
 
 // 讀取所有未付款訂單
 function loadUnpaidData(type, pageId) {
+	console.log("--------loadUnpaidData----")
 	var pid = (pageId === undefined) ? 1 : pageId;
 	
 	$.ajax({
@@ -83,7 +82,9 @@ function generatePaymentTable(response, type) {
     } else if (type == 'paid'){
 		target = $('#paidContent');
 	}
-	
+	console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
+	console.log(type);
+	console.log(target);
     target.empty();
 
     var htmlContent = '';
@@ -132,6 +133,7 @@ function generatePaymentTable(response, type) {
 	
 // 動態生成分頁導覽列內容
 function generatePagination(type, totalPages, currentPage){
+	console.log
     var target;
     if (type == "eatIn") {
         target = $('#eatInPagination');
@@ -140,18 +142,30 @@ function generatePagination(type, totalPages, currentPage){
     }else if (type === 'paid'){
 		target = $('#paidPagination');
 	}
+
     target.empty();
     
+    console.log(totalPages)
+    if(totalPages ==0 ){
+		return
+	}
+	
 	var htmlContent = '';
 	htmlContent += '<li class="page-item"><a class="page-link" onclick="changePage(\'' + type + '\', \'prev\', ' + totalPages + ', ' + currentPage + ')">&laquo;</a></li>';
-	for (var i = 1; i <= totalPages; i++) {
-		if (i === currentPage) {
-		    htmlContent += `<li class="page-item active"><a class="page-link" onclick="${(type === 'paid') ? `loadPaidData('paid', ${i})` : `loadUnpaidData('${type}', ${i})`}">${i}</a></li>`;
-		} else {
-		    htmlContent += `<li class="page-item"><a class="page-link" onclick="${(type === 'paid') ? `loadPaidData('paid', ${i})` : `loadUnpaidData('${type}', ${i})`}">${i}</a></li>`;
-		}
-    }
-	htmlContent+='<li class="page-item"><a class="page-link" onclick="changePage(\'' + type + '\', \'next\', ' + totalPages + ', ' + currentPage + ')">&raquo;</a></li>';
+	
+	var startPage = Math.max(1, currentPage - 2);
+	var endPage = Math.min(totalPages, startPage + 4);
+	
+	
+	for (var i = startPage; i <= endPage; i++) {
+	    if (i === currentPage) {
+	        htmlContent += `<li class="page-item active"><a class="page-link" onclick="${(type === 'paid') ? `loadPaidData('paid', ${i})` : `loadUnpaidData('${type}', ${i})`}">${i}</a></li>`;
+	    } else {
+	        htmlContent += `<li class="page-item"><a class="page-link" onclick="${(type === 'paid') ? `loadPaidData('paid', ${i})` : `loadUnpaidData('${type}', ${i})`}">${i}</a></li>`;
+	    }
+	}
+	
+	htmlContent += '<li class="page-item"><a class="page-link" onclick="changePage(\'' + type + '\', \'next\', ' + totalPages + ', ' + currentPage + ')">&raquo;</a></li>';
 	
 	target.html(htmlContent);
 }
@@ -310,7 +324,8 @@ function showConfirm() {
 // 付款 - 結單
 function calculate() {
     var paymentId = $('.paymentBody').attr('data-id');
-    
+    var activeNavItem = $('.nav-tabs .nav-item .nav-link.active').text();
+
      $.ajax({
      	url: contextPath + '/updateCheckoutBean?paymentId=' + paymentId,
          type: 'PUT',
@@ -319,8 +334,12 @@ function calculate() {
 	    },
 	    success: function() {
 	    	console.log('-----付款成功-----');
-			loadUnpaidData();
-	    },
+	    	if(activeNavItem == "外帶"){
+				loadUnpaidData("takeOut");
+			}else if (activeNavItem == "內用"){
+				loadUnpaidData("eatIn");
+			}
+		},
 	    error: function(error) {
 	        console.log('付款失敗:', error);
 	    }

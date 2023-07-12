@@ -191,7 +191,7 @@ public class fakeDataInit {
 
         String base64String = Base64.getEncoder().encodeToString(buf);
 
-        BasicSettingsBean shopNameBean = new BasicSettingsBean("shopName", "webDesign-RS");
+        BasicSettingsBean shopNameBean = new BasicSettingsBean("shopName", "墨竹亭(公益店)");
         BasicSettingsDao.save(shopNameBean);
         BasicSettingsBean logoImgBean = new BasicSettingsBean("logoImg", "data:"+mimeType+";base64,"+base64String);
         BasicSettingsDao.save(logoImgBean);
