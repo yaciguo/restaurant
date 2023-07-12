@@ -164,8 +164,13 @@ element.style {
 	transform: translate(-50%, -50%);
 	padding: 10px;
 	border: 1px solid #888;
+<<<<<<< HEAD
 	width: 600px;
 /* 	display: none; */
+=======
+	width: 550px;
+	/* 	display: none; */
+>>>>>>> ya
 	border-radius: 10px; /* 添加圓角效果 */
 	 display: flex;
   justify-content: space-between;

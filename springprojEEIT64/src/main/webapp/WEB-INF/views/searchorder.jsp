@@ -68,13 +68,14 @@
 
       <body>
         <!-- 導覽列 -->
-        <div class="container">
           <%@ include file="nav.jsp" %>
-            <div class="row">
-              <div class="col-sm-12">
-                <header>
+           		<header style="margin-top: 20px;">
                   <h1>訂單查詢</h1>
                 </header>
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+               
               </div>
             </div><br />
             <div class="row">
@@ -103,7 +104,7 @@
                         <c:forEach var="order" items="${orderList}">
                           <tr>
                             <th>成立時間</th>
-                            <td>${order.orderTime}</td>
+                            <td>2023-07-12</td>
                           </tr>
                           <tr>
                             <th>應付金額</th>

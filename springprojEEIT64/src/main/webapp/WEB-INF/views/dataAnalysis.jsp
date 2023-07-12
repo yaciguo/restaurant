@@ -213,19 +213,19 @@
                                                     <button id="this-day-btn" type="button" class="btn btn-primary flex-fill">當日</button>
                                                 </div>
                                             </div>
-                                            <div class="row text-nowrap mb-1">
+                                            <div class="row text-nowrap mb-1 px-0">
                                                 <div class="col">
                                                     <label
                                                         class=" d-flex justify-content-center align-items-center">結束時間</label>
                                                     <input class="form-control" id="startdate" name="startdate"
-                                                        placeholder='yyyy-mm-dd' type="text" />
+                                                        placeholder='yyyy-mm-dd' type="text" style="font-size:15px" />
                                                 </div>
-                                                <div style="width:10%;font-size: large;">~</div>
+                                                <div style="width:5%;font-size: large;">~</div>
                                                 <div class="col">
                                                     <label
                                                         class=" d-flex justify-content-center align-items-center">結束時間</label>
                                                     <input class="form-control" id="enddate" name="enddate"
-                                                        placeholder='yyyy-mm-dd' type="text" />
+                                                        placeholder='yyyy-mm-dd' type="text" style="font-size:15px" />
                                                 </div>
                                             </div>
                                         </div>
@@ -313,7 +313,7 @@
                     </div>
                     <div class="row text-nowrap">
                         <label class="col col-md-1 d-flex align-items-center">數據內容：</label>
-                        <div class="col col-md-6 ">
+                        <div class="col col-md-8">
                             <div class="row justify-content-start">
                                 <div class="col-md-2  form-check">
                                     <input class="form-check-input output-value-checkbox" type="checkbox" id="Quantity-checkbox" value="Quantity" checked>
@@ -344,7 +344,7 @@
                     </div>
                     <div class="row text-nowrap mb-2">
                         <label class="col col-md-1 d-flex align-items-center">對比內容：</label>
-                        <div class="col col-md-6 ">
+                        <div class="col col-md-8 ">
                             <div class="row">
                                 <div class="col-md-2  form-check">
                                     <input class="form-check-input output-target-checkbox" type="checkbox" id="Category-checkbox" value="Category" checked>

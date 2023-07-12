@@ -5,6 +5,8 @@
 
 <link rel='stylesheet' href="<c:url value='/css/checkout.css' />" />
 <script src="<c:url value='js/checkout.js' />"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
 
 <meta name="_contextPath" content="${pageContext.request.contextPath}" />
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
@@ -71,7 +73,7 @@
 				<thead>
 					<tr>
 						<th id="id-titleCell">結帳單號</th>
-						<th id="name-titleCell">顧客</th>
+						<th id="name-titleCell">顧客/桌號</th>
 						<th id="time-titleCell">結帳時間</th>
 						<th id="amount-titleCell">金額</th>
 					</tr>

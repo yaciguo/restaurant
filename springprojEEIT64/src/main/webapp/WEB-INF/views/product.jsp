@@ -91,7 +91,7 @@
 		<!-- 餐點總表-->
 		<!-- 產品總表格 -->
 		<div class="tab-pane fade show active" id="tab1">
-			<table class="table-product">
+			<table class="table-product " style="width: 95%;">
 				<thead>
 					<tr class="text-center">
 						<td colspan="8">餐點總表</td>
@@ -114,7 +114,7 @@
 						<td>${item.name}</td>
 						<!-- <td>${item.price}</td> -->
 						<td>${item.cost}</td>
-						<td>${item.description}</td>
+						<td class="td-css">${item.description}</td>
 						<td>${item.status}</td>
 						<%-- 						<td><c:forEach var="activity" items="${item.activityBean}"> --%>
 						<%--        	 					${activity.name}</c:forEach></td> --%>

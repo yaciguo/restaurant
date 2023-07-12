@@ -40,19 +40,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.roles("USER");
     }
   
-    private boolean isCloseSecurity = true;
+    private boolean isCloseSecurity = false;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-        if(isCloseSecurity){
-            http
-                .authorizeRequests(requests -> requests
-                        .anyRequest().permitAll()
-                        )
-                .cors(cors -> cors.disable())
-                .csrf(csrf -> csrf.ignoringAntMatchers("/**"))
-                ;
-            return;
-        }
+//        if(isCloseSecurity){
+//            http
+//                .authorizeRequests(requests -> requests
+//                        .anyRequest().permitAll()
+//                        )
+//                .cors(cors -> cors.disable())
+//                .csrf(csrf -> csrf.ignoringAntMatchers("/**"))
+//                ;
+//            return;
+//        }
         http
             .authorizeRequests(requests -> requests
                     .antMatchers("/resources/**").permitAll()
@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/searchbooking").permitAll()
                     .antMatchers("/reservation").permitAll()
                     .antMatchers("/shoppingcart").permitAll()
-                    .antMatchers("/shoppingcartInner").permitAll()
+                    .antMatchers("/shoppingcartInner5").permitAll()
                     .antMatchers("/question").permitAll()
                     .antMatchers("/booking").permitAll()
                     .antMatchers("/restaurant/newbooking").permitAll()
@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/bookingcheck").permitAll()
                     .antMatchers("/booktest").permitAll()
                     .antMatchers("/menu").permitAll()
-                    .antMatchers("/menuInner").permitAll()
+                    .antMatchers("/menuInner5").permitAll()
                     .antMatchers("/dishes2").permitAll()
                     .antMatchers("/restInfo").permitAll()
                     .antMatchers("/ordercheck").permitAll()

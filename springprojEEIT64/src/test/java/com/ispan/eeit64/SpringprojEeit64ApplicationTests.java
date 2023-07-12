@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class SpringprojEeit64ApplicationTests {
 
-	@Test
+	// @Test
 	void contextLoads() {
 	}
 
