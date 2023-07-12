@@ -2,13 +2,14 @@ var contextPath;
 var csrfHeaderName ;
 var csrfToken;
 
-	$(function(){
+
+	$(function(){	
 		contextPath = document.querySelector('meta[name="_contextPath"]').getAttribute('content');
 		csrfHeaderName = $("meta[name='_csrf_header']").attr("content");
 		csrfToken = $("meta[name='_csrf']").attr("content"); 
 		
 		//進入加載
-		var orderIndex = contextPath + '/orders/orderStatus/1' ;
+		var orderIndex = contextPath + '/orders/orderStatus/1';
 		initialize(orderIndex);		
 		
 		
@@ -41,39 +42,45 @@ var csrfToken;
 		        initialize(urlAddress);				
 			} 
 		})
-		
-		  // 按下更新鍵
-		  $('#order-statechoose-refresh').click(function() {
-		    var selectedOrders = [];
-		    $('.orders-table tbody tr').each(function() {
-		      const checkbox = $(this).find('input[type="checkbox"]');
-		      if (checkbox.prop('checked')) {
-		        var id = $(this).find('td:nth-child(2)').text();				
-		        var orderStatus = $('#form-select1 option:selected').val();
-		        var note = $('#form-control1').val();	
-		        selectedOrders.push({ "id": id, "orderStatus": orderStatus, "note":note});		    	        
-		      }
-		      
-		    }); 
-		    	console.log(selectedOrders);
-		      
-		    $.ajax({
-				  url: contextPath + '/orders/orderId',
-				  type: 'PUT',
-				  contentType: 'application/json',
-				  data: JSON.stringify(selectedOrders),      
-				  beforeSend: function(xhr) {
-            	  	xhr.setRequestHeader(csrfHeaderName, csrfToken);
-            	  },
-				  success: function(response) {
-					console.log("OK")
-					
-				  },
-				  error: function(error) {
-					console.log("Not OK")
-				  }
-				});
+
+		//更新
+		$('#order-statechoose-refresh').click(async function() {
+		  var selectedOrders = [];
+		  $('.orders-table tbody tr').each(function() {
+		    const checkbox = $(this).find('input[type="checkbox"]');
+		    if (checkbox.prop('checked')) {
+		      var id = $(this).find('td:nth-child(2)').text();
+		      var orderStatus = $('#form-select1 option:selected').val();
+		      var note = $('#form-control1').val();
+		      selectedOrders.push({ "id": id, "orderStatus": orderStatus, "note": note });
+			  
+		      var requestUrl = contextPath + '/orders/orderId';
+		      var requestUrl2 = contextPath + '/orders/orderId/' + id;
+				
+		      $.ajax({
+		        url: requestUrl,
+		        type: 'PUT',
+		        contentType: 'application/json',
+		        data: JSON.stringify(selectedOrders),
+		        beforeSend: function(xhr) {
+		          xhr.setRequestHeader(csrfHeaderName, csrfToken);
+		        },
+		        success: function(response) {
+		          console.log("OK");
+		          $('#modal-title').html('<span class="modal-icon text-success"><i class="fas fa-check-circle"></i></span> 訂單記錄更新成功');
+		          $('#success-modal').modal('show');
+		          initialize(requestUrl2);
+		        },
+		        error: function(error) {
+		          console.log("Not OK");
+		          $('#modal-title').html('<span class="modal-icon text-danger"><i class="fas fa-times-circle"></i></span> 訂單記錄更新失敗');
+		          $('#success-modal').modal('show');
+		          initialize(orderIndex);
+		        }
+		      });
+		    }
 		  });
+		});
 		     
 		//清除button
 		$("#order-search-clear").click(function() {
@@ -142,122 +149,214 @@ var csrfToken;
 		var myselect = $(".form-select").val();
 		$('#search-placeholder').attr('placeholder', '請輸入' + myselect);	
 	}
-	
-	function initialize(urlAddress) {
-		$.ajax({
-			url: urlAddress,
-			type: 'GET',
-			dataType: 'json',      
+
+		//初始
+		function initialize(urlAddress) {
+		  console.log(urlAddress);
+		
+		  $.ajax({
+		    url: urlAddress,
+		    type: 'GET',
+		    dataType: 'json',
 		    beforeSend: function(xhr) {
-    	  	   xhr.setRequestHeader(csrfHeaderName, csrfToken);
-    	    },
-			success: function(data) {
-				console.log(data);
-				console.log(data['content'].length)
-				let tableHtml = '';
-		        let tbody = $("#orderData-tbody");
-		        tbody.empty();
-			
-				if ( data.numberOfElements > 0 ) {
-					for (var i = 0; i < data['content'].length; i++) {
-						var orderData = data['content'][i];
-						console.log(data['content'][i].id);
-						
-						//判斷單別、電話/桌號
-						var orderType = '';
-						var orderPhone = '';
-						if (orderData.type == 'I') {
-						  	orderType = '內用';
-						  	orderPhone = orderData.customer
-						}else if (orderData.type == 'O'){
-							orderType = '外帶';
-							orderPhone = orderData.customer
-						}
-						
-						//活動
-						var activityBeandiscount = '';
-						var activityBeandishBeanname ='';
-						var activityBeanType = '';
-						if (orderData.activityBean != null){
-							if (orderData.activityBean.type == 'discount') {
-								activityBeanType = '折扣';
-							}else if (orderData.activityBean.type == 'gift') {
-								activityBeanType = '贈品';
-							}
-						}else{
-							activityBeanType = '';
-							activityBeandiscount = '';
-							activityBeandishBeanname ='';
-						}
+		      xhr.setRequestHeader(csrfHeaderName, csrfToken);
+		    },
+		    success: function(data) {
+		      let tableHtml = '';
+		      let tbody = $("#orderData-tbody");
+		      tbody.empty();
+		
+		      if (data.numberOfElements > 0) {
+		        for (var i = 0; i < data['content'].length; i++) {
+		          var orderData = data['content'][i];
 
-																
-						//訂單明細
-						var orderDetailsHtml = '';
-						orderData.orderDetailBean.forEach(function(detail) {
-						  orderDetailsHtml += detail.dish.name + ' - ' + detail.quantity ;
-						});
-						
-						//交易狀態
-						var payStatus = '';
-						if (orderData.checkoutBean != null && orderData.checkoutBean.payStatus != null) {
-							if (orderData.checkoutBean.payStatus == 'Y'){
-								payStatus = '已付款';
-							}else{
-								payStatus = '未付款';
-							}					  
-						}else{
-							payStatus = '未付款';
-						}
-						
-						//訂單狀態
-						var orderStatus = '';
-						if (orderData.orderRecordBean) {
-						  if (orderData.orderRecordBean.orderCancel != null) {
-						    orderStatus = '已取消';
-						  } else if (orderData.orderRecordBean.orderFinish != null) {
-						    orderStatus = '已完成';
-						  } else if (orderData.orderRecordBean.orderDeal != null) {
-						    orderStatus = '處理中';
-						  } else if (orderData.orderRecordBean.orderEstablish != null) {
-						    orderStatus = '已成立';
-						  } else {
-						    orderStatus = '此筆訂單有問題';
-						  }
-						}
-						
-						tableHtml += `
-			                            <tr onclick="openModal(this)">
-			                                <td id="choose-cell">
-			                                    <input class="order-checkbox form-check-input fs-4" type="checkbox">
-			                                </td>
-			                                <td id="id-cell">${orderData.id}</td>
-			                                <td id="type-cell">${orderType}</td>
-			                                <td id="phone-cell">${orderPhone}</td>
-			                                <td id="time-cell">${orderData.pickTime}</td>
-											<td id="items-cell">${orderDetailsHtml}</td>
-			                                <td id="price-cell">${orderData.amount}</td>
-			                                <td id="picktime-cell">${orderData.phone}</td>
-			                                <td id="statusO-cell">${orderStatus}</td>
-			                                <td id="statusP-cell">${payStatus}</td>
-			                                <td id="note-cell">${orderData.note}</td>
-			                                <td id="activitytype-cell" style="display:none">${activityBeanType}</td>
-			                                <td id="activitydiscount-cell" style="display:none">${activityBeandiscount}</td>
-			                                <td id="activitygift-cell" style="display:none">${activityBeandishBeanname}</td>		                                
-			                            </tr>`;
+		          // 判斷備註
+		          var orderNote = '';
+				  console.log(orderData.note)
+		          if (orderData.note == null){
+					  orderNote = '';
+				  }else {
+					  orderNote = orderData.note ;
+				  }
+				  		          		
+		          // 判斷單別、電話/桌號
+		          var orderType = '';
+		          var orderDataPhone = '';
+		          if (orderData.type == 'I') {
+		            orderType = '內用';
+		            orderCustomer = orderData.customer + '號桌';
+		          } else if (orderData.type == 'O') {
+		            orderType = '外帶';
+		            orderCustomer = orderData.customer;
+		          }
+				  if (orderData.phone == null) {
+		          	orderDataPhone = '';
+		          }else {
+					  orderDataPhone = orderData.phone;
+				  }
+		          
+		          // 活動
+		          var activityBeandiscount = '';
+		          var activityBeandishBeanname = '';
+		          var activityBeanType = '';
+		
+		          if (orderData.activityBean != null) {		            
+					if (orderData.activityBean.type == 'discount') {
+						activityBeanType = '折扣';
+						activityBeandiscount= orderData['activityBean']['discount']
+					} else if (orderData.activityBean.type == 'gift') {
+						activityBeanType = '贈品';
+						activityBeandishBeanname = orderData['activityBean']['dishBean']['name']
 					}
-				} else {
-					tableHtml += `<tr><td colspan="10" id="id-cell">目前無相對應資料</td></tr>`;
-				}
-					tbody.append(tableHtml);
-			},
-			error: function(error) {
-				console.log(error);
-			}
-		});
-	}
-	
+		          } else {
+		            activityBeanType = '';
+		            activityBeandiscount = '';
+		            activityBeandishBeanname = '';
+		          }
+				  
+		
+		          // 訂單明細
+		          var orderDetailsHtml = '';
+		          orderData.orderDetailBean.forEach(function(detail) {
+		            orderDetailsHtml += detail.dish.name + ' - ' + detail.quantity;
+		          });
+		
+		          // 交易狀態
+		          var payStatus = '';
+		          if (orderData.checkoutBean != null && orderData.checkoutBean.payStatus != null) {
+		            if (orderData.checkoutBean.payStatus == 'Y') {
+		              payStatus = '已付款';
+		            } else {
+		              payStatus = '未付款';
+		            }
+		          } else {
+		            payStatus = '未付款';
+		          }
+		
+		          // 訂單狀態
+		          var orderStatus = '';
+		          if (orderData.orderRecordBean) {
+		            if (orderData.orderRecordBean.orderCancel != null) {
+		              orderStatus = '已取消';
+		            } else if (orderData.orderRecordBean.orderFinish != null) {
+		              orderStatus = '已完成';
+		            } else if (orderData.orderRecordBean.orderDeal != null) {
+		              orderStatus = '處理中';
+		            } else if (orderData.orderRecordBean.orderEstablish != null) {
+		              orderStatus = '已成立';
+		            } else {
+		              orderStatus = '此筆訂單有問題';
+		            }
+		          }
+		
+		          tableHtml += `
+		            <tr onclick="openModal(this)">
+		              <td id="choose-cell">
+		                <input class="order-checkbox form-check-input fs-4" type="checkbox">
+		              </td>
+		              <td id="id-cell">${orderData.id}</td>
+		              <td id="type-cell">${orderType}</td>
+		              <td id="phone-cell">${orderCustomer}</td>
+		              <td id="time-cell">${orderData.pickTime}</td>
+		              <td id="items-cell" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 10px; max-width: 175px;">${orderDetailsHtml}</td>
+		              <td id="price-cell">${orderData.amount}</td>
+		              <td id="picktime-cell">${orderDataPhone}</td>
+		              <td id="statusO-cell">${orderStatus}</td>
+		              <td id="statusP-cell">${payStatus}</td>
+		              <td id="note-cell">${orderNote}</td>
+		              <td id="activitytype-cell" style="display:none">${activityBeanType}</td>
+		              <td id="activitydiscount-cell" style="display:none">${activityBeandiscount}</td>
+		              <td id="activitygift-cell" style="display:none">${activityBeandishBeanname}</td>
+		            </tr>`;
+		        }
+		      } else {
+		        tableHtml += `<tr><td colspan="10" id="id-cell">目前無相對應資料</td></tr>`;
+		      }
+		      tbody.append(tableHtml);
+		
+		      // 分页部分
+		      let pageHtml = '';
+		      let pagebody = $("#paidPagination");
+		      pagebody.empty();
+		
+		      console.log(urlAddress);
+		
+		      if (data['totalPages'] > 1) {
+		        const maxPagesToShow = 10; // 最多显示的页码数量
+		        const currentPage = data.number + 1;
+		        const totalPages = data.totalPages;
+		
+		        let startPage = 1;
+		        let endPage = totalPages;
+		
+		        if (totalPages > maxPagesToShow) {
+		          const middlePages = Math.floor(maxPagesToShow / 2);
+		          if (currentPage <= middlePages) {
+		            endPage = maxPagesToShow;
+		          } else if (currentPage >= totalPages - middlePages) {
+		            startPage = totalPages - maxPagesToShow + 1;
+		          } else {
+		            startPage = currentPage - middlePages;
+		            endPage = currentPage + middlePages;
+		          }
+		        }
+		
+		        const firstPageUrl = new URL(urlAddress, window.location.origin);
+		        firstPageUrl.searchParams.delete('pageNumber');
+		        firstPageUrl.searchParams.set('pageNumber', 0);
+		
+		        const lastPageUrl = new URL(urlAddress, window.location.origin);
+		        lastPageUrl.searchParams.delete('pageNumber');
+		        lastPageUrl.searchParams.set('pageNumber', totalPages - 1);
+		
+		        pageHtml += `
+		          <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+		            <a class="page-link" href="#" onclick="event.preventDefault(); initialize('${firstPageUrl.href}')">&laquo;</a>
+		          </li>
+		        `;
+		
+		        for (let i = startPage; i <= endPage; i++) {
+		          const url = new URL(urlAddress, window.location.origin);
+		          url.searchParams.delete('pageNumber');
+		          url.searchParams.set('pageNumber', i - 1);
+		          const newUrlAddress = url.href;
+		          pageHtml += `
+		            <li class="page-item ${i === currentPage ? 'active' : ''}">
+		              <a class="page-link" href="#" onclick="event.preventDefault(); initialize('${newUrlAddress}')">${i}</a>
+		            </li>
+		          `;
+		        }
+		
+		        pageHtml += `
+		          <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+		            <a class="page-link" href="#" onclick="event.preventDefault(); initialize('${lastPageUrl.href}')">&raquo;</a>
+		          </li>
+		        `;
+		      } else {
+		        pageHtml += `
+		          <li class="page-item disabled">
+		            <span class="page-link">&laquo;</span>
+		          </li>
+		          <li class="page-item active">
+		            <span class="page-link">1</span>
+		          </li>
+		          <li class="page-item disabled">
+		            <span class="page-link">&raquo;</span>
+		          </li>
+		        `;
+		      }
+		
+		      pagebody.html(pageHtml);
+		    },
+		    error: function(error) {
+		      console.log(error);
+		    }
+		  });
+		}
 
-	
+
+
+
 	//按下訂單產生互動視窗     
 	function openModal(row) {
 		var orderId = row.querySelector('#id-cell').textContent;

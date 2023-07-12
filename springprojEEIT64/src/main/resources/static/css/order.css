@@ -15,7 +15,14 @@
     .main-content.active {
         margin-left: 180px;
     }
-
+    
+	#item-cell {
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  text-align: left;
+	}	
+	
     .orders-link {
         font-size: 1.25rem;
         font-weight: bold;

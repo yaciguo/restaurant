@@ -110,6 +110,11 @@ public class HomeController {
 	public String dataAnalysis() {
 	    return "dataAnalysis";
 	}
+	@GetMapping("/table")
+	public String table() {
+		return "table";
+	}
+
 	@GetMapping("/test")
 	public String test() {
 		return "test";

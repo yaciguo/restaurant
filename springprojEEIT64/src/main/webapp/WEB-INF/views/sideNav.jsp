@@ -136,7 +136,7 @@
 					class="fa-solid fa-book-open-reader fa-xl"></i> <span
 					class="nav-title">商品管理</span>
 			</a></li>
-			<li><a href="<c:url value='/order' />"
+			<li><a href="<c:url value='/orders' />"
 				class="nav-link side-nav"> <i class="fa-solid fa-list-ul fa-xl"></i>
 					<span class="nav-title">訂單管理</span>
 			</a></li>
