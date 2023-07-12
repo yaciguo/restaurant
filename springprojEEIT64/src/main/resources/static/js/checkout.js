@@ -9,6 +9,8 @@ $(function () {
 	
     loadUnpaidData("eatIn");
     
+    console.log("Target selector: " + target.selector);
+
 	// 監聽 Bootstrap Tabs 切換事件
 	$('#payment-tabs').on('shown.bs.tab', function(e) {
 		var targetTab = $(e.target).attr('href');
@@ -73,6 +75,7 @@ function loadPaidData(type, pageId) {
 // 動態生成表格內容
 function generatePaymentTable(response, type) {
     var target;
+    console.log(type)
     if (type == "eatIn") {
         target = $('#eatInContent');
     } else if (type == "takeOut"){
@@ -80,6 +83,7 @@ function generatePaymentTable(response, type) {
     } else if (type == 'paid'){
 		target = $('#paidContent');
 	}
+	
     target.empty();
 
     var htmlContent = '';
