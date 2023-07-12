@@ -53,10 +53,10 @@ var csrfToken;
 		      var orderStatus = $('#form-select1 option:selected').val();
 		      var note = $('#form-control1').val();
 		      selectedOrders.push({ "id": id, "orderStatus": orderStatus, "note": note });
-		
+			  
 		      var requestUrl = contextPath + '/orders/orderId';
 		      var requestUrl2 = contextPath + '/orders/orderId/' + id;
-		
+				
 		      $.ajax({
 		        url: requestUrl,
 		        type: 'PUT',
@@ -69,8 +69,6 @@ var csrfToken;
 		          console.log("OK");
 		          $('#modal-title').html('<span class="modal-icon text-success"><i class="fas fa-check-circle"></i></span> 訂單記錄更新成功');
 		          $('#success-modal').modal('show');
-		          console.log("----");
-		          console.log(requestUrl2);
 		          initialize(requestUrl2);
 		        },
 		        error: function(error) {
@@ -176,6 +174,8 @@ var csrfToken;
 		          var orderNote = '';
 		          if (orderData.note == 'null'){
 					  orderNote = '';
+				  }else {
+					  orderNote = orderData.note ;
 				  }
 				  		          		
 		          // 判斷單別、電話/桌號
@@ -188,7 +188,6 @@ var csrfToken;
 		            orderType = '外帶';
 		            orderCustomer = orderData.customer;
 		          }
-					console.log(orderData.phone)
 				  if (orderData.phone == null) {
 		          	orderDataPhone = '';
 		          }else {
