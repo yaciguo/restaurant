@@ -75,6 +75,7 @@ function loadPaidData(type, pageId) {
 // 動態生成表格內容
 function generatePaymentTable(response, type) {
     var target;
+    console.log(type)
     if (type == "eatIn") {
         target = $('#eatInContent');
     } else if (type == "takeOut"){
@@ -82,6 +83,7 @@ function generatePaymentTable(response, type) {
     } else if (type == 'paid'){
 		target = $('#paidContent');
 	}
+	
     target.empty();
 
     var htmlContent = '';
