@@ -3,7 +3,8 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	
 	<!-- Js -->
-	<link rel='stylesheet' href="<c:url value='/css/order.css' />" />
+	<link rel='stylesheet' type="text/css" href="<c:url value='/css/order.css' />" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="<c:url value='/js/order.js'/>"></script>
 	<meta name="_contextPath" content="${pageContext.request.contextPath}" />
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
@@ -168,7 +169,7 @@
 								<th>編號</th>
 								<th>單別</th>
 								<th>顧客名</th>
-								<th>時間</th>
+								<th>取餐時間</th>
 								<th>明細</th>
 								<th>總金額</th>
 								<th>電話</th>
@@ -253,7 +254,6 @@
 										</ul>
 									</div>
 	
-
 								</div>
 	
 								<div class="right col-6">
