@@ -24,8 +24,8 @@ function closeModal() {
 }
 //==========================/新增產品
 //要放在function外，因js是由上往下讀取
-const dropdownItems = document.querySelectorAll('.dropdown-item');
-const dropdownButton = document.querySelector('.dropdown-toggle');
+var dropdownItems = document.querySelectorAll('.dropdown-item');
+var dropdownButton = document.querySelector('.dropdown-toggle');
 //==========================新增產品視窗設定
 
 function addProduct() {
@@ -207,25 +207,28 @@ function typesave(event) {
 
 
 //==========================下拉式選單接收新增種類
-$.ajax({
-	url: contextPath + '/getCategories', // 替換為後端 API 的 URL
-	type: 'GET',
-	success: function(response) {
-		// 獲取下拉式選單元素
-		const selectElement = document.getElementById('category-select');
 
-		// 迭代每個類別，創建選項並添加到下拉式選單中
-		response.forEach(function(category) {
-			const option = document.createElement('option');
-			option.value = category.id.toString();
-			option.text = category.name;
-			selectElement.appendChild(option);
-		});
-	},
-	error: function(xhr, status, error) {
-		console.log('獲取類別失敗:');
-		console.log('狀態碼:', xhr.status);
-		console.log('錯誤訊息:', error);
-	}
-});
+$(()=>{
+	$.ajax({
+		url: contextPath + '/getCategories', // 替換為後端 API 的 URL
+		type: 'GET',
+		success: function(response) {
+			// 獲取下拉式選單元素
+			const selectElement = document.getElementById('category-select');
+	
+			// 迭代每個類別，創建選項並添加到下拉式選單中
+			response.forEach(function(category) {
+				const option = document.createElement('option');
+				option.value = category.id.toString();
+				option.text = category.name;
+				selectElement.appendChild(option);
+			});
+		},
+		error: function(xhr, status, error) {
+			console.log('獲取類別失敗:');
+			console.log('狀態碼:', xhr.status);
+			console.log('錯誤訊息:', error);
+		}
+	});
+})
 //==========================/下拉式選單接收新增種類

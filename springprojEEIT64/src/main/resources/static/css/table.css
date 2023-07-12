@@ -3,6 +3,7 @@
 body {
 	background-color: #EEE;
 }
+
 .main-content {
 	min-width: 580px;
 	margin: 20px 20px 20px calc(60px + 20px);
@@ -22,93 +23,88 @@ body {
 	letter-spacing: 2px;
 	color: var(--main-color) !important;
 }
-.container{
-    display: flex;
-    gap:10px;
-    flex-wrap: wrap;
-    /* width: 500px; */
-    justify-content: center;
+
+.container {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	/* width: 500px; */
+	justify-content: center;
 }
-.container .box{
-    margin-top: 30px;
-    position: relative;
-    height: 100px;
-    width: 110px;
-    border-radius: 10px;
-    border: 2px solid gray;
+
+.container .box {
+	margin-top: 30px;
+	position: relative;
+	height: 100px;
+	width: 110px;
+	border-radius: 10px;
+	border: 2px solid gray;
 }
 
 .box {
-    position: relative;
-    /* width: 50px; */
-    height: 50px;
-    background-color: #ccc;
-    cursor: pointer;
-  }
-  
-
-  
-  .box::before,
-  .box::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 70%;
-    height: 4px;
-    background-color: #fff;
-    transform: translate(-50%, -50%);
-  }
-  
-  .box::before {
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
-  
-  .btn-group {
-    display: inline-flex;
-    border-radius: 6px;
-    justify-content: right;
-   
-  }
-  
-  .btn-group input[type="radio"] {
-    display: none;
-  }
-  
-  .btn-group {
-    /* display: flex; */
-    border: 2px solid #ccc;
-    border-radius: 6px;
-    justify-content: flex-end;
-  }
-  
-  .btn-group input[type="radio"] {
-    display: none;
-  }
-  
-  .btn-group label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    cursor: pointer;
-   
-  }
-  
-  .btn-group label:last-child {
-    border-right: none;
-  }
-  
-  .btn-group input[type="radio"]:checked + label {
-    background-color: #ccc;
-  }
-
-
-element.style {
-    width: 300px;
+	position: relative;
+	/* width: 50px; */
+	height: 50px;
+	background-color: #ccc;
+	cursor: pointer;
 }
 
-  
+.box::before, .box::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 70%;
+	height: 4px;
+	background-color: #fff;
+	transform: translate(-50%, -50%);
+}
+
+.box::before {
+	transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.btn-group {
+	display: inline-flex;
+	border-radius: 6px;
+	justify-content: right;
+}
+
+.btn-group input[type="radio"] {
+	display: none;
+}
+
+.btn-group {
+	/* display: flex; */
+	border: 2px solid #ccc;
+	border-radius: 6px;
+	justify-content: flex-end;
+}
+
+.btn-group input[type="radio"] {
+	display: none;
+}
+
+.btn-group label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+.btn-group label:last-child {
+	border-right: none;
+}
+
+.btn-group input[type="radio"]:checked+label {
+	background-color: #ccc;
+}
+
+element.style {
+	width: 300px;
+}
+
 /*   ==============================假功能 */
 
 /*   ==============================2桌 */
@@ -122,7 +118,7 @@ element.style {
 	border: 1px solid #888;
 	width: 26%;
 	display: none;
-	 border-radius: 10px; /* 添加圓角效果 */
+	border-radius: 10px; /* 添加圓角效果 */
 }
 
 .close {
@@ -132,8 +128,7 @@ element.style {
 	font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
@@ -156,7 +151,7 @@ element.style {
 }
 /*   ==============================2桌 */
 /*   ==============================9桌 */
-.test2{
+.test2 {
 	background-color: #fefefe;
 	position: fixed;
 	top: 50%;
@@ -164,31 +159,53 @@ element.style {
 	transform: translate(-50%, -50%);
 	padding: 10px;
 	border: 1px solid #888;
-	width: 600px;
-/* 	display: none; */
+	width: 500px;
+	/* 	display: none; */
 	border-radius: 10px; /* 添加圓角效果 */
-	 display: flex;
-  justify-content: space-between;
-}
-#table9 {
-  position: relative;
-}
-/* 輸入的人數 */
-.guests-count {
-  position: absolute;
-  left: 5px;
-}
-.left-panel, .right-panel {
-  flex: 1;
-   width: 50%; 
+	display: flex;
+	justify-content: space-between;
 }
 
-#intable {
-    display: flex; 
+/* 輸入的人數 */
+.left-panel2 {
+	width: 200px;
+	border-radius: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	padding-right: 70px;
+	margin-left: 20px
 }
+
+.modal-content2 {
+	width: 200px;
+	height: 200px;
+}
+
+.modal-content left-panel {
+	margin-top: -300px;
+	
+}
+
+.right-panel2 {
+	/*  background-color:pink; */
+	margin-left: 30px;
+	width: 270px;
+	padding-top: -500px;
+	justify-content: space-between;
+	border-radius: 20px; border : 1px solid rgba( 0, 0, 0, 0.5);
+	padding: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.modal-content right-panel {
+	/* 	background-color:red; */
+	width: 10px;
+	height: 10px;
+}
+
+
 /*   ==============================9桌 */
 /*   ==============================7桌 */
-.test3{
+.test3 {
 	background-color: #fefefe;
 	position: fixed;
 	top: 50%;
@@ -196,19 +213,40 @@ element.style {
 	transform: translate(-50%, -50%);
 	padding: 10px;
 	border: 1px solid #888;
-	width: 600px;
+	width: 500px;
+	/* 	display: none; */
 	border-radius: 10px; /* 添加圓角效果 */
-	 display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
-#table7 {
-  position: relative;
+
+/* #table7 { */
+/* 	position: relative; */
+/* } */
+
+/* #calltable { */
+/* 	display: flex; */
+/* } */
+
+.left-panel3 {
+	width: 200px;
+	border-radius: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	padding-right: 70px;
+	margin-left: 20px
 }
-.left-panel, .right-panel {
-  flex: 1;
-   width: 50%; 
+
+
+
+.right-panel3 {
+	/*  background-color:pink; */
+	margin-left: 35px;
+	width: 200px;
+	padding-top: -500px;
+	justify-content: space-between;
+	border-radius: 20px; border : 1px solid rgba( 0, 0, 0, 0.5);
+	padding: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
 }
-#calltable {
-    display: flex; 
-}
+
 /*   ==============================7桌 */

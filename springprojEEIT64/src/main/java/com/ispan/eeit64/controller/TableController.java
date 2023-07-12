@@ -1,36 +1,48 @@
 package com.ispan.eeit64.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.ispan.eeit64.service.TableService;
+
 @RestController
-@Controller
 public class TableController {
-	public TableController() {
-		
-	}
-	
-	//篩選日期時間
-	//  @PostMapping("/filter")
-	//  @CrossOrigin(origins = "http://localhost:8080") // 設置允許跨域的來源網址
-	//     public List<Reservation> filterData(@RequestBody FilterRequest filterRequest) {
-	//         // 獲取前端傳來的日期和時間值
-	//         String startDate = filterRequest.getStartDate();
-	//         String selectedTime = filterRequest.getSelectedTime();
 
-	//         // 在這裡根據日期和時間值進行資料篩選的操作
-	//         // 假設你有一個名為"reservations"的資料表，並使用某種資料庫連線方式進行查詢
-	//         // 這裡僅為示範，你需要根據你的資料庫操作進行修改
+    private final TableService tableService;
 
-	//         // 假設使用Spring Data JPA，Reservation為實體類對應資料庫表
-	//         List<Reservation> reservations = reservationRepository.findByDateAndTime(startDate, selectedTime);
-	//         return reservations;
-	//     }
+    @Autowired
+    public TableController(TableService tableService) {
+        this.tableService = tableService;
+    }
+    
+    @PostMapping("/filterData")
+    public Map<String, String>  filterData (@RequestBody Map<String, Object>  requestData) {
+    	 // 從 requestData 中獲取前端傳來的日期和時間值
+        String startDate = (String) requestData.get("startDate");
+        String selectedTime = (String) requestData.get("selectedTime");
 
+        // 委託 Service 來處理資料庫比對邏輯
+        Map<String, String> response = tableService.processFilter(startDate, selectedTime);
+
+        // 組裝回應的鍵值對
+        // Map<String, String> response = new HashMap<>();
+        // response.put("date", reservation.getDate().toString());
+        // response.put("startTime", reservation.getStartTime().toString());
+        
+        // 返回回應內容
+        return response;
+    
+    }
 }
+
