@@ -117,7 +117,8 @@ public class fakeDataInit {
     @Test
     void test() {
         try {
-            addDishData();
+            CategoryBean bean = categoryDao.findById(7).get();
+            categoryDao.delete(bean);
         } catch (Exception e) {
             System.out.println(e);
         }
