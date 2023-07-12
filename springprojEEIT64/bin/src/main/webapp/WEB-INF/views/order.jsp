@@ -3,11 +3,14 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	
 	<!-- Js -->
-	<link rel='stylesheet' href="<c:url value='/css/order.css' />" />
+	<link rel='stylesheet' type="text/css" href="<c:url value='/css/order.css' />" />
+
 	<script type="text/javascript" src="<c:url value='/js/order.js'/>"></script>
 	<meta name="_contextPath" content="${pageContext.request.contextPath}" />
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	<meta name="_csrf" content="${_csrf.token}"/>
+<!-- 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css"> -->
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script> -->
 	
 	
 	<body>
@@ -26,10 +29,10 @@
 					custom-value="5" data-bs-toggle="tab" href="#tab1">已取消</a></li>
 				<li class="nav-item"><a class="orders-link nav-link"
 					custom-value="6" data-bs-toggle="tab" href="#tab1">未付款</a></li>
-				<li>
-					<button type="button" class="btn btn-primary data-expo"
-					style="height: 60%;">匯出訂單.CSV</button>
-				</li>
+<!-- 				<li> -->
+<!-- 					<button type="button" class="btn btn-primary data-expo"  -->
+<!-- 					style="height: 60%;">匯出訂單.CSV</button> -->
+<!-- 				</li> -->
 			</ul>
 	
 			<!--搜尋-->
@@ -73,15 +76,15 @@
 							</li>
 							<li class="order-statechoose"><select class="form-select">
 									<option>更改狀態</option>
-									<option>刪除</option>
+<!-- 									<option>刪除</option> -->
 									<option>備註修改</option>
 							</select></li>
 	
 							<li class="order-statechoose"><select class="form-select" id="form-select1">
-									<option>訂單成立</option>
-									<option>訂單準備中</option>
-									<option>訂單完成</option>
-									<option>訂單取消</option>
+<!-- 									<option>訂單成立</option> -->
+									<option value="order_deal">訂單準備中</option>
+									<option value="order_finish">訂單完成</option>
+									<option value="order_cancel">訂單取消</option>
 							</select></li>
 	
 							<li class="order-statechoose"><input type="text"
@@ -168,7 +171,7 @@
 								<th>編號</th>
 								<th>單別</th>
 								<th>顧客名</th>
-								<th>時間</th>
+								<th>取餐時間</th>
 								<th>明細</th>
 								<th>總金額</th>
 								<th>電話</th>
@@ -253,7 +256,6 @@
 										</ul>
 									</div>
 	
-
 								</div>
 	
 								<div class="right col-6">

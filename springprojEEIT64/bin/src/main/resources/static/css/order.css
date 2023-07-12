@@ -40,6 +40,7 @@
     }
 
     .orders-detail {
+    
         margin: 0.5rem;
         padding: 1rem;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -83,11 +84,15 @@
     .order-search button{
         background-color: pink;
     }
-
+    
+    .order-statechoose button{
+        background-color: pink;
+    }
 
     .order-statechoose{
         display: inline-flex;
     }
+
 
 /*這個在留意是否蓋到別人*/
     li {  

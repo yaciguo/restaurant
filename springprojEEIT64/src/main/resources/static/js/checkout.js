@@ -8,8 +8,6 @@ $(function () {
 	csrfToken = $("meta[name='_csrf']").attr("content"); 
 	
     loadUnpaidData("eatIn");
-    
-    console.log("Target selector: " + target.selector);
 
 	// 監聽 Bootstrap Tabs 切換事件
 	$('#payment-tabs').on('shown.bs.tab', function(e) {
@@ -36,7 +34,7 @@ function loadUnpaidData(type, pageId) {
 	        xhr.setRequestHeader(csrfHeaderName, csrfToken);
 	    },
 	    success: function(response) {
-	        console.log("--------------ajax-queryUnpaid " + response.number);
+//	        console.log("--------------ajax-queryUnpaid " + response.number);
 	        console.log(response);
 	        console.log(response.content);
 	        var currentPage = response.number + 1;
@@ -85,7 +83,7 @@ function generatePaymentTable(response, type) {
 		target = $('#paidContent');
 	}
 
-    target.empty();
+//    target.empty();
 
     var htmlContent = '';
     for (var i = 0; i < response.length; i++) {
