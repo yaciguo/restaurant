@@ -39,7 +39,7 @@ public class DishBean {
 	@Column(name = "cost", columnDefinition = "INT(10) NOT NULL COMMENT'餐點成本'")
 	private Integer cost;
 
-	@Column(name = "picture", columnDefinition = "TEXT NOT NULL COMMENT'照片'")
+	@Column(name = "picture", columnDefinition = "LONGTEXT NOT NULL COMMENT'照片'")
 	private String picture;
 
 	@Column(name = "description", columnDefinition = "varchar(200) NOT NULL COMMENT'餐點描述'")

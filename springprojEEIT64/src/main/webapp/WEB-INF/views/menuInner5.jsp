@@ -22,18 +22,17 @@
         </head>
 
         <body class="">
-            
+            <!-- 導覽列 -->
+            <%@ include file="nav.jsp" %>
                 <div class="container">
                     <!-- 輪播 -->
                     <div class="row">
-                    <!-- 導覽列 -->
-            			<%@ include file="nav.jsp" %>
                     </div>
                     <!--  -->
                     <div class="row" id="container-intro">
                         <div class="col-sm-4">
                             <div>墨竹亭(公益店)</div><br>
-                            <div>(外帶)</div>
+                            <div>內用 5桌</div>
                         </div>
 
                         <div class="col-sm-5">
@@ -121,7 +120,7 @@
                     alert("購物車為空");
                     event.preventDefault(); // 取消事件的默认行为
                 } else {
-                    window.location.href = "<c:url value='/shoppingcart' />";
+                    window.location.href = "<c:url value='/shoppingcartInner5' />";
                 }
             }
 
@@ -287,7 +286,6 @@
                             }
                             //"<c:url value='/images/cart.png' />"
 //                             console.log(obj.picture)
-                            
                             let base64Image  = obj.picture; 
                             let statusText = obj.status === 'Y' ? '' : '售完';
                             // 檢查是否為售完商品，若是則設定 disabled 屬性
@@ -297,14 +295,14 @@
                             let rowClass = obj.status === 'Y' ? '' : 'soldOutBackground noHover';
 
                             content += "<tr class='tableRow " + categoryName + " " + rowClass + "'>" +
-                                "<td id='td1' style='width: 8%;'><img src='" + base64Image  + "' style='width: 160px;'></td>" +
-                                "<td id='td6' style='width: 9%;'>" + (obj.status === 'Y' ? statusText : "<span class='tdStatus'>" + statusText + "</span>") + "</td>" +
-                                "<td id='td2' style='width: 10%;font-size: 23px;font-weight:900;'>" + obj.name + "</td>" +
-                                "<td id='td5' style='width: 25%;font-size: 18px'>" + obj.description + "</td>" +
-                                "<td id='td3' style='width: 10%;font-size: 23px;font-weight:900;'>$ " + obj.price + "</td>" +
-                                "<td id='td4' style='width: 7%;'>" + addButton +
-                                "</td>" +
-                                "<tr>";
+                            "<td id='td1' style='width: 8%;'><img src='" + base64Image  + "' style='width: 160px;'></td>" +
+                            "<td id='td6' style='width: 9%;'>" + (obj.status === 'Y' ? statusText : "<span class='tdStatus'>" + statusText + "</span>") + "</td>" +
+                            "<td id='td2' style='width: 10%;font-size: 23px;font-weight:900;'>" + obj.name + "</td>" +
+                            "<td id='td5' style='width: 25%;font-size: 18px'>" + obj.description + "</td>" +
+                            "<td id='td3' style='width: 10%;font-size: 23px;font-weight:900;'>$ " + obj.price + "</td>" +
+                            "<td id='td4' style='width: 7%;'>" + addButton +
+                            "</td>" +
+                            "<tr>";
 
 
 

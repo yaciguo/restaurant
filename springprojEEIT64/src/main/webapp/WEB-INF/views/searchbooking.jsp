@@ -77,13 +77,14 @@
 
       <body>
         <!-- 導覽列 -->
-        <div class="container">
           <%@ include file="nav.jsp" %>
-            <div class="row">
-              <div class="col-sm-12">
-                <header>
+          <header style="margin-top: 20px;">
                   <h1>訂位查詢</h1>
                 </header>
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                
               </div>
             </div>
             <br />
