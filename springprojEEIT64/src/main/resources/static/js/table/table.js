@@ -22,7 +22,7 @@ document.getElementById("startdate").addEventListener("change", function() {
   filterData();
 });
 
-// 監聽時間選擇框的值變化事件ㄋ
+// 監聽時間選擇框的值變化事件
 document.getElementById("selectTime").addEventListener("change", function() {
   filterData();
 });
@@ -184,7 +184,7 @@ function callIntable() {
 //按確認
 function callwait() {
   var dateInput = document.getElementById('dateInput').value;
-  var timeInput = document.getElementById('timeInput').value;
+  var pNumber3 = document.getElementById('pNumber3').value;
   var nameInput = document.getElementById('nameInput').value;
   var maleInput = document.getElementById('maleInput').checked;
   var femaleInput = document.getElementById('femaleInput').checked;

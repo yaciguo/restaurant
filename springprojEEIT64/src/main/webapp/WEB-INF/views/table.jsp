@@ -99,28 +99,29 @@
 	<!-- 主要內容區域 -->
 	<div id="main-content" class="main-content">
 		<br> <br>
-		
+
 		<!-- 將時間跟日期放在畫面中同一行 -->
 		<!-- 				<div class="row"> -->
-			<div class="col-auto d-flex justify-content-center align-items-center">
-				<label for="startdate" style="width:130px">訂位日期：</label> <input class="form-control"
-					id="startdate" name="startdate" placeholder='yyyy-mm-dd'
-					type="text" style="width:150px "/>
-			</div>
-			<div class="col-auto d-flex justify-content-center align-items-center">
-				<label for="pNumber" style="width:172px ">訂位時間:</label><select id="selectTime"
-					onchange="selectTime()">
-					<option value="" label="請選擇時間" />
-					<option value="1" label="12:00" />
-					<option value="2" label="13:00" />
-					<option value="3" label="14:00" />
-					<option value="4" label="15:00" />
-					<option value="5" label="16:00" />
-					<option value="6" label="17:00" />
-					<option value="7" label="18:00" />
-				</select>
-			</div>
-		
+		<div class="col-auto d-flex justify-content-center align-items-center">
+			<label for="startdate" style="width: 130px" >訂位日期：</label> <input
+				class="form-control" id="startdate" name="startdate"
+				placeholder='yyyy-mm-dd' type="text" style="width: 150px" />
+		</div>
+		<br>
+		<div class="col-auto d-flex justify-content-center align-items-center">
+			<label for="pNumber" style="width: 172px">訂位時間:</label><select
+				id="selectTime" onchange="selectTime()">
+				<option value="" label="請選擇時間" />
+				<option value="1" label="12:00" />
+				<option value="2" label="13:00" />
+				<option value="3" label="14:00" />
+				<option value="4" label="15:00" />
+				<option value="5" label="16:00" />
+				<option value="6" label="17:00" />
+				<option value="7" label="18:00" />
+			</select>
+		</div>
+
 		<!-- 				</div> -->
 		<!-- 			</div> -->
 		<!-- 		<input type="text" name="findphone" id="fphone" placeholder="請輸入電話查詢"> -->
@@ -215,95 +216,116 @@
 
 		<!-------------- 現場候位與電話預約9桌--------------->
 		<div id="intable" class="test2" style="display: none">
-			<div class="left-panel">
-				<!-- 左邊的內容 -->
-				<div class="modal-content">
-					<span class="close" onclick="closewait()">&times;</span> <label
-						for="guestsInput">人數：</label> <br> <select id="guestsInput">
-						<option value="" label="請選擇人數"></option>
-						<option value="1" label="1"></option>
-						<option value="2" label="2"></option>
-						<option value="3" label="3"></option>
-						<option value="4" label="4"></option>
-					</select> <br>
-					<button onclick="confirmwait()">確認</button>
+			<div class="te2" style="display: flex">
+				<div class="left-panel2">
+					<!-- 左邊的內容 -->
+					<div class="modal-content2">
+						<div style="margin-right: 20px" class="close"
+							onclick="closewait()">&times;</div>
+						<br>
+						<h5>現場候位：</h5><br>
+							<!-- 					<label for="guestsInput">人數：</label>  -->
+							<select id="guestsInput">
+								<option value="" label="請選擇人數"></option>
+								<option value="1" label="1"></option>
+								<option value="2" label="2"></option>
+								<option value="3" label="3"></option>
+								<option value="4" label="4"></option>
+							</select> <br><br>
+							<button onclick="confirmwait()">確認</button>
+					</div>
 				</div>
-			</div>
-			<br>
-			<div class="right-panel">
-				<!-- 右邊的內容 -->
-				<div class="modal-content left-panel">
-					<span class="close" onclick="closewait()">&times;</span> <label
-						for="dateInput">日期：</label> <input type="date" id="dateInput">
-					<br> <label for="timeInput">時間：</label> <select id="pNumber">
-						<option value="" label="請選擇時間" />
-						<option value="1" label="12:00" />
-						<option value="2" label="13:00" />
-						<option value="3" label="14:00" />
-						<option value="4" label="15:00" />
-						<option value="5" label="16:00" />
-						<option value="6" label="17:00" />
-						<option value="7" label="18:00" />
-					</select><br> <label for="nameInput">姓名：</label> <input type="text"
-						id="nameInput" readonly> <br> <label
-						for="genderInput">性別：</label> <input type="radio" id="maleInput"
-						class="gender" value="M"> <label for="maleInput">先生</label>
-					<input type="radio" id="femaleInput" class="gender" value="F">
-					<label for="femaleInput">小姐</label> <br> <label
-						for="phoneInput">手機：</label> <input type="tel" id="phoneInput"
-						placeholder="請輸入09xxxxxxxx" pattern="[0]{1}[9]{1}[0-9]{8}">
-					<br>
-					<button onclick="confirmwait()">確認</button>
+				<br>
+				<div class="right-panel2">
+					<!-- 右邊的內容 -->
+					<div class="modal-content right-panel"
+						style="border: 1px solid rgba(0, 0, 0, 0);">
+						<div style="padding-left: 180px" class="close"
+							onclick="closewait()">&times;</div>
+						<h5>來電預約：</h5><br>
+						<label for="dateInput">預約日期：</label> <input type="date"
+							id="dateInput"> <br>
+						<label for="timeInput">預約時間：</label> <select id="pNumber">
+							<option value="" label="請選擇時間" />
+							<option value="1" label="12:00" />
+							<option value="2" label="13:00" />
+							<option value="3" label="14:00" />
+							<option value="4" label="15:00" />
+							<option value="5" label="16:00" />
+							<option value="6" label="17:00" />
+							<option value="7" label="18:00" />
+						</select><br> 
+						<label for="nameInput">姓名：</label> 
+						<input type="text"id="nameInput" readonly> <br> 
+						<label for="genderInput">性別：</label> 						
+						<label for="maleInput"><input type="radio" id="maleInput"	class="gender" value="M"> 先生</label>						
+						<label for="femaleInput"><input type="radio" id="femaleInput" class="gender" value="F">小姐</label> <br> 					
+						<label for="phoneInput">手機：</label> 
+						<input type="tel" id="phoneInput" placeholder="請輸入09xxxxxxxx" pattern="[0]{1}[9]{1}[0-9]{8}">
+						<br>
+						<button onclick="confirmwait()">確認</button>
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-------------- 現場候位與電話預約9桌--------------->
 		<!-------------- 現場候位與電話預約7桌--------------->
 		<div id="calltable" class="test3" style="display: none">
-			<div class="left-panel">
-				<!-- 左邊的內容 -->
-				<div class="modal-content left-panel">
-					<span class="close" onclick="closewait()">&times;</span> <label
-						for="guestsInput">人數：</label> <br> <select id="guestsInput">
-						<option value="" label="請選擇人數"></option>
-						<option value="1" label="1"></option>
-						<option value="2" label="2"></option>
-						<option value="3" label="3"></option>
-						<option value="4" label="4"></option>
-					</select> <br>
-					<button onclick="callwait()">確認</button>
+			<div class="te3" style="display: flex">
+				<div class="left-panel3">
+					<!-- 左邊的內容 -->
+					<div class="modal-content left-panel" style=" border: 1px solid rgba(0, 0, 0, 0);  border-radius: 1.3rem;">
+						<div style="margin-left: 170px" class="close"
+							onclick="callclose()">&times;</div>
+						<br>
+						<h5>現場候位：</h5><br>
+<!-- 							<label for="guestsInput">人數：</label>  -->
+							<select	id="guestsInput">
+								<option value="" label="請選擇人數"></option>
+								<option value="1" label="1"></option>
+								<option value="2" label="2"></option>
+								<option value="3" label="3"></option>
+								<option value="4" label="4"></option>
+							</select> <br><br>
+							<button onclick="callwait()">確認</button>
+					</div>
 				</div>
-			</div>
-			<br>
-			<div class="right-panel">
-				<!-- 右邊的內容 -->
-				<div class="modal-content right-panel">
-					<span class="close" onclick="callclose()">&times;</span><label
-						for="dateInput">日期：</label> <input type="date" id="dateInput">
-					<br> <label>時間：</label> <select id="timeInput">
-						<option value="" label="請選擇時間" />
-						<option value="1" label="12:00" />
-						<option value="2" label="13:00" />
-						<option value="3" label="14:00" />
-						<option value="4" label="15:00" />
-						<option value="5" label="16:00" />
-						<option value="6" label="17:00" />
-						<option value="7" label="18:00" />
-					</select> <br> <label for="nameInput">姓名：</label> <input type="text"
-						id="nameInput"> <br> <label for="genderInput">性別：</label>
-					<input type="radio" id="maleInput" name="gender" value="M">
-					<label for="maleInput">先生</label> <input type="radio"
-						id="femaleInput" name="gender" value="F"> <label
-						for="femaleInput">小姐</label> <br> <label for="phoneInput">手機：</label>
-					<input type="tel" id="phoneInput" placeholder="請輸入09xxxxxxxx"
-						pattern="[0]{1}[9]{1}[0-9]{8}"> <br>
-					<button onclick="callwait()">確認</button>
+				<br>
+				<div class="right-panel3">
+					<!-- 右邊的內容 -->
+					<div class="modal-content right-panel"
+						style="border: 1px solid rgba(0, 0, 0, 0);">
+						<div style="padding-left: 165px" class="close"
+							onclick="callclose()">&times;</div>
+						<h5>來電預約：</h5><br><br>
+						<label for="dateInput">預約日期：</label> <input type="date"
+							id="dateInput"> <br> 
+							<label for="timeInput3">預約時間：</label> 
+							<select	id="pNumber3">
+							<option value="" label="請選擇時間" />
+							<option value="1" label="12:00" />
+							<option value="2" label="13:00" />
+							<option value="3" label="14:00" />
+							<option value="4" label="15:00" />
+							<option value="5" label="16:00" />
+							<option value="6" label="17:00" />
+							<option value="7" label="18:00" />
+						</select> <br> 
+						<label for="nameInput">姓名：</label> 
+						<input type="text"	id="nameInput"> <br> 
+							<label for="genderInput">性別：</label>						
+						<label for="maleInput"><input type="radio" id="maleInput" name="gender" value="M">先生</label> 						
+						<label for="femaleInput"><input type="radio"	id="femaleInput" name="gender" value="F"> 小姐</label> <br> 
+						<label for="phoneInput">手機：</label>
+						<input type="tel" id="phoneInput" placeholder="請輸入09xxxxxxxx"
+							pattern="[0]{1}[9]{1}[0-9]{8}"> <br>
+						<button onclick="callwait()">確認</button>
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-------------- 現場候位與電話預約7桌--------------->
 
-	</div>
 	</div>
 	<!-- /主要內容區域 -->
 </body>
