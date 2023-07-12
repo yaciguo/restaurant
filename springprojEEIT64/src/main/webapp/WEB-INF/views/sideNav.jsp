@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>webDesign-RS</title>
+<title id="sidenav-title">webDesign-RS</title>
 
 <!-- Favicons -->
 <link href="assets/img/s-logo.png" rel="icon">
@@ -120,7 +120,7 @@
 <body>
 	<!-- 左側 導覽列 -->
 	<nav id="sidebar" class="sidebar">
-		<img src="${pageContext.request.contextPath}/assets/img/logo.png">
+		<img id="sideNav-shopLogo-img" src="${pageContext.request.contextPath}/assets/img/logo.png">
 
 		<ul class="nav flex-column" style="list-style: none; padding: 30px 0;">
 			<li><a href="<c:url value='/basicSettings' />"
@@ -185,6 +185,7 @@
 <script>
 	$(function() {
 		loadPage("/restaurant/checkout")
+		getAndSetAllSettings();
 
 		// 導覽列控制設定
 		$('#sidebar-Toggle').on('click', function () {
@@ -238,6 +239,27 @@
 				console.log('登出失敗:', error);
 			}
 		});
+	}
+
+	function getAndSetAllSettings(){
+		console.log("${pageContext.request.contextPath}/basicSettings.api/getBasicSettings")
+		$.ajax({
+			type: "get",
+			url: "${pageContext.request.contextPath}/basicSettings.api/getBasicSettings",
+			async : false,
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+			},
+			success : function(response) {
+				console.log(response);
+				$("#sidenav-title").html(response.data.shopName);
+				$("#sideNav-shopLogo-img").attr("src", response.data.logoImg);
+				$("#sideNav-shopLogo-img").css("width","100%");
+			},
+			error : function(error) {
+				console.log('資料獲取失敗:', error);
+			}
+		})
 	}
 </script>
 

@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.ispan.eeit64.controller.APIResult.APIResult;
 import com.ispan.eeit64.controller.APIResult.StatusCode;
+import com.ispan.eeit64.entity.BasicSettingsBean;
 import com.ispan.eeit64.entity.ClosingTimeBean;
 import com.ispan.eeit64.entity.FdTableBean;
 import com.ispan.eeit64.entity.OpeningHourBean;
+import com.ispan.eeit64.service.impl.BasicSettingsServiceImpl;
 import com.ispan.eeit64.service.impl.ClosingTimeServiceImpl;
 import com.ispan.eeit64.service.impl.FdTableServiceImpl;
 import com.ispan.eeit64.service.impl.OpeningHourServiceImpl;
@@ -43,6 +45,8 @@ public class BasicSettingsController {
     @Autowired
     FdTableServiceImpl FdTableService;
     @Autowired
+    BasicSettingsServiceImpl basicSettingsService;
+    @Autowired
     Environment env;
     
     @ExceptionHandler(value = InvalidFormatException.class)
@@ -52,6 +56,34 @@ public class BasicSettingsController {
         // handle exception here
         return apiResult;
     }
+    
+    @GetMapping("/getBasicSettings")
+    public @ResponseBody APIResult getBasicSettings(
+    ){
+        try {
+            APIResult result = new APIResult(StatusCode.SUCCESS, basicSettingsService.getAllSettings(), "成功獲取資料");
+            return result;
+        } catch (Exception e) {
+            APIResult result = new APIResult(StatusCode.ERROR, null, "無法獲取資料");
+            return result;
+        }
+    }
+    
+    @PostMapping("/editBasicSettings")
+    public @ResponseBody APIResult editBasicSettings(
+        @RequestBody BasicSettingsBean bean
+    ){
+        System.out.println(bean);
+        APIResult result;
+        try {
+            result = new APIResult(StatusCode.SUCCESS, basicSettingsService.update(bean), "成功儲存資料");
+            return result;
+        } catch (Exception e) {
+            result = new APIResult(StatusCode.ERROR, bean, "無法儲存資料");
+            return result;
+        }
+    }    
+
 
     // OpeningHour
     @GetMapping("/getAllOpeningHour")

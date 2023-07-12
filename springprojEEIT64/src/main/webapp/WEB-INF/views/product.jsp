@@ -78,78 +78,42 @@
 
 <body>
 	<!-- 左側導覽列 -->
-	<%@ include file="sideNav.jsp"%>
 	<!-- 主要內容區域 -->
 	<div id="main-content" class="main-content">
 		<!-- 上方列按鈕-->
-		<!-- 		<button type="button" class="btn btn-primary add-activity" -->
-		<!-- 			onclick="showModal()">新增產品種類</button> -->
+		<button type="button" class="btn btn-primary add-type"
+			onclick="addtype()">新增餐點種類</button>
 		<button type="button" class="btn btn-primary add-activity"
-			onclick="fdmix()">新增產品</button>
-		<div class="btn-group">
-			<!-- 			<button type="button" class="btn btn-primary dropdown-toggle" -->
-			<!-- 				data-bs-toggle="dropdown" aria-expanded="false">請選擇產品種類</button> -->
-			<!-- 			<ul class="dropdown-menu"> -->
-			<!-- 				<li><a class="dropdown-item" href="#" data-category-id="1">乾麵類</a></li> -->
-			<!-- 				1 -->
-			<!-- 				<li><a class="dropdown-item" href="#" data-category-id="2">湯麵類</a></li> -->
-			<!-- 				2 -->
-			<!-- 				<li><a class="dropdown-item" href="#" data-category-id="3">飯類</a></li> -->
-			<!-- 				3 -->
-			<!-- 				<li><a class="dropdown-item" href="#" data-category-id="4">湯類</a></li> -->
-			<!-- 				4 -->
-			<!-- 				<li><a class="dropdown-item" href="#" data-category-id="5">青菜類</a></li> -->
-			<!-- 				5 -->
-			<!-- 				<li><a class="dropdown-item" href="#" data-category-id="6">小菜類</a></li> -->
-			<!-- 				6 -->
-			<!-- 				<li><a class="dropdown-item" href="#" data-category-id="7">茶類</a></li> -->
-			<!-- 				7 -->
-			<!-- 			</ul> -->
-		</div>
+			onclick="addfd()">新增餐點</button>
 		<!-- 上方列按鈕-->
 		<br> <br>
 		<!-- 餐點總表-->
-
 		<!-- 產品總表格 -->
 		<div class="tab-pane fade show active" id="tab1">
 			<table class="table-product">
 				<thead>
 					<tr class="text-center">
-						<td colspan="9">餐點總表</td>
+						<td colspan="5">餐點總表</td>
 					</tr>
 					<tr class="text-center">
 						<td>餐點編號</td>
-						<td>Check</td>
+						<!-- 						<td>Check</td> -->
 						<td>餐點名稱</td>
 						<td>餐點價格</td>
 						<td>餐點成本</td>
-						<td>餐點描述</td>
+<!-- 						<td>餐點描述</td> -->
 						<td>餐點狀態</td>
 					</tr>
 				</thead>
-				<!-- 新增幾列 -->
-
-				<%-- 				<c:forEach items="${dishes}" var="dish"> --%>
-				<!-- 					<tr> -->
-				<%-- 						<td><c:out value="${dish.id}" /></td> --%>
-				<%--<td><c:out value="${dish.name}" /></td> --%>
-				<%-- 						<td><c:out value="${dish.categoryBean}" /></td> --%>
-				<%-- 						<td><c:out value="${dish.price}" /></td> --%>
-				<%-- 						<td><c:out value="${dish.cost}" /></td> --%>
-				<%-- 						<td><c:out value="${dish.description}" /></td> --%>
-				<!-- 					</tr> -->
-				<%-- 				</c:forEach> --%>
 				<!-- 之後資料庫取得資料並將其存放在json中，再建立新的表格列 -->
+				<!-- 不用foreach 前端接收後端 Controller 一樣用ajax-->
 				<c:forEach var="item" items="${list.content}">
 					<tr class="tr-title">
 						<td>${item.id}</td>
-						<td><label style="display: block;"><input
-								name="select[]" value="1" type="checkbox"
-								onchange="updateSelectedItems()"></label></td>
 						<td>${item.name}</td>
-						<td>${item.price}</td>
+						<!-- <td>${item.price}</td> -->
 						<td>${item.cost}</td>
-						<td>${item.description}</td>
+<%-- 						<td>${item.description}</td> --%>
 						<td>${item.status}</td>
 						<%-- 						<td><c:forEach var="activity" items="${item.activityBean}"> --%>
 						<%--        	 					${activity.name}</c:forEach></td> --%>
@@ -170,39 +134,13 @@
 						<span class="close" onclick=" closeModal()">&times;</span>
 					</div>
 					<div class="modal-body px-2">
-						<div class="addproduct-detail" style="display: none;">
-							<strong>餐點編號：</strong><input type="text" id="add-id" disabled>
-						</div>
 						<div class="addproduct-detail">
-						<select id="categoryId" required="required">
-                      <option value="">請選擇類型</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      
-                    </select>
-						
-						
-<!-- 							<button type="button" class="btn btn-primary dropdown-toggle" -->
-<!-- 								data-bs-toggle="dropdown" aria-expanded="false" id="pselect">請選擇產品種類</button> -->
-<!-- 							<ul class="dropdown-menu" > -->
-<!-- 								<li><a class="dropdown-item" href="#" data-category-id="1">乾麵類</a></li> -->
-<!-- 								1 -->
-<!-- 								<li><a class="dropdown-item" href="#" data-category-id="2">湯麵類</a></li> -->
-<!-- 								2 -->
-<!-- 								<li><a class="dropdown-item" href="#" data-category-id="3">飯類</a></li> -->
-<!-- 								3 -->
-<!-- 								<li><a class="dropdown-item" href="#" data-category-id="4">湯類</a></li> -->
-<!-- 								4 -->
-<!-- 								<li><a class="dropdown-item" href="#" data-category-id="5">青菜類</a></li> -->
-<!-- 								5 -->
-<!-- 								<li><a class="dropdown-item" href="#" data-category-id="6">小菜類</a></li> -->
-<!-- 								6 -->
-<!-- 								<li><a class="dropdown-item" href="#" data-category-id="7">茶類</a></li> -->
-<!-- 								7 -->
-<!-- 							</ul> -->
+							<select id="category-select" required="required">								
+							</select>
+						</div>
+						<div class="py-4">
+							<span><B>新增餐點圖：</B></span> <input type="file" accept=".jpg, .png"
+								id="fdpictureInput">
 						</div>
 						<div class="addproduct-detail">
 							<strong>餐點名稱：</strong> <input type="text" id="add-name" required>
@@ -217,6 +155,7 @@
 							<strong>餐點描述：</strong> <input type="text" id="add-description"
 								required>
 						</div>
+						
 					</div>
 					<div class="modal-footer justify-content-center">
 						<button type="button" class="btn btn-secondary px-5 py-2 mx-4"
@@ -227,7 +166,33 @@
 				</form>
 			</div>
 		</div>
-
+		<!-- 修改新增產品彈跳視窗-->
+		<!-- 新增產品彈跳視窗-->
+		<div class="modal" id="myType" tabindex="-1"
+			aria-labelledby="mixproduct-modalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<form class="modal-content" id="addproduct-form">
+					<div class="modal-header">
+						<h4 class="modal-title" id="addproduct-modalLabel">
+							<B>新增產品種類</B>
+						</h4>
+						<span class="close" onclick=" closetype()">&times;</span>
+					</div>
+					<div class="modal-body px-2">
+						<div class="fdtype">
+							<strong>輸入產品種類：</strong> <input type="text" id="type-name"
+								required>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary px-5 py-2 mx-4"
+							data-bs-dismiss="modal" onclick="tpyecancel()">取消</button>
+						<button type="submit" class="btn btn-primary px-5 py-2 mx-4"
+							onclick="typesave(event)">確認</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 	<!-- 主要內容區域 -->
 

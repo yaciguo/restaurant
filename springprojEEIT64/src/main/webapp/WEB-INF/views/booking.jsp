@@ -377,7 +377,6 @@ document.getElementById("pNumber").addEventListener("change", function() {
             <form:radiobutton path="gender" name="gender" value="F" required="true" label="小姐" />
             <form:errors path="name" cssClass="error" />
             <form:errors path="gender" cssClass="error" />        
-
           <br /><br />
           <label for="phone">手機:</label>
           	<form:input path="phone" type="tel" id="phone" placeholder="請輸入09xxxxxxxx" pattern="[0]{1}[9]{1}[0-9]{8}" required="true" /><br /><br />

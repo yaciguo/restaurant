@@ -1,0 +1,47 @@
+[
+	{
+		"id": 1,
+		"name": "Activity 0",
+		"type": "gift",
+		"amount": 500,
+		"discount": 20,
+		"startDate": 1685548800000,
+		"endDate": 1688054400000
+	},
+	{
+		"id": 2,
+		"name": "Activity 1",
+		"type": "discount",
+		"amount": 1000,
+		"discount": 40,
+		"startDate": 1685548800000,
+		"endDate": 1688054400000
+	},
+	{
+		"id": 3,
+		"name": "Activity 2",
+		"type": "discount",
+		"amount": 1500,
+		"discount": 80,
+		"startDate": 1685548800000,
+		"endDate": 1688054400000
+	},
+	{
+		"id": 4,
+		"name": "Activity 3",
+		"type": "discount",
+		"amount": 2000,
+		"discount": 120,
+		"startDate": 1685548800000,
+		"endDate": 1688054400000
+	},
+	{
+		"id": 5,
+		"name": "Activity 4",
+		"type": "discount",
+		"amount": 2500,
+		"discount": 200,
+		"startDate": 1685548800000,
+		"endDate": 1688054400000
+	}
+]

@@ -80,11 +80,19 @@ public class orderTest {
 		// List<Object[]> list = oDao.sumCostByDishIdsAndOrderTime(ids, s, e);
 		// List<Object[]> list = oDao.sumQuantityByAllDishIdsAndOrderTime( s, e);
 		// List<Object[]> list = oDao.sumQuantityByAllCategoryIdsAndOrderTime( s, e);
-		// Integer list = oDao.sumCostByOrderTime( s, e);
+		Integer list = oDao.sumSalesPriceByAllDishIdsAndOrderTime( s, e);
+
+		// Integer list = oDao.sumCostByOrderTime( s, e);\
+		// int a = 0;
 		// for(Object[] o : list){
 		// 	System.out.println(o[0]);
-		// 	// System.out.println(o[1]);
+		// 	System.out.println(o[1].getClass());
+		// 	a += (long)o[1];
 		// }
+		// for(Object[] o : list2){
+		// 	System.out.println(o[0]);
+		// }
+		System.out.println(list);
 		// System.out.println(list.size());
 		// System.out.println(list);
 	}
@@ -117,7 +125,7 @@ public class orderTest {
 		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM");
 		Date s = f.parse("2023-01-10");
 		Date e = f.parse("2023-08-12");
-		System.out.println(t.getCountOrders(t.MONTH_METHOD, null, s, e));
+		// System.out.println(t.getCountOrders(t.MONTH_METHOD, null, s, e));
 		// for(Map a : t.splitDate(t.DAY, s, e)){
 		// 	System.out.println(a);
 		// }
