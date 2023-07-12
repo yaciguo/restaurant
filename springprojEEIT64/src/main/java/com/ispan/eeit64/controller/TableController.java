@@ -36,9 +36,9 @@ public class TableController {
         Map<String, String> response = tableService.processFilter(startDate, selectedTime);
 
         // 組裝回應的鍵值對
-        Map<String, String> response = new HashMap<>();
-        response.put("date", reservation.getDate().toString());
-        response.put("startTime", reservation.getStartTime().toString());
+        // Map<String, String> response = new HashMap<>();
+        // response.put("date", reservation.getDate().toString());
+        // response.put("startTime", reservation.getStartTime().toString());
         
         // 返回回應內容
         return response;

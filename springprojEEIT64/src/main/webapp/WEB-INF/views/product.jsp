@@ -160,7 +160,7 @@
 					<div class="modal-footer justify-content-center">
 						<button type="button" class="btn btn-secondary px-5 py-2 mx-4"
 							data-bs-dismiss="modal" onclick="fdcancel()">取消</button>
-						<button type="submit" class="btn btn-primary px-5 py-2 mx-4"
+						<button type="button" class="btn btn-primary px-5 py-2 mx-4"
 							onclick="addProduct()" id="addp">確認</button>
 					</div>
 				</form>
