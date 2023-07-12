@@ -82,12 +82,6 @@ function generatePaymentTable(response, type) {
     } else if (type == 'paid'){
 		target = $('#paidContent');
 	}
-<<<<<<<<< Temporary merge branch 1
-	console.log(type)
-	console.log(target)
-=========
-	
->>>>>>>>> Temporary merge branch 2
     target.empty();
 
     var htmlContent = '';
