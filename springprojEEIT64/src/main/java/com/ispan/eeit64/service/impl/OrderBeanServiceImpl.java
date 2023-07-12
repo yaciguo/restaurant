@@ -1,8 +1,6 @@
 package com.ispan.eeit64.service.impl;
 
 import java.sql.Timestamp;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -125,30 +123,10 @@ public class OrderBeanServiceImpl implements OrderBeanService{
             	  record.setOrderCancel(new Timestamp(System.currentTimeMillis()));
               } else if(status.equals("order_finish")) {
             	  record.setOrderFinish(new Timestamp(System.currentTimeMillis()));
-            	  orders.setCheckoutBean(new CheckoutBean(null,"N",orderBean));      	   
+//            	  orders.setCheckoutBean(new CheckoutBean(null,"N",orderBean));
+            	  
               } 
-              
-//            // 设置订单处理时间
-//              if (status.equals("訂單準備中")) {
-//                  ZoneId taiwanZone = ZoneId.of("Asia/Taipei");
-//                  ZonedDateTime taiwanTime = ZonedDateTime.now(taiwanZone);
-//                  record.setOrderDeal(Timestamp.from(taiwanTime.toInstant()));
-//              }
-//              // 设置订单取消时间
-//              else if (status.equals("訂單取消")) {
-//                  ZoneId taiwanZone = ZoneId.of("Asia/Taipei");
-//                  ZonedDateTime taiwanTime = ZonedDateTime.now(taiwanZone);
-//                  record.setOrderCancel(Timestamp.from(taiwanTime.toInstant()));
-//              }
-//              // 设置订单完成时间和CheckoutBean
-//              else if (status.equals("訂單完成")) {
-//                  ZoneId taiwanZone = ZoneId.of("Asia/Taipei");
-//                  ZonedDateTime taiwanTime = ZonedDateTime.now(taiwanZone);
-//                  record.setOrderFinish(Timestamp.from(taiwanTime.toInstant()));
-//                  orders.setCheckoutBean(new CheckoutBean(null, "N", orderBean));
-//              }
-
-              orderRecordBeanRepository.save(record);
+              orderRecordBeanRepository.save(record);                         
               orderBeanRepository.save(order);
           }
       } catch (Exception e) {

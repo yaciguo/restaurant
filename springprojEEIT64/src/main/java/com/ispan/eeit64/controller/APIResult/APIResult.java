@@ -21,7 +21,6 @@ public class APIResult {
     public APIResult() {
 
     }
-
     public Object getData() {
         return data;
     }

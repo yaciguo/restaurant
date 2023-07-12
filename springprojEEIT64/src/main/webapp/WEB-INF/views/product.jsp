@@ -9,79 +9,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<meta name="_contextPath" content="${pageContext.request.contextPath}" />
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
-<meta name="_csrf" content="${_csrf.token}"/>
-
 <link rel='stylesheet' href="<c:url value='/css/product.css' />" />
-<!-- <link -->
-<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" -->
-<!-- 	rel="stylesheet" -->
-<!-- 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" -->
-<!-- 	crossorigin="anonymous" /> -->
-<!-- <script -->
-<!-- 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" -->
-<!-- 	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" -->
-<!-- 	crossorigin="anonymous"></script> -->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<%-- <meta name="_csrf" content="${_csrf.token}" /> --%>
-<%-- <meta name="_csrf_header" content="${_csrf.headerName}" /> --%>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <title>product</title>
 
 <!-- Favicons -->
-<!-- <link href="assets/img/s-logo.png" rel="icon"> -->
+<link href="assets/img/s-logo.png" rel="icon">
 
-<!-- <link -->
-<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" -->
-<!-- 	rel="stylesheet" -->
-<!-- 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" -->
-<!-- 	crossorigin="anonymous"> -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
 
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" -->
-<!-- 	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" -->
-<!-- 	crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- <script -->
-<!-- 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" -->
-<!-- 	integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" -->
-<!-- 	crossorigin="anonymous"> -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+	integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+	crossorigin="anonymous">
 	
-<!-- </script> -->
+</script>
 
-<!-- <script -->
-<!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js" -->
-<!-- 	integrity="sha512-nhY06wKras39lb9lRO76J4397CH1XpRSLfLJSftTeo3+q2vP7PaebILH9TqH+GRpnOhfAGjuYMVmVTOZJ+682w==" -->
-<!-- 	crossorigin="anonymous" referrerpolicy="no-referrer"> -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+	integrity="sha512-nhY06wKras39lb9lRO76J4397CH1XpRSLfLJSftTeo3+q2vP7PaebILH9TqH+GRpnOhfAGjuYMVmVTOZJ+682w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer">
 	
-<!-- </script> -->
+</script>
 
-<!-- <!-- bootstrap5 - 前端框架 -->
-<!-- <link -->
-<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" -->
-<!-- 	rel="stylesheet" -->
-<!-- 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" -->
-<!-- 	crossorigin="anonymous"> -->
-<!-- <script -->
-<!-- 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" -->
-<!-- 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" -->
-<!-- 	crossorigin="anonymous"></script> -->
+<!-- bootstrap5 - 前端框架 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 
-<!-- <!-- jquery 框架 -->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" -->
-<!-- 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" -->
-<!-- 	crossorigin="anonymous"></script> -->
+<!-- jquery 框架 -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	crossorigin="anonymous"></script>
 
-<!-- <!-- fontAwesome - icon插件 -->
-<!-- <!-- css都要有rel="stylesheet" js就不用 -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+<!-- fontAwesome - icon插件 -->
+<!-- css都要有rel="stylesheet" js就不用 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 	<!-- 左側導覽列 -->
+	<%@ include file="sideNav.jsp"%>
 	<!-- 主要內容區域 -->
 	<div id="main-content" class="main-content">
 		<!-- 上方列按鈕-->
@@ -97,7 +94,7 @@
 			<table class="table-product " style="width: 95%;">
 				<thead>
 					<tr class="text-center">
-						<td colspan="5">餐點總表</td>
+						<td colspan="8">餐點總表</td>
 					</tr>
 					<tr class="text-center">
 						<td>餐點編號</td>
@@ -115,7 +112,7 @@
 					<tr class="tr-title">
 						<td>${item.id}</td>
 						<td>${item.name}</td>
-						<td>${item.price}</td>
+						<!-- <td>${item.price}</td> -->
 						<td>${item.cost}</td>
 						<td class="td-css">${item.description}</td>
 						<td>${item.status}</td>
@@ -142,10 +139,10 @@
 							<select id="category-select" required="required">								
 							</select>
 						</div>
-						<div class="py-4">
+						<!-- <div class="py-4">
 							<span><B>新增餐點圖：</B></span> <input type="file" accept=".jpg, .png"
 								id="fdpictureInput">
-						</div>
+						</div> -->
 						<div class="addproduct-detail">
 							<strong>餐點名稱：</strong> <input type="text" id="add-name" required>
 						</div>
@@ -159,12 +156,11 @@
 							<strong>餐點描述：</strong> <input type="text" id="add-description"
 								required>
 						</div>
-						
 					</div>
 					<div class="modal-footer justify-content-center">
 						<button type="button" class="btn btn-secondary px-5 py-2 mx-4"
 							data-bs-dismiss="modal" onclick="fdcancel()">取消</button>
-						<button type="button" class="btn btn-primary px-5 py-2 mx-4"
+						<button type="submit" class="btn btn-primary px-5 py-2 mx-4"
 							onclick="addProduct()" id="addp">確認</button>
 					</div>
 				</form>
