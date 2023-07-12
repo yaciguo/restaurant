@@ -190,45 +190,6 @@ var csrfToken;
 							activityBeandishBeanname ='';
 						}
 
-<<<<<<< HEAD
-		          // 判斷備註
-		          var orderNote = '';
-				  console.log(orderData.note)
-		          if (orderData.note == null){
-					  orderNote = '';
-				  }else {
-					  orderNote = orderData.note ;
-				  }
-				  		          		
-		          // 判斷單別、電話/桌號
-		          var orderType = '';
-		          var orderDataPhone = '';
-		          if (orderData.type == 'I') {
-		            orderType = '內用';
-		            orderCustomer = orderData.customer + '號桌';
-		          } else if (orderData.type == 'O') {
-		            orderType = '外帶';
-		            orderCustomer = orderData.customer;
-		          }
-				  if (orderData.phone == null) {
-		          	orderDataPhone = '';
-		          }else {
-					  orderDataPhone = orderData.phone;
-				  }
-		          
-		          // 活動
-		          var activityBeandiscount = '';
-		          var activityBeandishBeanname = '';
-		          var activityBeanType = '';
-		
-		          if (orderData.activityBean != null) {		            
-					if (orderData.activityBean.type == 'discount') {
-						activityBeanType = '折扣';
-						activityBeandiscount= orderData['activityBean']['discount']
-					} else if (orderData.activityBean.type == 'gift') {
-						activityBeanType = '贈品';
-						activityBeandishBeanname = orderData['activityBean']['dishBean']['name']
-=======
 																
 						//訂單明細
 						var orderDetailsHtml = '';
@@ -283,7 +244,6 @@ var csrfToken;
 			                                <td id="activitydiscount-cell" style="display:none">${activityBeandiscount}</td>
 			                                <td id="activitygift-cell" style="display:none">${activityBeandishBeanname}</td>		                                
 			                            </tr>`;
->>>>>>> e86a5bbde2d47cd255bd7ec10b75588510ed2dc5
 					}
 				} else {
 					tableHtml += `<tr><td colspan="10" id="id-cell">目前無相對應資料</td></tr>`;

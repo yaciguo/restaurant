@@ -35,54 +35,11 @@ function addProduct() {
 	var categoryId = $("#categoryId").val();
 	console.log('第六句測試成功:');
 
-<<<<<<< HEAD
-		var productData = {
-			name: productName,
-			price: productPrice,
-			cost: productCost,
-			description: productDescription,
-			FK_categoryId: "8",
-			imageBase64: base64Image,
-		};
-		console.log('${pageContext.request.contextPath}');
-		console.log(productData);
-		console.log(fdpictureInput);
-		console.log("========================")
-		// $.ajax({
-		// 	url: contextPath + '/addProduct',
-		// 	//		url : '${pageContext.request.contextPath}/addProduct',
-		// 	type: 'POST',
-		// 	data: JSON.stringify(productData),
-		// 	contentType: 'application/json',
-		// 	beforeSend: function(xhr) {
-		// 		xhr.setRequestHeader(csrfHeaderName, csrfToken);
-		// 	},
-		// 	success: function() {
-		// 		//productData();
-		// 		// alert('新增成功！');
-		// 		console.log('success測試成功:');
-		// 	},
-		// 	error: function(xhr, error) {
-		// 		// alert('新增失敗！');
-		// 		console.log('產品保存失敗:');
-		// 		console.log('狀態碼:', xhr.status);
-		// 		console.log('錯誤訊息:', error);
-		// 	}
-		// });
-		$('#add-name').val("");
-		$('#add-price').val("");
-		$('#add-cost').val("");
-		$('#add-description').val("");
-		$('#fdpictureInput').val("");
-		$("#myModal").modal('hide');
-		closeModal()
-=======
 	// 檢查 productId 是否為空或只包含空白字元
 	if (!productId) {
 		console.log('產品編號不可為空！');
 		return; // 中止函式執行或執行其他處理
 	}
->>>>>>> e86a5bbde2d47cd255bd7ec10b75588510ed2dc5
 
 //	const dropdownItems = document.querySelectorAll('.dropdown-item');
 //	const dropdownButton = document.querySelector('.dropdown-toggle');
