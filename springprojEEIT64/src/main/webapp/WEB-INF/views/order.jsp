@@ -4,7 +4,7 @@
 	
 	<!-- Js -->
 	<link rel='stylesheet' type="text/css" href="<c:url value='/css/order.css' />" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	<script type="text/javascript" src="<c:url value='/js/order.js'/>"></script>
 	<meta name="_contextPath" content="${pageContext.request.contextPath}" />
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
@@ -82,9 +82,9 @@
 	
 							<li class="order-statechoose"><select class="form-select" id="form-select1">
 <!-- 									<option>訂單成立</option> -->
-									<option>訂單準備中</option>
-									<option>訂單完成</option>
-									<option>訂單取消</option>
+									<option value="order_deal">訂單準備中</option>
+									<option value="order_finish">訂單完成</option>
+									<option value="order_cancel">訂單取消</option>
 							</select></li>
 	
 							<li class="order-statechoose"><input type="text"
