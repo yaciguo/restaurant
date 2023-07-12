@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+body {
+	background-color: #EEE;
+}
+
+.payment-link {
+	font-size: 1.25rem;
+	font-weight: bold;
+	letter-spacing: 2px;
+	color: var(--main-color) !important;
+}
+
+.payment-text {
+	width: 100%;
+	font-size: 1.3em;
+	margin-top: 30px;
+	margin-bottom: 5px;
+}
+
+.add-payment {
+	width: 60px;
+	height: 60px;
+	margin-left: 20px;
+	font-size: 2rem;
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.payment-detail {
+	/* margin: 0.5rem; */
+	padding: 0.3rem 0.5rem;
+}
+
+.payment-detail input {
+	border: 1px solid #ccc;
+	line-height: 1.8rem;
+}
+
+.payment-table {
+	border-collapse: collapse;
+	width: 100%;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-table tr:hover {
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-table th, td {
+	padding: 20px 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom: 1px solid #ddd;
+}
+
+.payment-table th {
+	background-color: #f2f2f2;
+}
+
+.payment-table tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.truncate-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 120px;
+}
+
+.inputInvalid {
+	border: 1px solid red;
+	animation-name: border-transition;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+
+@keyframes border-transition {
+	from { 
+		border-color:red;
+	}
+
+	to {
+		border-color: -internal-light-dark;
+	}
+}

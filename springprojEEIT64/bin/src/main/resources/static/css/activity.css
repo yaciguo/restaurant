@@ -4,19 +4,6 @@ body {
 	background-color: #EEE;
 }
 
-.main-content {
-	min-width: 580px;
-	margin: 20px 20px 20px calc(60px + 20px);
-	padding: 15px;
-	transition: margin-left 0.3s ease-in-out;
-	background-color: #FFF;
-	border-radius: var(--main-radius);
-}
-
-.main-content.active {
-	margin-left: 180px;
-}
-
 .activity-link {
 	font-size: 1.25rem;
 	font-weight: bold;
@@ -41,31 +28,12 @@ body {
 
 .activity-detail {
 	margin: 0.5rem;
-<<<<<<< HEAD
 	padding: 0.5rem;
 }
 
 .activity-detail input {
-    border: 1px solid #ccc;
-    line-height: 1.8rem;
-=======
-<<<<<<< HEAD
-	padding: 0.5rem;
-}
-
-.activity-detail input {
-    border: 1px solid #ccc;
-    line-height: 1.8rem;
-=======
-	padding: 1rem;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.activity-detail input {
-	border: none;
-	border-bottom: 1px solid black;
->>>>>>> origin/sara
->>>>>>> main
+	border: 1px solid #ccc;
+	line-height: 1.8rem;
 }
 
 .activity-table {
