@@ -150,7 +150,7 @@ var csrfToken;
 		$('#search-placeholder').attr('placeholder', '請輸入' + myselect);	
 	}
 
-	
+		//初始
 		function initialize(urlAddress) {
 		  console.log(urlAddress);
 		
@@ -349,7 +349,6 @@ var csrfToken;
 		    }
 		  });
 		}
-
 
 
 
