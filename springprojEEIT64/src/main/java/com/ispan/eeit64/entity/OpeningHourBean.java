@@ -24,12 +24,10 @@ public class OpeningHourBean {
 	@Column(name = "dayOfWeek", nullable = false, columnDefinition = "INT(1) COMMENT '星期幾'")
 	private int dayOfWeek;
 
-//	@Temporal(TemporalType.TIME)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone="GMT+8")
 	@Column(name = "startTime", nullable = false, columnDefinition = "TIME COMMENT '開始營業時間'")
 	private Date startTime;
 	
-//	@Temporal(TemporalType.TIME)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone="GMT+8")
 	@Column(name = "endTime", nullable = false, columnDefinition = "TIME COMMENT '結束營業時間'")
 	private Date endTime ;
