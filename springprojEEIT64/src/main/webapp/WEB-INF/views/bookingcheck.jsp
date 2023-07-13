@@ -108,7 +108,7 @@ body {
     <header>
     <h1 style="margin-top: 20px;">訂位成功</h1>
   </header>
-  <br><br>
+  <br><br><br>
   <div class="container">
     <div class="row" style="text-align: center;"> 
       <h1>感謝您的訂位！</h1>
