@@ -1,2 +1,8 @@
 /.metadata/
 /springprojEEIT64/src/main/resources/application.properties
+!.springprojEEIT64/src/main/resources/application.properties
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
