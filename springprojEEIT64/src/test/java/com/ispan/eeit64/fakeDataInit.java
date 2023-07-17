@@ -227,7 +227,6 @@ public class fakeDataInit {
             CategoryBean cbean = cbeanOptional.get();
             DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "/images/dumpling.png", jsonBean.description, "Y");
 
-            System.out.println(456);
             dishDao.save(bean);
         }
     }
@@ -367,4 +366,3 @@ public class fakeDataInit {
         }
     }
 }
-
