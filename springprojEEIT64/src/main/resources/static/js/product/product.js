@@ -59,27 +59,35 @@ function addProduct() {
 		console.log('${pageContext.request.contextPath}');
 		console.log(productData);
 		console.log(fdpictureInput);
-		$.ajax({
-			url: contextPath + '/addProduct',
-			//		url : '${pageContext.request.contextPath}/addProduct',
-			type: 'POST',
-			data: JSON.stringify(productData),
-			contentType: 'application/json',
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader(csrfHeaderName, csrfToken);
-			},
-			success: function() {
-				//productData();
-				console.log('success測試成功:');
-				//			alert('新增成功！');
-			},
-			error: function(xhr, error) {
-				alert('新增失敗！');
-				console.log('產品保存失敗:');
-				console.log('狀態碼:', xhr.status);
-				console.log('錯誤訊息:', error);
-			}
-		});
+		console.log("========================")
+		// $.ajax({
+		// 	url: contextPath + '/addProduct',
+		// 	//		url : '${pageContext.request.contextPath}/addProduct',
+		// 	type: 'POST',
+		// 	data: JSON.stringify(productData),
+		// 	contentType: 'application/json',
+		// 	beforeSend: function(xhr) {
+		// 		xhr.setRequestHeader(csrfHeaderName, csrfToken);
+		// 	},
+		// 	success: function() {
+		// 		//productData();
+		// 		// alert('新增成功！');
+		// 		console.log('success測試成功:');
+		// 	},
+		// 	error: function(xhr, error) {
+		// 		// alert('新增失敗！');
+		// 		console.log('產品保存失敗:');
+		// 		console.log('狀態碼:', xhr.status);
+		// 		console.log('錯誤訊息:', error);
+		// 	}
+		// });
+		$('#add-name').val("");
+		$('#add-price').val("");
+		$('#add-cost').val("");
+		$('#add-description').val("");
+		$('#fdpictureInput').val("");
+		$("#myModal").modal('hide')
+
 	};
 	reader.readAsDataURL(file);
 }	
@@ -184,23 +192,23 @@ function typesave(event) {
 		name: typeName
 	};
 	console.log(typeData);
-	$.ajax({
-		url: contextPath + '/addType', // 替換為後端 API 的 URL
-		type: 'POST',
-		data: JSON.stringify(typeData),
-		contentType: 'application/json',
-		beforeSend: function(xhr) {
-			xhr.setRequestHeader(csrfHeaderName, csrfToken);
-		},
-		success: function() {
-			console.log('success測試成功:');
-		},
-		error: function(xhr, status, error) {
-			console.log('產品保存失敗:');
-			console.log('狀態碼:', xhr.status);
-			console.log('錯誤訊息:', error);
-		}
-	});
+	// $.ajax({
+	// 	url: contextPath + '/addType', // 替換為後端 API 的 URL
+	// 	type: 'POST',
+	// 	data: JSON.stringify(typeData),
+	// 	contentType: 'application/json',
+	// 	beforeSend: function(xhr) {
+	// 		xhr.setRequestHeader(csrfHeaderName, csrfToken);
+	// 	},
+	// 	success: function() {
+	// 		console.log('success測試成功:');
+	// 	},
+	// 	error: function(xhr, status, error) {
+	// 		console.log('產品保存失敗:');
+	// 		console.log('狀態碼:', xhr.status);
+	// 		console.log('錯誤訊息:', error);
+	// 	}
+	// });
 	let modal = document.getElementById("myType");
 	modal.style.display = "none";
 }

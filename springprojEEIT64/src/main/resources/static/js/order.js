@@ -199,17 +199,20 @@ var csrfToken;
 		          var activityBeandishBeanname = '';
 		          var activityBeanType = '';
 		
-		          if (orderData.activityBean != null) {
-		            if (orderData.activityBean.type == 'discount') {
-		              activityBeanType = '折扣';
-		            } else if (orderData.activityBean.type == 'gift') {
-		              activityBeanType = '贈品';
-		            }
+		          if (orderData.activityBean != null) {		            
+					if (orderData.activityBean.type == 'discount') {
+						activityBeanType = '折扣';
+						activityBeandiscount= orderData['activityBean']['discount']
+					} else if (orderData.activityBean.type == 'gift') {
+						activityBeanType = '贈品';
+						activityBeandishBeanname = orderData['activityBean']['dishBean']['name']
+					}
 		          } else {
 		            activityBeanType = '';
 		            activityBeandiscount = '';
 		            activityBeandishBeanname = '';
 		          }
+				  
 		
 		          // 訂單明細
 		          var orderDetailsHtml = '';
