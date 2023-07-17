@@ -114,7 +114,7 @@ public class fakeDataInit {
         System.out.println("");
     }
     
-    @Test
+    // @Test
     void test() {
         // try {
         //     CategoryBean bean = categoryDao.findById(7).get();
@@ -124,7 +124,7 @@ public class fakeDataInit {
         // }
     }
         
-    @Test
+    // @Test
     void addFakeData() {
         System.out.println("----------------------------------------------");
         // try {

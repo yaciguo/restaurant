@@ -28,6 +28,7 @@ public class orderTest {
 	OrderRepository oDao;
 	@Autowired
 	DishRepository dDao;
+	
 	void test() {
 		// Set<OrderDetailBean> dBeans = new HashSet<>();
 		// Integer[] dId = {2,2,3,3,8,8,33,33};
