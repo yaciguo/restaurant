@@ -127,28 +127,28 @@
 		<!-- 				</div> -->
 		<!-- 將時間跟日期放在畫面中同一行 -->
 		<!-- 				<div class="row"> -->
-			<div class="col-auto d-flex justify-content-center align-items-center">
-				<label for="startdate" style="width:130px">訂位日期：</label> <input class="form-control"
-					id="startdate" name="startdate" placeholder='yyyy-mm-dd'
-					type="text" style="width:150px "/>
-			</div>
-			<div class="col-auto d-flex justify-content-center align-items-center">
-				<label for="pNumber" style="width:172px ">訂位時間:</label><select id="selectTime"
-					onchange="selectTime()">
-					<option value="" label="請選擇時間" />
-					<option value="1" label="12:00" />
-					<option value="2" label="13:00" />
-					<option value="3" label="14:00" />
-					<option value="4" label="15:00" />
-					<option value="5" label="16:00" />
-					<option value="6" label="17:00" />
-					<option value="7" label="18:00" />
-				</select>
-			</div>
-		
-		<!-- 				</div> -->
-		<!-- 			</div> -->
-		<!-- 		<input type="text" name="findphone" id="fphone" placeholder="請輸入電話查詢"> -->
+		<div class="col-auto d-flex justify-content-center align-items-center">
+			<label for="startdate" style="width: 130px" >訂位日期：</label> 
+			<input	class="form-control" id="startdate" name="startdate"
+				placeholder='yyyy-mm-dd' type="text" style="width: 150px" />
+		</div>
+		<br>
+		<div class="col-auto d-flex justify-content-center align-items-center">
+			<label for="pNumber" style="width: 172px">訂位時間:</label>
+			<select	id="selectTime" onchange="selectTime()">
+				<option value="" label="請選擇時間" />
+				<option value="0" label="11:00" />
+				<option value="1" label="12:00" />
+				<option value="2" label="13:00" />
+				<option value="3" label="14:00" />
+				<option value="5" label="16:00" />
+				<option value="6" label="17:00" />
+				<option value="7" label="18:00" />
+				<option value="7" label="19:00" />
+				<option value="7" label="20:00" />
+			</select>
+		</div>
+
 		<section class="container">
 			<div class="tab-content">
 				<div class="row">

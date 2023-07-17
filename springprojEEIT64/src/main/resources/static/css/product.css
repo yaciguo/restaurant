@@ -1,5 +1,17 @@
 @charset "UTF-8";
 /* Modal框样式 */
+    body {
+        background-color: #EEE;
+    }
+
+    .main-content {
+        min-width: 580px;
+        margin: 20px 20px 20px calc(60px + 20px);
+        padding: 15px;
+        transition: margin-left 0.3s ease-in-out;
+        background-color: #FFF;
+        border-radius: var(--main-radius);
+    }
 .modal, .fdmixview {
   display: none;
   position: fixed;
@@ -33,14 +45,14 @@
 }
 
 /* 公版 */
-.main-content {
+/* .main-content {
 	min-width: 580px;
 	margin: 20px 20px 20px calc(60px + 20px);
 	padding: 15px;
 	transition: margin-left 0.3s ease-in-out;
 	background-color: #FFF;
 	border-radius: var(--main-radius);
-}
+} */
 
 
 .newtype {

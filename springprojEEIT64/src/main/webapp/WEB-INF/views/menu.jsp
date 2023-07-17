@@ -22,11 +22,12 @@
         </head>
 
         <body class="">
-            <!-- 導覽列 -->
-            <%@ include file="nav.jsp" %>
+            
                 <div class="container">
                     <!-- 輪播 -->
                     <div class="row">
+                    <!-- 導覽列 -->
+            			<%@ include file="nav.jsp" %>
                     </div>
                     <!--  -->
                     <div class="row" id="container-intro">

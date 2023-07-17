@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
-<link rel='stylesheet' href="<c:url value='/css/activity.css' />" />
+<link rel='stylesheet' type="text/css" href="<c:url value='/css/activity.css' />" />
 <script src="<c:url value='js/activity.js' />"></script>
 
 <meta name="_contextPath" content="${pageContext.request.contextPath}" />

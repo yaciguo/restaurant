@@ -1,4 +1,8 @@
 var contextPath = document.getElementById('contextPath').value;
+var contextPath;
+var csrfHeaderName ;
+var csrfToken;
+
 //==========================新增產品確認與取消按鈕
 function fdmix() {
 	let modal = document.getElementById("myModal");
@@ -35,23 +39,46 @@ function addProduct() {
 	var categoryId = $("#categoryId").val();
 	console.log('第六句測試成功:');
 
-	// 檢查 productId 是否為空或只包含空白字元
-	if (!productId) {
-		console.log('產品編號不可為空！');
-		return; // 中止函式執行或執行其他處理
-	}
+		var productData = {
+			name: productName,
+			price: productPrice,
+			cost: productCost,
+			description: productDescription,
+			FK_categoryId: "8",
+			imageBase64: base64Image,
+		};
+		console.log('${pageContext.request.contextPath}');
+		console.log(productData);
+		console.log(fdpictureInput);
+		console.log("========================")
+		// $.ajax({
+		// 	url: contextPath + '/addProduct',
+		// 	//		url : '${pageContext.request.contextPath}/addProduct',
+		// 	type: 'POST',
+		// 	data: JSON.stringify(productData),
+		// 	contentType: 'application/json',
+		// 	beforeSend: function(xhr) {
+		// 		xhr.setRequestHeader(csrfHeaderName, csrfToken);
+		// 	},
+		// 	success: function() {
+		// 		//productData();
+		// 		// alert('新增成功！');
+		// 		console.log('success測試成功:');
+		// 	},
+		// 	error: function(xhr, error) {
+		// 		// alert('新增失敗！');
+		// 		console.log('產品保存失敗:');
+		// 		console.log('狀態碼:', xhr.status);
+		// 		console.log('錯誤訊息:', error);
+		// 	}
+		// });
+		$('#add-name').val("");
+		$('#add-price').val("");
+		$('#add-cost').val("");
+		$('#add-description').val("");
+		$('#fdpictureInput').val("");
+		$("#myModal").modal('hide')
 
-//	const dropdownItems = document.querySelectorAll('.dropdown-item');
-//	const dropdownButton = document.querySelector('.dropdown-toggle');
-	//  	let categoryId = null;
-
-	var productData = {
-		id: productId,
-		name: productName,
-		price: productPrice,
-		cost: productCost,
-		description: productDescription,
-		categoryId : categoryId,
 	};
 	console.log('第七句測試成功:');
 	console.log('${pageContext.request.contextPath}');
@@ -61,6 +88,7 @@ function addProduct() {
 		type: 'POST',
 		data: JSON.stringify(productData),
 		contentType: 'application/json',
+<<<<<<< HEAD
 				beforeSend: function(xhr) {
 					xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
 				},
@@ -68,6 +96,14 @@ function addProduct() {
 			//			productData();
 			//				$('#addp').val('');
 			console.log('success測試成功:');
+=======
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfToken);
+		},
+		success: function(response) {
+			loadPictureData();
+			$('#fdpictureInput').val('');
+>>>>>>> ya
 		},
 		error: function(xhr, error) {
 			console.log('產品保存失敗:');
@@ -214,11 +250,79 @@ function addCategory() {
 	li.value = inputText;
 	categoryList.appendChild(li);
 
+<<<<<<< HEAD
 	// 将新的选项添加到下拉选单中
 	let select = document.getElementById("type");
 	let option = document.createElement("option");
 	option.value = inputText;
 	select.appendChild(option);
 	closeModal();
+=======
+function typesave(event) {
+	event.preventDefault();
+	// 獲取輸入值
+	const typeNameInput = document.querySelector('#type-name');
+	const typeName = typeNameInput.value;
+	console.log("1");
+	// 組織表單數據，使用 const 創建的變數是一個常量，其值在初始化後不能再被修改。
+	const typeData = {
+		name: typeName
+	};
+	console.log(typeData);
+	// $.ajax({
+	// 	url: contextPath + '/addType', // 替換為後端 API 的 URL
+	// 	type: 'POST',
+	// 	data: JSON.stringify(typeData),
+	// 	contentType: 'application/json',
+	// 	beforeSend: function(xhr) {
+	// 		xhr.setRequestHeader(csrfHeaderName, csrfToken);
+	// 	},
+	// 	success: function() {
+	// 		console.log('success測試成功:');
+	// 	},
+	// 	error: function(xhr, status, error) {
+	// 		console.log('產品保存失敗:');
+	// 		console.log('狀態碼:', xhr.status);
+	// 		console.log('錯誤訊息:', error);
+	// 	}
+	// });
+	let modal = document.getElementById("myType");
+	modal.style.display = "none";
+>>>>>>> ya
 }
 //==========================/新增產品種類
+<<<<<<< HEAD
+=======
+
+
+//==========================下拉式選單接收新增種類
+
+$(()=>{
+	
+	contextPath = $("meta[name='_contextPath']").attr("content"); 
+	csrfHeaderName = $("meta[name='_csrf_header']").attr("content");
+	csrfToken = $("meta[name='_csrf']").attr("content"); 
+	$.ajax({
+		url: contextPath + '/getCategories', // 替換為後端 API 的 URL
+		type: 'GET',
+		success: function(response) {
+			// 獲取下拉式選單元素
+			const selectElement = document.getElementById('category-select');
+	
+			// 迭代每個類別，創建選項並添加到下拉式選單中
+			response.forEach(function(category) {
+				const option = document.createElement('option');
+				option.value = category.id.toString();
+				option.text = category.name;
+				selectElement.appendChild(option);
+			});
+		},
+		error: function(xhr, status, error) {
+			console.log('獲取類別失敗:');
+			console.log('狀態碼:', xhr.status);
+			console.log('錯誤訊息:', error);
+		}
+	});
+})
+//==========================/下拉式選單接收新增種類
+>>>>>>> ya

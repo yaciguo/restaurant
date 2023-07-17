@@ -46,6 +46,7 @@ import com.ispan.eeit64.jsonBean.CategoryJson;
 import com.ispan.eeit64.jsonBean.CheckoutJson;
 import com.ispan.eeit64.jsonBean.ClosingTimeJson;
 import com.ispan.eeit64.jsonBean.DishJson;
+import com.ispan.eeit64.jsonBean.DishJson2;
 import com.ispan.eeit64.jsonBean.FdTableJson;
 import com.ispan.eeit64.jsonBean.OpeningHourJson;
 import com.ispan.eeit64.jsonBean.OrderJson;
@@ -115,44 +116,46 @@ public class fakeDataInit {
     
     @Test
     void test() {
-        try {
-            addBasicSettingsData();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        // try {
+        //     CategoryBean bean = categoryDao.findById(7).get();
+        //     categoryDao.delete(bean);
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
     }
         
     @Test
     void addFakeData() {
-        try {
-            if(isDeleteOldData) {
-                resetTable("fdtable", fdTableDao);
-                resetTable("reservation", reservationDao);
-                resetTable("orders", orderDao);
-                ucDao.resetAutoId("orderdetail");
-                ucDao.resetAutoId("orderrecord");
-                resetTable("checkout", checkoutDao);
-                resetTable("openinghour", openHourdao);
-                resetTable("closingtime", ClosingTimeDao);
-                resetTable("category", categoryDao);
-                resetTable("dish", dishDao);
-                resetTable("activity", activityDao);
-            }
+        System.out.println("----------------------------------------------");
+        // try {
+        //     if(isDeleteOldData) {
+        //         resetTable("fdtable", fdTableDao);
+        //         resetTable("reservation", reservationDao);
+        //         resetTable("orders", orderDao);
+        //         ucDao.resetAutoId("orderdetail");
+        //         ucDao.resetAutoId("orderrecord");
+        //         resetTable("checkout", checkoutDao);
+        //         resetTable("openinghour", openHourdao);
+        //         resetTable("closingtime", ClosingTimeDao);
+        //         resetTable("category", categoryDao);
+        //         resetTable("dish", dishDao);
+        //         resetTable("activity", activityDao);
+        //     }
             
-            // add fake data
-            addBasicSettingsData();
-            addFdTableData();
-            addReservationData();
-            addOpeningHourData();
-            addClosingTimeData();
-            addCategoryData();
-            addDishData();
-            addActivityData();
-            addOrderData();
-            addCheckoutData();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        //     // add fake data
+        //     addBasicSettingsData();
+        //     addFdTableData();
+        //     addReservationData();
+        //     addOpeningHourData();
+        //     addClosingTimeData();
+        //     addCategoryData();
+        //     addDishData();
+        //     addActivityData();
+        //     addOrderData();
+        //     addCheckoutData();
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
     }
 
     public <T> List<T> getJson(String jsonPath, Class<T> type) throws Exception {
@@ -190,7 +193,7 @@ public class fakeDataInit {
 
         String base64String = Base64.getEncoder().encodeToString(buf);
 
-        BasicSettingsBean shopNameBean = new BasicSettingsBean("shopName", "webDesign-RS");
+        BasicSettingsBean shopNameBean = new BasicSettingsBean("shopName", "墨竹亭(公益店)");
         BasicSettingsDao.save(shopNameBean);
         BasicSettingsBean logoImgBean = new BasicSettingsBean("logoImg", "data:"+mimeType+";base64,"+base64String);
         BasicSettingsDao.save(logoImgBean);
@@ -220,12 +223,13 @@ public class fakeDataInit {
     }
 
     public void addDishData() throws Exception {
-        List<DishJson> json = getJson("/static/assets/json/dish.json", DishJson.class);
+        List<DishJson2> json = getJson("/static/assets/json/dish2.json", DishJson2.class);
         
-        for (DishJson jsonBean : json) {
-            Optional<CategoryBean> cbeanOptional = categoryDao.findById(jsonBean.category+1);
+        for (DishJson2 jsonBean : json) {
+            Integer cid = ((Double)jsonBean.categoryBean.get("id")).intValue();
+            Optional<CategoryBean> cbeanOptional = categoryDao.findById(cid);
             CategoryBean cbean = cbeanOptional.get();
-            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, "/images/dumpling.png", jsonBean.description, "Y");
+            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, jsonBean.picture, jsonBean.description, jsonBean.status);
 
             dishDao.save(bean);
         }
@@ -301,6 +305,7 @@ public class fakeDataInit {
             orderDao.save(oBean);
         }
     }
+    
     public void addFdTableData() throws Exception {
         List<FdTableJson> json = getJson("/static/assets/json/fdtable.json", FdTableJson.class);
             
@@ -317,7 +322,10 @@ public class fakeDataInit {
         SimpleDateFormat formatYMDDate = new SimpleDateFormat("yyyy-MM-dd");
         for(ReservationsJson jsonBean : json) {
             Optional<FdTableBean> fdTableBeanOptional = fdTableDao.findById(jsonBean.FK_FdTableBean_Id);
-            FdTableBean fBean = fdTableBeanOptional.get();
+            FdTableBean fBean = null; 
+            if(!fdTableBeanOptional.isEmpty()){
+                fBean = fdTableBeanOptional.get();
+            }
             
             ReservationBean rBean = new ReservationBean(
                     jsonBean.name, 
@@ -349,8 +357,7 @@ public class fakeDataInit {
                 jsonBean.payStatus,
                 oBean
             );
-            checkoutDao.save(cBean);
-            
+            checkoutDao.save(cBean);            
         }
     }
     

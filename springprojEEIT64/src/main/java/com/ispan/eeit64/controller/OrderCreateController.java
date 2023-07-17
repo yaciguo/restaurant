@@ -51,10 +51,10 @@ public class OrderCreateController {
 	}
 	
 	
-	@GetMapping("/shoppingcartInner")
-	public String shoppingcartInner(Model model) {
+	@GetMapping("/shoppingcartInner5")
+	public String shoppingcartInner5(Model model) {
 //	    model.addAttribute("newOrder", new OrderBean());
-	    return "/shoppingcartInner";
+	    return "/shoppingcartInner5";
 	}
 	
 	//=======================外帶單===================================================================================
@@ -166,10 +166,10 @@ public class OrderCreateController {
 	}
 	
 //===================內用單===============================================================================================
-	@PostMapping("/custIndex/newOrderInner")
+	@PostMapping("/custIndex/newOrderInner5")
 	@ResponseBody
 //  public Map<String, String> newOrder(@RequestBody OrderBean bean, @RequestParam("orderDetails") List<Integer> dishIds) {
-	public ResponseEntity<Map<String, String>> newOrderInner(@RequestBody Map<String, Object> requestData) {	
+	public ResponseEntity<Map<String, String>> newOrderInner5(@RequestBody Map<String, Object> requestData) {	
 		Map<String, String> response = new HashMap<>();		
 		SimpleDateFormat formatDate = new SimpleDateFormat("hh:mm:ss");
 //		Date pickTime = null;

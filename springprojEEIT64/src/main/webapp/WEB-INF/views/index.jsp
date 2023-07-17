@@ -25,7 +25,7 @@
 				<br>
 				<a href="<c:url value='/custIndex' />"> 消費者首頁 </a>
 				<br>
-				<a href="<c:url value='/menuInner' />"> 內用點餐 </a>
+				<a href="<c:url value='/menuInner5' />"> 內用點餐 </a>
 				<br>
 				<a href="<c:url value='/question' />"> 常見問題 </a>
 				<br> <br>

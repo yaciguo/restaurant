@@ -91,6 +91,12 @@
     <artifactId>spring-boot-starter-mail</artifactId>
 </dependency>
 
+<!--==========================linepay==========================-->
+<!--<dependency>-->
+<!--    <groupId>org.springframework.boot</groupId>-->
+<!--    <artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--    <version>3.0.0</version>-->
+<!--</dependency>-->
 
 	</dependencies>
 

@@ -128,6 +128,7 @@ public class ShowDishController {
 	        }
 
 	        Optional<CategoryBean> categoryBeanOptional = categoryRepository.findById(categoryId);
+			System.out.println(123);
 	        CategoryBean categoryBean = null;
 
 	        if (categoryBeanOptional.isPresent()) {

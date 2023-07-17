@@ -28,28 +28,27 @@ public class orderTest {
 	OrderRepository oDao;
 	@Autowired
 	DishRepository dDao;
-	@Test
 	void test() {
-		Set<OrderDetailBean> dBeans = new HashSet<>();
-		Integer[] dId = {2,2,3,3,8,8,33,33};
-        Map<Integer, Integer> elementCountMap = new HashMap<>();
+		// Set<OrderDetailBean> dBeans = new HashSet<>();
+		// Integer[] dId = {2,2,3,3,8,8,33,33};
+        // Map<Integer, Integer> elementCountMap = new HashMap<>();
 
-        for (int element : dId) {
-            if (elementCountMap.containsKey(element)) {
-                int count = elementCountMap.get(element);
-                elementCountMap.put(element, count + 1);
-            } else {
-                elementCountMap.put(element, 1);
-            }
-        }
+        // for (int element : dId) {
+        //     if (elementCountMap.containsKey(element)) {
+        //         int count = elementCountMap.get(element);
+        //         elementCountMap.put(element, count + 1);
+        //     } else {
+        //         elementCountMap.put(element, 1);
+        //     }
+        // }
                 
-		for(Integer id : elementCountMap.keySet()) {
-			Optional<DishBean> dishBeanOptional = dDao.findById(id);
-			DishBean dishBean = dishBeanOptional.get();
+		// for(Integer id : elementCountMap.keySet()) {
+		// 	Optional<DishBean> dishBeanOptional = dDao.findById(id);
+		// 	DishBean dishBean = dishBeanOptional.get();
 			
-			OrderDetailBean odBean = new OrderDetailBean(dishBean, elementCountMap.get(id));
-			dBeans.add(odBean);
-		}
+		// 	OrderDetailBean odBean = new OrderDetailBean(dishBean, elementCountMap.get(id));
+		// 	dBeans.add(odBean);
+		// }
 		
 //		OrderBean oBean = new OrderBean("type", new Date(), new Timestamp(System.currentTimeMillis()), 1000, "Status",
 //				"note", "customer", "phone", dBeans);
@@ -60,7 +59,6 @@ public class orderTest {
 //			System.out.println(e);
 //		}
 	}
-	@Test
 	void test2() throws ParseException {
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 		Timestamp s = new Timestamp(f.parse("2023-01-01").getTime());
@@ -97,7 +95,6 @@ public class orderTest {
 		// System.out.println(list);
 	}
 
-	@Test
 	void test3() throws ParseException {
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM");
@@ -119,7 +116,6 @@ public class orderTest {
 	@Autowired
 	DataAnalysisServiceImpl t;
 
-	@Test
 	void test4() throws ParseException {
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM");

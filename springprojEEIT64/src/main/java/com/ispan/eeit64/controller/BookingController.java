@@ -105,7 +105,7 @@ public class BookingController {
                     // 印出插入後的 ID
                     System.out.println(bean.getId());
                  // 发送电子邮件通知 先關掉==============
-//                    sendEmailNotification(bean);
+                   sendEmailNotification(bean);
 
                     response.put("success", "預定成功！您的桌子號碼為：" + selectedTableId);
                 } else {
