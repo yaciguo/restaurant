@@ -88,22 +88,12 @@ function addProduct() {
 		type: 'POST',
 		data: JSON.stringify(productData),
 		contentType: 'application/json',
-<<<<<<< HEAD
-				beforeSend: function(xhr) {
-					xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
-				},
-		success: function() {
-			//			productData();
-			//				$('#addp').val('');
-			console.log('success測試成功:');
-=======
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader(csrfHeaderName, csrfToken);
 		},
 		success: function(response) {
 			loadPictureData();
 			$('#fdpictureInput').val('');
->>>>>>> ya
 		},
 		error: function(xhr, error) {
 			console.log('產品保存失敗:');
@@ -250,14 +240,6 @@ function addCategory() {
 	li.value = inputText;
 	categoryList.appendChild(li);
 
-<<<<<<< HEAD
-	// 将新的选项添加到下拉选单中
-	let select = document.getElementById("type");
-	let option = document.createElement("option");
-	option.value = inputText;
-	select.appendChild(option);
-	closeModal();
-=======
 function typesave(event) {
 	event.preventDefault();
 	// 獲取輸入值
@@ -288,11 +270,8 @@ function typesave(event) {
 	// });
 	let modal = document.getElementById("myType");
 	modal.style.display = "none";
->>>>>>> ya
 }
 //==========================/新增產品種類
-<<<<<<< HEAD
-=======
 
 
 //==========================下拉式選單接收新增種類
@@ -325,4 +304,3 @@ $(()=>{
 	});
 })
 //==========================/下拉式選單接收新增種類
->>>>>>> ya
