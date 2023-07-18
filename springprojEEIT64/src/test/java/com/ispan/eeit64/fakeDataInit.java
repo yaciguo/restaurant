@@ -45,13 +45,13 @@ import com.ispan.eeit64.jsonBean.ActivityJson;
 import com.ispan.eeit64.jsonBean.CategoryJson;
 import com.ispan.eeit64.jsonBean.CheckoutJson;
 import com.ispan.eeit64.jsonBean.ClosingTimeJson;
-import com.ispan.eeit64.jsonBean.DishJson;
 import com.ispan.eeit64.jsonBean.DishJson2;
 import com.ispan.eeit64.jsonBean.FdTableJson;
 import com.ispan.eeit64.jsonBean.OpeningHourJson;
 import com.ispan.eeit64.jsonBean.OrderJson;
 import com.ispan.eeit64.jsonBean.OrderRecordJson;
 import com.ispan.eeit64.jsonBean.ReservationsJson;
+import com.ispan.eeit64.jsonBean.awsS3Json;
 import com.ispan.eeit64.jsonBean.reader.ReadJson;
 import com.ispan.eeit64.repository.ActivityRepository;
 import com.ispan.eeit64.repository.BasicSettingsRepository;
@@ -153,6 +153,8 @@ public class fakeDataInit {
             // addActivityData();
             // addOrderData();
             // addCheckoutData();
+
+            // updateDishData();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -224,13 +226,28 @@ public class fakeDataInit {
 
     public void addDishData() throws Exception {
         List<DishJson2> json = getJson("/static/assets/json/dish2.json", DishJson2.class);
+        List<awsS3Json> uelJson = getJson("/static/assets/json/awsS3.json", awsS3Json.class);
         
-        for (DishJson2 jsonBean : json) {
+        for (DishJson2 jsonBean : json) {            
+            Integer id = jsonBean.id;
             Integer cid = ((Double)jsonBean.categoryBean.get("id")).intValue();
             Optional<CategoryBean> cbeanOptional = categoryDao.findById(cid);
             CategoryBean cbean = cbeanOptional.get();
-            DishBean bean = new DishBean(jsonBean.name, cbean, jsonBean.price, jsonBean.cost, jsonBean.picture, jsonBean.description, jsonBean.status);
+            String url = uelJson.get(id).picture;
+            DishBean bean = new DishBean(id, jsonBean.name, cbean, jsonBean.price, jsonBean.cost, url, jsonBean.description, jsonBean.status);
 
+            dishDao.save(bean);
+        }
+    }
+
+    public void updateDishData() throws Exception {
+        List<awsS3Json> uelJson = getJson("/static/assets/json/awsS3.json", awsS3Json.class);
+        
+        for (awsS3Json jsonBean : uelJson) {            
+            Integer id = jsonBean.id;
+            String url = jsonBean.picture;
+            DishBean bean = dishDao.findById(id).get();
+            bean.setPicture(url);
             dishDao.save(bean);
         }
     }
