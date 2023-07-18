@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -146,7 +147,7 @@ public class fakeDataInit {
             // addBasicSettingsData();
             // addFdTableData();
             // addReservationData();
-            // addOpeningHourData();
+            addOpeningHourData();
             // addClosingTimeData();
             // addCategoryData();
             // addDishData();
@@ -226,15 +227,13 @@ public class fakeDataInit {
 
     public void addDishData() throws Exception {
         List<DishJson2> json = getJson("/static/assets/json/dish2.json", DishJson2.class);
-        List<awsS3Json> uelJson = getJson("/static/assets/json/awsS3.json", awsS3Json.class);
         
         for (DishJson2 jsonBean : json) {            
             Integer id = jsonBean.id;
             Integer cid = ((Double)jsonBean.categoryBean.get("id")).intValue();
             Optional<CategoryBean> cbeanOptional = categoryDao.findById(cid);
             CategoryBean cbean = cbeanOptional.get();
-            String url = uelJson.get(id).picture;
-            DishBean bean = new DishBean(id, jsonBean.name, cbean, jsonBean.price, jsonBean.cost, url, jsonBean.description, jsonBean.status);
+            DishBean bean = new DishBean(id, jsonBean.name, cbean, jsonBean.price, jsonBean.cost, jsonBean.picture, jsonBean.description, jsonBean.status);
 
             dishDao.save(bean);
         }

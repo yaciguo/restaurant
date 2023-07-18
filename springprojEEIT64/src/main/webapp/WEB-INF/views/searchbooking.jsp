@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       <!DOCTYPE html>
       <html>
 
@@ -113,7 +114,8 @@
                         <c:forEach var="reservation" items="${reservationList}">
                           <tr>
                             <th>成立時間</th>
-                            <td>${reservation.submitTime}</td>
+                            <td><fmt:formatDate value="${reservation.submitTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            </td>
                           </tr>
                           <tr>
                             <th>訂位人數</th>
