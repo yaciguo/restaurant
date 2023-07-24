@@ -2,7 +2,9 @@ package com.ispan.eeit64.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -88,7 +90,7 @@ public class OrderController {
 	    	}	        
    }
     
-
+    
 	//查訂單編號
 	@GetMapping("/orders/orderId/{id}")
 	@ResponseBody
@@ -99,6 +101,17 @@ public class OrderController {
 	    return orderBeanService.findById(orderId,pageSize, pageNumber);
 	}
 
+	//查多筆訂單編號
+//	@GetMapping("/orders/orderMulId")
+//	@ResponseBody
+//	public Page<OrderBean> findByMulOrderId(@RequestBody(required = true) String id,
+//        @RequestParam(required = false, defaultValue = "20") int pageSize,
+//        @RequestParam(required = false, defaultValue = "0") int pageNumber) {
+////	    Integer orderId = Integer.parseInt(id);
+//	    return orderBeanService.findByMulOrderId(id,pageSize, pageNumber);
+//	}	
+	
+	
     //搜尋手機號碼
 	@GetMapping("/orders/orderPhone/")
 	@ResponseBody
@@ -132,4 +145,19 @@ public class OrderController {
 	        }
 		}
 	
+		//更新多筆
+	    @GetMapping("/orders/mulorderId")
+	    @ResponseBody
+	    public Page<OrderBean> findByMulOrders(@RequestParam List<Integer> ids,
+	                                           @RequestParam(defaultValue = "0") Integer pageNumber,
+	                                           @RequestParam(defaultValue = "20") Integer pageSize) {
+	        return orderBeanService.findByMulOrders(ids, pageNumber, pageSize);
+	    }
+
+		
 }
+
+
+
+
+

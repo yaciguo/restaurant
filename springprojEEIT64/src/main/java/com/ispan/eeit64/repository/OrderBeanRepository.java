@@ -43,4 +43,6 @@ public interface OrderBeanRepository extends JpaRepository<OrderBean, Integer> {
     @Query("SELECT o FROM OrderBean o JOIN FETCH o.orderRecordBean WHERE o.id = :orderId")
     OrderBean findOrderWithRecordById(@Param("orderId") Integer orderId);       
 
+    @Query("SELECT o FROM OrderBean o WHERE o.id IN :ids")
+    Page<OrderBean> findByMulOrders(@Param("ids") List<String> id, Pageable pageable);   
 }

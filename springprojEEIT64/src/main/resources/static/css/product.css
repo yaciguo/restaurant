@@ -96,7 +96,12 @@ ul {
 li {
 	margin-bottom: 8px;
 } */
-
+/* #add-description{ */
+/* 	  white-space: nowrap; */
+/* 	  overflow: hidden; */
+/* 	  text-overflow: ellipsis; */
+/* 	  text-align: left; */
+/* } */
 
 .table-product {
   border-collapse: collapse;

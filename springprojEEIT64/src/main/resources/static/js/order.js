@@ -46,6 +46,7 @@ var csrfToken;
 		//更新
 		$('#order-statechoose-refresh').click(async function() {
 		  var selectedOrders = [];
+		   
 		  $('.orders-table tbody tr').each(function() {
 		    const checkbox = $(this).find('input[type="checkbox"]');
 		    if (checkbox.prop('checked')) {
@@ -56,7 +57,15 @@ var csrfToken;
 			  
 		      var requestUrl = contextPath + '/orders/orderId';
 		      var requestUrl2 = contextPath + '/orders/orderId/' + id;
+		      var requestUrl3 = contextPath + '/orders/mulorderId/';
+		      
+		      if (selectedOrders.length == 1){
+					requestUrl2 = requestUrl2; 
+		      }  else{
+			 		requestUrl2 = requestUrl3; 
+		      }
 				
+
 		      $.ajax({
 		        url: requestUrl,
 		        type: 'PUT',
@@ -66,10 +75,11 @@ var csrfToken;
 		          xhr.setRequestHeader(csrfHeaderName, csrfToken);
 		        },
 		        success: function(response) {
-		          console.log("OK");
 		          $('#modal-title').html('<span class="modal-icon text-success"><i class="fas fa-check-circle"></i></span> 訂單記錄更新成功');
 		          $('#success-modal').modal('show');
-		          initialize(requestUrl2);
+		           console.log("here");
+		          initialize(requestUrl2)		
+		          
 		        },
 		        error: function(error) {
 		          console.log("Not OK");
@@ -172,7 +182,7 @@ var csrfToken;
 
 		          // 判斷備註
 		          var orderNote = '';
-		          if (orderData.note == 'null'){
+		          if (orderData.note == null){
 					  orderNote = '';
 				  }else {
 					  orderNote = orderData.note ;
@@ -202,8 +212,10 @@ var csrfToken;
 		          if (orderData.activityBean != null) {
 		            if (orderData.activityBean.type == 'discount') {
 		              activityBeanType = '折扣';
+		              activityBeandiscount= orderData['activityBean']['discount']
 		            } else if (orderData.activityBean.type == 'gift') {
 		              activityBeanType = '贈品';
+		              activityBeandishBeanname = orderData['activityBean']['dishBean']['name']
 		            }
 		          } else {
 		            activityBeanType = '';
@@ -261,8 +273,8 @@ var csrfToken;
 		              <td id="statusP-cell">${payStatus}</td>
 		              <td id="note-cell">${orderNote}</td>
 		              <td id="activitytype-cell" style="display:none">${activityBeanType}</td>
-		              <td id="activitydiscount-cell" style="display:none">${activityBeandiscount}</td>
-		              <td id="activitygift-cell" style="display:none">${activityBeandishBeanname}</td>
+		              <td id="activitydiscount-cell" >${activityBeandiscount}</td>
+		              <td id="activitygift-cell" >${activityBeandishBeanname}</td>
 		            </tr>`;
 		        }
 		      } else {

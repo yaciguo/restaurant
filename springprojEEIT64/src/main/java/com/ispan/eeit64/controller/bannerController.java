@@ -27,7 +27,6 @@ public class bannerController {
 	@GetMapping(value = { "/queryBanner", "/custIndex/queryBanner" })
 	public List<BannerBean> findAllBanners() {
 		List<BannerBean> allBanner = bannerRepository.findAll();
-
 		return allBanner;
 	}
 

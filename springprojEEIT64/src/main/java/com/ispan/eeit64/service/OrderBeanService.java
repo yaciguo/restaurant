@@ -22,6 +22,7 @@ public interface OrderBeanService  {
 		Page<OrderBean> findByCheckoutBeanPayStatus(String payStatus, Integer pageNumber, Integer pageSize);	
 		void updateOrderState(List<OrderBean> orderBeans);
 		void saveOrder(OrderBean order);
-		OrderBean findOrderWithRecordById(Integer orderId);		
+		OrderBean findOrderWithRecordById(Integer orderId);
+		Page<OrderBean> findByMulOrders(List<Integer> ids, Integer pageNumber, Integer pageSize);
 		
 }
