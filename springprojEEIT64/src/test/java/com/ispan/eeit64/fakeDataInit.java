@@ -209,7 +209,9 @@ public class fakeDataInit {
         SimpleDateFormat formatDate = new SimpleDateFormat("HH:mm");
         for (OpeningHourJson jsonBean : json) {
             Date oepnDate = formatDate.parse(jsonBean.open);
+            oepnDate.setHours(oepnDate.getHours()-8);
             Date closeDate = formatDate.parse(jsonBean.close);
+            closeDate.setHours(closeDate.getHours()-8);
             OpeningHourBean bean = new OpeningHourBean(null, jsonBean.day, oepnDate, closeDate);
             openHourdao.save(bean);
         }
